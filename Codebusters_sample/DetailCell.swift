@@ -37,12 +37,12 @@ class DetailCell: SKSpriteNode {
         case .Active:
             let number = SKSpriteNode(imageNamed: "active")
             number.zPosition = -1002
-            number.addChild(createLabel(String(name.toInt()! + 1), SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), 36, CGPointZero))
+            number.addChild(createLabel(String(Int(name)! + 1), fontColor: SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), fontSize: 36, position: CGPointZero))
             addChild(number)
         case .NonActive:
             let number = SKSpriteNode(imageNamed: "nonActive")
             number.zPosition = -1002
-            number.addChild(createLabel(String(name.toInt()! + 1), SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), 36, CGPointZero))
+            number.addChild(createLabel(String(Int(name)! + 1), fontColor: SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), fontSize: 36, position: CGPointZero))
             addChild(number)
         case .Placed:
             self.texture = texture

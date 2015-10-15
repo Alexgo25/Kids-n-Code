@@ -12,8 +12,8 @@ import AVFoundation
 
 
 class Switcher: SKSpriteNode {
-    private let label_On = createLabel("ВКЛ", UIColor.whiteColor(), 29, CGPoint(x: 22.5, y: 0))
-    private let label_Off = createLabel("ВЫКЛ", UIColor.whiteColor(), 29, CGPoint(x: -29.5, y: 0))
+    private let label_On = createLabel("ВКЛ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPoint(x: 22.5, y: 0))
+    private let label_Off = createLabel("ВЫКЛ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPoint(x: -29.5, y: 0))
     
     private let atlas = SKTextureAtlas(named: "PauseView")
     private let switcher: SKSpriteNode
@@ -88,7 +88,7 @@ class Switcher: SKSpriteNode {
         GameProgress.sharedInstance.changeSetting(name!, value: "Off")
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if isSwitchedOn() {
             switchOff()
         } else {
@@ -113,7 +113,7 @@ class MusicSwitcher: SKNode {
         userInteractionEnabled = true
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if switcher.isSwitchedOn() {
             AudioPlayer.sharedInstance.pauseBackgroundMusic()
         } else {

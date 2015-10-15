@@ -19,7 +19,7 @@ public class GameProgress {
         var settings = getLevelsData()["settings"] as! [String : AnyObject]
         settings.updateValue(value, forKey: key)
         
-        var config = getLevelsData()
+        let config = getLevelsData()
         
         config.setValue(settings, forKey: "settings")
         config.writeToFile(getLevelsDataPath(), atomically: true)
@@ -90,7 +90,11 @@ public class GameProgress {
         let fileManager = NSFileManager.defaultManager()
         if !fileManager.fileExistsAtPath(path) {
             if let bundle = NSBundle.mainBundle().pathForResource("Levels", ofType: "plist") {
-                fileManager.copyItemAtPath(bundle, toPath: path, error: nil)
+                do {
+                    try fileManager.copyItemAtPath(bundle, toPath: path)
+                } catch _ {
+                    print("mh")
+                }
             }
         }
         
@@ -126,10 +130,10 @@ public class GameProgress {
     }
 
     func getLevelsDataPath() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let documentsDirectory = paths[0] as? String
-        let path = documentsDirectory?.stringByAppendingPathComponent("Levels.plist")
-        return path!
+        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        let fileURL = documentsURL.URLByAppendingPathComponent("Levels.plist")
+        
+        return fileURL.path!
     }
     
     func getCurrentLevelData() -> [String : AnyObject] {
@@ -149,7 +153,7 @@ public class GameProgress {
     }
     
     func writeToPropertyListFile(levelPacks: [[String : AnyObject]]) {
-        var config = getLevelsData()
+        let config = getLevelsData()
         
         config.setValue(levelPacks, forKey: "levelPacks")
         config.writeToFile(getLevelsDataPath(), atomically: true)

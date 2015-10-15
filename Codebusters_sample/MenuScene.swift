@@ -24,7 +24,7 @@ class MenuScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
-        if let recognizers = view.gestureRecognizers {
+        if let _ = view.gestureRecognizers {
             view.gestureRecognizers!.removeAll(keepCapacity: false)
         }
         
@@ -32,15 +32,14 @@ class MenuScene: SKScene {
         showDetails()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
             let touchLocation = touch.locationInNode(self)
             
             if let cell = nodeAtPoint(touchLocation) as? DetailCell {
                 switch cell.getCellState() {
                 case .Active, .Placed:
-                    addChild(LevelSelectionView(levelPackIndex: cell.name!.toInt()!))
+                    addChild(LevelSelectionView(levelPackIndex: Int(cell.name!)!))
                 case .NonActive:
                     return
                 }

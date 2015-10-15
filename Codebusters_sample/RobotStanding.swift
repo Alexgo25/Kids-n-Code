@@ -52,7 +52,7 @@ class RobotStanding {
     }
     
     func moveUpperBlock(direction: Direction, floorPosition: FloorPosition) -> SKAction {
-        var action = blocks.last!.moveToNextPosition(direction, floorPosition: floorPosition)
+        let action = blocks.last!.moveToNextPosition(direction, floorPosition: floorPosition)
         return action
     }
     

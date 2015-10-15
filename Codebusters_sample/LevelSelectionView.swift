@@ -12,21 +12,24 @@ import SpriteKit
 class LevelSelectionView: SKSpriteNode {
     
     let levelPackIndex: Int
+    let levelsCount: Int
     
     init(levelPackIndex: Int) {
         
         let texture = SKTexture(imageNamed: "LevelSelectionView_Background")
         self.levelPackIndex = levelPackIndex
+        let levels = GameProgress.sharedInstance.getLevelPackData(levelPackIndex)
+        levelsCount = levels.count
         
         super.init(texture: texture, color: SKColor(), size: texture.size())
-        
-        let levels = GameProgress.sharedInstance.getLevelPackData(levelPackIndex)
         
         Battery.count = 0
         
         for levelResult in levels {
             if let batteryType = Type(rawValue: levelResult) {
-                addChild(Battery(type: batteryType))
+                let battery = Battery(type: batteryType)
+                battery.position = getNextPosition()
+                addChild(battery)
             }
         }
         
@@ -43,13 +46,12 @@ class LevelSelectionView: SKSpriteNode {
         runAction(appear)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
             let touchLocation = touch.locationInNode(self)
             if let battery = nodeAtPoint(touchLocation) as? Battery {
                 if battery.type.rawValue >= 0 {
-                    GameProgress.sharedInstance.setLevel(levelPackIndex, level: battery.name!.toInt()!)
+                    GameProgress.sharedInstance.setLevel(levelPackIndex, level: Int(battery.name!)!)
                     GameProgress.sharedInstance.newGame(scene!.view!)
                 }
             } else {
@@ -60,6 +62,24 @@ class LevelSelectionView: SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getNextPosition() -> CGPoint {
+        if levelsCount < 5 {
+            let dx: CGFloat = 422
+            if Battery.count < 3 {
+                return CGPoint(x: Battery.firstPositionSecondRow.x + dx * (Battery.count - 1) - 50, y: Battery.firstPositionFirstRow.y)
+            } else {
+                return CGPoint(x: Battery.firstPositionSecondRow.x + dx * (Battery.count - 3) - 50, y: Battery.firstPositionSecondRow.y)
+            }
+        } else {
+            let dx: CGFloat = 322
+            if Battery.count < 4 {
+                return CGPoint(x: Battery.firstPositionFirstRow.x + dx * (Battery.count - 1), y: Battery.firstPositionFirstRow.y)
+            } else {
+                return CGPoint(x: Battery.firstPositionSecondRow.x + dx * (Battery.count - 4), y: Battery.firstPositionSecondRow.y)
+            }
+        }
     }
 }
 
@@ -74,7 +94,7 @@ internal enum Type: Int {
 internal class Battery: SKSpriteNode {
 
     static let firstPositionFirstRow = CGPoint(x: 711.5, y: 842)
-    static let secondPositionFirstRow = CGPoint(x: 871.5, y: 562)
+    static let firstPositionSecondRow = CGPoint(x: 871.5, y: 562)
     static var count: CGFloat = 0
     
     private let type: Type
@@ -84,7 +104,6 @@ internal class Battery: SKSpriteNode {
         super.init(texture: nil, color: SKColor.clearColor(), size: CGSize())
 
         name = String(Int(Battery.count))
-        position = getNextPosition()
         Battery.count++
         zPosition = 1003
         
@@ -106,13 +125,13 @@ internal class Battery: SKSpriteNode {
         case .Excellent, .Good, .Bad:
             let number = SKSpriteNode(imageNamed: "nonActive")
             number.zPosition = -1002
-            number.addChild(createLabel(String(Int(Battery.count)), SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), 36, CGPointZero))
+            number.addChild(createLabel(String(Int(Battery.count)), fontColor: SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), fontSize: 36, position: CGPointZero))
             number.position.y = 114
             addChild(number)
         case .Opened:
             let number = SKSpriteNode(imageNamed: "active")
             number.zPosition = -1002
-            number.addChild(createLabel(String(Int(Battery.count)), SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), 36, CGPointZero))
+            number.addChild(createLabel(String(Int(Battery.count)), fontColor: SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), fontSize: 36, position: CGPointZero))
             number.position.y = 114
             addChild(number)
         
@@ -120,7 +139,7 @@ internal class Battery: SKSpriteNode {
             let number = SKSpriteNode(imageNamed: "nonActive")
             number.alpha = 0.5
             number.zPosition = -1002
-            number.addChild(createLabel(String(Int(Battery.count)), SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), 36, CGPointZero))
+            number.addChild(createLabel(String(Int(Battery.count)), fontColor: SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), fontSize: 36, position: CGPointZero))
             number.position.y = 114
             addChild(number)
         }
@@ -128,15 +147,5 @@ internal class Battery: SKSpriteNode {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func getNextPosition() -> CGPoint {
-        let dx: CGFloat = 322
-        
-        if Battery.count < 3 {
-            return CGPoint(x: Battery.firstPositionFirstRow.x + dx * (Battery.count), y: Battery.firstPositionFirstRow.y)
-        } else {
-            return CGPoint(x: Battery.secondPositionFirstRow.x + dx * (Battery.count - 3), y: Battery.secondPositionFirstRow.y)
-        }
     }
 }

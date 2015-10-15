@@ -33,15 +33,15 @@ class EndLevelView: SKSpriteNode {
         
         if actionsCount <= result_1 {
             battery.texture = SKTexture(imageNamed: "battery_3")
-            addChild(createLabel("Молодец! Ты нашел оптимальный алгоритм!", UIColor.blackColor(), 46, CGPoint(x: 1039.5, y: 1125.5)))
+            addChild(createLabel("Молодец! Ты нашел оптимальный алгоритм!", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1125.5)))
         } else if actionsCount <= result_2 {
             battery.texture = SKTexture(imageNamed: "battery_2")
-            addChild(createLabel("Отлично! Осталось изменить всего несколько", UIColor.blackColor(), 46, CGPoint(x: 1039.5, y: 1151)))
-            addChild(createLabel("действий, чтобы алгоритм стал оптимальным...", UIColor.blackColor(), 46, CGPoint(x: 1039.5, y: 1093)))
+            addChild(createLabel("Отлично! Осталось изменить всего несколько", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1151)))
+            addChild(createLabel("действий, чтобы алгоритм стал оптимальным...", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1093)))
         } else {
             battery.texture = SKTexture(imageNamed: "battery_1")
-            addChild(createLabel("Хорошо! Теперь давай попробуем составить", UIColor.blackColor(), 46, CGPoint(x: 1039.5, y: 1151)))
-            addChild(createLabel("программу с меньшим количеством действий", UIColor.blackColor(), 46, CGPoint(x: 1039.5, y: 1093)))
+            addChild(createLabel("Хорошо! Теперь давай попробуем составить", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1151)))
+            addChild(createLabel("программу с меньшим количеством действий", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1093)))
         }
         
         zPosition = 2000
@@ -50,15 +50,16 @@ class EndLevelView: SKSpriteNode {
         background.anchorPoint = CGPointZero
         
         addChild(buttonRestart)
-        addChild(createLabel("Заново", UIColor.blackColor(), 29, CGPoint(x: 1018.5, y: 670)))
+        addChild(createLabel("Заново", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1018.5, y: 670)))
         
         addChild(buttonNextLevel)
-        addChild(createLabel("Играть дальше", UIColor.blackColor(), 29, CGPoint(x: 1363, y: 670)))
+        addChild(createLabel("Играть дальше", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1363, y: 670)))
         
         addChild(buttonExit)
-        addChild(createLabel("Выйти в меню", UIColor.blackColor(), 29, CGPoint(x: 672, y: 670)))
+        addChild(createLabel("Выйти в меню", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 672, y: 670)))
         
         battery.position = Constants.Battery_EndLevelViewPosition
+        battery.zPosition = 1
         addChild(battery)
         
         show()
@@ -71,9 +72,8 @@ class EndLevelView: SKSpriteNode {
         runAction(appear)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
             switch node {
@@ -86,9 +86,8 @@ class EndLevelView: SKSpriteNode {
         }
     }
     
-    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        for touch in touches! {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
             switch node {
@@ -101,9 +100,8 @@ class EndLevelView: SKSpriteNode {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
             switch node {

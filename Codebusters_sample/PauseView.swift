@@ -26,7 +26,8 @@ class PauseView: SKSpriteNode {
         let texture = backgroundRightPart.texture!
         super.init(texture: texture, color: UIColor(), size: texture.size())
         zPosition = 2000
-        backgroundRightPart.zPosition = 20000
+        backgroundRightPart.zPosition = 900
+        backgroundLeftPart.zPosition = 1000
         alpha = 0
         anchorPoint = CGPointZero
         backgroundLeftPart.anchorPoint = CGPointZero
@@ -34,13 +35,13 @@ class PauseView: SKSpriteNode {
         addChild(backgroundLeftPart)
         
         addChild(buttonRestart)
-        buttonRestart.addChild(createLabel("ЗАНОВО", UIColor.whiteColor(), 29, CGPointZero))
+        buttonRestart.addChild(createLabel("ЗАНОВО", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero))
         
         addChild(buttonContinue)
-        buttonContinue.addChild(createLabel("ПРОДОЛЖИТЬ", UIColor.whiteColor(), 29, CGPointZero))
+        buttonContinue.addChild(createLabel("ПРОДОЛЖИТЬ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero))
         
         addChild(buttonExit)
-        buttonExit.addChild(createLabel("ВЫЙТИ", UIColor.whiteColor(), 29, CGPointZero))
+        buttonExit.addChild(createLabel("ВЫЙТИ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero))
         
         show()
         userInteractionEnabled = true
@@ -49,14 +50,14 @@ class PauseView: SKSpriteNode {
         soundSwitcher.zPosition = 1001
         backgroundLeftPart.addChild(soundSwitcher)
         
-        let soundLabel = createLabel("Звуки", UIColor.blackColor(), 29, CGPoint(x: 205.5, y: 473))
+        let soundLabel = createLabel("Звуки", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 205.5, y: 473))
         backgroundLeftPart.addChild(soundLabel)
         
         musicSwitcher.position = CGPoint(x: 404, y: 552)
         musicSwitcher.zPosition = 1001
         backgroundLeftPart.addChild(musicSwitcher)
         
-        let musicLabel = createLabel("Музыка", UIColor.blackColor(), 29, CGPoint(x: 404.5, y: 473))
+        let musicLabel = createLabel("Музыка", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 404.5, y: 473))
         backgroundLeftPart.addChild(musicLabel)
     }
     
@@ -75,9 +76,8 @@ class PauseView: SKSpriteNode {
         runAction(SKAction.sequence([disappear, SKAction.removeFromParent()]))
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
             switch node {
@@ -92,9 +92,8 @@ class PauseView: SKSpriteNode {
         }
     }
     
-    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        for touch in touches! {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
             switch node {
@@ -109,18 +108,17 @@ class PauseView: SKSpriteNode {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
             switch node {
-            case buttonRestart, buttonRestart.children[0] as! SKNode:
+            case buttonRestart, buttonRestart.children[0] :
                 buttonRestart.resetTexture()
                 GameProgress.sharedInstance.newGame(scene!.view!)
             case backgroundLeftPart:
                 return
-            case buttonExit, buttonExit.children[0] as! SKNode:
+            case buttonExit, buttonExit.children[0] :
                 GameProgress.sharedInstance.goToMenu(scene!.view!)
             case soundSwitcher, musicSwitcher:
                 return

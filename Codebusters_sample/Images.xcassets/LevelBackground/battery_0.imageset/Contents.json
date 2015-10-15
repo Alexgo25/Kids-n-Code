@@ -1,13 +1,17 @@
 {
   "images" : [
     {
-      "idiom" : "ipad",
-      "scale" : "1x",
-      "filename" : "finishscreen_emptybattery.png"
+      "idiom" : "universal",
+      "filename" : "finishscreen_emptybattery.png",
+      "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
+      "idiom" : "universal",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

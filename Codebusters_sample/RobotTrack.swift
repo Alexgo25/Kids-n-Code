@@ -96,7 +96,7 @@ class RobotTrack {
         
         track[getNextRobotTrackPosition(direction) + direction.rawValue].appendBlock(track[getNextRobotTrackPosition(direction)].getUpperBlock())
         track[getNextRobotTrackPosition(direction)].removeLastBlock()
-        var action = track[currentRobotPosition + 2 * direction.rawValue].moveUpperBlock(direction, floorPosition: track[getNextRobotTrackPosition(direction) + direction.rawValue].getFloorPosition())
+        let action = track[currentRobotPosition + 2 * direction.rawValue].moveUpperBlock(direction, floorPosition: track[getNextRobotTrackPosition(direction) + direction.rawValue].getFloorPosition())
         return action
     }
     

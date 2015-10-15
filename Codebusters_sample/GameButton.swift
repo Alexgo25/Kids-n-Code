@@ -39,15 +39,14 @@ class GameButton: SKSpriteNode {
         userInteractionEnabled = true
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         touched()
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
             AudioPlayer.sharedInstance.playSoundEffect("Sound_GameButton_\(gameButtonType.rawValue).mp3")
-            let touchLocation = touch.locationInNode(parent)
+            let touchLocation = touch.locationInNode(parent!)
             if containsPoint(touchLocation) {
                 parent!.touchesEnded(touches, withEvent: event)
             }
@@ -55,7 +54,7 @@ class GameButton: SKSpriteNode {
         }
     }
     
-    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         resetTexture()
     }
     

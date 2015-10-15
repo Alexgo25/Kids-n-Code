@@ -148,12 +148,12 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             canScaleBackground = playAreaSize.width > track!.trackLength(1) ? false : true
         } else {
             if recognizer.state == .Changed && canScaleBackground {
-                var minScale: CGFloat = playAreaSize.width / track!.trackLength(1)
-                var maxScale: CGFloat = 1
+                let minScale: CGFloat = playAreaSize.width / track!.trackLength(1)
+                let maxScale: CGFloat = 1
                 
                 var deltaScale = recognizer.scale
-                var currentScale = trackLayer.xScale
-                var zoomSpeed: CGFloat = 0.2
+                let currentScale = trackLayer.xScale
+                let zoomSpeed: CGFloat = 0.2
                 
                 deltaScale = (deltaScale - 1) * zoomSpeed + 1;
                 
@@ -232,9 +232,9 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             let touchLocation = convertPointFromView(swipe.locationInView(view))
             let node = nodeAtPoint(touchLocation)
             if let cell = node as? ActionCell {
-                ActionCell.deleteCell(cell.name!.toInt()!)
+                ActionCell.deleteCell(Int(cell.name!)!)
             } else if let cell = node.parent! as? ActionCell {
-                ActionCell.deleteCell(cell.name!.toInt()!)
+                ActionCell.deleteCell(Int(cell.name!)!)
             }
         }
     }
@@ -273,9 +273,8 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
             switch node {
@@ -289,9 +288,8 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
             switch node {
@@ -328,11 +326,11 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         
         addChild(background)
         
-        background.addChild(createLabel("Программа", UIColor.blackColor(), 46, CGPoint(x: 1773, y: 1429)))
-        background.addChild(createLabel("По одной", UIColor.blackColor(), 29, CGPoint(x: 1648, y: 390)))
-        background.addChild(createLabel("Запуск", UIColor.blackColor(), 29, CGPoint(x: 1769, y: 217)))
-        background.addChild(createLabel("Сброс", UIColor.blackColor(), 29, CGPoint(x: 1892, y: 390)))
-        background.addChild(createLabel("ПОСЛЕ ЗАПУСКА", UIColor.whiteColor(), 23, CGPoint(x: 1773, y: 1296)))
+        background.addChild(createLabel("Программа", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1773, y: 1429)))
+        background.addChild(createLabel("По одной", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1648, y: 390)))
+        background.addChild(createLabel("Запуск", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1769, y: 217)))
+        background.addChild(createLabel("В начало", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1892, y: 390)))
+        background.addChild(createLabel("ПОСЛЕ ЗАПУСКА", fontColor: UIColor.whiteColor(), fontSize: 23, position: CGPoint(x: 1773, y: 1296)))
         
         addChild(button_Pause)
         addChild(button_Start)
@@ -382,7 +380,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
     override func update(currentTime: CFTimeInterval) {
         if robot!.isRunningActions() {
-            checkRobotPosition(durationOfAnimation: 0)
+            checkRobotPosition(0)
         }
     }
 }

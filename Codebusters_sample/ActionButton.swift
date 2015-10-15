@@ -27,19 +27,18 @@ class ActionButton: SKSpriteNode {
         showLabel()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         tapBegan()
         
     }
     
-    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         tapEnded()
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {                    tapEnded()
-        let touchesSet = touches as! Set<UITouch>
-        for touch in touchesSet {
-            let touchLocation = touch.locationInNode(parent)
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {                    tapEnded()
+        for touch in touches {
+            let touchLocation = touch.locationInNode(parent!)
             if containsPoint(touchLocation) {
                 ActionCell.appendCell(actionType)
                 AudioPlayer.sharedInstance.playSoundEffect("Sound_ActionButton.mp3")
@@ -80,7 +79,7 @@ class ActionButton: SKSpriteNode {
             label.text = "ШАГНУТЬ"
             label.position = CGPoint(x: -8, y: 75)
         case .turn:
-            label.text = "ПОВЕРНУТЬ"
+            label.text = "РАЗВЕРНУТЬСЯ"
             label.position = CGPoint(x: -15, y: 75)
         case .push:
             label.text = "ТОЛКНУТЬ"

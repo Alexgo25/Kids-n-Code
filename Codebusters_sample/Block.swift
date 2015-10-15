@@ -53,8 +53,6 @@ class Block: SKNode {
         let moveByX = SKAction.moveTo(getNextPosition(direction), duration: 0.5)
         let moveByY = SKAction.moveTo(getNextPosition(direction, floorPosition: floorPosition), duration: 0.15)
         let sequence: SKAction
-        let position = CGFloat(trackPosition + direction.rawValue + 7 * (floorPosition.rawValue - 1))
-        
         if self.floorPosition.rawValue > floorPosition.rawValue {
             let sound = SKAction.runBlock() {
                 AudioPlayer.sharedInstance.playSoundEffect("CubeFalling.mp3")

@@ -93,7 +93,7 @@ class ActionCell: SKSpriteNode {
     }
     
     static func isArrayOfCellsFull() -> Bool {
-        return cells.count > 30
+        return cells.count > 29
     }
     
     static func appendCell(actionType: ActionType) {

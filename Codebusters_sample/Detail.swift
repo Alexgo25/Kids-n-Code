@@ -31,7 +31,7 @@ class Detail: SKSpriteNode {
         self.trackPosition = trackPosition
         self.floorPosition = floorPosition
         super.init(texture: texture, color: UIColor(), size: texture.size())
-        position = getCGPointOfPosition(trackPosition, floorPosition)
+        position = getCGPointOfPosition(trackPosition, floorPosition: floorPosition)
         zPosition = 100
         if floorPosition == .first {
             position.y += 60
@@ -59,9 +59,9 @@ class Detail: SKSpriteNode {
     }
     
     func hideDetail() {
-        var fadeOut = SKAction.fadeOutWithDuration(0.2)
-        var remove = SKAction.removeFromParent()
-        var sequence = SKAction.sequence([fadeOut, remove])
+        let fadeOut = SKAction.fadeOutWithDuration(0.2)
+        let remove = SKAction.removeFromParent()
+        let sequence = SKAction.sequence([fadeOut, remove])
         runAction(sequence)
         AudioPlayer.sharedInstance.playSoundEffect("DetailAchievement.wav")
     }
