@@ -23,13 +23,13 @@ class ActionButton: SKSpriteNode {
         actionType = type
         position = CGPoint(x: 20, y: 60)
         userInteractionEnabled = true
-        
+        setScale(1)
         showLabel()
+        name = "ActionButton_\(type.rawValue)"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         tapBegan()
-        
     }
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
@@ -40,8 +40,10 @@ class ActionButton: SKSpriteNode {
         for touch in touches {
             let touchLocation = touch.locationInNode(parent!)
             if containsPoint(touchLocation) {
+                TouchesAnalytics.sharedInstance.appendTouch(name!)
                 ActionCell.appendCell(actionType)
-                AudioPlayer.sharedInstance.playSoundEffect("Sound_ActionButton.mp3")
+                AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
+                
             }
         }
     }
@@ -67,8 +69,8 @@ class ActionButton: SKSpriteNode {
         runAction(move)
     }
 
-    func hideButton() {
-        let move = SKAction.moveTo(CGPoint(x: 20, y: 60), duration: 0.1)
+    func hideButton(duration: NSTimeInterval = 0.1) {
+        let move = SKAction.moveTo(CGPoint(x: 20, y: 60), duration: duration)
         let sequence = SKAction.sequence([move, SKAction.removeFromParent()])
         runAction(sequence)
     }
@@ -78,15 +80,19 @@ class ActionButton: SKSpriteNode {
         case .move:
             label.text = "ШАГНУТЬ"
             label.position = CGPoint(x: -8, y: 75)
+            zPosition = 11
         case .turn:
-            label.text = "РАЗВЕРНУТЬСЯ"
-            label.position = CGPoint(x: -15, y: 75)
+            label.text = "ПОВЕРНУТЬСЯ"
+            label.position = CGPoint(x: -35, y: 75)
+            zPosition = 10
         case .push:
             label.text = "ТОЛКНУТЬ"
             label.position = CGPoint(x: 8, y: 75)
+            zPosition = 10
         case .jump:
             label.text = "ПРЫГНУТЬ"
             label.position = CGPoint(x: 15, y: 75)
+            zPosition = 11
         default:
             label.text = ""
         }

@@ -14,12 +14,16 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         let scene = MenuScene()
             let skView = self.view as! SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
+            //skView.showsFPS = true
+            //skView.showsNodeCount = true
             skView.ignoresSiblingOrder = true
             //skView.showsPhysics = true
             scene.scaleMode = .AspectFill
+            AnalyticsCore.sharedAnalyticsCore.sendData()
             skView.presentScene(scene)
+        
+                GameProgress.sharedInstance.getSettings()
+            AudioPlayer.sharedInstance.playBackgroundMusic("backgroundMusic.mp3")
         }
 
     override func prefersStatusBarHidden() -> Bool {

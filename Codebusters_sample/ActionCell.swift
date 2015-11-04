@@ -16,17 +16,22 @@ class ActionCell: SKSpriteNode {
     static let cellsLayer = SKNode()
     private static var upperCellIndex = 0
     private let atlas = SKTextureAtlas(named: "ActionCells")
-
+    private var cellTexture = SKSpriteNode()
+    
+    
     private static let cellsLayerStartPosition = CGPoint(x: 1765, y: 1232)
     
     
     init(actionType: ActionType) {
         let texture = atlas.textureNamed("ActionCell_\(actionType.rawValue)")
-        
-        super.init(texture: texture, color: UIColor(), size: texture.size())
+        cellTexture = SKSpriteNode(texture: texture)
+        cellTexture.zPosition = -2
+
+        super.init(texture: nil, color: SKColor.clearColor(), size: texture.size())
+        addChild(cellTexture)
         self.actionType = actionType
         position = getNextPosition()
-        zPosition = 1002
+        zPosition = 1003
         ActionCell.cells.append(self)
         alpha = 0
         runAction(SKAction.fadeInWithDuration(0.2))
@@ -40,18 +45,18 @@ class ActionCell: SKSpriteNode {
     }
     
     func getNextPosition() -> CGPoint {
-        return CGPoint(x: 0, y: -CGFloat(ActionCell.cells.count) * texture!.size().height)
+        return CGPoint(x: 0, y: -CGFloat(ActionCell.cells.count) * cellTexture.size.height)
     }
     
     func highlightBegin() -> SKAction {
         return SKAction.runBlock() {
-            self.texture = self.atlas.textureNamed("ActionCell_\(self.actionType.rawValue)_Highlighted")
+            self.cellTexture.texture = self.atlas.textureNamed("ActionCell_\(self.actionType.rawValue)_Highlighted")
         }
     }
     
     func highlightEnd() -> SKAction {
         return SKAction.runBlock() {
-            self.texture = self.atlas.textureNamed("ActionCell_\(self.actionType.rawValue)")
+            self.cellTexture.texture = self.atlas.textureNamed("ActionCell_\(self.actionType.rawValue)")
         }
     }
     
@@ -64,7 +69,7 @@ class ActionCell: SKSpriteNode {
         case .jump:
             label.text = "ПРЫГНУТЬ"
         case .turn:
-            label.text = "ПОВЕРНУТЬ"
+            label.text = "ПОВЕРНУТЬСЯ"
         case .push:
             label.text = "ТОЛКНУТЬ"
         default:
@@ -74,22 +79,22 @@ class ActionCell: SKSpriteNode {
         label.fontSize = 23
         label.position = CGPoint(x: 19, y: 2)
         label.verticalAlignmentMode = .Center
-        label.zPosition = 1
+        label.zPosition = -1
         addChild(label)
     }
     
     static func resetCellTextures() {
         let atlas = SKTextureAtlas(named: "ActionCells")
         for cell in cells {
-            cell.texture = atlas.textureNamed("ActionCell_\(cell.actionType.rawValue)")
+            cell.cellTexture.texture = atlas.textureNamed("ActionCell_\(cell.actionType.rawValue)")
         }
     }
     
     static func resetCells() {
         cellsLayer.removeAllChildren()
         upperCellIndex = 0
-        cells = []
         cellsLayer.position = cellsLayerStartPosition
+        cells.removeAll(keepCapacity: false)
     }
     
     static func isArrayOfCellsFull() -> Bool {
@@ -105,12 +110,12 @@ class ActionCell: SKSpriteNode {
         }
     }
     
-    static func deleteCell(index: Int) {
+    static func deleteCell(index: Int, direction: CGFloat) {
         if cells[index].alpha == 0 {
             return
         }
         
-        let fadeOutAction = SKAction.group([SKAction.moveByX(-100, y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
+        let fadeOutAction = SKAction.group([SKAction.moveByX(100 * direction, y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
         
         cells[index].runAction(SKAction.sequence([fadeOutAction, SKAction.runBlock() { AudioPlayer.sharedInstance.playSoundEffect("Sound_ActionCellRemoving.mp3") }, SKAction.removeFromParent()]), completion: {
             self.moveCellsUpAfterDeleting(index)

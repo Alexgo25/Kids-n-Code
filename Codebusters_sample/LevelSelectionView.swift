@@ -48,11 +48,13 @@ class LevelSelectionView: SKSpriteNode {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
+            AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
             let touchLocation = touch.locationInNode(self)
             if let battery = nodeAtPoint(touchLocation) as? Battery {
                 if battery.type.rawValue >= 0 {
                     GameProgress.sharedInstance.setLevel(levelPackIndex, level: Int(battery.name!)!)
                     GameProgress.sharedInstance.newGame(scene!.view!)
+                    
                 }
             } else {
                 runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.2), SKAction.removeFromParent()]))

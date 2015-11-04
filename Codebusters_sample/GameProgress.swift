@@ -48,15 +48,15 @@ public class GameProgress {
     }
     
     func writeResultOfCurrentLevel(result: Int) {
-    
+        
         var currentLevelData = getCurrentLevelData()
         let currentLevelResult = currentLevelData["result"] as! Int
-
+        
         if result != 0 && currentLevelResult == 0 {
             openNextLevel()
         }
-
-        if result < currentLevelResult || result == 0 || currentLevelResult == 0 {
+        
+        if (result < currentLevelResult || result == 0 || currentLevelResult == 0) {
             currentLevelData.updateValue(result, forKey: "result")
         }
         
@@ -67,6 +67,27 @@ public class GameProgress {
         levels[currentLevel] = currentLevelData
         levelPacks[currentLevelPack]["levels"] = levels
         writeToPropertyListFile(levelPacks)
+    }
+    
+    func removeTutorial() {
+        var currentLevelData = getCurrentLevelData()
+        currentLevelData.removeValueForKey("tutorial")
+        
+        var levelPacks = getLevelsData()["levelPacks"] as! [[String : AnyObject]]
+        
+        var levels = levelPacks[currentLevelPack]["levels"] as! [[String : AnyObject]]
+        
+        levels[currentLevel] = currentLevelData
+        levelPacks[currentLevelPack]["levels"] = levels
+        writeToPropertyListFile(levelPacks)
+    }
+    
+    func getTutorialNumber() -> Int {
+        if let tutorial = getCurrentLevelData()["tutorial"] as? Int {
+            return tutorial
+        }
+        
+        return 0
     }
     
     func openNextLevel() {
@@ -97,8 +118,6 @@ public class GameProgress {
                 }
             }
         }
-        
-        getSettings()
     }
     
     func getLevelPacks() -> [[String : AnyObject]] {
@@ -108,7 +127,7 @@ public class GameProgress {
         let levelPacks = config["levelPacks"] as! [[String : AnyObject]]
         return levelPacks
     }
-
+    
     func setLevel(levelPack: Int, level: Int) {
         currentLevel = level
         currentLevelPack = levelPack
@@ -119,16 +138,16 @@ public class GameProgress {
             let scene = LevelScene(size: view.scene!.size)
             view.presentScene(scene, transition: SKTransition.crossFadeWithDuration(0.4))
         } else {
-            goToMenu(view)
+            goToMenu(view, robotTextImage: "\(Detail.sharedInstance.getDetailType().rawValue)_Text")
         }
     }
-
+    
     func getLevelsData() -> NSDictionary {
         let path = getLevelsDataPath()
         let config = NSMutableDictionary(contentsOfFile: path)!
         return config
     }
-
+    
     func getLevelsDataPath() -> String {
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         let fileURL = documentsURL.URLByAppendingPathComponent("Levels.plist")
@@ -140,15 +159,24 @@ public class GameProgress {
         var levelPacks = getLevelPacks()
         var levelPackData = levelPacks[currentLevelPack]
         let levels = levelPackData["levels"] as! [[String : AnyObject]]
-        let levelData = levels[currentLevel]
+        var levelData = levels[currentLevel]
         
         if levelPackData["cellState"] as! String == DetailCellState.NonActive.rawValue {
             levelPackData.updateValue(DetailCellState.Active.rawValue, forKey: "cellState")
             levelPacks[currentLevelPack] = levelPackData
-
+            
             writeToPropertyListFile(levelPacks)
         }
-
+        
+        
+        if currentLevel == levels.count - 1 {
+            if let detailType = levelPackData["detailType"] as? String {
+                levelData.updateValue(detailType, forKey: "detailType")
+            }
+        } else {
+            levelData.updateValue("Crystall", forKey: "detailType")
+        }
+        
         return levelData
     }
     
@@ -158,10 +186,16 @@ public class GameProgress {
         config.setValue(levelPacks, forKey: "levelPacks")
         config.writeToFile(getLevelsDataPath(), atomically: true)
     }
-
+    
     func setNextLevel() {
         let levelPackData = getLevelPacks()[currentLevelPack]
         let levels = levelPackData["levels"] as! [[String : AnyObject]]
+        
+        if currentLevelPack == 5 && currentLevel == levels.count - 1 {
+            let config = getLevelsData()
+            config.setValue("True", forKey: "Finished")
+            config.writeToFile(getLevelsDataPath(), atomically: true)
+        }
         
         if currentLevel < levels.count - 1 {
             currentLevel++
@@ -190,11 +224,34 @@ public class GameProgress {
         }
     }
     
-    func goToMenu(view: SKView) {
+    func finished() -> Bool {
+        if let value = getLevelsData()["Finished"] as? String {
+            if value == "True" {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func isGameFinished() -> Bool {
+        let levelPacks = GameProgress.sharedInstance.getLevelPacks()
+        let lastLevelPack = levelPacks[5]
+        
+        if lastLevelPack["cellState"] as! String == "" {
+            return true
+        }
+        
+        return false
+    }
+    
+    func goToMenu(view: SKView, robotTextImage: String = "") {
         currentLevel = -1
         currentLevelPack = -1
-        
-        view.presentScene(MenuScene(), transition: SKTransition.crossFadeWithDuration(0.4))
+        if robotTextImage != "" {
+            view.presentScene(MenuScene(robotTextImage: robotTextImage), transition: SKTransition.crossFadeWithDuration(0.4))
+        } else {
+            view.presentScene(MenuScene(), transition: SKTransition.crossFadeWithDuration(0.4))
+        }
     }
     
     func getSettings() {
@@ -206,5 +263,12 @@ public class GameProgress {
         if settings["music"] as! String == "Off" {
             AudioPlayer.sharedInstance.musicSwitcher.switchOff()
         }
+    }
+    
+    func getCurrentLevelNumber()->Int {
+        return currentLevel
+    }
+    func getCurrentLevelPackNumber()->Int {
+        return currentLevelPack
     }
 }

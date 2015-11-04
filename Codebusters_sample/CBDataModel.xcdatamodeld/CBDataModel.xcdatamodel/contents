@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
+    <entity name="Action" representedClassName=".Action" syncable="YES">
+        <attribute name="actionType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Level" inverseName="actions" inverseEntity="Level" syncable="YES"/>
+    </entity>
+    <entity name="Level" representedClassName=".Level" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="finished" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="levelNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="levelPackNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="actions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Action" inverseName="level" inverseEntity="Action" syncable="YES"/>
+        <relationship name="touches" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Touch" inverseName="level" inverseEntity="Touch" syncable="YES"/>
+    </entity>
+    <entity name="Touch" representedClassName=".Touch" syncable="YES">
+        <attribute name="touchedNode" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Level" inverseName="touches" inverseEntity="Level" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Level" positionX="-36" positionY="9" width="128" height="150"/>
+        <element name="Action" positionX="0" positionY="81" width="128" height="75"/>
+        <element name="Touch" positionX="27" positionY="108" width="128" height="75"/>
+    </elements>
+</model>

@@ -12,6 +12,8 @@ import SpriteKit
 import AVFoundation
 
 public class AudioPlayer {
+    
+    
     public static let sharedInstance = AudioPlayer()
     
     private var backgroundMusicPlayer: AVAudioPlayer?
@@ -29,13 +31,15 @@ public class AudioPlayer {
         musicSwitcher = MusicSwitcher(switcher: Switcher(parameter: &musicIsOn, name: "music"))
     }
     
+    
+    
     public func playBackgroundMusic(filename: String) {
         let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
         if (url == nil) {
             print("Could not find file: \(filename)")
             return
         }
-        
+    
         var error: NSError? = nil
         do {
             backgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: url!)
@@ -46,7 +50,9 @@ public class AudioPlayer {
         if let player = backgroundMusicPlayer {
             player.numberOfLoops = -1
             player.prepareToPlay()
-            player.play()
+            if musicIsOn {
+                player.play()
+            }
         } else {
             print("Could not create audio player: \(error!)")
         }

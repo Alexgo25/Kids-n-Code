@@ -63,10 +63,10 @@ struct Constants {
     static let ActionCellSize = CGSize(width: 239, height: 66)
     static let ActionCellFirstPosition = CGPoint(x: 1748, y: 1238)
     
-    static let Button_MovePosition = CGPoint(x: -168, y: 156)
+    static let Button_MovePosition = CGPoint(x: -188, y: 156)
     static let Button_TurnPosition = CGPoint(x: -61, y: 224)
     static let Button_PushPosition = CGPoint(x: 94, y: 224)
-    static let Button_JumpPosition = CGPoint(x: 205, y: 156)
+    static let Button_JumpPosition = CGPoint(x: 215, y: 156)
     static let Button_StartPosition = CGPoint(x: 1769, y: 120)
     
     static let Button_ClearPosition = CGPoint(x: 1892, y: 289)
@@ -126,6 +126,8 @@ func getGameButtonPosition(type: GameButtonType) -> CGPoint {
         return Constants.Button_Restart_EndLevelViewPosition
     case .Exit_EndLevelView:
         return Constants.Button_Exit_EndLevelViewPosition
+    case .Ok:
+        return Constants.Button_TipsPosition
     }
 }
 

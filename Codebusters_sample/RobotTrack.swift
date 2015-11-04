@@ -12,16 +12,38 @@ import SpriteKit
 class RobotTrack {
     
     private var track: [RobotStanding] = []
-    private var currentRobotPosition: Int
-    private let startRobotPosition: Int
-    private let detailPosition: Int
+    private var currentRobotPosition = 0
+    private var startRobotPosition = 0
+    private var detailPosition = 0
+    private var detailFloorPosition = FloorPosition.first
     
-    init(pattern: [FloorPosition], robotPosition: Int, detailPosition: Int) {
-        startRobotPosition = robotPosition
-        self.detailPosition = detailPosition
-        currentRobotPosition = robotPosition
+    static let sharedInstance = RobotTrack()
+    
+    private func getCurrentLevelTrackInfo() {
+        let levelData = GameProgress.sharedInstance.getCurrentLevelData()
         
-        initTrackFromPattern(pattern)
+        if let pattern = levelData["blocksPattern"] as? [Int] {
+            initTrackFromPattern(pattern)
+        }
+        
+        if let robotPosition = levelData["robotPosition"] as? Int {
+            currentRobotPosition = robotPosition
+            startRobotPosition = robotPosition
+        }
+        
+        if let detailPosition = levelData["detailPosition"] as? Int {
+            self.detailPosition = detailPosition
+        }
+        
+        if let detailFloorPositionInt = levelData["detailFloorPosition"] as? Int {
+            if let detailFloorPosition = FloorPosition(rawValue: detailFloorPositionInt) {
+                self.detailFloorPosition = detailFloorPosition
+            }
+        }
+    }
+    
+    class func initTrack() {
+        sharedInstance.getCurrentLevelTrackInfo()
     }
     
     func trackLength(scale: CGFloat) -> CGFloat {
@@ -36,14 +58,16 @@ class RobotTrack {
         track.removeAll(keepCapacity: false)
     }
     
-    func initTrackFromPattern(pattern: [FloorPosition]) {
+    func initTrackFromPattern(pattern: [Int]) {
         track.append(RobotStanding(trackPosition: track.count, floorPosition: .ground))
-        for var i = 1; i <= pattern.count; i++ {
-            track.append(RobotStanding(trackPosition: i, floorPosition: pattern[i - 1]))
+        for var i = 0; i < pattern.count; i++ {
+            if let floor = FloorPosition(rawValue: pattern[i]) {
+                track.append(RobotStanding(trackPosition: i + 1, floorPosition: floor))
+            }
         }
         track.append(RobotStanding(trackPosition: track.count, floorPosition: .ground))
     }
-    
+
     func canPerformActionWithDirection(action: ActionType, direction: Direction) -> Bool {
         switch action {
         case .move:
@@ -51,10 +75,24 @@ class RobotTrack {
         case .jump:
             return track[currentRobotPosition].getFloorPosition() != .ground && track[getNextRobotTrackPosition(direction)].getFloorPosition() != .ground
         case .push:
+            if detailPosition == currentRobotPosition + 2 * direction.rawValue && detailFloorPosition == track[currentRobotPosition + 2 * direction.rawValue].getFloorPosition() {
+                return false
+            }
+            
             return track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue || (track[getNextRobotTrackPosition(direction)].getFloorPosition() != track[currentRobotPosition + 2 * direction.rawValue].getFloorPosition() && track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue == track[currentRobotPosition].getFloorPosition().rawValue + 1)
         default:
             return true
         }
+    }
+    
+    func getBlocksPattern() -> [FloorPosition] {
+        var array: [FloorPosition] = []
+       
+        for block in track {
+            array.append(block.getFloorPosition())
+        }
+        
+        return array
     }
     
     func resetRobotPosition() {
@@ -104,9 +142,3 @@ class RobotTrack {
         return track[trackPosition].getBlockAt(floorPosition)
     }
 }
-
-
-
-    
-    
-    

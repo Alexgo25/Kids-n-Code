@@ -22,8 +22,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>1</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
 					<integer>2</integer>
 					<key>detailFloorPosition</key>
@@ -34,6 +32,8 @@
 					<integer>1</integer>
 					<key>result_2</key>
 					<integer>2</integer>
+					<key>tutorial</key>
+					<integer>1</integer>
 				</dict>
 				<dict>
 					<key>blocksPattern</key>
@@ -46,8 +46,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>2</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
 					<integer>5</integer>
 					<key>detailFloorPosition</key>
@@ -71,8 +69,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>5</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
 					<integer>4</integer>
 					<key>detailFloorPosition</key>
@@ -83,6 +79,8 @@
 					<integer>2</integer>
 					<key>result_2</key>
 					<integer>3</integer>
+					<key>tutorial</key>
+					<integer>2</integer>
 				</dict>
 				<dict>
 					<key>blocksPattern</key>
@@ -96,8 +94,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>4</integer>
-					<key>detailType</key>
-					<string>CPU</string>
 					<key>detailPosition</key>
 					<integer>1</integer>
 					<key>detailFloorPosition</key>
@@ -142,6 +138,8 @@
 					<integer>1</integer>
 					<key>result_2</key>
 					<integer>2</integer>
+					<key>tutorial</key>
+					<integer>3</integer>
 				</dict>
 				<dict>
 					<key>blocksPattern</key>
@@ -155,8 +153,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>2</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
 					<integer>3</integer>
 					<key>detailFloorPosition</key>
@@ -172,6 +168,30 @@
 					<key>blocksPattern</key>
 					<array>
 						<integer>1</integer>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>2</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>1</integer>
+					<key>detailPosition</key>
+					<integer>5</integer>
+					<key>detailFloorPosition</key>
+					<integer>2</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>4</integer>
+					<key>result_2</key>
+					<integer>5</integer>
+				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
+						<integer>1</integer>
 						<integer>2</integer>
 						<integer>1</integer>
 						<integer>1</integer>
@@ -180,8 +200,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>3</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
 					<integer>5</integer>
 					<key>detailFloorPosition</key>
@@ -204,34 +222,7 @@
 						<integer>1</integer>
 					</array>
 					<key>robotPosition</key>
-					<integer>5</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
-					<key>detailPosition</key>
 					<integer>1</integer>
-					<key>detailFloorPosition</key>
-					<integer>1</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>5</integer>
-					<key>result_2</key>
-					<integer>6</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>1</integer>
-					<key>detailType</key>
-					<string>HardDrive</string>
 					<key>detailPosition</key>
 					<integer>4</integer>
 					<key>detailFloorPosition</key>
@@ -256,6 +247,29 @@
 					<key>blocksPattern</key>
 					<array>
 						<integer>1</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>5</integer>
+					<key>detailPosition</key>
+					<integer>1</integer>
+					<key>detailFloorPosition</key>
+					<integer>1</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>5</integer>
+					<key>result_2</key>
+					<integer>6</integer>
+				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
+						<integer>1</integer>
 						<integer>1</integer>
 						<integer>1</integer>
 						<integer>1</integer>
@@ -264,8 +278,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>4</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
 					<integer>6</integer>
 					<key>detailFloorPosition</key>
@@ -274,6 +286,30 @@
 					<integer>-1</integer>
 					<key>result_1</key>
 					<integer>3</integer>
+					<key>result_2</key>
+					<integer>4</integer>
+				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
+						<integer>1</integer>
+						<integer>0</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>0</integer>
+						<integer>1</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>4</integer>
+					<key>detailPosition</key>
+					<integer>7</integer>
+					<key>detailFloorPosition</key>
+					<integer>1</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>4</integer>
 					<key>result_2</key>
 					<integer>5</integer>
 				</dict>
@@ -289,8 +325,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>6</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
 					<integer>1</integer>
 					<key>detailFloorPosition</key>
@@ -306,76 +340,25 @@
 					<key>blocksPattern</key>
 					<array>
 						<integer>1</integer>
-						<integer>1</integer>
+						<integer>2</integer>
 						<integer>2</integer>
 						<integer>1</integer>
 						<integer>2</integer>
+						<integer>0</integer>
 						<integer>1</integer>
 					</array>
 					<key>robotPosition</key>
 					<integer>1</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
-					<integer>1</integer>
+					<integer>7</integer>
 					<key>detailFloorPosition</key>
-					<integer>2</integer>
+					<integer>1</integer>
 					<key>result</key>
 					<integer>-1</integer>
 					<key>result_1</key>
+					<integer>7</integer>
+					<key>result_2</key>
 					<integer>8</integer>
-					<key>result_2</key>
-					<integer>9</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
-						<integer>1</integer>
-						<integer>0</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>4</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
-					<key>detailPosition</key>
-					<integer>1</integer>
-					<key>detailFloorPosition</key>
-					<integer>2</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>14</integer>
-					<key>result_2</key>
-					<integer>15</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-						<integer>1</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>5</integer>
-					<key>detailType</key>
-					<string>RAM1</string>
-					<key>detailPosition</key>
-					<integer>3</integer>
-					<key>detailFloorPosition</key>
-					<integer>2</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>5</integer>
-					<key>result_2</key>
-					<integer>6</integer>
 				</dict>
 			</array>
 		</dict>
@@ -389,6 +372,54 @@
 				<dict>
 					<key>blocksPattern</key>
 					<array>
+						<integer>2</integer>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>0</integer>
+						<integer>2</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>1</integer>
+					<key>detailPosition</key>
+					<integer>7</integer>
+					<key>detailFloorPosition</key>
+					<integer>1</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>7</integer>
+					<key>result_2</key>
+					<integer>8</integer>
+				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>0</integer>
+						<integer>2</integer>
+						<integer>0</integer>
+						<integer>1</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>1</integer>
+					<key>detailPosition</key>
+					<integer>7</integer>
+					<key>detailFloorPosition</key>
+					<integer>1</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>8</integer>
+					<key>result_2</key>
+					<integer>9</integer>
+				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
 						<integer>1</integer>
 						<integer>1</integer>
 						<integer>2</integer>
@@ -399,8 +430,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>1</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
 					<integer>7</integer>
 					<key>detailFloorPosition</key>
@@ -418,51 +447,22 @@
 						<integer>1</integer>
 						<integer>1</integer>
 						<integer>2</integer>
-						<integer>2</integer>
-						<integer>2</integer>
 						<integer>1</integer>
+						<integer>2</integer>
 						<integer>1</integer>
 					</array>
 					<key>robotPosition</key>
 					<integer>1</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
-					<integer>5</integer>
+					<integer>1</integer>
 					<key>detailFloorPosition</key>
 					<integer>2</integer>
 					<key>result</key>
 					<integer>-1</integer>
 					<key>result_1</key>
-					<integer>4</integer>
-					<key>result_2</key>
-					<integer>5</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
-						<integer>1</integer>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-						<integer>1</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>1</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
-					<key>detailPosition</key>
-					<integer>7</integer>
-					<key>detailFloorPosition</key>
-					<integer>1</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>8</integer>
-					<key>result_2</key>
 					<integer>9</integer>
+					<key>result_2</key>
+					<integer>10</integer>
 				</dict>
 				<dict>
 					<key>blocksPattern</key>
@@ -472,49 +472,20 @@
 						<integer>2</integer>
 						<integer>1</integer>
 						<integer>2</integer>
-						<integer>0</integer>
 						<integer>1</integer>
 					</array>
 					<key>robotPosition</key>
 					<integer>4</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
-					<integer>7</integer>
-					<key>detailFloorPosition</key>
 					<integer>1</integer>
+					<key>detailFloorPosition</key>
+					<integer>2</integer>
 					<key>result</key>
 					<integer>-1</integer>
 					<key>result_1</key>
-					<integer>4</integer>
+					<integer>15</integer>
 					<key>result_2</key>
-					<integer>5</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-						<integer>1</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>1</integer>
-					<key>detailType</key>
-					<string>RAM2</string>
-					<key>detailPosition</key>
-					<integer>7</integer>
-					<key>detailFloorPosition</key>
-					<integer>1</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>7</integer>
-					<key>result_2</key>
-					<integer>8</integer>
+					<integer>16</integer>
 				</dict>
 			</array>
 		</dict>
@@ -528,84 +499,6 @@
 				<dict>
 					<key>blocksPattern</key>
 					<array>
-						<integer>2</integer>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-						<integer>2</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>1</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
-					<key>detailPosition</key>
-					<integer>7</integer>
-					<key>detailFloorPosition</key>
-					<integer>1</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>7</integer>
-					<key>result_2</key>
-					<integer>8</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>1</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
-					<key>detailPosition</key>
-					<integer>7</integer>
-					<key>detailFloorPosition</key>
-					<integer>2</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>22</integer>
-					<key>result_2</key>
-					<integer>23</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>1</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
-					<key>detailPosition</key>
-					<integer>1</integer>
-					<key>detailFloorPosition</key>
-					<integer>2</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>1</integer>
-					<key>result_2</key>
-					<integer>2</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
 						<integer>1</integer>
 						<integer>2</integer>
 						<integer>1</integer>
@@ -616,8 +509,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>6</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
 					<integer>1</integer>
 					<key>detailFloorPosition</key>
@@ -634,6 +525,77 @@
 					<array>
 						<integer>1</integer>
 						<integer>2</integer>
+						<integer>0</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>5</integer>
+					<key>detailPosition</key>
+					<integer>3</integer>
+					<key>detailFloorPosition</key>
+					<integer>2</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>11</integer>
+					<key>result_2</key>
+					<integer>12</integer>
+				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
+						<integer>1</integer>
+						<integer>0</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>3</integer>
+					<key>detailPosition</key>
+					<integer>1</integer>
+					<key>detailFloorPosition</key>
+					<integer>1</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>15</integer>
+					<key>result_2</key>
+					<integer>16</integer>
+				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
+						<integer>1</integer>
+						<integer>0</integer>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>0</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>3</integer>
+					<key>detailPosition</key>
+					<integer>1</integer>
+					<key>detailFloorPosition</key>
+					<integer>1</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>16</integer>
+					<key>result_2</key>
+					<integer>17</integer>
+				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
+						<integer>1</integer>
+						<integer>2</integer>
 						<integer>1</integer>
 						<integer>2</integer>
 						<integer>0</integer>
@@ -642,8 +604,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>1</integer>
-					<key>detailType</key>
-					<string>Battery</string>
 					<key>detailPosition</key>
 					<integer>7</integer>
 					<key>detailFloorPosition</key>
@@ -668,53 +628,25 @@
 					<key>blocksPattern</key>
 					<array>
 						<integer>1</integer>
-						<integer>0</integer>
-						<integer>1</integer>
-						<integer>1</integer>
+						<integer>2</integer>
 						<integer>1</integer>
 						<integer>2</integer>
 						<integer>1</integer>
+						<integer>1</integer>
+						<integer>0</integer>
 					</array>
 					<key>robotPosition</key>
 					<integer>3</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
 					<key>detailPosition</key>
-					<integer>1</integer>
+					<integer>7</integer>
 					<key>detailFloorPosition</key>
-					<integer>1</integer>
+					<integer>2</integer>
 					<key>result</key>
 					<integer>-1</integer>
 					<key>result_1</key>
-					<integer>15</integer>
+					<integer>22</integer>
 					<key>result_2</key>
-					<integer>16</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
-						<integer>1</integer>
-						<integer>0</integer>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>0</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>3</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
-					<key>detailPosition</key>
-					<integer>1</integer>
-					<key>detailFloorPosition</key>
-					<integer>1</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>16</integer>
-					<key>result_2</key>
-					<integer>17</integer>
+					<integer>23</integer>
 				</dict>
 				<dict>
 					<key>blocksPattern</key>
@@ -729,34 +661,6 @@
 					</array>
 					<key>robotPosition</key>
 					<integer>4</integer>
-					<key>detailType</key>
-					<string>Crystall</string>
-					<key>detailPosition</key>
-					<integer>7</integer>
-					<key>detailFloorPosition</key>
-					<integer>2</integer>
-					<key>result</key>
-					<integer>-1</integer>
-					<key>result_1</key>
-					<integer>21</integer>
-					<key>result_2</key>
-					<integer>22</integer>
-				</dict>
-				<dict>
-					<key>blocksPattern</key>
-					<array>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-						<integer>2</integer>
-						<integer>1</integer>
-						<integer>1</integer>
-						<integer>0</integer>
-					</array>
-					<key>robotPosition</key>
-					<integer>3</integer>
-					<key>detailType</key>
-					<string>Fan</string>
 					<key>detailPosition</key>
 					<integer>7</integer>
 					<key>detailFloorPosition</key>
@@ -768,11 +672,61 @@
 					<key>result_2</key>
 					<integer>18</integer>
 				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>0</integer>
+						<integer>2</integer>
+						<integer>0</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>1</integer>
+					<key>detailPosition</key>
+					<integer>1</integer>
+					<key>detailFloorPosition</key>
+					<integer>2</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>20</integer>
+					<key>result_2</key>
+					<integer>21</integer>
+				</dict>
+				<dict>
+					<key>blocksPattern</key>
+					<array>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>1</integer>
+						<integer>2</integer>
+						<integer>0</integer>
+						<integer>2</integer>
+						<integer>0</integer>
+					</array>
+					<key>robotPosition</key>
+					<integer>1</integer>
+					<key>detailPosition</key>
+					<integer>7</integer>
+					<key>detailFloorPosition</key>
+					<integer>2</integer>
+					<key>result</key>
+					<integer>-1</integer>
+					<key>result_1</key>
+					<integer>23</integer>
+					<key>result_2</key>
+					<integer>24</integer>
+				</dict>
 			</array>
 		</dict>
 	</array>
 	<key>settings</key>
 	<dict>
+		<key>version</key>
+		<string>1.0</string>
 		<key>sounds</key>
 		<string>On</string>
 		<key>music</key>

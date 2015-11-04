@@ -13,6 +13,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
     let background = SKNode()
     let trackLayer = SKNode()
+    var touchesToRecord : [String] = []
+    //level info
+    let thisLevelNumber : Int?
+    let thisLevelPackNumber : Int?
     
     let levelBackground1 = SKSpriteNode(imageNamed: "levelBackground1")
     let levelBackground2 = SKSpriteNode(imageNamed: "levelBackground2")
@@ -24,24 +28,67 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     let button_Debug = GameButton(type: .Debug)
     let button_Clear = GameButton(type: .Clear)
     
-    var robot: Robot?
-    var detail: Detail?
-    var track: RobotTrack?
+    var robot: Robot
+    var detail: Detail
+    var track: RobotTrack
     
     var selectedNode: SKNode?
-    
-    let levelData: [String : AnyObject]
-    
-    private var blocksPattern: [FloorPosition] = []
     
     let playAreaSize: CGSize
     var canScaleBackground = true
     
     override init(size: CGSize) {
-        levelData = GameProgress.sharedInstance.getCurrentLevelData()
+        detail = Detail.sharedInstance
+        track = RobotTrack.sharedInstance
+        robot = Robot.sharedInstance
+        
         playAreaSize = CGSize(width: size.width - levelBackground2.size.width, height: size.height)
+        thisLevelNumber = GameProgress.sharedInstance.getCurrentLevelNumber()
+        thisLevelPackNumber = GameProgress.sharedInstance.getCurrentLevelPackNumber()
+        
         super.init(size: size)
+        
+        //Listening to notifications
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name: NotificationKeys.kRobotTookDetailNotificationKey, object: robot)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+        
     }
+    
+    //Handling notifications
+    
+     func finishWithSuccess() {
+        print("Finished")
+        //record
+        var strings : [String!] = []
+        for cell in ActionCell.cells {
+            strings.append(cell.getActionType().rawValue)
+            print(cell.getActionType().rawValue)
+        }
+        let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+       CoreDataAdapter.sharedAdapter.addNewLevel(thisLevelNumber!, levelPackNumber: thisLevelPackNumber!, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
+        TouchesAnalytics.sharedInstance.resetTouches()
+    }
+    
+    func finishWithMistake() {
+        print("Mistake")
+        TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+        //record
+        var strings : [String!] = []
+        for cell in ActionCell.cells {
+            strings.append(cell.getActionType().rawValue)
+            print(cell.getActionType().rawValue)
+        }
+        let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+        CoreDataAdapter.sharedAdapter.addNewLevel(thisLevelNumber!, levelPackNumber: thisLevelPackNumber!, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
+        TouchesAnalytics.sharedInstance.resetTouches()
+    }
+    
+    
+    func handleTouch(notification : NSNotification) {
+        touchesToRecord.append(notification.userInfo!["touch"]! as! String)
+        print(notification.userInfo!["touch"]!)
+    }
+
     
     override func didMoveToView(view: SKView) {
         userInteractionEnabled = true
@@ -49,93 +96,61 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         physicsWorld.gravity = CGVectorMake(0, 0)
         physicsWorld.contactDelegate = self
         
+        
         ActionCell.cellsLayer.removeFromParent()
         addChild(ActionCell.cellsLayer)
         ActionCell.resetCells()
         
-        ActionCell.cells.removeAll(keepCapacity: false)
+        //Analytics->start timer
+        TimerDelegate.sharedTimerDelegate.startTimer()
         
         createBackground()
         createTrackLayer()
         
-        if let count = view.gestureRecognizers?.count {
-            if count > 0 {
-                view.gestureRecognizers?.removeAll(keepCapacity: false)
-            }
-        }
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
-        swipeLeft.direction = .Left
-        swipeLeft.delegate = self
-        view.addGestureRecognizer(swipeLeft)
-        
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: Selector("swipedUp:"))
-        swipeUp.direction = .Up
-        swipeUp.delegate = self
-        view.addGestureRecognizer(swipeUp)
-        
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: Selector("swipedDown:"))
-        swipeDown.direction = .Down
-        swipeDown.delegate = self
-        view.addGestureRecognizer(swipeDown)
-        
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("handlePanFrom:"))
-        view.addGestureRecognizer(gestureRecognizer)
-        
-        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: Selector("handlePinchFrom:"))
-        view.addGestureRecognizer(pinchRecognizer)
+        addGestures()
         
         showDetailAndRobot()
+        
+        if GameProgress.sharedInstance.getTutorialNumber() > 0 {
+            addChild(Tutorial.sharedInstance)
+            let number = GameProgress.sharedInstance.getTutorialNumber()
+            
+            switch number {
+            case 1:
+                Tutorial.sharedInstance.showFirstPart()
+            case 2:
+                Tutorial.sharedInstance.showSecondPart()
+            case 3:
+                Tutorial.sharedInstance.showThirdPart()
+            default:
+                break
+            }
+
+            GameProgress.sharedInstance.removeTutorial()
+        }
     }
     
     func createBlocks() {
-        if track?.deleteBlocks() != nil {
-            track!.deleteBlocks()
-        }
+        track.deleteBlocks()
         
-        track = RobotTrack(pattern: blocksPattern, robotPosition: robot!.getStartPosition(), detailPosition: detail!.getTrackPosition())
-        robot!.track = track!
-        for var i = 1; i <= blocksPattern.count; i++ {
-            for var j = 0; j < blocksPattern[i - 1].rawValue; j++ {
-                trackLayer.addChild(track!.getBlockAt(i, floorPosition: j))
+        RobotTrack.initTrack()
+        
+        let blocksPattern = track.getBlocksPattern()
+        
+        for var i = 1; i < blocksPattern.count; i++ {
+            for var j = 0; j < blocksPattern[i].rawValue; j++ {
+                trackLayer.addChild(track.getBlockAt(i, floorPosition: j))
             }
         }
     }
     
     func createTrackLayer() {
-        let blocks: AnyObject? = levelData["blocksPattern"]
-        if let pattern = blocks as? [Int] {
-            for block in pattern {
-                if let floor = FloorPosition(rawValue: block) {
-                    blocksPattern.append(floor)
-                }
-            }
-        }
+        createBlocks()
+        Detail.initDetail()
+        Robot.initRobot()
         
-        let robotPosition = levelData["robotPosition"] as! Int
-        let detailPosition = levelData["detailPosition"] as! Int
-        
-        let detailFloorPositionInt = levelData["detailFloorPosition"] as! Int
-        let detailFloorPosition = FloorPosition(rawValue: detailFloorPositionInt)
-        
-        track = RobotTrack(pattern: blocksPattern, robotPosition: robotPosition, detailPosition: detailPosition)
-        
-        robot = Robot(track: track!)
-        
-        let detailTypeString  = levelData["detailType"] as! String
-        if let detailType = DetailType(rawValue: detailTypeString) {
-            detail = Detail(detailType: detailType, trackPosition: detailPosition, floorPosition: detailFloorPosition!)
-        }
-        
-        trackLayer.addChild(robot!)
-        trackLayer.addChild(detail!)
-
-        for var i = 1; i <= blocksPattern.count; i++ {
-            for var j = 0; j < blocksPattern[i - 1].rawValue; j++ {
-                trackLayer.addChild(track!.getBlockAt(i, floorPosition: j))
-            }
-        }
-        
+        trackLayer.addChild(robot)
+        trackLayer.addChild(detail)
         background.addChild(trackLayer)
     }
     
@@ -145,10 +160,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
     func handlePinchFrom(recognizer: UIPinchGestureRecognizer) {
         if recognizer.state == .Began {
-            canScaleBackground = playAreaSize.width > track!.trackLength(1) ? false : true
+            canScaleBackground = playAreaSize.width > track.trackLength(1) ? false : true
         } else {
             if recognizer.state == .Changed && canScaleBackground {
-                let minScale: CGFloat = playAreaSize.width / track!.trackLength(1)
+                let minScale: CGFloat = playAreaSize.width / track.trackLength(1)
                 let maxScale: CGFloat = 1
                 
                 var deltaScale = recognizer.scale
@@ -163,6 +178,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
                 trackLayer.runAction(SKAction.scaleBy(deltaScale, duration: 0))
                 trackLayer.position = boundLayerPos(trackLayer.position)
                 recognizer.scale = 1
+                //Analytics->record zoomPinch
+                //touchesToRecord.append("zoomPinch")
+                TouchesAnalytics.sharedInstance.appendTouch("zoomPinch")
+                //print("zoomPinch")
             }
         }
     }
@@ -172,7 +191,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             var touchLocation = recognizer.locationInView(recognizer.view)
             touchLocation = convertPointFromView(touchLocation)
             
-            if track!.trackLength(trackLayer.xScale) > playAreaSize.width {
+            if track.trackLength(trackLayer.xScale) > playAreaSize.width {
                 selectNodeForTouch(touchLocation)
             }
             
@@ -198,6 +217,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             moveTo.timingMode = .EaseOut
             trackLayer.runAction(moveTo)
             selectedNode = nil
+            //Analytics->record scrollPan
+            //touchesToRecord.append("scrollPan")
+            TouchesAnalytics.sharedInstance.appendTouch("scrollPan")
+            //print("scrollPan")
         }
     }
     
@@ -221,37 +244,71 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         var retval = aNewPosition
         
         retval.x = CGFloat(min(retval.x, 0))
-        retval.x = CGFloat(max(retval.x, -(track!.trackLength(trackLayer.xScale)) + playAreaSize.width))
+        retval.x = CGFloat(max(retval.x, -(track.trackLength(trackLayer.xScale)) + playAreaSize.width))
         retval.y = position.y
     
         return retval
     }
     
     func swipedLeft(swipe: UISwipeGestureRecognizer) {
-        if robot!.isOnStart {
+        if robot.isOnStart {
             let touchLocation = convertPointFromView(swipe.locationInView(view))
             let node = nodeAtPoint(touchLocation)
             if let cell = node as? ActionCell {
-                ActionCell.deleteCell(Int(cell.name!)!)
-            } else if let cell = node.parent! as? ActionCell {
-                ActionCell.deleteCell(Int(cell.name!)!)
+                ActionCell.deleteCell(Int(cell.name!)!, direction: -1)
+                //Analytics->record deleteCellSwipeLeft
+                //touchesToRecord.append("deleteCellSwipeLeft")
+                TouchesAnalytics.sharedInstance.appendTouch("deleteCellSwipeLeft")
+                //print("deleteCellSwipeLeft")
             }
+        }
+    }
+    
+    func swipedRight(swipe: UISwipeGestureRecognizer) {
+        if robot.isOnStart {
+            let touchLocation = convertPointFromView(swipe.locationInView(view))
+            let node = nodeAtPoint(touchLocation)
+            if let cell = node as? ActionCell {
+                ActionCell.deleteCell(Int(cell.name!)!, direction: 1)
+                //Analytics->record deleteCellSwipeRight
+                //touchesToRecord.append("deleteCellSwipeRight")
+                TouchesAnalytics.sharedInstance.appendTouch("deleteCellSwipeRight")
+                //print("deleteCellSwipeRight")
+            }
+        }
+        
+        let touchLocation = convertPointFromView(swipe.locationInView(view))
+        let node = nodeAtPoint(touchLocation)
+        if let _ = node as? Tutorial {
+            Tutorial.sharedInstance.showNextSlide()
+            //Analytics->record showNextSlideSwipe
+            //touchesToRecord.append("showNextTutorialSlideSwipe")
+            TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
+            //print("showNextTutorialSlideSwipe")
         }
     }
     
     func swipedUp(swipe: UISwipeGestureRecognizer) {
         let touchLocation = convertPointFromView(swipe.locationInView(view))
         let node = nodeAtPoint(touchLocation)
-        if node.isMemberOfClass(ActionCell) && node.alpha > 0 && !robot!.isRunningActions() {
+        if node.isMemberOfClass(ActionCell) && node.alpha > 0 && !robot.isRunningActions() {
             ActionCell.moveCellsLayerUp()
+            //Analytics->record swipeCellLayerUp
+            //touchesToRecord.append("swipeCellLayerUp")
+            TouchesAnalytics.sharedInstance.appendTouch("swipeCellLayerUp")
+            //print("swipeCellLayerUp")
         }
     }
     
     func swipedDown(swipe: UISwipeGestureRecognizer) {
         let touchLocation = convertPointFromView(swipe.locationInView(view))
         let node = nodeAtPoint(touchLocation)
-        if node.isMemberOfClass(ActionCell) && node.alpha > 0 && !robot!.isRunningActions() {
+        if node.isMemberOfClass(ActionCell) && node.alpha > 0 && !robot.isRunningActions() {
             ActionCell.moveCellsLayerDown()
+            //Analytics->record swipeCellLayerDown
+            //touchesToRecord.append("swipeCellLayerDown")
+            TouchesAnalytics.sharedInstance.appendTouch("swipeCellLayerDown")
+            //print("swipeCellLayerDown")
         }
     }
     
@@ -259,10 +316,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         let contactMask: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         switch contactMask {
         case PhysicsCategory.Robot | PhysicsCategory.Detail:
-            detail!.hideDetail()
-            robot!.takeDetail()
+            detail.hideDetail()
+            robot.takeDetail()
             
-            if detail!.getDetailType() != DetailType.Crystall {
+            if detail.getDetailType() != DetailType.Crystall {
                 GameProgress.sharedInstance.checkDetailCellState()
             }
             
@@ -281,8 +338,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             case button_Start, button_Pause, button_Tips, button_Debug, button_Restart, button_Clear:
                 return
             default:
-                if robot!.isTurnedToFront() && !node.isMemberOfClass(ActionCell) {
-                    robot!.runAction(robot!.turnFromFront())
+                
+                if robot.isTurnedToFront() && !node.isMemberOfClass(ActionCell) {
+                    robot.runAction(robot.turnFromFront())
+                    
                 }
             }
         }
@@ -295,18 +354,46 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             switch node {
             case button_Start:
                 checkRobotPosition()
-                robot!.performActions()
+                //Analytics->record start button
+                //touchesToRecord.append(node.name!)
+                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
+                //print(node.name!)
+                robot.performActions()
             case button_Pause:
+                //Analytics->record pause
+                //touchesToRecord.append(node.name!)
+                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
+                //print(node.name!)
                 pauseGame()
             case button_Tips:
-                GameProgress.sharedInstance.goToMenu(view!)
+                //Analytics->record tips
+                //touchesToRecord.append(node.name!)
+                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
+                //print(node.name!)
+                if !robot.isRunningActions() {
+                    addChild(Tutorial.sharedInstance)
+                    Tutorial.sharedInstance.showFullTutorial()
+                }
             case button_Clear:
-                ActionCell.resetCellTextures()
-                robot!.resetActions()
                 createBlocks()
+                //Analytics->record clear button
+                //touchesToRecord.append(node.name!)
+                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
+                //print(node.name!)
+                Detail.sharedInstance.move()
+                ActionCell.resetCellTextures()
+                robot.resetActions()
             case button_Debug:
-                robot!.debug()
+                //Analytics->record debug button
+                //touchesToRecord.append(node.name!)
+                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
+                //print(node.name!)
+                robot.debug()
             case button_Restart:
+                //Analytics-->record Restart button
+                //touchesToRecord.append(node.name!)
+                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
+                //print(node.name!)
                 GameProgress.sharedInstance.newGame(view!)
             default:
                 return
@@ -318,7 +405,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         levelBackground1.anchorPoint = CGPointZero
         levelBackground1.zPosition = -1
         background.addChild(levelBackground1)
-        
+        background.name = "background"
         levelBackground2.anchorPoint = CGPointZero
         levelBackground2.position = CGPoint(x: size.width - levelBackground2.size.width, y: 0)
         levelBackground2.zPosition = 1000
@@ -327,12 +414,13 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         addChild(background)
         
         background.addChild(createLabel("Программа", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1773, y: 1429)))
-        background.addChild(createLabel("По одной", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1648, y: 390)))
+        background.addChild(createLabel("Отладка", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1648, y: 390)))
         background.addChild(createLabel("Запуск", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1769, y: 217)))
         background.addChild(createLabel("В начало", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1892, y: 390)))
         background.addChild(createLabel("ПОСЛЕ ЗАПУСКА", fontColor: UIColor.whiteColor(), fontSize: 23, position: CGPoint(x: 1773, y: 1296)))
         
         addChild(button_Pause)
+        button_Pause.zPosition = 2500
         addChild(button_Start)
         addChild(button_Tips)
         addChild(button_Restart)
@@ -352,7 +440,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
     func checkRobotPosition(durationOfAnimation: NSTimeInterval = 0.4) {
         let bound: CGFloat = Constants.BlockFace_Size.width
-        let robotPosition = trackLayer.position.x + robot!.position.x
+        let robotPosition = trackLayer.position.x + robot.position.x
         
         if robotPosition < bound {
             trackLayer.runAction(SKAction.moveByX(-robotPosition + bound, y: 0, duration: durationOfAnimation))
@@ -366,7 +454,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
     func showDetailAndRobot() {
         let bound: CGFloat = Constants.BlockFace_Size.width
-        let detailPosition = trackLayer.position.x + detail!.position.x
+        let detailPosition = trackLayer.position.x + detail.position.x
         
         if detailPosition < bound {
             trackLayer.runAction(SKAction.moveByX(-detailPosition + bound, y: 0, duration: 0), completion: { self.checkRobotPosition() })
@@ -375,11 +463,48 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         
         if detailPosition > playAreaSize.width - bound {
             trackLayer.runAction(SKAction.moveByX(-detailPosition + playAreaSize.width - bound, y: 0, duration: 0), completion: { self.checkRobotPosition() })
+            return
         }
+        
+        checkRobotPosition()
+    }
+    
+    func addGestures() {
+        if let count = view!.gestureRecognizers?.count {
+            if count > 0 {
+                view!.gestureRecognizers?.removeAll(keepCapacity: false)
+            }
+        }
+
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
+        swipeLeft.direction = .Left
+        swipeLeft.delegate = self
+        view!.addGestureRecognizer(swipeLeft)
+
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: Selector("swipedRight:"))
+        swipeRight.direction = .Right
+        swipeRight.delegate = self
+        view!.addGestureRecognizer(swipeRight)
+        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: Selector("swipedUp:"))
+        swipeUp.direction = .Up
+        swipeUp.delegate = self
+        view!.addGestureRecognizer(swipeUp)
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: Selector("swipedDown:"))
+        swipeDown.direction = .Down
+        swipeDown.delegate = self
+        view!.addGestureRecognizer(swipeDown)
+        
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("handlePanFrom:"))
+        view!.addGestureRecognizer(gestureRecognizer)
+        
+        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: Selector("handlePinchFrom:"))
+        view!.addGestureRecognizer(pinchRecognizer)
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if robot!.isRunningActions() {
+        if robot.isRunningActions() {
             checkRobotPosition(0)
         }
     }

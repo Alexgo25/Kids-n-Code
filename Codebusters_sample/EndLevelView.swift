@@ -44,7 +44,7 @@ class EndLevelView: SKSpriteNode {
             addChild(createLabel("программу с меньшим количеством действий", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1093)))
         }
         
-        zPosition = 2000
+        zPosition = 3000
 
         anchorPoint = CGPointZero
         background.anchorPoint = CGPointZero
@@ -106,13 +106,14 @@ class EndLevelView: SKSpriteNode {
             let node = nodeAtPoint(touchLocation)
             switch node {
             case buttonRestart:
-                buttonRestart.resetTexture()
                 GameProgress.sharedInstance.newGame(scene!.view!)
             case buttonNextLevel:
                 GameProgress.sharedInstance.setNextLevel()
                 GameProgress.sharedInstance.newGame(scene!.view!)
+                
             case buttonExit:
                 GameProgress.sharedInstance.goToMenu(scene!.view!)
+                removeFromParent()
             default:
                 return
             }
