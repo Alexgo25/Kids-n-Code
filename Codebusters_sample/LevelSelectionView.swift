@@ -54,7 +54,6 @@ class LevelSelectionView: SKSpriteNode {
                 if battery.type.rawValue >= 0 {
                     GameProgress.sharedInstance.setLevel(levelPackIndex, level: Int(battery.name!)!)
                     GameProgress.sharedInstance.newGame(scene!.view!)
-                    
                 }
             } else {
                 runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.2), SKAction.removeFromParent()]))
@@ -94,7 +93,7 @@ internal enum Type: Int {
 }
 
 internal class Battery: SKSpriteNode {
-
+    
     static let firstPositionFirstRow = CGPoint(x: 711.5, y: 842)
     static let firstPositionSecondRow = CGPoint(x: 871.5, y: 562)
     static var count: CGFloat = 0
@@ -104,7 +103,7 @@ internal class Battery: SKSpriteNode {
     init(type: Type) {
         self.type = type
         super.init(texture: nil, color: SKColor.clearColor(), size: CGSize())
-
+        
         name = String(Int(Battery.count))
         Battery.count++
         zPosition = 1003
@@ -136,7 +135,7 @@ internal class Battery: SKSpriteNode {
             number.addChild(createLabel(String(Int(Battery.count)), fontColor: SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), fontSize: 36, position: CGPointZero))
             number.position.y = 114
             addChild(number)
-        
+            
         case .Closed:
             let number = SKSpriteNode(imageNamed: "nonActive")
             number.alpha = 0.5
@@ -146,7 +145,7 @@ internal class Battery: SKSpriteNode {
             addChild(number)
         }
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

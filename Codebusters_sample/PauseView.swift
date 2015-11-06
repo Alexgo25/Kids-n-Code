@@ -133,13 +133,13 @@ class PauseView: SKSpriteNode {
             switch node {
             case buttonRestart, buttonRestart.children[0] :
                 buttonRestart.resetTexture()
-                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
+                TouchesAnalytics.sharedInstance.appendTouch(buttonRestart.name!)
                 GameProgress.sharedInstance.newGame(scene!.view!)
                 hide()
             case backgroundLeftPart:
                 return
             case buttonExit, buttonExit.children[0] :
-                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
+                TouchesAnalytics.sharedInstance.appendTouch(buttonExit.name!)
                 NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
                 GameProgress.sharedInstance.goToMenu(scene!.view!)
                 removeAllChildren()
