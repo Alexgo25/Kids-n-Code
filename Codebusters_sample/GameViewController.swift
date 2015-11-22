@@ -19,12 +19,13 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             //skView.showsPhysics = true
             scene.scaleMode = .AspectFill
-            AnalyticsCore.sharedAnalyticsCore.sendData()
+        
             skView.presentScene(scene)
         if (NSUserDefaults.standardUserDefaults().objectForKey("deviceID") == nil){
             let deviceid = String(stringInterpolationSegment: UIDevice.currentDevice().identifierForVendor)
             NSUserDefaults.standardUserDefaults().setObject(deviceid, forKey: "deviceID")
         }
+        AnalyticsCore.sharedAnalyticsCore.sendData()
         
                 GameProgress.sharedInstance.getSettings()
             AudioPlayer.sharedInstance.playBackgroundMusic("backgroundMusic.mp3")
