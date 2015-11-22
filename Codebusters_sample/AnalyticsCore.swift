@@ -60,7 +60,7 @@ class AnalyticsCore : NSObject{
         for level in levels {
             arr.addObject(returnLevelAsNSDictionary(level))
         }
-        let deviceid = String(stringInterpolationSegment: UIDevice.currentDevice().identifierForVendor)
+        let deviceid = NSUserDefaults.standardUserDefaults().objectForKey("deviceID") as! String
         let dict = ["device" : deviceid,
             "levels" : arr]
         return dict

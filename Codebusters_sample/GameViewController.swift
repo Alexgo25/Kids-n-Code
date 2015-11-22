@@ -21,6 +21,10 @@ class GameViewController: UIViewController {
             scene.scaleMode = .AspectFill
             AnalyticsCore.sharedAnalyticsCore.sendData()
             skView.presentScene(scene)
+        if (NSUserDefaults.standardUserDefaults().objectForKey("deviceID") == nil){
+            let deviceid = String(stringInterpolationSegment: UIDevice.currentDevice().identifierForVendor)
+            NSUserDefaults.standardUserDefaults().setObject(deviceid, forKey: "deviceID")
+        }
         
                 GameProgress.sharedInstance.getSettings()
             AudioPlayer.sharedInstance.playBackgroundMusic("backgroundMusic.mp3")
