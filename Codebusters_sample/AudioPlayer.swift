@@ -12,26 +12,32 @@ import SpriteKit
 import AVFoundation
 
 public class AudioPlayer {
-    
-    
     public static let sharedInstance = AudioPlayer()
     
     private var backgroundMusicPlayer: AVAudioPlayer?
     private var soundEffectPlayer: AVAudioPlayer?
     
-    private var soundsAreOn = true
-    private var musicIsOn = true
+    var soundsAreOn: Bool
+    var musicIsOn: Bool
     
-    var soundsSwitcher: Switcher
-    var musicSwitcher: MusicSwitcher
-    
-    
-    private init() {
-        soundsSwitcher = Switcher(parameter: &soundsAreOn, name: "sounds")
-        musicSwitcher = MusicSwitcher(switcher: Switcher(parameter: &musicIsOn, name: "music"))
+    init() {
+        musicIsOn = true
+        soundsAreOn = true
+        
+        let settings = GameProgress.sharedInstance.getLevelsData()["settings"] as! [String : AnyObject]
+        
+        if let sounds = settings["sounds"] as? String {
+            if sounds == "Off" {
+                soundsAreOn = false
+            }
+        }
+        
+        if let music = settings["music"] as? String {
+            if music == "Off" {
+                musicIsOn = false
+            }
+        }
     }
-    
-    
     
     public func playBackgroundMusic(filename: String) {
         let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
@@ -62,6 +68,7 @@ public class AudioPlayer {
         if let player = backgroundMusicPlayer {
             if player.playing {
                 player.pause()
+                musicIsOn = false
             }
         }
     }
@@ -70,6 +77,7 @@ public class AudioPlayer {
         if let player = backgroundMusicPlayer {
             if !player.playing {
                 player.play()
+                musicIsOn = true
             }
         }
     }

@@ -254,17 +254,6 @@ public class GameProgress {
         }
     }
     
-    func getSettings() {
-        let settings = getLevelsData()["settings"] as! [String : AnyObject]
-        if settings["sounds"] as! String == "Off" {
-            AudioPlayer.sharedInstance.soundsSwitcher.switchOff()
-        }
-        
-        if settings["music"] as! String == "Off" {
-            AudioPlayer.sharedInstance.musicSwitcher.switchOff()
-        }
-    }
-    
     func getCurrentLevelNumber()->Int {
         return currentLevel
     }

@@ -26,10 +26,10 @@ class GameViewController: UIViewController {
             NSUserDefaults.standardUserDefaults().setObject(deviceid, forKey: "deviceID")
         }
         AnalyticsCore.sharedAnalyticsCore.sendData()
-        
-                GameProgress.sharedInstance.getSettings()
-            AudioPlayer.sharedInstance.playBackgroundMusic("backgroundMusic.mp3")
-        }
+
+        weak var audio = AudioPlayer.sharedInstance
+        AudioPlayer.sharedInstance.playBackgroundMusic("backgroundMusic.mp3")
+    }
 
     override func prefersStatusBarHidden() -> Bool {
         return true

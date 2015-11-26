@@ -18,12 +18,24 @@ class PauseView: SKSpriteNode {
     private let buttonContinue = GameButton(type: .Continue_PauseView)
     private let buttonExit = GameButton(type: .Exit_PauseView)
     
-    private var soundSwitcher = AudioPlayer.sharedInstance.soundsSwitcher
-    private var musicSwitcher = AudioPlayer.sharedInstance.musicSwitcher
+    private var soundSwitcher: SoundSwitcher
+    private var musicSwitcher: MusicSwitcher
     
     
     init() {
+        musicSwitcher = MusicSwitcher()
+        soundSwitcher = SoundSwitcher()
+        
+        if !AudioPlayer.sharedInstance.musicIsOn {
+            musicSwitcher.switchOff()
+        }
+        
+        if !AudioPlayer.sharedInstance.soundsAreOn {
+            soundSwitcher.switchOff()
+        }
+        
         musicSwitcher.name = "MusicSwitcher"
+        soundSwitcher.name = "SoundSwitcher"
         
         let texture = backgroundRightPart.texture!
         super.init(texture: texture, color: UIColor(), size: texture.size())
@@ -58,10 +70,6 @@ class PauseView: SKSpriteNode {
         let soundLabel = createLabel("Звуки", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 205.5, y: 473))
         backgroundLeftPart.addChild(soundLabel)
         
-        if let _ = musicSwitcher.parent {
-            musicSwitcher.removeFromParent()
-        }
-        
         musicSwitcher.position = CGPoint(x: 404, y: 552)
         musicSwitcher.zPosition = 1001
         backgroundLeftPart.addChild(musicSwitcher)
@@ -69,10 +77,6 @@ class PauseView: SKSpriteNode {
         let musicLabel = createLabel("Музыка", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 404.5, y: 473))
         backgroundLeftPart.addChild(musicLabel)
     }
-
-    
-
-
     
     func show() {
         let appear = SKAction.fadeInWithDuration(0.15)
@@ -87,11 +91,7 @@ class PauseView: SKSpriteNode {
         let moveLeftPart = SKAction.moveByX(-backgroundLeftPart.size.width, y: 0, duration: 0.15)
         backgroundLeftPart.runAction(moveLeftPart)
         runAction(SKAction.sequence([disappear, SKAction.removeFromParent()]))
-
-
     }
-    
-
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
@@ -146,7 +146,6 @@ class PauseView: SKSpriteNode {
                 hide()
             case soundSwitcher, musicSwitcher:
                 TouchesAnalytics.sharedInstance.appendTouch(node.name!)
-                return
             default:
                 if let scene = self.scene as? LevelScene {
                     TouchesAnalytics.sharedInstance.appendTouch("returnFromPause")

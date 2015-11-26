@@ -9,88 +9,72 @@ import Foundation
 import SpriteKit
 import AVFoundation
 
-
 class Switcher: SKSpriteNode {
-    
-    private var label = SKLabelNode()
-    private let atlas = SKTextureAtlas(named: "PauseView")
     private let switcher: SKSpriteNode
+    private var label: SKLabelNode
+    private var switchedOn: Bool = true
     
-    private var parameter: UnsafeMutablePointer<Bool> = nil
-    
-    init(parameter: UnsafeMutablePointer<Bool>, name: String) {
-        self.parameter = parameter
-        
-        switcher = SKSpriteNode(texture: atlas.textureNamed("Switcher_PauseView"))
-        
+    init() {
+        let atlas = SKTextureAtlas(named: "PauseView")
         let texture = atlas.textureNamed("SwitcherBackground_On_PauseView")
-        super.init(texture: texture, color: UIColor(), size: texture.size())
-        self.name = name
+        
+        let switcherTexture = SKTexture(imageNamed: "Switcher_PauseView.png")
+        switcher = SKSpriteNode(texture: switcherTexture)
         switcher.position = CGPoint(x: -52, y: 0)
         
-        addChild(switcher)
-        
         label = createLabel("ВКЛ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPoint(x: 22.5, y: 0))
+        
+        super.init(texture: texture, color: UIColor(), size: texture.size())
+        
+        addChild(switcher)
         addChild(label)
         
-        userInteractionEnabled = true
+        userInteractionEnabled = false
     }
-    
+
     func isSwitchedOn() -> Bool {
-        return parameter.memory
+        return switchedOn
     }
     
-    func switchOn() {
+    private func switchOn() {
+        switchedOn = true
         
-        let changeBackground = SKAction.runBlock() {
-            self.texture = self.atlas.textureNamed("SwitcherBackground_On_PauseView")
-        }
-        
+        let atlas = SKTextureAtlas(named: "PauseView")
+        let texture = atlas.textureNamed("SwitcherBackground_On_PauseView")
+        let changeTexture = SKAction.setTexture(texture, resize: true)
         let moveSwitcher = SKAction.moveByX(-103, y: 0, duration: 0.1)
         
-        let removeLabel = SKAction.runBlock() {
-            self.label.text = ""
-        }
+        let newLabelPosition = CGPoint(x: 22.5, y: 0)
         
-        let addLabel = SKAction.runBlock() {
+        label.text = ""
+        switcher.runAction(moveSwitcher, completion: {
+            self.runAction(changeTexture)
+            self.label.position = newLabelPosition
             self.label.text = "ВКЛ"
-            self.label.position = CGPoint(x: 22.5, y: 0)
-        }
-        
-        let sequence = SKAction.sequence([removeLabel, moveSwitcher, changeBackground, addLabel])
-        switcher.runAction(sequence)
-        
-        parameter.memory = true
-        
-        GameProgress.sharedInstance.changeSetting(name!, value: "On")
+        })
     }
     
     func switchOff() {
-        let changeBackground = SKAction.runBlock() {
-            self.texture = self.atlas.textureNamed("SwitcherBackground_Off_PauseView")
-        }
+        switchedOn = false
         
+        let atlas = SKTextureAtlas(named: "PauseView")
+        let texture = atlas.textureNamed("SwitcherBackground_Off_PauseView")
+        let changeTexture = SKAction.setTexture(texture, resize: true)
         let moveSwitcher = SKAction.moveByX(103, y: 0, duration: 0.1)
         
-        let removeLabel = SKAction.runBlock() {
-            self.label.text = ""
-        }
+        let newLabelPosition = CGPoint(x: -29.5, y: 0)
         
-        let addLabel = SKAction.runBlock() {
+        label.text = ""
+        
+        switcher.runAction(moveSwitcher, completion: {
+            self.runAction(changeTexture)
+            self.label.position = newLabelPosition
             self.label.text = "ВЫКЛ"
-            self.label.position = CGPoint(x: -29.5, y: 0)
-        }
-        
-        let sequence = SKAction.sequence([removeLabel, moveSwitcher, changeBackground, addLabel])
-        switcher.runAction(sequence)
-        
-        parameter.memory = false
-        
-        GameProgress.sharedInstance.changeSetting(name!, value: "Off")
+        })
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if isSwitchedOn() {
+        if switchedOn {
             switchOff()
         } else {
             switchOn()
@@ -102,13 +86,12 @@ class Switcher: SKSpriteNode {
     }
 }
 
-class MusicSwitcher: SKNode {
+class MusicSwitcher: SKSpriteNode {
     private let switcher: Switcher
     
-    init(switcher: Switcher) {
-        self.switcher = switcher
-        super.init()
-        switcher.userInteractionEnabled = false
+    init() {
+        switcher = Switcher()
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSize())
         addChild(switcher)
         
         userInteractionEnabled = true
@@ -117,8 +100,42 @@ class MusicSwitcher: SKNode {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if switcher.isSwitchedOn() {
             AudioPlayer.sharedInstance.pauseBackgroundMusic()
+            GameProgress.sharedInstance.changeSetting("music", value: "Off")
         } else {
             AudioPlayer.sharedInstance.resumeBackgroundMusic()
+            GameProgress.sharedInstance.changeSetting("music", value: "On")
+        }
+        
+        switcher.touchesEnded(touches, withEvent: event)
+    }
+    
+    func switchOff() {
+        switcher.switchOff()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class SoundSwitcher: SKSpriteNode {
+    private let switcher: Switcher
+    
+    init() {
+        switcher = Switcher()
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSize())
+        addChild(switcher)
+        
+        userInteractionEnabled = true
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if switcher.isSwitchedOn() {
+            AudioPlayer.sharedInstance.soundsAreOn = false
+            GameProgress.sharedInstance.changeSetting("sounds", value: "Off")
+        } else {
+            AudioPlayer.sharedInstance.soundsAreOn = true
+            GameProgress.sharedInstance.changeSetting("sounds", value: "On")
         }
         
         switcher.touchesEnded(touches, withEvent: event)
