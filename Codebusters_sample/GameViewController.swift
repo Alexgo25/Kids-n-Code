@@ -27,7 +27,7 @@ class GameViewController: UIViewController {
         }
         AnalyticsCore.sharedAnalyticsCore.sendData()
 
-        weak var audio = AudioPlayer.sharedInstance
+        weak var audio = AudioPlayer.sharedInstance // Не убирать
         AudioPlayer.sharedInstance.playBackgroundMusic("backgroundMusic.mp3")
     }
 

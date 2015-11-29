@@ -38,12 +38,13 @@ class ActionButton: SKSpriteNode {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {                    tapEnded()
         for touch in touches {
+            weak var parent = self.parent
             let touchLocation = touch.locationInNode(parent!)
+            parent = nil
             if containsPoint(touchLocation) {
                 TouchesAnalytics.sharedInstance.appendTouch(name!)
                 ActionCell.appendCell(actionType)
                 AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
-                
             }
         }
     }

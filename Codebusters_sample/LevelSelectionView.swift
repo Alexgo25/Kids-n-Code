@@ -10,12 +10,10 @@ import UIKit
 import SpriteKit
 
 class LevelSelectionView: SKSpriteNode {
-    
     let levelPackIndex: Int
     let levelsCount: Int
     
     init(levelPackIndex: Int) {
-        
         let texture = SKTexture(imageNamed: "LevelSelectionView_Background")
         self.levelPackIndex = levelPackIndex
         let levels = GameProgress.sharedInstance.getLevelPackData(levelPackIndex)

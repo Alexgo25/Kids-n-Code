@@ -11,25 +11,24 @@ import SpriteKit
 
 class ActionCell: SKSpriteNode {
     
-    private var actionType: ActionType = .none
-    static var cells: [ActionCell] = []
-    static let cellsLayer = SKNode()
+    private var actionType: ActionType
     private static var upperCellIndex = 0
-    private let atlas = SKTextureAtlas(named: "ActionCells")
-    private var cellTexture = SKSpriteNode()
-    
+    private var cellBackground: SKSpriteNode
     
     private static let cellsLayerStartPosition = CGPoint(x: 1765, y: 1232)
-    
+    static var cells: [ActionCell] = []
+    static let cellsLayer = SKNode()
     
     init(actionType: ActionType) {
+        let atlas = SKTextureAtlas(named: "ActionCells")
         let texture = atlas.textureNamed("ActionCell_\(actionType.rawValue)")
-        cellTexture = SKSpriteNode(texture: texture)
-        cellTexture.zPosition = -2
-
-        super.init(texture: nil, color: SKColor.clearColor(), size: texture.size())
-        addChild(cellTexture)
+        cellBackground = SKSpriteNode(texture: texture)
+        cellBackground.zPosition = -2
         self.actionType = actionType
+        
+        super.init(texture: nil, color: SKColor.clearColor(), size: texture.size())
+
+        addChild(cellBackground)
         position = getNextPosition()
         zPosition = 1003
         ActionCell.cells.append(self)
@@ -45,18 +44,20 @@ class ActionCell: SKSpriteNode {
     }
     
     func getNextPosition() -> CGPoint {
-        return CGPoint(x: 0, y: -CGFloat(ActionCell.cells.count) * cellTexture.size.height)
+        return CGPoint(x: 0, y: -CGFloat(ActionCell.cells.count) * cellBackground.size.height)
     }
     
     func highlightBegin() -> SKAction {
+        let atlas = SKTextureAtlas(named: "ActionCells")
         return SKAction.runBlock() {
-            self.cellTexture.texture = self.atlas.textureNamed("ActionCell_\(self.actionType.rawValue)_Highlighted")
+            self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType.rawValue)_Highlighted")
         }
     }
     
     func highlightEnd() -> SKAction {
+        let atlas = SKTextureAtlas(named: "ActionCells")
         return SKAction.runBlock() {
-            self.cellTexture.texture = self.atlas.textureNamed("ActionCell_\(self.actionType.rawValue)")
+            self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType.rawValue)")
         }
     }
     
@@ -86,7 +87,7 @@ class ActionCell: SKSpriteNode {
     static func resetCellTextures() {
         let atlas = SKTextureAtlas(named: "ActionCells")
         for cell in cells {
-            cell.cellTexture.texture = atlas.textureNamed("ActionCell_\(cell.actionType.rawValue)")
+            cell.cellBackground.texture = atlas.textureNamed("ActionCell_\(cell.actionType.rawValue)")
         }
     }
     

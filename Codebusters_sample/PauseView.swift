@@ -10,148 +10,87 @@ import UIKit
 import SpriteKit
 
 class PauseView: SKSpriteNode {
-    
-    private var backgroundRightPart = SKSpriteNode(imageNamed: "pauseBackgroundRightPart")
-    private var backgroundLeftPart = SKSpriteNode(imageNamed: "pauseBackgroundLeftPart")
+    private let backgroundLeftPart = SKSpriteNode(imageNamed: "pauseBackgroundLeftPart")
+    private let backgroundRightPart = SKSpriteNode(imageNamed: "pauseBackgroundRightPart")
     
     private let buttonRestart = GameButton(type: .Restart_PauseView)
     private let buttonContinue = GameButton(type: .Continue_PauseView)
     private let buttonExit = GameButton(type: .Exit_PauseView)
     
-    private var soundSwitcher: SoundSwitcher
-    private var musicSwitcher: MusicSwitcher
-    
+    private let soundSwitcher: SoundSwitcher
+    private let musicSwitcher: MusicSwitcher
     
     init() {
         musicSwitcher = MusicSwitcher()
         soundSwitcher = SoundSwitcher()
-        
-        if !AudioPlayer.sharedInstance.musicIsOn {
-            musicSwitcher.switchOff()
-        }
-        
-        if !AudioPlayer.sharedInstance.soundsAreOn {
-            soundSwitcher.switchOff()
-        }
-        
-        musicSwitcher.name = "MusicSwitcher"
-        soundSwitcher.name = "SoundSwitcher"
-        
-        let texture = backgroundRightPart.texture!
-        super.init(texture: texture, color: UIColor(), size: texture.size())
-        zPosition = 3000
-        backgroundRightPart.zPosition = 900
-        backgroundLeftPart.zPosition = 1000
-        alpha = 0
+        super.init(texture: nil, color: UIColor(), size: CGSize())
+
         anchorPoint = CGPointZero
+        userInteractionEnabled = true
+        zPosition = 3000
+        
+        createBackground()
+        show()
+    }
+    
+    func createBackground() {
+        backgroundLeftPart.zPosition = 1000
         backgroundLeftPart.anchorPoint = CGPointZero
         backgroundLeftPart.position.x = -backgroundLeftPart.size.width
         addChild(backgroundLeftPart)
         
-        addChild(buttonRestart)
-        buttonRestart.addChild(createLabel("ЗАНОВО", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero))
-        
-        addChild(buttonContinue)
-        buttonContinue.addChild(createLabel("ПРОДОЛЖИТЬ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero))
-        
-        addChild(buttonExit)
-        buttonExit.addChild(createLabel("ВЫЙТИ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero))
-        
-        show()
-        userInteractionEnabled = true
-        
-        soundSwitcher.name = "SoundSwitcher"
-        
-        soundSwitcher.position = CGPoint(x: 206.5, y: 552)
-        soundSwitcher.zPosition = 1001
-        
         backgroundLeftPart.addChild(soundSwitcher)
+        backgroundLeftPart.addChild(musicSwitcher)
         
         let soundLabel = createLabel("Звуки", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 205.5, y: 473))
         backgroundLeftPart.addChild(soundLabel)
         
-        musicSwitcher.position = CGPoint(x: 404, y: 552)
-        musicSwitcher.zPosition = 1001
-        backgroundLeftPart.addChild(musicSwitcher)
-        
         let musicLabel = createLabel("Музыка", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 404.5, y: 473))
         backgroundLeftPart.addChild(musicLabel)
+        
+        addChild(buttonRestart)
+        addChild(buttonContinue)
+        addChild(buttonExit)
+        
+        backgroundRightPart.zPosition = 999
+        backgroundRightPart.anchorPoint = CGPointZero
+        addChild(backgroundRightPart)
     }
     
     func show() {
+        alpha = 0
         let appear = SKAction.fadeInWithDuration(0.15)
         let moveLeftPart = SKAction.moveByX(backgroundLeftPart.size.width, y: 0, duration: 0.15)
         backgroundLeftPart.runAction(moveLeftPart)
         runAction(appear)
-        
     }
     
     func hide() {
+        TouchesAnalytics.sharedInstance.appendTouch("returnFromPause")
         let disappear = SKAction.fadeOutWithDuration(0.15)
         let moveLeftPart = SKAction.moveByX(-backgroundLeftPart.size.width, y: 0, duration: 0.15)
         backgroundLeftPart.runAction(moveLeftPart)
+        
         runAction(SKAction.sequence([disappear, SKAction.removeFromParent()]))
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            let touchLocation = touch.locationInNode(self)
-            let node = nodeAtPoint(touchLocation)
-            switch node {
-            case buttonContinue, buttonRestart, buttonExit:
-                let button = node as! GameButton
-                button.touched()
-            case backgroundLeftPart:
-                return
-            default:
-                TouchesAnalytics.sharedInstance.appendTouch("returnFromPause")
-                hide()
-            }
-        }
-    }
-    
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        for touch in touches! {
-            let touchLocation = touch.locationInNode(self)
-            let node = nodeAtPoint(touchLocation)
-            switch node {
-            case buttonContinue, buttonRestart, buttonExit:
-                let button = node as! GameButton
-                button.resetTexture()
-            case backgroundLeftPart:
-                return
-            default:
-                hide()
-            }
-        }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
+            TouchesAnalytics.sharedInstance.appendTouch(buttonRestart.name!)
             switch node {
-            case buttonRestart, buttonRestart.children[0] :
-                buttonRestart.resetTexture()
-                TouchesAnalytics.sharedInstance.appendTouch(buttonRestart.name!)
+            case buttonRestart:
                 GameProgress.sharedInstance.newGame(scene!.view!)
-                hide()
-            case backgroundLeftPart:
-                return
-            case buttonExit, buttonExit.children[0] :
-                TouchesAnalytics.sharedInstance.appendTouch(buttonExit.name!)
+            case buttonExit:
                 NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
                 GameProgress.sharedInstance.goToMenu(scene!.view!)
-                removeAllChildren()
+            case buttonContinue, backgroundRightPart:
                 hide()
-            case soundSwitcher, musicSwitcher:
-                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
+                weak var scene = self.scene as? LevelScene
+                scene!.background.paused = false
             default:
-                if let scene = self.scene as? LevelScene {
-                    TouchesAnalytics.sharedInstance.appendTouch("returnFromPause")
-                    hide()
-                    scene.background.paused = false
-                }
+                return
             }
         }
     }

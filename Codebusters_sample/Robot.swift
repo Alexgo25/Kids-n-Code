@@ -15,7 +15,6 @@ enum Direction: Int {
 }
 
 class Robot: SKSpriteNode, SKPhysicsContactDelegate {
-    
     private var actions: [SKAction] = []
     private var currentActionIndex = 0
 
@@ -26,18 +25,23 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     private var robotTookDetail = false
     private var debugging = false
     private var runningActions = false
-    private var track = RobotTrack.sharedInstance
     private var currentTrackPosition = 0
     private var currentFloorPosition = FloorPosition.first
     
-    static let sharedInstance = Robot()
+    private weak var detail: Detail?
+    private weak var track: RobotTrack?
     
     private let actionButtons = [ActionButton(type: .move), ActionButton(type: .turn), ActionButton(type: .push), ActionButton(type: .jump)]
     var isOnStart = true
     
-    private init() {
+    init(track: RobotTrack, detail: Detail) {
+        self.track = track
+        self.detail = detail
+        
         let texture = SKTexture(imageNamed: "robot")
         super.init(texture: texture, color: SKColor(), size: texture.size())
+        
+        moveToStart()
         
         zPosition = 101
         userInteractionEnabled = true
@@ -47,24 +51,8 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         physicsBody!.contactTestBitMask = PhysicsCategory.Detail
         physicsBody!.collisionBitMask = 0
         name = "Robot"
-
+        setScale(0.8)
     }
-    
-
-    
-    private func getCurrentLevelRobotInfo() {
-        setFirstTexture()
-        
-        track = RobotTrack.sharedInstance
-        currentTrackPosition = track.getRobotStartPosition()
-    }
-    
-    class func initRobot() {
-        sharedInstance.removeFromParent()
-        sharedInstance.resetActions()
-        sharedInstance.getCurrentLevelRobotInfo()
-    }
-    
     
     func isRunningActions() -> Bool {
         return debugging || runningActions
@@ -75,7 +63,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func canPerformAction(actionType: ActionType) -> Bool {
-        return track.canPerformActionWithDirection(actionType, direction: direction)
+        return track!.canPerformActionWithDirection(actionType, direction: direction)
     }
     
     func takeDetail() {
@@ -115,23 +103,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func resetActions() {
-        direction = .ToRight
-        animationDirection = .ToRight
-        removeAllActions()
-        if turnedToFront {
-            runAction(turnFromFront(0))
-        }
-        
-        if !isOnStart || turnedToFront {
-            setFirstTexture()
-        }
-        
         moveToStart()
-        track.resetRobotPosition()
-        currentActionIndex = 0
-        robotTookDetail = false
-        debugging = false
-        runningActions = false
     }
 
     func startDebugging() {
@@ -149,7 +121,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                 
                 ActionCell.moveCellsLayerToTop()
                 
-                var sequence = [SKAction.runBlock() { Detail.sharedInstance.fixPosition() }]
+                var sequence = [SKAction.runBlock() { self.detail!.fixPosition() }]
                 
                 if turnedToFront {
                     sequence.append(turnFromFront())
@@ -205,9 +177,9 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func checkDetail() {
-        if Detail.sharedInstance.getFloorPosition() == currentFloorPosition && Detail.sharedInstance.getTrackPosition() == currentTrackPosition {
-            Detail.sharedInstance.zPosition -= 1
-            Detail.sharedInstance.runAction(SKAction.moveByX(0, y: -200, duration: 0.4))
+        if detail!.getFloorPosition() == currentFloorPosition && detail!.getTrackPosition() == currentTrackPosition {
+            detail!.zPosition -= 100
+            detail!.runAction(SKAction.moveByX(0, y: -200, duration: 0.4))
             takeDetail()
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kRobotTookDetailNotificationKey, object: self)
         }
@@ -248,7 +220,6 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     
     func performActions() {
         if !ActionCell.cells.isEmpty && isOnStart {
-            
             isOnStart = false
             
             for cell in ActionCell.cells {
@@ -258,7 +229,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             }
             
             ActionCell.moveCellsLayerToTop()
-            var sequence = [SKAction.runBlock() { Detail.sharedInstance.fixPosition() }]
+            var sequence = [SKAction.runBlock() { self.detail!.fixPosition() }]
 
             if turnedToFront {
                 sequence.append(turnFromFront())
@@ -269,13 +240,6 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         }
     }
 
-    func setFirstTexture() {
-        setScale(1)
-        texture = SKTexture(imageNamed: "robot")
-        size = texture!.size()
-        setScale(0.8)
-    }
-    
     func mistake() -> SKAction {
         //notification
 
@@ -300,13 +264,13 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func move() -> SKAction {
-        let nextTrackPosition = self.track.getNextRobotTrackPosition(direction)
-        let nextFloorPosition = self.track.getFloorPositionAt(nextTrackPosition)
+        let nextTrackPosition = self.track!.getNextRobotTrackPosition(direction)
+        let nextFloorPosition = self.track!.getFloorPositionAt(nextTrackPosition)
         let changeZPosition = SKAction.runBlock() {
             self.changeZPosition(nextFloorPosition)
         }
         
-        if floorPosition() == track.getFloorPositionAt(track.getNextRobotTrackPosition(direction)) {
+        if floorPosition() == track!.getFloorPositionAt(track!.getNextRobotTrackPosition(direction)) {
             let move = SKAction.moveByX(Constants.BlockFace_Size.width * CGFloat(direction.rawValue), y: 0, duration: 1.6)
         
             let animate = SKAction.group([SKAction.animateWithTextures(getRobotAnimation("Move", direction: direction), timePerFrame: 0.04, resize: true, restore: false)])
@@ -314,7 +278,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         
             let moveAndAnimate = SKAction.group([changeZPosition, setNextTrackPosition(), move, repeatAnimation])
         
-            track.setNextRobotTrackPosition(direction)
+            track!.setNextRobotTrackPosition(direction)
         
             return moveAndAnimate
         } else {
@@ -332,7 +296,6 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func turn() -> SKAction {
-        
         let sound = SKAction.runBlock() {
             AudioPlayer.sharedInstance.playSoundEffect("Reverse.mp3")
         }
@@ -350,14 +313,15 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
-        if !turnedToFront && isOnStart {
-            runAction(turnToFront())
-            TouchesAnalytics.sharedInstance.appendTouch("RobotTurnToFrontTouch")
-        } else if turnedToFront && isOnStart {
-            runAction(turnFromFront())
-            TouchesAnalytics.sharedInstance.appendTouch("RobotTurnFromFrontTouch")
+        if isOnStart {
+            if !turnedToFront {
+                runAction(turnToFront())
+                TouchesAnalytics.sharedInstance.appendTouch("RobotTurnToFrontTouch")
+            } else {
+                runAction(turnFromFront())
+                TouchesAnalytics.sharedInstance.appendTouch("RobotTurnFromFrontTouch")
             }
-        
+        }
     }
     
     func turnToFront() -> SKAction {
@@ -399,9 +363,9 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func jump(afterStep: Bool) -> SKAction {
-        let nextTrackPosition = self.track.getNextRobotTrackPosition(direction)
+        let nextTrackPosition = track!.getNextRobotTrackPosition(direction)
         var currentPositionPoint = getCurrentPositionPoint()
-        let nextFloorPosition = self.track.getFloorPositionAt(nextTrackPosition)
+        let nextFloorPosition = track!.getFloorPositionAt(nextTrackPosition)
         
         if afterStep {
             let x = Int(currentPositionPoint.x) + Int(Constants.BlockFace_Size.width * CGFloat(direction.rawValue)/5)
@@ -413,7 +377,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         let endPoint = CGPoint(x: getNextPositionPoint(direction).x , y: getNextPositionPoint(direction).y + 60)
         var controlPoint: CGPoint
 
-        if floorPosition() != track.getFloorPositionAt(nextTrackPosition) {
+        if floorPosition() != track!.getFloorPositionAt(nextTrackPosition) {
             controlPoint = CGPoint(x: (getNextPositionPoint(direction).x + currentPositionPoint.x)/2, y: max(getNextPositionPoint(direction).y, currentPositionPoint.y) + Constants.BlockFace_Size.height)
         } else {
             controlPoint = CGPoint(x: (getNextPositionPoint(direction).x + currentPositionPoint.x)/2, y: max(getNextPositionPoint(direction).y, currentPositionPoint.y) + Constants.BlockFace_Size.height/2)
@@ -433,13 +397,13 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         
         let sequence = SKAction.sequence([setNextTrackPosition(), setNextFloorPosition(nextFloorPosition), animateBegin, sound, moveByCurve, changeZPosition, animateEnd])
         
-        track.setNextRobotTrackPosition(direction)
+        track!.setNextRobotTrackPosition(direction)
         
         return sequence
     }
     
     func push() -> SKAction {
-        let sequence = SKAction.sequence([push_FirstPart(), track.moveBlock(direction), push_SecondPart()])
+        let sequence = SKAction.sequence([push_FirstPart(), track!.moveBlock(direction), push_SecondPart()])
         return sequence
     }
     
@@ -459,19 +423,14 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func moveToStart() {
-        track.resetRobotPosition()
-        currentTrackPosition = track.getRobotStartPosition()
-        currentFloorPosition = track.getFloorPositionAt(currentTrackPosition)
-        actions.removeAll(keepCapacity: false)
-        stopRobot = false
-        runningActions = false
-        isOnStart = true
-        position = getCGPointOfPosition(track.getRobotStartPosition(), floorPosition: track.getFloorPositionAt(track.getRobotStartPosition()))
+        currentTrackPosition = track!.getRobotStartPosition()
+        currentFloorPosition = track!.getFloorPositionAt(currentTrackPosition)
+        position = getCGPointOfPosition(track!.getRobotStartPosition(), floorPosition: track!.getFloorPositionAt(track!.getRobotStartPosition()))
         changeZPosition(floorPosition())
     }
     
     func getStartPosition() -> Int {
-        return track.getRobotStartPosition()
+        return track!.getRobotStartPosition()
     }
     
     func getCurrentPositionPoint() -> CGPoint {
@@ -479,7 +438,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func getNextPositionPoint(direction: Direction) -> CGPoint {
-        return getCGPointOfPosition(trackPosition() + direction.rawValue, floorPosition: track.getFloorPositionAt(trackPosition() + direction.rawValue))
+        return getCGPointOfPosition(trackPosition() + direction.rawValue, floorPosition: track!.getFloorPositionAt(trackPosition() + direction.rawValue))
     }
     
     func getDirection() -> Direction {
@@ -507,19 +466,19 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func isOnDetailPosition() -> Bool {
-        return track.robotIsOnDetailPosition()
+        return track!.robotIsOnDetailPosition()
     }
     
     private func trackPosition() -> Int {
-        return track.getCurrentRobotPosition()
+        return track!.getCurrentRobotPosition()
     }
 
     private func getCurrentFloorPosition() -> FloorPosition {
-        return track.getFloorPositionAt(currentTrackPosition)
+        return track!.getFloorPositionAt(currentTrackPosition)
     }
     
     private func floorPosition() -> FloorPosition {
-        return track.getFloorPositionAt(trackPosition())
+        return track!.getFloorPositionAt(trackPosition())
     }
     
     private func setNextTrackPosition() -> SKAction {

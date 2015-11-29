@@ -13,10 +13,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
     let background = SKNode()
     let trackLayer = SKNode()
-    var touchesToRecord : [String] = []
+    var touchesToRecord: [String] = []
     //level info
-    let thisLevelNumber : Int?
-    let thisLevelPackNumber : Int?
+    let thisLevelNumber: Int?
+    let thisLevelPackNumber: Int?
     
     let levelBackground1 = SKSpriteNode(imageNamed: "levelBackground1")
     let levelBackground2 = SKSpriteNode(imageNamed: "levelBackground2")
@@ -38,9 +38,9 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     var canScaleBackground = true
     
     override init(size: CGSize) {
-        detail = Detail.sharedInstance
-        track = RobotTrack.sharedInstance
-        robot = Robot.sharedInstance
+        track = RobotTrack()
+        detail = Detail(track: track)
+        robot = Robot(track: track, detail: detail)
         
         playAreaSize = CGSize(width: size.width - levelBackground2.size.width, height: size.height)
         thisLevelNumber = GameProgress.sharedInstance.getCurrentLevelNumber()
@@ -51,7 +51,6 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         //Listening to notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name: NotificationKeys.kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-        
     }
     
     //Handling notifications
@@ -131,10 +130,6 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     }
     
     func createBlocks() {
-        track.deleteBlocks()
-        
-        RobotTrack.initTrack()
-        
         let blocksPattern = track.getBlocksPattern()
         
         for var i = 1; i < blocksPattern.count; i++ {
@@ -146,9 +141,6 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
     func createTrackLayer() {
         createBlocks()
-        Detail.initDetail()
-        Robot.initRobot()
-        
         trackLayer.addChild(robot)
         trackLayer.addChild(detail)
         background.addChild(trackLayer)
@@ -318,13 +310,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         case PhysicsCategory.Robot | PhysicsCategory.Detail:
             detail.hideDetail()
             robot.takeDetail()
-            
             if detail.getDetailType() != DetailType.Crystall {
                 GameProgress.sharedInstance.checkDetailCellState()
             }
-            
             runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() { self.addChild(EndLevelView()) } ]))
-        
         default:
             return
         }
@@ -334,15 +323,8 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
-            switch node {
-            case button_Start, button_Pause, button_Tips, button_Debug, button_Restart, button_Clear:
-                return
-            default:
-                
-                if robot.isTurnedToFront() && !node.isMemberOfClass(ActionCell) {
-                    robot.runAction(robot.turnFromFront())
-                    
-                }
+            if robot.isTurnedToFront() && !node.isMemberOfClass(ActionCell) {
+                robot.runAction(robot.turnFromFront())
             }
         }
     }
@@ -351,49 +333,43 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
+            //touchesToRecord.append(node.name!)
+            if let name = node.name {
+                TouchesAnalytics.sharedInstance.appendTouch(name)
+            }
+            //print(node.name!)
             switch node {
             case button_Start:
                 checkRobotPosition()
                 //Analytics->record start button
-                //touchesToRecord.append(node.name!)
-                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
-                //print(node.name!)
                 robot.performActions()
             case button_Pause:
                 //Analytics->record pause
-                //touchesToRecord.append(node.name!)
-                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
-                //print(node.name!)
                 pauseGame()
             case button_Tips:
                 //Analytics->record tips
-                //touchesToRecord.append(node.name!)
-                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
-                //print(node.name!)
                 if !robot.isRunningActions() {
                     addChild(Tutorial.sharedInstance)
                     Tutorial.sharedInstance.showFullTutorial()
                 }
             case button_Clear:
-                createBlocks()
-                //Analytics->record clear button
-                //touchesToRecord.append(node.name!)
-                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
-                //print(node.name!)
-                Detail.sharedInstance.move()
                 ActionCell.resetCellTextures()
-                robot.resetActions()
+                track.deleteBlocks()
+                detail.removeFromParent()
+                robot.removeFromParent()
+                trackLayer.removeFromParent()
+                track = RobotTrack()
+                detail = Detail(track: track)
+                robot = Robot(track: track, detail: detail)
+                
+                createTrackLayer()
+                //Analytics->record clear button
             case button_Debug:
                 //Analytics->record debug button
-                //touchesToRecord.append(node.name!)
-                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
-                //print(node.name!)
                 robot.debug()
             case button_Restart:
                 //Analytics-->record Restart button
-                //touchesToRecord.append(node.name!)
-                TouchesAnalytics.sharedInstance.appendTouch(node.name!)
-                //print(node.name!)
+                weak var view = self.view
                 GameProgress.sharedInstance.newGame(view!)
             default:
                 return
@@ -470,6 +446,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     }
     
     func addGestures() {
+        weak var view = self.view
         if let count = view!.gestureRecognizers?.count {
             if count > 0 {
                 view!.gestureRecognizers?.removeAll(keepCapacity: false)

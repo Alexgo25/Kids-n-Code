@@ -10,14 +10,15 @@ import Foundation
 import SpriteKit
 
 class RobotTrack {
-    
     private var track: [RobotStanding] = []
     private var currentRobotPosition = 0
     private var startRobotPosition = 0
     private var detailPosition = 0
     private var detailFloorPosition = FloorPosition.first
     
-    static let sharedInstance = RobotTrack()
+    init() {
+        getCurrentLevelTrackInfo()
+    }
     
     private func getCurrentLevelTrackInfo() {
         let levelData = GameProgress.sharedInstance.getCurrentLevelData()
@@ -40,10 +41,6 @@ class RobotTrack {
                 self.detailFloorPosition = detailFloorPosition
             }
         }
-    }
-    
-    class func initTrack() {
-        sharedInstance.getCurrentLevelTrackInfo()
     }
     
     func trackLength(scale: CGFloat) -> CGFloat {
@@ -94,11 +91,7 @@ class RobotTrack {
         
         return array
     }
-    
-    func resetRobotPosition() {
-        currentRobotPosition = startRobotPosition
-    }
-    
+
     func robotIsOnDetailPosition() -> Bool {
         return currentRobotPosition == detailPosition
     }

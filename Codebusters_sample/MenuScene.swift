@@ -73,8 +73,14 @@ class MenuScene: SKScene {
             } else if nodeAtPoint(touchLocation) == finalView {
                 finalView.runAction(SKAction.fadeOutWithDuration(0.4), completion: { self.finalView.removeFromParent() } )
                 turnOffScreenAndMoveKeyboard()
-                showRobot("\(Detail.sharedInstance.getDetailType().rawValue)_Text")
                 
+                let levelData = GameProgress.sharedInstance.getCurrentLevelData()
+                if let detailTypeString  = levelData["detailType"] as? String {
+                    if let type = DetailType(rawValue: detailTypeString) {
+                        showRobot("\(type.rawValue)_Text")
+                    }
+                }
+
                 let config = GameProgress.sharedInstance.getLevelsData()
                 config.setValue("", forKey: "Finished")
                 config.writeToFile(GameProgress.sharedInstance.getLevelsDataPath(), atomically: true)

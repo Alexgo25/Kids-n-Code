@@ -138,7 +138,13 @@ public class GameProgress {
             let scene = LevelScene(size: view.scene!.size)
             view.presentScene(scene, transition: SKTransition.crossFadeWithDuration(0.4))
         } else {
-            goToMenu(view, robotTextImage: "\(Detail.sharedInstance.getDetailType().rawValue)_Text")
+            let levelData = GameProgress.sharedInstance.getCurrentLevelData()
+            if let detailTypeString  = levelData["detailType"] as? String {
+                if let type = DetailType(rawValue: detailTypeString) {
+                    goToMenu(view, robotTextImage: "\(type.rawValue)_Text")
+                }
+            }
+
         }
     }
     
@@ -254,10 +260,10 @@ public class GameProgress {
         }
     }
     
-    func getCurrentLevelNumber()->Int {
+    func getCurrentLevelNumber() -> Int {
         return currentLevel
     }
-    func getCurrentLevelPackNumber()->Int {
+    func getCurrentLevelPackNumber() -> Int {
         return currentLevelPack
     }
 }

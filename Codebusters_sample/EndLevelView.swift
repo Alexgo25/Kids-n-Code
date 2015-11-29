@@ -10,16 +10,12 @@ import UIKit
 import SpriteKit
 
 class EndLevelView: SKSpriteNode {
-    private let background = SKSpriteNode(imageNamed: "EndLevelView_Background")
-    
     private let buttonRestart = GameButton(type: .Restart_EndLevelView)
     private let buttonNextLevel = GameButton(type: .NextLevel_EndLevelView)
     private let buttonExit = GameButton(type: .Exit_EndLevelView)
     
-    private let battery = SKSpriteNode(imageNamed: "battery_3")
-    
     init() {
-        let texture = background.texture!
+        let texture = SKTexture(imageNamed: "EndLevelView_Background") //background.texture!
         super.init(texture: texture, color: UIColor(), size: texture.size())
         
         let levelData = GameProgress.sharedInstance.getCurrentLevelData()
@@ -30,24 +26,25 @@ class EndLevelView: SKSpriteNode {
         let actionsCount = ActionCell.cellsCount()
     
         GameProgress.sharedInstance.writeResultOfCurrentLevel(actionsCount)
-        
+        var batteryTexture = SKTexture()
         if actionsCount <= result_1 {
-            battery.texture = SKTexture(imageNamed: "battery_3")
+            batteryTexture = SKTexture(imageNamed: "battery_3")
             addChild(createLabel("Молодец! Ты нашел оптимальный алгоритм!", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1125.5)))
         } else if actionsCount <= result_2 {
-            battery.texture = SKTexture(imageNamed: "battery_2")
+            batteryTexture = SKTexture(imageNamed: "battery_2")
             addChild(createLabel("Отлично! Осталось изменить всего несколько", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1151)))
             addChild(createLabel("действий, чтобы алгоритм стал оптимальным...", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1093)))
         } else {
-            battery.texture = SKTexture(imageNamed: "battery_1")
+            batteryTexture = SKTexture(imageNamed: "battery_1")
             addChild(createLabel("Хорошо! Теперь давай попробуем составить", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1151)))
             addChild(createLabel("программу с меньшим количеством действий", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1093)))
         }
         
+        let battery = SKSpriteNode(texture: batteryTexture)
+        
         zPosition = 3000
 
         anchorPoint = CGPointZero
-        background.anchorPoint = CGPointZero
         
         addChild(buttonRestart)
         addChild(createLabel("Заново", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1018.5, y: 670)))
@@ -62,42 +59,15 @@ class EndLevelView: SKSpriteNode {
         battery.zPosition = 1
         addChild(battery)
         
-        show()
         userInteractionEnabled = true
+
+        show()
     }
     
     func show() {
         alpha = 0
         let appear = SKAction.fadeInWithDuration(0.2)
         runAction(appear)
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            let touchLocation = touch.locationInNode(self)
-            let node = nodeAtPoint(touchLocation)
-            switch node {
-            case buttonNextLevel, buttonRestart, buttonExit:
-                let button = node as! GameButton
-                button.touched()
-            default:
-                return
-            }
-        }
-    }
-    
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        for touch in touches! {
-            let touchLocation = touch.locationInNode(self)
-            let node = nodeAtPoint(touchLocation)
-            switch node {
-            case buttonNextLevel, buttonRestart, buttonExit:
-                let button = node as! GameButton
-                button.resetTexture()
-            default:
-                return
-            }
-        }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -113,7 +83,6 @@ class EndLevelView: SKSpriteNode {
                 
             case buttonExit:
                 GameProgress.sharedInstance.goToMenu(scene!.view!)
-                removeFromParent()
             default:
                 return
             }

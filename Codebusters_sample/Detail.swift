@@ -24,21 +24,11 @@ class Detail: SKSpriteNode {
     private var trackPosition = 0
     private var floorPosition = FloorPosition.first
     private var startPosition: CGPoint?
+    private weak var track: RobotTrack?
     
-    static let sharedInstance = Detail()
-    
-    private init() {
-        super.init(texture: nil, color: SKColor.clearColor(), size: CGSize())
-        zPosition = 100
+    init(track: RobotTrack) {
+        self.track = track
         
-        physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 50, height: 50))
-        physicsBody!.categoryBitMask = PhysicsCategory.Detail
-        physicsBody!.contactTestBitMask = PhysicsCategory.Robot
-        physicsBody!.collisionBitMask = 0
-        name = "Detail"
-    }
-    
-    private func getCurrentLevelDetailInfo() {
         let levelData = GameProgress.sharedInstance.getCurrentLevelData()
         
         if let position = levelData["detailPosition"] as? Int {
@@ -59,10 +49,11 @@ class Detail: SKSpriteNode {
         
         let atlas = SKTextureAtlas(named: "Details")
         let texture = atlas.textureNamed("Detail_\(detailType.rawValue)")
-        self.texture = texture
+        
+        super.init(texture: texture, color: UIColor(), size: texture.size())
+        
         position = getCGPointOfPosition(trackPosition, floorPosition: floorPosition)
-        size = texture.size()
-        if !(RobotTrack.sharedInstance.getFloorPositionAt(trackPosition).rawValue < floorPosition.rawValue) {
+        if !(track.getFloorPositionAt(trackPosition).rawValue < floorPosition.rawValue) {
             zPosition = CGFloat(6 * floorPosition.rawValue + 1)
         } else {
             zPosition = CGFloat(5 * (floorPosition.rawValue + 1))
@@ -77,12 +68,14 @@ class Detail: SKSpriteNode {
         alpha = 1
         
         move()
-    }
-    
-    class func initDetail() {
-        sharedInstance.removeAllActions()
-        sharedInstance.removeFromParent()
-        sharedInstance.getCurrentLevelDetailInfo()
+        
+        zPosition = 100
+        
+        physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 50, height: 50))
+        physicsBody!.categoryBitMask = PhysicsCategory.Detail
+        physicsBody!.contactTestBitMask = PhysicsCategory.Robot
+        physicsBody!.collisionBitMask = 0
+        name = "Detail"
     }
     
     func hideDetail() {

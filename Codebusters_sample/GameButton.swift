@@ -26,19 +26,42 @@ enum GameButtonType: String {
 }
 
 class GameButton: SKSpriteNode {
-    
+    private var background: SKSpriteNode
     private let gameButtonType: GameButtonType
-    private let atlas = SKTextureAtlas(named: "GameButtons")
     
     init(type: GameButtonType) {
+        let atlas = SKTextureAtlas(named: "GameButtons")
         let texture = atlas.textureNamed("GameButton_\(type.rawValue)")
+        background = SKSpriteNode(texture: texture)
+        background.zPosition = -2
+        
         gameButtonType = type
-        super.init(texture: texture, color: UIColor(), size: texture.size())
+        
+        super.init(texture: nil, color: UIColor(), size: CGSize())
         position = getGameButtonPosition(type)
-        zPosition = 1001
+        zPosition = 1003
         
         userInteractionEnabled = true
         name = "GameButton_\(type.rawValue)"
+        
+        addChild(background)
+        
+        switch gameButtonType {
+        case .Continue_PauseView:
+            let label = createLabel("ПРОДОЛЖИТЬ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero)
+            label.zPosition = -1
+            addChild(label)
+        case .Exit_PauseView:
+            let label = createLabel("ВЫЙТИ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero)
+            label.zPosition = -1
+            addChild(label)
+        case .Restart_PauseView:
+            let label = createLabel("ЗАНОВО", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero)
+            label.zPosition = -1
+            addChild(label)
+        default:
+            break
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -47,10 +70,12 @@ class GameButton: SKSpriteNode {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
+            weak var parent = self.parent
             let touchLocation = touch.locationInNode(parent!)
             if containsPoint(touchLocation) {
                 parent!.touchesEnded(touches, withEvent: event)
             }
+            parent = nil
             resetTexture()
         }
     }
@@ -61,11 +86,15 @@ class GameButton: SKSpriteNode {
     
     func touched() {
         AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
-        texture = atlas.textureNamed("GameButton_\(gameButtonType.rawValue)_Pressed")
+        let atlas = SKTextureAtlas(named: "GameButtons")
+        let texture = atlas.textureNamed("GameButton_\(gameButtonType.rawValue)_Pressed")
+        background.texture = texture
     }
     
     func resetTexture() {
-        texture = atlas.textureNamed("GameButton_\(gameButtonType.rawValue)")
+        let atlas = SKTextureAtlas(named: "GameButtons")
+        let texture = atlas.textureNamed("GameButton_\(gameButtonType.rawValue)")
+        background.texture = texture
     }
     
     func getActionType() -> GameButtonType {

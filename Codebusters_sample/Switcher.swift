@@ -94,7 +94,15 @@ class MusicSwitcher: SKSpriteNode {
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSize())
         addChild(switcher)
         
+        name = "MusicSwitcher"
         userInteractionEnabled = true
+        
+        if !AudioPlayer.sharedInstance.musicIsOn {
+            switcher.switchOff()
+        }
+        
+        position = CGPoint(x: 404, y: 552)
+        zPosition = 1001
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -107,10 +115,6 @@ class MusicSwitcher: SKSpriteNode {
         }
         
         switcher.touchesEnded(touches, withEvent: event)
-    }
-    
-    func switchOff() {
-        switcher.switchOff()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -126,7 +130,15 @@ class SoundSwitcher: SKSpriteNode {
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSize())
         addChild(switcher)
         
+        name = "SoundSwitcher"
         userInteractionEnabled = true
+        
+        if !AudioPlayer.sharedInstance.soundsAreOn {
+            switcher.switchOff()
+        }
+        
+        position = CGPoint(x: 206.5, y: 552)
+        zPosition = 1001
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -139,10 +151,6 @@ class SoundSwitcher: SKSpriteNode {
         }
         
         switcher.touchesEnded(touches, withEvent: event)
-    }
-    
-    func switchOff() {
-        switcher.switchOff()
     }
     
     required init?(coder aDecoder: NSCoder) {
