@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 
+
+
 class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +23,17 @@ class GameViewController: UIViewController {
             scene.scaleMode = .AspectFill
         
             skView.presentScene(scene)
-        if (NSUserDefaults.standardUserDefaults().objectForKey("deviceID") == nil){
+        if (NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsNameKeys.kDeviceIDKey) == nil){
             let deviceid = String(stringInterpolationSegment: UIDevice.currentDevice().identifierForVendor)
             NSUserDefaults.standardUserDefaults().setObject(deviceid, forKey: "deviceID")
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: NSUserDefaultsNameKeys.kNeedUpdatesKey)
+            print("game loaded for the first time")
         }
-        AnalyticsCore.sharedAnalyticsCore.sendData()
+        
+         else if (NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsNameKeys.kNeedUpdatesKey) == true){
+            AnalyticsCore.sharedAnalyticsCore.sendData()
+            print("sending data")
+        }
 
         weak var audio = AudioPlayer.sharedInstance // Не убирать
         AudioPlayer.sharedInstance.playBackgroundMusic("backgroundMusic.mp3")

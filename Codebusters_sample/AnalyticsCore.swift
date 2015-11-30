@@ -9,8 +9,12 @@
 import Foundation
 import UIKit
 
+let urlstr = "http://kidsncode.com/php/analytics.php"
+
 
 class AnalyticsCore : NSObject{
+    
+
     
     class var sharedAnalyticsCore : AnalyticsCore{
         struct Singleton {
@@ -19,12 +23,13 @@ class AnalyticsCore : NSObject{
         return Singleton.core
     }
     
-    let urlString = "http://kidsncode.com/php/analytics.php"
+
     
     override init() {
         super.init()
     }
     
+
     
     
     func returnTouchesAsArray(touches : NSSet)->[String!] {
@@ -76,7 +81,7 @@ class AnalyticsCore : NSObject{
     
     func sendData() {
         //try print(getFinalJSONData(CoreDataAdapter.sharedAdapter.getLevels()))
-        let URLSTR = urlString
+        let URLSTR = urlstr
         let url = NSURL(string: URLSTR)
         let request = NSMutableURLRequest(URL: url!, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
         request.HTTPMethod = "POST"

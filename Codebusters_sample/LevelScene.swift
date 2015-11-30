@@ -51,9 +51,17 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         //Listening to notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name: NotificationKeys.kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "recordTerminate", name: NotificationKeys.kApplicationWillTerminateKey, object: NotificationZombie.sharedInstance)
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: NSUserDefaultsNameKeys.kNeedUpdatesKey)
     }
     
     //Handling notifications
+    
+    func recordTerminate() {
+        print("Terminate")
+        //recording data
+        
+    }
     
      func finishWithSuccess() {
         print("Finished")
@@ -80,12 +88,6 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
         CoreDataAdapter.sharedAdapter.addNewLevel(thisLevelNumber!, levelPackNumber: thisLevelPackNumber!, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
         TouchesAnalytics.sharedInstance.resetTouches()
-    }
-    
-    
-    func handleTouch(notification : NSNotification) {
-        touchesToRecord.append(notification.userInfo!["touch"]! as! String)
-        print(notification.userInfo!["touch"]!)
     }
 
     

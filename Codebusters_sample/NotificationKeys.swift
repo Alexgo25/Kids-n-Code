@@ -13,8 +13,10 @@ struct NotificationKeys {
     static let kRobotFinishedWithMistakeNotificationKey = "RobotFinishedWithMistake"
     static let kNodeTouchNotificationKey = "NodeTouch"
     static let kPauseQuitNotificationKey = "PauseQuit"
+    static let kApplicationWillTerminateKey = "TerminateQuit"
 
 }
+
 
 class NotificationZombie {
     static let sharedInstance = NotificationZombie()

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
-               BuildableName = "Kids&apos;n&apos;Code.app"
+               BuildableName = "Kids&apos;n&apos;Code.temp_caseinsensitive_rename.app"
                BlueprintName = "Kids&apos;n&apos;Code"
                ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
-            BuildableName = "Kids&apos;n&apos;Code.app"
+            BuildableName = "Kids&apos;n&apos;Code.temp_caseinsensitive_rename.app"
             BlueprintName = "Kids&apos;n&apos;Code"
             ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
-            BuildableName = "Kids&apos;n&apos;Code.app"
+            BuildableName = "Kids&apos;n&apos;Code.temp_caseinsensitive_rename.app"
             BlueprintName = "Kids&apos;n&apos;Code"
             ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
-            BuildableName = "Kids&apos;n&apos;Code.app"
+            BuildableName = "Kids&apos;n&apos;Code.temp_caseinsensitive_rename.app"
             BlueprintName = "Kids&apos;n&apos;Code"
             ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
          </BuildableReference>

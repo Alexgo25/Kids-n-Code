@@ -19,9 +19,19 @@ class TimerDelegate : NSObject {
     
     private var isRunning = false
     private var date = NSDate()
+    private var extraDate : NSDate?
+    private var extraTime : Double?
     
     override init(){
         super.init()
+    }
+    
+    func pauseTimer() {
+        
+    }
+    
+    func resumeTimer() {
+        
     }
     
     func startTimer() {
@@ -41,6 +51,10 @@ class TimerDelegate : NSObject {
         print(time)
         isRunning = false
         return time
+    }
+    
+    func timerIsRunning() ->Bool {
+        return isRunning
     }
     
     
