@@ -23,17 +23,20 @@ class GameViewController: UIViewController {
             scene.scaleMode = .AspectFill
         
             skView.presentScene(scene)
-        if (NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsNameKeys.kDeviceIDKey) == nil){
-            let deviceid = String(stringInterpolationSegment: UIDevice.currentDevice().identifierForVendor)
-            NSUserDefaults.standardUserDefaults().setObject(deviceid, forKey: "deviceID")
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: NSUserDefaultsNameKeys.kNeedUpdatesKey)
-            print("game loaded for the first time")
-        }
+        dispatch_async(dispatch_get_main_queue(), {
+            if (NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsNameKeys.kDeviceIDKey) == nil){
+                let deviceid = String(stringInterpolationSegment: UIDevice.currentDevice().identifierForVendor)
+                NSUserDefaults.standardUserDefaults().setObject(deviceid, forKey: "deviceID")
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: NSUserDefaultsNameKeys.kNeedUpdatesKey)
+                print("game loaded for the first time")
+            }
+                
+            else if (NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsNameKeys.kNeedUpdatesKey) == true){
+                AnalyticsCore.sharedAnalyticsCore.sendData()
+                print("sending data")
+            }
+        })
         
-         else if (NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsNameKeys.kNeedUpdatesKey) == true){
-            AnalyticsCore.sharedAnalyticsCore.sendData()
-            print("sending data")
-        }
 
         weak var audio = AudioPlayer.sharedInstance // Не убирать
         AudioPlayer.sharedInstance.playBackgroundMusic("backgroundMusic.mp3")
