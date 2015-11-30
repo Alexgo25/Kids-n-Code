@@ -17,7 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
-                                                        
+        // TODO: Move this to where you establish a user session
+        self.logUser()
         return true
     }
 
@@ -44,5 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             TouchesAnalytics.sharedInstance.appendTouch(TouchKeys.kTerminateApplicationKey)
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kApplicationWillTerminateKey, object: NotificationZombie.sharedInstance)
         }
+    }
+    
+    //Crashlytics
+    
+    func logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        Crashlytics.sharedInstance().setUserIdentifier("12345")
     }
 }

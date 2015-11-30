@@ -65,29 +65,34 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
      func finishWithSuccess() {
         print("Finished")
-        //record
-        var strings : [String!] = []
-        for cell in ActionCell.cells {
-            strings.append(cell.getActionType().rawValue)
-            print(cell.getActionType().rawValue)
-        }
-        let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
-       CoreDataAdapter.sharedAdapter.addNewLevel(thisLevelNumber!, levelPackNumber: thisLevelPackNumber!, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
-        TouchesAnalytics.sharedInstance.resetTouches()
+        dispatch_async(dispatch_get_main_queue(), {
+            //record
+            var strings : [String!] = []
+            for cell in ActionCell.cells {
+                strings.append(cell.getActionType().rawValue)
+                print(cell.getActionType().rawValue)
+            }
+            let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+         CoreDataAdapter.sharedAdapter.addNewLevel(self.thisLevelNumber!, levelPackNumber: self.thisLevelPackNumber!, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
+             TouchesAnalytics.sharedInstance.resetTouches()
+        })
+        
     }
     
     func finishWithMistake() {
         print("Mistake")
-        TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
-        //record
-        var strings : [String!] = []
-        for cell in ActionCell.cells {
-            strings.append(cell.getActionType().rawValue)
-            print(cell.getActionType().rawValue)
-        }
-        let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
-        CoreDataAdapter.sharedAdapter.addNewLevel(thisLevelNumber!, levelPackNumber: thisLevelPackNumber!, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
-        TouchesAnalytics.sharedInstance.resetTouches()
+        dispatch_async(dispatch_get_main_queue(), {
+            //record
+            var strings : [String!] = []
+            for cell in ActionCell.cells {
+                strings.append(cell.getActionType().rawValue)
+                print(cell.getActionType().rawValue)
+            }
+            let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+            CoreDataAdapter.sharedAdapter.addNewLevel(self.thisLevelNumber!, levelPackNumber: self.thisLevelPackNumber!, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
+            TouchesAnalytics.sharedInstance.resetTouches()
+        })
+
     }
 
     

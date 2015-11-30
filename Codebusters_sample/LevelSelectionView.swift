@@ -106,10 +106,13 @@ internal class Battery: SKSpriteNode {
         Battery.count++
         zPosition = 1003
         
-        var battery = SKSpriteNode(imageNamed: "battery_\(type.rawValue)")
+        var battery : SKSpriteNode
         
         if type.rawValue < 0 {
             battery = SKSpriteNode(imageNamed: "battery_0")
+        }
+        else {
+            battery = SKSpriteNode(imageNamed: "battery_\(type.rawValue)")
         }
         
         battery.zPosition = -1002
