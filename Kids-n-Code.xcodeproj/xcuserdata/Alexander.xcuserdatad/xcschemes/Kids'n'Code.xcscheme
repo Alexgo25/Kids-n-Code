@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
                BuildableName = "Kids&apos;n&apos;Code.temp_caseinsensitive_rename.app"
-               BlueprintName = "Kids&apos;n&apos;Code"
-               ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
+               BlueprintName = "Kids-n-Code"
+               ReferencedContainer = "container:Kids-n-Code.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
             BuildableName = "Kids&apos;n&apos;Code.temp_caseinsensitive_rename.app"
-            BlueprintName = "Kids&apos;n&apos;Code"
-            ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
+            BlueprintName = "Kids-n-Code"
+            ReferencedContainer = "container:Kids-n-Code.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -57,8 +57,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
             BuildableName = "Kids&apos;n&apos;Code.temp_caseinsensitive_rename.app"
-            BlueprintName = "Kids&apos;n&apos;Code"
-            ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
+            BlueprintName = "Kids-n-Code"
+            ReferencedContainer = "container:Kids-n-Code.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,8 +76,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
             BuildableName = "Kids&apos;n&apos;Code.temp_caseinsensitive_rename.app"
-            BlueprintName = "Kids&apos;n&apos;Code"
-            ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
+            BlueprintName = "Kids-n-Code"
+            ReferencedContainer = "container:Kids-n-Code.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

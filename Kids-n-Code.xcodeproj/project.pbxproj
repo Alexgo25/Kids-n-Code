@@ -14,6 +14,9 @@
 		110952D01AC6DF5B000A960A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 110952CE1AC6DF5B000A960A /* LaunchScreen.xib */; };
 		110952DC1AC6DF5B000A960A /* Codebusters_sampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */; };
 		115C6E971ACBFA4200B79250 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C6E961ACBFA4200B79250 /* Robot.swift */; };
+		11913EFD1C0CE70900E3482A /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFC1C0CE70900E3482A /* libFMDB.a */; };
+		11913EFF1C0CE70E00E3482A /* libKSCrash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFE1C0CE70E00E3482A /* libKSCrash.a */; };
+		11913F011C0CE71300E3482A /* libprotobuf-c.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913F001C0CE71300E3482A /* libprotobuf-c.a */; };
 		1198E74E1BE905AA00AFE73A /* TimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E74D1BE905AA00AFE73A /* TimerDelegate.swift */; };
 		1198E7511BE9064E00AFE73A /* CBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1198E74F1BE9064E00AFE73A /* CBDataModel.xcdatamodeld */; };
 		1198E7531BE9067100AFE73A /* CoreDataAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E7521BE9067100AFE73A /* CoreDataAdapter.swift */; };
@@ -83,6 +86,18 @@
 		C1D04753D94947A12BC6EFFB /* libPods-Kids'n'Code.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 371DE81FA58A1197E757ADF8 /* libPods-Kids'n'Code.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		11913F041C0D923400E3482A /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = sourcecode.metal;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# <com.apple.compilers.metal.osx>\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXContainerItemProxy section */
 		110952D61AC6DF5B000A960A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -94,17 +109,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		110952BC1AC6DF5B000A960A /* Kids'n'Code.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kids'n'Code.temp_caseinsensitive_rename.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		110952BC1AC6DF5B000A960A /* Codebusters_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Codebusters_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		110952C01AC6DF5B000A960A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		110952C11AC6DF5B000A960A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		110952C71AC6DF5B000A960A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		110952CA1AC6DF5B000A960A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		110952CC1AC6DF5B000A960A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		110952CF1AC6DF5B000A960A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		110952D51AC6DF5B000A960A /* Kids'n'Code.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kids'n'Code.temp_caseinsensitive_rename.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		110952D51AC6DF5B000A960A /* Kids-n-Code.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kids-n-Code.temp_caseinsensitive_rename.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		110952DA1AC6DF5B000A960A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Codebusters_sampleTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codebusters_sampleTests.swift; sourceTree = "<group>"; };
 		115C6E961ACBFA4200B79250 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		11913EFC1C0CE70900E3482A /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "Pods/../build/Debug-iphoneos/libFMDB.a"; sourceTree = "<group>"; };
+		11913EFE1C0CE70E00E3482A /* libKSCrash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libKSCrash.a; path = "Pods/../build/Debug-iphoneos/libKSCrash.a"; sourceTree = "<group>"; };
+		11913F001C0CE71300E3482A /* libprotobuf-c.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libprotobuf-c.a"; path = "Pods/../build/Debug-iphoneos/libprotobuf-c.a"; sourceTree = "<group>"; };
+		11913F031C0D8FA900E3482A /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		1198E74D1BE905AA00AFE73A /* TimerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerDelegate.swift; sourceTree = "<group>"; };
 		1198E7501BE9064E00AFE73A /* CBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CBDataModel.xcdatamodel; sourceTree = "<group>"; };
 		1198E7521BE9067100AFE73A /* CoreDataAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAdapter.swift; sourceTree = "<group>"; };
@@ -183,8 +202,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11AEAADA1C0CC7CE000EB2E0 /* Crashlytics.framework in Frameworks */,
+				11913F011C0CE71300E3482A /* libprotobuf-c.a in Frameworks */,
+				11913EFF1C0CE70E00E3482A /* libKSCrash.a in Frameworks */,
+				11913EFD1C0CE70900E3482A /* libFMDB.a in Frameworks */,
 				11AEAAD91C0CC7CE000EB2E0 /* Fabric.framework in Frameworks */,
+				11AEAADA1C0CC7CE000EB2E0 /* Crashlytics.framework in Frameworks */,
 				C1D04753D94947A12BC6EFFB /* libPods-Kids'n'Code.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,8 +226,8 @@
 			children = (
 				11AEAAD71C0CC7CE000EB2E0 /* Fabric.framework */,
 				11AEAAD81C0CC7CE000EB2E0 /* Crashlytics.framework */,
-				110952BE1AC6DF5B000A960A /* Kids'n'Code */,
-				110952D81AC6DF5B000A960A /* Codebusters_sampleTests */,
+				110952BE1AC6DF5B000A960A /* Kids-n-Code */,
+				110952D81AC6DF5B000A960A /* Kids-n-Code_sampleTests */,
 				110952BD1AC6DF5B000A960A /* Products */,
 				B7CD431AB60CA56557E8DBCB /* Pods */,
 				1841D57F6CCD39FE3C08D554 /* Frameworks */,
@@ -216,13 +238,13 @@
 		110952BD1AC6DF5B000A960A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				110952BC1AC6DF5B000A960A /* Kids'n'Code.temp_caseinsensitive_rename.app */,
-				110952D51AC6DF5B000A960A /* Kids'n'Code.temp_caseinsensitive_rename.xctest */,
+				110952BC1AC6DF5B000A960A /* Codebusters_sample.app */,
+				110952D51AC6DF5B000A960A /* Kids-n-Code.temp_caseinsensitive_rename.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		110952BE1AC6DF5B000A960A /* Kids'n'Code */ = {
+		110952BE1AC6DF5B000A960A /* Kids-n-Code */ = {
 			isa = PBXGroup;
 			children = (
 				1198E74C1BE9058800AFE73A /* Mechanisms&Services */,
@@ -237,7 +259,7 @@
 				110952CE1AC6DF5B000A960A /* LaunchScreen.xib */,
 				110952BF1AC6DF5B000A960A /* Supporting Files */,
 			);
-			name = "Kids'n'Code";
+			name = "Kids-n-Code";
 			path = Codebusters_sample;
 			sourceTree = "<group>";
 		};
@@ -264,12 +286,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		110952D81AC6DF5B000A960A /* Codebusters_sampleTests */ = {
+		110952D81AC6DF5B000A960A /* Kids-n-Code_sampleTests */ = {
 			isa = PBXGroup;
 			children = (
 				110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */,
 				110952D91AC6DF5B000A960A /* Supporting Files */,
 			);
+			name = "Kids-n-Code_sampleTests";
 			path = Codebusters_sampleTests;
 			sourceTree = "<group>";
 		};
@@ -333,6 +356,7 @@
 				1198E7541BE9068F00AFE73A /* AnalyticsCore.swift */,
 				1198E77C1BE9329400AFE73A /* NotificationKeys.swift */,
 				11AEAAD41C0C8365000EB2E0 /* NameKeys.swift */,
+				11913F031C0D8FA900E3482A /* Bridging-Header.h */,
 			);
 			name = "Mechanisms&Services";
 			sourceTree = "<group>";
@@ -340,6 +364,9 @@
 		1841D57F6CCD39FE3C08D554 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				11913F001C0CE71300E3482A /* libprotobuf-c.a */,
+				11913EFE1C0CE70E00E3482A /* libKSCrash.a */,
+				11913EFC1C0CE70900E3482A /* libFMDB.a */,
 				371DE81FA58A1197E757ADF8 /* libPods-Kids'n'Code.a */,
 			);
 			name = Frameworks;
@@ -410,9 +437,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		110952BB1AC6DF5B000A960A /* Kids'n'Code */ = {
+		110952BB1AC6DF5B000A960A /* Kids-n-Code */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 110952DF1AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids'n'Code" */;
+			buildConfigurationList = 110952DF1AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids-n-Code" */;
 			buildPhases = (
 				B5A1A933E028009DDEE417A2 /* Check Pods Manifest.lock */,
 				110952B81AC6DF5B000A960A /* Sources */,
@@ -423,17 +450,18 @@
 				004A2625D273F949FFFA1387 /* Copy Pods Resources */,
 			);
 			buildRules = (
+				11913F041C0D923400E3482A /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
-			name = "Kids'n'Code";
+			name = "Kids-n-Code";
 			productName = Codebusters_sample;
-			productReference = 110952BC1AC6DF5B000A960A /* Kids'n'Code.temp_caseinsensitive_rename.app */;
+			productReference = 110952BC1AC6DF5B000A960A /* Codebusters_sample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		110952D41AC6DF5B000A960A /* Kids'n'CodeTests */ = {
+		110952D41AC6DF5B000A960A /* Kids-n-CodeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 110952E21AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids'n'CodeTests" */;
+			buildConfigurationList = 110952E21AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids-n-CodeTests" */;
 			buildPhases = (
 				110952D11AC6DF5B000A960A /* Sources */,
 				110952D21AC6DF5B000A960A /* Frameworks */,
@@ -444,9 +472,9 @@
 			dependencies = (
 				110952D71AC6DF5B000A960A /* PBXTargetDependency */,
 			);
-			name = "Kids'n'CodeTests";
+			name = "Kids-n-CodeTests";
 			productName = Codebusters_sampleTests;
-			productReference = 110952D51AC6DF5B000A960A /* Kids'n'Code.temp_caseinsensitive_rename.xctest */;
+			productReference = 110952D51AC6DF5B000A960A /* Kids-n-Code.temp_caseinsensitive_rename.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -470,7 +498,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 110952B71AC6DF5B000A960A /* Build configuration list for PBXProject "Kids'n'Code" */;
+			buildConfigurationList = 110952B71AC6DF5B000A960A /* Build configuration list for PBXProject "Kids-n-Code" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -483,8 +511,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				110952BB1AC6DF5B000A960A /* Kids'n'Code */,
-				110952D41AC6DF5B000A960A /* Kids'n'CodeTests */,
+				110952BB1AC6DF5B000A960A /* Kids-n-Code */,
+				110952D41AC6DF5B000A960A /* Kids-n-CodeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -658,7 +686,7 @@
 /* Begin PBXTargetDependency section */
 		110952D71AC6DF5B000A960A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 110952BB1AC6DF5B000A960A /* Kids'n'Code */;
+			target = 110952BB1AC6DF5B000A960A /* Kids-n-Code */;
 			targetProxy = 110952D61AC6DF5B000A960A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -724,6 +752,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -760,6 +789,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -779,7 +809,11 @@
 				INFOPLIST_FILE = Codebusters_sample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "Kids'n'Code.temp_caseinsensitive_rename";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = Codebusters_sample;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -798,7 +832,11 @@
 				INFOPLIST_FILE = Codebusters_sample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "Kids'n'Code.temp_caseinsensitive_rename";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = Codebusters_sample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -819,8 +857,8 @@
 				INFOPLIST_FILE = Codebusters_sampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "alexander.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "Kids'n'Code.temp_caseinsensitive_rename";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kids'n'Code.temp_caseinsensitive_rename.app/Kids'n'Code.temp_caseinsensitive_rename";
+				PRODUCT_NAME = "Kids-n-Code.temp_caseinsensitive_rename";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kids-n-Code.temp_caseinsensitive_rename.app/Kids-n-Code.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -835,15 +873,15 @@
 				INFOPLIST_FILE = Codebusters_sampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "alexander.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "Kids'n'Code.temp_caseinsensitive_rename";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kids'n'Code.temp_caseinsensitive_rename.app/Kids'n'Code.temp_caseinsensitive_rename";
+				PRODUCT_NAME = "Kids-n-Code.temp_caseinsensitive_rename";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kids-n-Code.temp_caseinsensitive_rename.app/Kids-n-Code.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		110952B71AC6DF5B000A960A /* Build configuration list for PBXProject "Kids'n'Code" */ = {
+		110952B71AC6DF5B000A960A /* Build configuration list for PBXProject "Kids-n-Code" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				110952DD1AC6DF5B000A960A /* Debug */,
@@ -852,7 +890,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		110952DF1AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids'n'Code" */ = {
+		110952DF1AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids-n-Code" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				110952E01AC6DF5B000A960A /* Debug */,
@@ -861,7 +899,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		110952E21AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids'n'CodeTests" */ = {
+		110952E21AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids-n-CodeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				110952E31AC6DF5B000A960A /* Debug */,

@@ -17,8 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
+        
         // TODO: Move this to where you establish a user session
         self.logUser()
+        YMMYandexMetrica.activateWithApiKey("d9143aae-dc60-4dbe-b7e2-638f574bedc1")
         return true
     }
 
