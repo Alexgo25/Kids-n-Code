@@ -120,11 +120,11 @@
 		110952D51AC6DF5B000A960A /* Kids'n'Code.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kids'n'Code.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		110952DA1AC6DF5B000A960A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Codebusters_sampleTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codebusters_sampleTests.swift; sourceTree = "<group>"; };
+		1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kids'n'Code-Bridging-Header.h"; sourceTree = "<group>"; };
 		115C6E961ACBFA4200B79250 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
 		11913EFC1C0CE70900E3482A /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "Pods/../build/Debug-iphoneos/libFMDB.a"; sourceTree = "<group>"; };
 		11913EFE1C0CE70E00E3482A /* libKSCrash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libKSCrash.a; path = "Pods/../build/Debug-iphoneos/libKSCrash.a"; sourceTree = "<group>"; };
 		11913F001C0CE71300E3482A /* libprotobuf-c.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libprotobuf-c.a"; path = "Pods/../build/Debug-iphoneos/libprotobuf-c.a"; sourceTree = "<group>"; };
-		11913F031C0D8FA900E3482A /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		1198E74D1BE905AA00AFE73A /* TimerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerDelegate.swift; sourceTree = "<group>"; };
 		1198E7501BE9064E00AFE73A /* CBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CBDataModel.xcdatamodel; sourceTree = "<group>"; };
 		1198E7521BE9067100AFE73A /* CoreDataAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAdapter.swift; sourceTree = "<group>"; };
@@ -357,7 +357,7 @@
 				1198E7541BE9068F00AFE73A /* AnalyticsCore.swift */,
 				1198E77C1BE9329400AFE73A /* NotificationKeys.swift */,
 				11AEAAD41C0C8365000EB2E0 /* NameKeys.swift */,
-				11913F031C0D8FA900E3482A /* Bridging-Header.h */,
+				1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */,
 			);
 			name = "Mechanisms&Services";
 			sourceTree = "<group>";
@@ -753,8 +753,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Codebusters_sample;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(EXECUTABLE_NAME)/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Kids'n'Code-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -790,8 +791,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Codebusters_sample;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(EXECUTABLE_NAME)/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Kids'n'Code-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -862,6 +864,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "alexander.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Kids'n'Code";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Codebusters_sample.app/Codebusters_sample";
 			};
 			name = Debug;
@@ -878,6 +881,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "alexander.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Kids'n'Code";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Codebusters_sample.app/Codebusters_sample";
 			};
 			name = Release;
