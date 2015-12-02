@@ -28,6 +28,7 @@
 		11AEAAD51C0C8365000EB2E0 /* NameKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AEAAD41C0C8365000EB2E0 /* NameKeys.swift */; };
 		11AEAAD91C0CC7CE000EB2E0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AEAAD71C0CC7CE000EB2E0 /* Fabric.framework */; };
 		11AEAADA1C0CC7CE000EB2E0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AEAAD81C0CC7CE000EB2E0 /* Crashlytics.framework */; };
+		11E1088C1C0F799F00D207A1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 110952DA1AC6DF5B000A960A /* Info.plist */; };
 		11E38C671AD949460061BE81 /* RobotStanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E38C661AD949460061BE81 /* RobotStanding.swift */; };
 		11E38C691AD94BCC0061BE81 /* RobotTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E38C681AD94BCC0061BE81 /* RobotTrack.swift */; };
 		6120207D1BE15FDA00682C73 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6120207C1BE15FDA00682C73 /* Tutorial.swift */; };
@@ -535,6 +536,7 @@
 				61AC5DB31BA586C000CA109C /* GameButtons.atlas in Resources */,
 				61AC5DDF1BA5881300CA109C /* Animation_Jump_ToRight.atlas in Resources */,
 				61AC5DE51BA5881300CA109C /* Animation_TurnToFront_ToRight.atlas in Resources */,
+				11E1088C1C0F799F00D207A1 /* Info.plist in Resources */,
 				61AC5DE01BA5881300CA109C /* Animation_Move_ToRight.atlas in Resources */,
 				614DA0B31AEF19780088A557 /* Reverse.mp3 in Resources */,
 				615D6E8C1BBEF2FC00229AD6 /* Sound_ActionCellRemoving.mp3 in Resources */,
