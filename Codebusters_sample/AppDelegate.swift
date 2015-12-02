@@ -54,6 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func logUser() {
         // TODO: Use the current user's information
         // You can call any combination of these three methods
-        Crashlytics.sharedInstance().setUserIdentifier("12345")
+        Crashlytics.sharedInstance().setUserEmail("alexgo25616@gmail.com")
     }
 }

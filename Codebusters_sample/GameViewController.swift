@@ -34,6 +34,7 @@ class GameViewController: UIViewController {
             else if (NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsNameKeys.kNeedUpdatesKey) == true){
                 AnalyticsCore.sharedAnalyticsCore.sendData()
                 print("sending data")
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: NSUserDefaultsNameKeys.kNeedUpdatesKey)
             }
         })
         

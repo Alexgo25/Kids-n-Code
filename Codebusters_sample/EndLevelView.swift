@@ -13,8 +13,10 @@ class EndLevelView: SKSpriteNode {
     private let buttonRestart = GameButton(type: .Restart_EndLevelView)
     private let buttonNextLevel = GameButton(type: .NextLevel_EndLevelView)
     private let buttonExit = GameButton(type: .Exit_EndLevelView)
+
     
     init() {
+
         let texture = SKTexture(imageNamed: "EndLevelView_Background") //background.texture!
         super.init(texture: texture, color: UIColor(), size: texture.size())
         
@@ -63,6 +65,8 @@ class EndLevelView: SKSpriteNode {
 
         show()
     }
+    
+    
     
     func show() {
         alpha = 0

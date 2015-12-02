@@ -165,7 +165,15 @@ public class GameProgress {
         var levelPacks = getLevelPacks()
         var levelPackData = levelPacks[currentLevelPack]
         let levels = levelPackData["levels"] as! [[String : AnyObject]]
-        var levelData = levels[currentLevel]
+        print(currentLevel)
+        var levelIndex = currentLevel
+        if (levelIndex == -1){
+            levelIndex = levels.count - 1
+        }
+        
+        var levelData = levels[levelIndex]
+        
+        
         
         if levelPackData["cellState"] as! String == DetailCellState.NonActive.rawValue {
             levelPackData.updateValue(DetailCellState.Active.rawValue, forKey: "cellState")
@@ -175,7 +183,7 @@ public class GameProgress {
         }
         
         
-        if currentLevel == levels.count - 1 {
+        if levelIndex == levels.count - 1 {
             if let detailType = levelPackData["detailType"] as? String {
                 levelData.updateValue(detailType, forKey: "detailType")
             }

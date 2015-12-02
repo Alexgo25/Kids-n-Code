@@ -3,17 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>ru</string>
-	<key>CFBundleDisplayName</key>
-	<string>Kids&apos;n&apos;Code</string>
+	<string>en_US</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>Kids&apos;n&apos;Code</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
@@ -21,6 +17,10 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.1</string>
+	<key>CFBundleDisplayName</key>
+	<string>Kids&apos;n&apos;Code</string>
+	<key>CFBundleName</key>
+	<string>Kids&apos;n&apos;Code</string>
 </dict>
 </plist>

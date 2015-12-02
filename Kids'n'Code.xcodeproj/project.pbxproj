@@ -116,7 +116,7 @@
 		110952CA1AC6DF5B000A960A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		110952CC1AC6DF5B000A960A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		110952CF1AC6DF5B000A960A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		110952D51AC6DF5B000A960A /* Kids-n-Code.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kids-n-Code.temp_caseinsensitive_rename.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		110952D51AC6DF5B000A960A /* Kids'n'Code.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kids'n'Code.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		110952DA1AC6DF5B000A960A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Codebusters_sampleTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codebusters_sampleTests.swift; sourceTree = "<group>"; };
 		115C6E961ACBFA4200B79250 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				110952BC1AC6DF5B000A960A /* Codebusters_sample.app */,
-				110952D51AC6DF5B000A960A /* Kids-n-Code.temp_caseinsensitive_rename.xctest */,
+				110952D51AC6DF5B000A960A /* Kids'n'Code.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -437,9 +437,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		110952BB1AC6DF5B000A960A /* Kids-n-Code */ = {
+		110952BB1AC6DF5B000A960A /* Kids'n'Code */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 110952DF1AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids-n-Code" */;
+			buildConfigurationList = 110952DF1AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids'n'Code" */;
 			buildPhases = (
 				B5A1A933E028009DDEE417A2 /* Check Pods Manifest.lock */,
 				110952B81AC6DF5B000A960A /* Sources */,
@@ -454,14 +454,14 @@
 			);
 			dependencies = (
 			);
-			name = "Kids-n-Code";
+			name = "Kids'n'Code";
 			productName = Codebusters_sample;
 			productReference = 110952BC1AC6DF5B000A960A /* Codebusters_sample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		110952D41AC6DF5B000A960A /* Kids-n-CodeTests */ = {
+		110952D41AC6DF5B000A960A /* Kids'n'CodeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 110952E21AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids-n-CodeTests" */;
+			buildConfigurationList = 110952E21AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids'n'CodeTests" */;
 			buildPhases = (
 				110952D11AC6DF5B000A960A /* Sources */,
 				110952D21AC6DF5B000A960A /* Frameworks */,
@@ -472,9 +472,9 @@
 			dependencies = (
 				110952D71AC6DF5B000A960A /* PBXTargetDependency */,
 			);
-			name = "Kids-n-CodeTests";
+			name = "Kids'n'CodeTests";
 			productName = Codebusters_sampleTests;
-			productReference = 110952D51AC6DF5B000A960A /* Kids-n-Code.temp_caseinsensitive_rename.xctest */;
+			productReference = 110952D51AC6DF5B000A960A /* Kids'n'Code.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -498,7 +498,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 110952B71AC6DF5B000A960A /* Build configuration list for PBXProject "Kids-n-Code" */;
+			buildConfigurationList = 110952B71AC6DF5B000A960A /* Build configuration list for PBXProject "Kids'n'Code" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -511,8 +511,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				110952BB1AC6DF5B000A960A /* Kids-n-Code */,
-				110952D41AC6DF5B000A960A /* Kids-n-CodeTests */,
+				110952BB1AC6DF5B000A960A /* Kids'n'Code */,
+				110952D41AC6DF5B000A960A /* Kids'n'CodeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -686,7 +686,7 @@
 /* Begin PBXTargetDependency section */
 		110952D71AC6DF5B000A960A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 110952BB1AC6DF5B000A960A /* Kids-n-Code */;
+			target = 110952BB1AC6DF5B000A960A /* Kids'n'Code */;
 			targetProxy = 110952D61AC6DF5B000A960A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -813,6 +813,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = Alexander.kidsncode;
 				PRODUCT_NAME = Codebusters_sample;
 				PROVISIONING_PROFILE = "";
 			};
@@ -836,6 +837,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = Alexander.kidsncode;
 				PRODUCT_NAME = Codebusters_sample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -857,8 +859,8 @@
 				INFOPLIST_FILE = Codebusters_sampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "alexander.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "Kids-n-Code.temp_caseinsensitive_rename";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kids-n-Code.temp_caseinsensitive_rename.app/Kids-n-Code.temp_caseinsensitive_rename";
+				PRODUCT_NAME = "Kids'n'Code";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Codebusters_sample.app/Codebusters_sample";
 			};
 			name = Debug;
 		};
@@ -873,15 +875,15 @@
 				INFOPLIST_FILE = Codebusters_sampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "alexander.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "Kids-n-Code.temp_caseinsensitive_rename";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kids-n-Code.temp_caseinsensitive_rename.app/Kids-n-Code.temp_caseinsensitive_rename";
+				PRODUCT_NAME = "Kids'n'Code";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Codebusters_sample.app/Codebusters_sample";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		110952B71AC6DF5B000A960A /* Build configuration list for PBXProject "Kids-n-Code" */ = {
+		110952B71AC6DF5B000A960A /* Build configuration list for PBXProject "Kids'n'Code" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				110952DD1AC6DF5B000A960A /* Debug */,
@@ -890,7 +892,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		110952DF1AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids-n-Code" */ = {
+		110952DF1AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids'n'Code" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				110952E01AC6DF5B000A960A /* Debug */,
@@ -899,7 +901,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		110952E21AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids-n-CodeTests" */ = {
+		110952E21AC6DF5B000A960A /* Build configuration list for PBXNativeTarget "Kids'n'CodeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				110952E31AC6DF5B000A960A /* Debug */,

@@ -16,22 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
                BuildableName = "Codebusters_sample.app"
-               BlueprintName = "Codebusters_sample"
-               ReferencedContainer = "container:Codebusters_sample.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "110952D41AC6DF5B000A960A"
-               BuildableName = "Codebusters_sampleTests.xctest"
-               BlueprintName = "Codebusters_sampleTests"
-               ReferencedContainer = "container:Codebusters_sample.xcodeproj">
+               BlueprintName = "Kids&apos;n&apos;Code"
+               ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,24 +28,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "110952D41AC6DF5B000A960A"
-               BuildableName = "Codebusters_sampleTests.xctest"
-               BlueprintName = "Codebusters_sampleTests"
-               ReferencedContainer = "container:Codebusters_sample.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
             BuildableName = "Codebusters_sample.app"
-            BlueprintName = "Codebusters_sample"
-            ReferencedContainer = "container:Codebusters_sample.xcodeproj">
+            BlueprintName = "Kids&apos;n&apos;Code"
+            ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -81,8 +57,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
             BuildableName = "Codebusters_sample.app"
-            BlueprintName = "Codebusters_sample"
-            ReferencedContainer = "container:Codebusters_sample.xcodeproj">
+            BlueprintName = "Kids&apos;n&apos;Code"
+            ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -100,8 +76,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "110952BB1AC6DF5B000A960A"
             BuildableName = "Codebusters_sample.app"
-            BlueprintName = "Codebusters_sample"
-            ReferencedContainer = "container:Codebusters_sample.xcodeproj">
+            BlueprintName = "Kids&apos;n&apos;Code"
+            ReferencedContainer = "container:Kids&apos;n&apos;Code.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

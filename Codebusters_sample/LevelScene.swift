@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
-    
+
     let background = SKNode()
     let trackLayer = SKNode()
     var touchesToRecord: [String] = []
@@ -51,17 +51,13 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         //Listening to notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name: NotificationKeys.kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "recordTerminate", name: NotificationKeys.kApplicationWillTerminateKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: NotificationKeys.kApplicationWillTerminateKey, object: NotificationZombie.sharedInstance)
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: NSUserDefaultsNameKeys.kNeedUpdatesKey)
     }
     
     //Handling notifications
+
     
-    func recordTerminate() {
-        print("Terminate")
-        //recording data
-        
-    }
     
      func finishWithSuccess() {
         print("Finished")

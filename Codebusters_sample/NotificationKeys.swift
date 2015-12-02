@@ -14,6 +14,7 @@ struct NotificationKeys {
     static let kNodeTouchNotificationKey = "NodeTouch"
     static let kPauseQuitNotificationKey = "PauseQuit"
     static let kApplicationWillTerminateKey = "TerminateQuit"
+    static let kIfLastLevelInPack = "LastLevelInPack"
 
 }
 
