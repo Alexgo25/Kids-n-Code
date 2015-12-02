@@ -163,6 +163,10 @@ public class GameProgress {
     
     func getCurrentLevelData() -> [String : AnyObject] {
         var levelPacks = getLevelPacks()
+        print(currentLevelPack)
+        if (currentLevelPack == -1){
+            currentLevelPack = levelPacks.count - 1
+        }
         var levelPackData = levelPacks[currentLevelPack]
         let levels = levelPackData["levels"] as! [[String : AnyObject]]
         print(currentLevel)
@@ -170,6 +174,7 @@ public class GameProgress {
         if (levelIndex == -1){
             levelIndex = levels.count - 1
         }
+        
         
         var levelData = levels[levelIndex]
         

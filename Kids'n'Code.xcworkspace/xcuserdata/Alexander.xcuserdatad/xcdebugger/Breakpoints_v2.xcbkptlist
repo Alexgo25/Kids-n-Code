@@ -26,22 +26,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/GameProgress.swift"
-            timestampString = "470752577.354894"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "getCurrentLevelData()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Codebusters_sample/GameProgress.swift"
             timestampString = "470755486.797108"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -58,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/GameProgress.swift"
-            timestampString = "470757091.739528"
+            timestampString = "470760508.838736"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "getCurrentLevelData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -81,6 +65,70 @@
             endingLineNumber = "23"
             landmarkName = "init()"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/MenuScene.swift"
+            timestampString = "470760248.420269"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "touchesBegan(_:withEvent:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/MenuScene.swift"
+            timestampString = "470760249.444246"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "touchesBegan(_:withEvent:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Codebusters_sample.MenuScene.touchesBegan (Codebusters_sample.MenuScene)(Swift.Set&lt;__ObjC.UITouch&gt;, withEvent : Swift.Optional&lt;__ObjC.UIEvent&gt;) -&gt; ()"
+                  moduleName = "Codebusters_sample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/MenuScene.swift"
+                  timestampString = "470760374.642941"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "1464">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Codebusters_sample.MenuScene.(touchesBegan (Codebusters_sample.MenuScene) -&gt; (Swift.Set&lt;__ObjC.UITouch&gt;, withEvent : Swift.Optional&lt;__ObjC.UIEvent&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "Codebusters_sample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/MenuScene.swift"
+                  timestampString = "470760374.643164"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
