@@ -46,8 +46,6 @@ public class Tutorial: SKSpriteNode {
         
         anchorPoint = CGPointZero
         
-        userInteractionEnabled = false
-        
         show()
     }
     
