@@ -42,8 +42,8 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         super.init(texture: texture, color: SKColor(), size: texture.size())
         
         moveToStart()
-        
-        zPosition = 101
+
+        changeZPosition(currentFloorPosition)
         userInteractionEnabled = true
         
         physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: size.width - 50, height: size.height - 70))
@@ -178,7 +178,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     
     func checkDetail() {
         if detail!.getFloorPosition() == currentFloorPosition && detail!.getTrackPosition() == currentTrackPosition {
-            detail!.zPosition -= 100
+            detail!.zPosition -= 1
             detail!.runAction(SKAction.moveByX(0, y: -200, duration: 0.4))
             takeDetail()
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kRobotTookDetailNotificationKey, object: self)
@@ -191,11 +191,14 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                 self.checkDetail()
                 if self.stopRobot {
                     let turn = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05, resize: true, restore: false)
+                
+                    
                     if self.robotTookDetail {
                         self.runAction(turn)
                     } else {
                         let sequence = SKAction.sequence([turn, self.mistake()])
                         self.runAction(sequence)
+                        self.lightClearButton()
                     }
                     
                     return
@@ -212,10 +215,20 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                         self.stopRobot = true
                         let turn = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05)
                         self.runAction(turn)
+                        self.lightClearButton()
                     }
                 }
             })
         })
+    }
+    
+    func lightClearButton() {
+        let clearButton = SKSpriteNode(imageNamed: "buttonClearWithLight")
+        clearButton.name = "clear"
+        clearButton.position = Constants.Button_ClearPosition
+        clearButton.userInteractionEnabled = true
+        clearButton.zPosition = 1001
+        scene!.addChild(clearButton)
     }
     
     func performActions() {

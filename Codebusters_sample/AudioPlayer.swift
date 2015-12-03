@@ -21,21 +21,17 @@ public class AudioPlayer {
     var musicIsOn: Bool
     
     init() {
-        musicIsOn = true
-        soundsAreOn = true
+        let defaults = NSUserDefaults.standardUserDefaults()
+
+        if let music = defaults.objectForKey("music") as? Bool, let sounds = defaults.objectForKey("sounds") as? Bool {
+            musicIsOn = music
+            soundsAreOn = sounds
+        } else {
+            defaults.setBool(true, forKey: "music")
+            defaults.setBool(true, forKey: "sounds")
         
-        let settings = GameProgress.sharedInstance.getLevelsData()["settings"] as! [String : AnyObject]
-        
-        if let sounds = settings["sounds"] as? String {
-            if sounds == "Off" {
-                soundsAreOn = false
-            }
-        }
-        
-        if let music = settings["music"] as? String {
-            if music == "Off" {
-                musicIsOn = false
-            }
+            musicIsOn = true
+            soundsAreOn = true
         }
     }
     

@@ -16,13 +16,11 @@ enum DetailCellState: String {
 }
 
 class DetailCell: SKSpriteNode {
-
     private var cellState: DetailCellState
     private var detailType: DetailType
-    private let atlas = SKTextureAtlas(named: "Details")
     
     init(detailType: DetailType, cellState: DetailCellState, name: String) {
-       
+        let atlas = SKTextureAtlas(named: "Details")
         let texture = atlas.textureNamed("Detail_\(detailType.rawValue)")
         self.cellState = cellState
         self.detailType = detailType
@@ -38,7 +36,12 @@ class DetailCell: SKSpriteNode {
             let number = SKSpriteNode(imageNamed: "active")
             number.zPosition = -1002
             number.addChild(createLabel(String(Int(name)! + 1), fontColor: SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), fontSize: 36, position: CGPointZero))
+            
+            let light = SKSpriteNode(imageNamed: "activeLight")
+            light.zPosition = -1003
+            
             addChild(number)
+            addChild(light)
         case .NonActive:
             let number = SKSpriteNode(imageNamed: "nonActive")
             number.zPosition = -1002
@@ -48,7 +51,7 @@ class DetailCell: SKSpriteNode {
             self.texture = texture
         }
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
