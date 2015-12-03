@@ -15,16 +15,6 @@ public class GameProgress {
     var currentLevel = 0
     var currentLevelPack = 0
     
-    func changeSetting(key: String, value: String) {
-        var settings = getLevelsData()["settings"] as! [String : AnyObject]
-        settings.updateValue(value, forKey: key)
-        
-        let config = getLevelsData()
-        
-        config.setValue(settings, forKey: "settings")
-        config.writeToFile(getLevelsDataPath(), atomically: true)
-    }
-    
     func getLevelPackData(levelPackIndex: Int) -> [Int] {
         var array: [Int] = []
         let levels = getLevelPacks()[levelPackIndex]["levels"] as! [[String : AnyObject]]
@@ -138,13 +128,8 @@ public class GameProgress {
             let scene = LevelScene(size: view.scene!.size)
             view.presentScene(scene, transition: SKTransition.crossFadeWithDuration(0.4))
         } else {
-            let levelData = GameProgress.sharedInstance.getCurrentLevelData()
-            if let detailTypeString  = levelData["detailType"] as? String {
-                if let type = DetailType(rawValue: detailTypeString) {
-                    goToMenu(view, robotTextImage: "\(type.rawValue)_Text")
-                }
-            }
-
+            let type = getCurrentLevelPackDetailType()
+            goToMenu(view, robotTextImage: "\(type.rawValue)_Text")
         }
     }
     
@@ -221,6 +206,18 @@ public class GameProgress {
         } else {
             currentLevel = -1
         }
+    }
+    
+    func getCurrentLevelPackDetailType() -> DetailType {
+        var levelPacks = getLevelPacks()
+        var levelPackData = levelPacks[currentLevelPack]
+        if let detailTypeString = levelPackData["detailType"] as? String {
+            if let detailType = DetailType(rawValue: detailTypeString) {
+                return detailType
+            }
+        }
+        
+        return DetailType.Crystall
     }
     
     func checkDetailCellState() {

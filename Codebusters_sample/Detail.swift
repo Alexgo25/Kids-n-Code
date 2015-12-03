@@ -69,8 +69,6 @@ class Detail: SKSpriteNode {
         
         move()
         
-        zPosition = 100
-        
         physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 50, height: 50))
         physicsBody!.categoryBitMask = PhysicsCategory.Detail
         physicsBody!.contactTestBitMask = PhysicsCategory.Robot

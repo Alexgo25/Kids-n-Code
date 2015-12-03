@@ -727,10 +727,6 @@
 	<dict>
 		<key>version</key>
 		<string>1.0</string>
-		<key>sounds</key>
-		<string>On</string>
-		<key>music</key>
-		<string>On</string>
 	</dict>
 </dict>
 </plist>

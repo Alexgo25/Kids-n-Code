@@ -111,12 +111,12 @@ class ActionCell: SKSpriteNode {
         }
     }
     
-    static func deleteCell(index: Int, direction: CGFloat) {
+    static func deleteCell(index: Int, direction: Direction) {
         if cells[index].alpha == 0 {
             return
         }
         
-        let fadeOutAction = SKAction.group([SKAction.moveByX(100 * direction, y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
+        let fadeOutAction = SKAction.group([SKAction.moveByX(100 * CGFloat(direction.rawValue), y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
         
         cells[index].runAction(SKAction.sequence([fadeOutAction, SKAction.runBlock() { AudioPlayer.sharedInstance.playSoundEffect("Sound_ActionCellRemoving.mp3") }, SKAction.removeFromParent()]), completion: {
             self.moveCellsUpAfterDeleting(index)

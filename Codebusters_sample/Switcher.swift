@@ -106,12 +106,14 @@ class MusicSwitcher: SKSpriteNode {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
         if switcher.isSwitchedOn() {
             AudioPlayer.sharedInstance.pauseBackgroundMusic()
-            GameProgress.sharedInstance.changeSetting("music", value: "Off")
+            defaults.setBool(false, forKey: "music")
         } else {
             AudioPlayer.sharedInstance.resumeBackgroundMusic()
-            GameProgress.sharedInstance.changeSetting("music", value: "On")
+            defaults.setBool(true, forKey: "music")
         }
         
         switcher.touchesEnded(touches, withEvent: event)
@@ -142,12 +144,14 @@ class SoundSwitcher: SKSpriteNode {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
         if switcher.isSwitchedOn() {
             AudioPlayer.sharedInstance.soundsAreOn = false
-            GameProgress.sharedInstance.changeSetting("sounds", value: "Off")
+            defaults.setBool(false, forKey: "sounds")
         } else {
             AudioPlayer.sharedInstance.soundsAreOn = true
-            GameProgress.sharedInstance.changeSetting("sounds", value: "On")
+            defaults.setBool(true, forKey: "sounds")
         }
         
         switcher.touchesEnded(touches, withEvent: event)
