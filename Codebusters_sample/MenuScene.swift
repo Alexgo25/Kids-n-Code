@@ -91,15 +91,13 @@ class MenuScene: SKScene {
     func showDetails() {
         let levelPacks = GameProgress.sharedInstance.getLevelPacks()
         for levelPack in levelPacks {
-            let detailTypeString = levelPack["detailType"] as! String
-            let detailType = DetailType(rawValue: detailTypeString)
-            
-            let cellStateString = levelPack["cellState"] as! String
-            let cellState = DetailCellState(rawValue: cellStateString)
-            
-            let detailCell = DetailCell(detailType: detailType!, cellState: cellState!, name: String(details.count))
-            details.append(detailCell)
-            addChild(detailCell)
+            if let detailTypeString = levelPack["detailType"] as? String, let cellStateString = levelPack["cellState"] as? String {
+                if let detailType = DetailType(rawValue: detailTypeString), let cellState = DetailCellState(rawValue: cellStateString) {
+                    let detailCell = DetailCell(detailType: detailType, cellState: cellState, name: String(details.count))
+                    details.append(detailCell)
+                    addChild(detailCell)
+                }
+            }
         }
     }
     

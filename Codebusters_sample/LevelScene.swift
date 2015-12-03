@@ -114,20 +114,9 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         showDetailAndRobot()
         
         if GameProgress.sharedInstance.getTutorialNumber() > 0 {
-            addChild(Tutorial.sharedInstance)
             let number = GameProgress.sharedInstance.getTutorialNumber()
+            addChild(Tutorial(tutorialNumber: number))
             
-            switch number {
-            case 1:
-                Tutorial.sharedInstance.showFirstPart()
-            case 2:
-                Tutorial.sharedInstance.showSecondPart()
-            case 3:
-                Tutorial.sharedInstance.showThirdPart()
-            default:
-                break
-            }
-
             GameProgress.sharedInstance.removeTutorial()
         }
     }
@@ -246,25 +235,35 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     }
     
     func swipedLeft(swipe: UISwipeGestureRecognizer) {
-        if robot.isOnStart {
-            let touchLocation = convertPointFromView(swipe.locationInView(view))
-            let node = nodeAtPoint(touchLocation)
-            if let cell = node as? ActionCell {
-                ActionCell.deleteCell(Int(cell.name!)!, direction: -1)
-                //Analytics->record deleteCellSwipeLeft
+        let touchLocation = convertPointFromView(swipe.locationInView(view))
+        let node = nodeAtPoint(touchLocation)
+        
+        if let cell = node as? ActionCell {
+            if robot.isOnStart {
+                ActionCell.deleteCell(Int(cell.name!)!, direction: .ToLeft)
+                //Analytics->record deleteCellSwipeRight
                 //touchesToRecord.append("deleteCellSwipeLeft")
                 TouchesAnalytics.sharedInstance.appendTouch("deleteCellSwipeLeft")
-                //print("deleteCellSwipeLeft")
+                //print("deleteCellSwipeRight")
             }
+        }
+
+        if let tutorial = node as? Tutorial {
+            tutorial.showNextSlide(.ToLeft)
+            //Analytics->record showNextSlideSwipe
+            //touchesToRecord.append("showNextTutorialSlideSwipe")
+            TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
+            //print("showNextTutorialSlideSwipe")
         }
     }
     
     func swipedRight(swipe: UISwipeGestureRecognizer) {
-        if robot.isOnStart {
-            let touchLocation = convertPointFromView(swipe.locationInView(view))
-            let node = nodeAtPoint(touchLocation)
-            if let cell = node as? ActionCell {
-                ActionCell.deleteCell(Int(cell.name!)!, direction: 1)
+        let touchLocation = convertPointFromView(swipe.locationInView(view))
+        let node = nodeAtPoint(touchLocation)
+
+        if let cell = node as? ActionCell {
+            if robot.isOnStart {
+                ActionCell.deleteCell(Int(cell.name!)!, direction: .ToRight)
                 //Analytics->record deleteCellSwipeRight
                 //touchesToRecord.append("deleteCellSwipeRight")
                 TouchesAnalytics.sharedInstance.appendTouch("deleteCellSwipeRight")
@@ -272,10 +271,8 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             }
         }
         
-        let touchLocation = convertPointFromView(swipe.locationInView(view))
-        let node = nodeAtPoint(touchLocation)
-        if let _ = node as? Tutorial {
-            Tutorial.sharedInstance.showNextSlide()
+        if let tutorial = node as? Tutorial {
+            tutorial.showNextSlide(.ToRight)
             //Analytics->record showNextSlideSwipe
             //touchesToRecord.append("showNextTutorialSlideSwipe")
             TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
@@ -352,10 +349,14 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             case button_Tips:
                 //Analytics->record tips
                 if !robot.isRunningActions() {
-                    addChild(Tutorial.sharedInstance)
-                    Tutorial.sharedInstance.showFullTutorial()
+                    addChild(Tutorial(tutorialNumber: 0))
                 }
             case button_Clear:
+                enumerateChildNodesWithName("clear") {
+                    node, stop in
+                    node.removeFromParent()
+                }
+                
                 ActionCell.resetCellTextures()
                 track.deleteBlocks()
                 detail.removeFromParent()
@@ -393,9 +394,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         addChild(background)
         
         background.addChild(createLabel("Программа", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1773, y: 1429)))
-        background.addChild(createLabel("Отладка", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1648, y: 390)))
-        background.addChild(createLabel("Запуск", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1769, y: 217)))
-        background.addChild(createLabel("В начало", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1892, y: 390)))
+        button_Debug.addChild(createLabel("Отладка", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
+        button_Start.addChild(createLabel("Запуск", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
+        button_Clear.addChild(createLabel("В начало", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
+        button_Restart.addChild(createLabel("Заново", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
         background.addChild(createLabel("ПОСЛЕ ЗАПУСКА", fontColor: UIColor.whiteColor(), fontSize: 23, position: CGPoint(x: 1773, y: 1296)))
         
         addChild(button_Pause)
