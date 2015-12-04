@@ -2,15 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "container:/Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Kids'n'Code.xcodeproj">
+      location = "container:/Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Kids&apos;n&apos;Code.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Kids'n'Code.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Kids'n'Code.xcodeproj">
    </FileRef>
 </Workspace>
