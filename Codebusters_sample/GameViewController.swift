@@ -24,17 +24,17 @@ class GameViewController: UIViewController {
         
             skView.presentScene(scene)
         dispatch_async(dispatch_get_main_queue(), {
-            if (NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsNameKeys.kDeviceIDKey) == nil){
+            if (NSUserDefaults.standardUserDefaults().objectForKey(kDeviceIDKey) == nil){
                 let deviceid = String(stringInterpolationSegment: UIDevice.currentDevice().identifierForVendor)
                 NSUserDefaults.standardUserDefaults().setObject(deviceid, forKey: "deviceID")
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: NSUserDefaultsNameKeys.kNeedUpdatesKey)
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: kNeedUpdatesKey)
                 print("game loaded for the first time")
             }
                 
-            else if (NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsNameKeys.kNeedUpdatesKey) == true){
+            else if (NSUserDefaults.standardUserDefaults().boolForKey(kNeedUpdatesKey) == true){
                 AnalyticsCore.sharedAnalyticsCore.sendData()
                 print("sending data")
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: NSUserDefaultsNameKeys.kNeedUpdatesKey)
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: kNeedUpdatesKey)
             }
         })
         

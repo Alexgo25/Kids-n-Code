@@ -83,7 +83,7 @@ class PauseView: SKSpriteNode {
             case buttonRestart:
                 GameProgress.sharedInstance.newGame(scene!.view!)
             case buttonExit:
-                NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+                NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
                 GameProgress.sharedInstance.goToMenu(scene!.view!)
             case buttonContinue, backgroundRightPart:
                 hide()

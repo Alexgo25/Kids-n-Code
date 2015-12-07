@@ -181,7 +181,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             detail!.zPosition -= 1
             detail!.runAction(SKAction.moveByX(0, y: -200, duration: 0.4))
             takeDetail()
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kRobotTookDetailNotificationKey, object: self)
+            NSNotificationCenter.defaultCenter().postNotificationName(kRobotTookDetailNotificationKey, object: self)
         }
     }
     

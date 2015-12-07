@@ -11,5 +11,21 @@
 
 #import "FMDB.h"
 #import "YandexMobileMetrica.h"
+//push token
+#define kDevicePushTokenKey "pushToken"
+//notification keys
+#define kRobotTookDetailNotificationKey "RobotTookDetail"
+#define kRobotFinishedWithMistakeNotificationKey "RobotFinishedWithMistake"
+#define kNodeTouchNotificationKey "NodeTouch"
+#define kPauseQuitNotificationKey "PauseQuit"
+#define kApplicationWillTerminateKey "TerminateQuit"
+#define kIfLastLevelInPack "LastLevelInPack"
+//action keys
+#define kTerminateApplicationKey "terminateApplication"
+//name keys
+#define kDeviceIDKey "deviceID"
+#define kNeedUpdatesKey "needUpdates"
+
+
 
 #endif /* Kids_n_Code_Bridging_Header_h */

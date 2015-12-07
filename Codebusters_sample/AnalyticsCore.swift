@@ -12,6 +12,7 @@ import UIKit
 let urlstr = "http://kidsncode.com/php/analytics.php"
 
 
+
 class AnalyticsCore : NSObject{
     
 
@@ -77,6 +78,10 @@ class AnalyticsCore : NSObject{
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let str = dateFormatter.stringFromDate(date)
         return str
+    }
+    
+    func sendDevicePushToken(deviceToken : String) {
+        let dict = ["devicePushToken" : deviceToken]
     }
     
     func sendData() {

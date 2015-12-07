@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E1FCF74E9D546BAD738E6D7D'
+               BlueprintIdentifier = '46255CFD7E28AAD07104F2D1'
                BlueprintName = 'KSCrash'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libKSCrash.a'>

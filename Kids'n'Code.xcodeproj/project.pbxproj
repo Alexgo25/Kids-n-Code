@@ -25,7 +25,6 @@
 		1198E7791BE90B3C00AFE73A /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E7731BE90B3C00AFE73A /* Action.swift */; };
 		1198E77B1BE90B3C00AFE73A /* Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E7751BE90B3C00AFE73A /* Touch.swift */; };
 		1198E77D1BE9329400AFE73A /* NotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E77C1BE9329400AFE73A /* NotificationKeys.swift */; };
-		11AEAAD51C0C8365000EB2E0 /* NameKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AEAAD41C0C8365000EB2E0 /* NameKeys.swift */; };
 		11AEAAD91C0CC7CE000EB2E0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AEAAD71C0CC7CE000EB2E0 /* Fabric.framework */; };
 		11AEAADA1C0CC7CE000EB2E0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AEAAD81C0CC7CE000EB2E0 /* Crashlytics.framework */; };
 		11E1088C1C0F799F00D207A1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 110952DA1AC6DF5B000A960A /* Info.plist */; };
@@ -135,7 +134,6 @@
 		1198E7731BE90B3C00AFE73A /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		1198E7751BE90B3C00AFE73A /* Touch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Touch.swift; sourceTree = "<group>"; };
 		1198E77C1BE9329400AFE73A /* NotificationKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationKeys.swift; sourceTree = "<group>"; };
-		11AEAAD41C0C8365000EB2E0 /* NameKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameKeys.swift; sourceTree = "<group>"; };
 		11AEAAD71C0CC7CE000EB2E0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		11AEAAD81C0CC7CE000EB2E0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		11E38C661AD949460061BE81 /* RobotStanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotStanding.swift; sourceTree = "<group>"; };
@@ -356,7 +354,6 @@
 				1198E74D1BE905AA00AFE73A /* TimerDelegate.swift */,
 				1198E7541BE9068F00AFE73A /* AnalyticsCore.swift */,
 				1198E77C1BE9329400AFE73A /* NotificationKeys.swift */,
-				11AEAAD41C0C8365000EB2E0 /* NameKeys.swift */,
 				1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */,
 			);
 			name = "Mechanisms&Services";
@@ -492,6 +489,11 @@
 					110952BB1AC6DF5B000A960A = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 4YNF6U5553;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					110952D41AC6DF5B000A960A = {
 						CreatedOnToolsVersion = 6.2;
@@ -660,7 +662,6 @@
 				1198E77B1BE90B3C00AFE73A /* Touch.swift in Sources */,
 				618F7BAA1AEEEAC500B2DBC5 /* LevelScene.swift in Sources */,
 				61A4362B1AD16D1B002B8540 /* ActionCell.swift in Sources */,
-				11AEAAD51C0C8365000EB2E0 /* NameKeys.swift in Sources */,
 				61A23A741BC9094B006B10C6 /* LevelSelectionView.swift in Sources */,
 				1198E77D1BE9329400AFE73A /* NotificationKeys.swift in Sources */,
 				61EFA4B41ADBEC4400EB8C6B /* Block.swift in Sources */,

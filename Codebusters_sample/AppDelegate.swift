@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: Move this to where you establish a user session
         self.logUser()
         YMMYandexMetrica.activateWithApiKey("d9143aae-dc60-4dbe-b7e2-638f574bedc1")
+        
+        let settings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound , UIUserNotificationType.Badge , UIUserNotificationType.Alert], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
         return true
     }
 
@@ -44,16 +48,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         if (TimerDelegate.sharedTimerDelegate.timerIsRunning()) {
-            TouchesAnalytics.sharedInstance.appendTouch(TouchKeys.kTerminateApplicationKey)
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kApplicationWillTerminateKey, object: NotificationZombie.sharedInstance)
+            TouchesAnalytics.sharedInstance.appendTouch(kTerminateApplicationKey)
+            NSNotificationCenter.defaultCenter().postNotificationName(kApplicationWillTerminateKey, object: NotificationZombie.sharedInstance)
         }
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        print("Registering device token")
+        let stringToken = convertDeviceTokenToString(deviceToken)
+        print(stringToken)
+        NSUserDefaults.standardUserDefaults().setObject(stringToken, forKey: kDevicePushTokenKey)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Error registering token")
+        print(error.localizedDescription)
     }
     
     //Crashlytics
     
-    func logUser() {
+    private func logUser() {
         // TODO: Use the current user's information
         // You can call any combination of these three methods
         Crashlytics.sharedInstance().setUserEmail("alexgo25616@gmail.com")
+    }
+    private func convertDeviceTokenToString(deviceToken : NSData) ->String {
+        var deviceTokenStr = deviceToken.description.stringByReplacingOccurrencesOfString("<", withString: "")
+        deviceTokenStr = deviceTokenStr.stringByReplacingOccurrencesOfString(">", withString: "")
+        deviceTokenStr = deviceTokenStr.stringByReplacingOccurrencesOfString(" ", withString: "")
+        return deviceTokenStr
+        
     }
 }

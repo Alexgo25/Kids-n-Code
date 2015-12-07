@@ -8,15 +8,6 @@
 
 import Foundation
 
-struct NotificationKeys {
-    static let kRobotTookDetailNotificationKey = "RobotTookDetail"
-    static let kRobotFinishedWithMistakeNotificationKey = "RobotFinishedWithMistake"
-    static let kNodeTouchNotificationKey = "NodeTouch"
-    static let kPauseQuitNotificationKey = "PauseQuit"
-    static let kApplicationWillTerminateKey = "TerminateQuit"
-    static let kIfLastLevelInPack = "LastLevelInPack"
-
-}
 
 
 class NotificationZombie {

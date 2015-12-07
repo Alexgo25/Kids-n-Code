@@ -49,10 +49,10 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         super.init(size: size)
         
         //Listening to notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name: NotificationKeys.kRobotTookDetailNotificationKey, object: robot)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: NotificationKeys.kApplicationWillTerminateKey, object: NotificationZombie.sharedInstance)
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: NSUserDefaultsNameKeys.kNeedUpdatesKey)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name: kRobotTookDetailNotificationKey, object: robot)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kApplicationWillTerminateKey, object: NotificationZombie.sharedInstance)
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: kNeedUpdatesKey)
     }
     
     //Handling notifications
