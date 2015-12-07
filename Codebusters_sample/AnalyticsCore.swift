@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 let urlstr = "http://kidsncode.com/php/analytics.php"
+let tempAnalyticsUrl = "http://kidsncode.com/php/simplepush/sendpush.php?push=1"
 
 
 
