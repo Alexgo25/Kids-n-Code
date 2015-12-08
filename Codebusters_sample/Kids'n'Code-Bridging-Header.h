@@ -13,6 +13,7 @@
 #import "YandexMobileMetrica.h"
 //push token
 #define kDevicePushTokenKey "pushToken"
+
 //notification keys
 #define kRobotTookDetailNotificationKey "RobotTookDetail"
 #define kRobotFinishedWithMistakeNotificationKey "RobotFinishedWithMistake"
@@ -25,6 +26,7 @@
 //name keys
 #define kDeviceIDKey "deviceID"
 #define kNeedUpdatesKey "needUpdates"
+#define kPushTokenIsSentToServer "tokenSent"
 
 
 

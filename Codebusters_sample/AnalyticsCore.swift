@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 let urlstr = "http://kidsncode.com/php/analytics.php"
-let tempAnalyticsUrl = "http://kidsncode.com/php/simplepush/sendpush.php?push=1"
+let tempAnalyticsUrl = "http://kidsncode.com/php/push/sendpush.php?push=1"
 
 
 
@@ -83,12 +83,44 @@ class AnalyticsCore : NSObject{
     
     func sendDevicePushToken(deviceToken : String) {
         let dict = ["devicePushToken" : deviceToken]
+        let url = NSURL(string: tempAnalyticsUrl)
+        let request = NSMutableURLRequest(URL: url!, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+        request.HTTPMethod = "POST"
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        do {
+            try request.HTTPBody = NSJSONSerialization.dataWithJSONObject(dict, options: .PrettyPrinted)
+        }
+        catch _ {
+            print("error")
+        }
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            if (response != nil) {
+                print("Response: \(response)")
+                //deleting coredata
+                do {
+                    try CoreDataAdapter.sharedAdapter.deleteAllLevels()
+                }
+                catch _ {
+                    print("Error deleting coredata")
+                }
+            }
+            if (error == nil) {
+                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                print("Body: \(strData)")
+            }
+            
+        })
+        task.resume()
+        
     }
+
+        
+    
     
     func sendData() {
         //try print(getFinalJSONData(CoreDataAdapter.sharedAdapter.getLevels()))
-        let URLSTR = urlstr
-        let url = NSURL(string: URLSTR)
+        let url = NSURL(string: urlstr)
         let request = NSMutableURLRequest(URL: url!, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
         request.HTTPMethod = "POST"
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
