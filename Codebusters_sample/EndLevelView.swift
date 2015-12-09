@@ -64,6 +64,7 @@ class EndLevelView: SKSpriteNode {
         userInteractionEnabled = true
 
         show()
+        NSNotificationCenter.defaultCenter().postNotificationName(kShowAdsNotificationKey, object: NotificationZombie.sharedInstance)
     }
     
     

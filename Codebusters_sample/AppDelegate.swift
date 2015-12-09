@@ -58,10 +58,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let stringToken = convertDeviceTokenToString(deviceToken)
         print(stringToken)
         NSUserDefaults.standardUserDefaults().setObject(stringToken, forKey: kDevicePushTokenKey)
+        
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         print("Error registering token")
+        let stringToken = "null"
+        NSUserDefaults.standardUserDefaults().setObject(stringToken, forKey: kDevicePushTokenKey)
         print(error.localizedDescription)
     }
     
@@ -79,4 +82,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return deviceTokenStr
         
     }
+
 }

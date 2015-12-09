@@ -21,12 +21,13 @@
 #define kPauseQuitNotificationKey "PauseQuit"
 #define kApplicationWillTerminateKey "TerminateQuit"
 #define kIfLastLevelInPack "LastLevelInPack"
+#define kShowAdsNotificationKey "showAdsAtTheEnd"
 //action keys
 #define kTerminateApplicationKey "terminateApplication"
 //name keys
 #define kDeviceIDKey "deviceID"
 #define kNeedUpdatesKey "needUpdates"
-#define kPushTokenIsSentToServer "tokenSent"
+
 
 
 
