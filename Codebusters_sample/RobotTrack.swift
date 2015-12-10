@@ -13,8 +13,8 @@ class RobotTrack {
     private var track: [RobotStanding] = []
     private var currentRobotPosition = 0
     private var startRobotPosition = 0
-    private var detailPosition = 0
-    private var detailFloorPosition = FloorPosition.first
+    var detailPosition = 0
+    var detailFloorPosition = FloorPosition.first
     
     init() {
         getCurrentLevelTrackInfo()
@@ -62,16 +62,31 @@ class RobotTrack {
                 track.append(RobotStanding(trackPosition: i + 1, floorPosition: floor))
             }
         }
-        track.append(RobotStanding(trackPosition: track.count, floorPosition: .ground))
     }
 
     func canPerformActionWithDirection(action: ActionType, direction: Direction) -> Bool {
         switch action {
         case .move:
+            if currentRobotPosition + direction.rawValue < 0 || currentRobotPosition + direction.rawValue >= track.count {
+                return false
+            }
+            
             return ((track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue) && (track[getNextRobotTrackPosition(direction)].getFloorPosition() != .ground))
         case .jump:
+            if currentRobotPosition + direction.rawValue < 0 || currentRobotPosition + direction.rawValue >= track.count {
+                return false
+            }
+            
             return track[currentRobotPosition].getFloorPosition() != .ground && track[getNextRobotTrackPosition(direction)].getFloorPosition() != .ground
         case .push:
+            if currentRobotPosition + 2 * direction.rawValue < 0 {
+                return false
+            }
+            
+            if currentRobotPosition + 2 * direction.rawValue >= track.count {
+                track.append(RobotStanding(trackPosition: track.count, floorPosition: .ground))
+            }
+            
             if detailPosition == currentRobotPosition + 2 * direction.rawValue && detailFloorPosition == track[currentRobotPosition + 2 * direction.rawValue].getFloorPosition() {
                 return false
             }

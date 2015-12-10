@@ -30,7 +30,7 @@ class ActionCell: SKSpriteNode {
 
         addChild(cellBackground)
         position = getNextPosition()
-        zPosition = 1003
+        zPosition = 2001
         ActionCell.cells.append(self)
         alpha = 0
         runAction(SKAction.fadeInWithDuration(0.2))

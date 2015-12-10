@@ -397,7 +397,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         background.addChild(createLabel("ПОСЛЕ ЗАПУСКА", fontColor: UIColor.whiteColor(), fontSize: 23, position: CGPoint(x: 1773, y: 1296)))
         
         addChild(button_Pause)
-        button_Pause.zPosition = 2500
+        button_Pause.zPosition = 3001
         addChild(button_Start)
         addChild(button_Tips)
         addChild(button_Restart)

@@ -21,25 +21,13 @@ enum DetailType: String {
 
 class Detail: SKSpriteNode {
     private var detailType = DetailType.Crystall
-    private var trackPosition = 0
-    private var floorPosition = FloorPosition.first
-    private var startPosition: CGPoint?
+    private var startPosition = CGPointZero
     private weak var track: RobotTrack?
     
     init(track: RobotTrack) {
         self.track = track
         
         let levelData = GameProgress.sharedInstance.getCurrentLevelData()
-        
-        if let position = levelData["detailPosition"] as? Int {
-            trackPosition = position
-        }
-        
-        if let detailFloorPositionInt = levelData["detailFloorPosition"] as? Int {
-            if let floor = FloorPosition(rawValue: detailFloorPositionInt) {
-                floorPosition = floor
-            }
-        }
         
         if let detailTypeString  = levelData["detailType"] as? String {
             if let type = DetailType(rawValue: detailTypeString) {
@@ -52,8 +40,9 @@ class Detail: SKSpriteNode {
         
         super.init(texture: texture, color: UIColor(), size: texture.size())
         
-        position = getCGPointOfPosition(trackPosition, floorPosition: floorPosition)
-        if !(track.getFloorPositionAt(trackPosition).rawValue < floorPosition.rawValue) {
+        let floorPosition = getFloorPosition()
+        position = getCGPointOfPosition(getTrackPosition(), floorPosition: floorPosition)
+        if !(track.getFloorPositionAt(getTrackPosition()).rawValue < floorPosition.rawValue) {
             zPosition = CGFloat(6 * floorPosition.rawValue + 1)
         } else {
             zPosition = CGFloat(5 * (floorPosition.rawValue + 1))
@@ -86,7 +75,7 @@ class Detail: SKSpriteNode {
     
     func move() {
         if !hasActions() {
-            let moveUp = SKAction.moveTo(startPosition!, duration: 1)
+            let moveUp = SKAction.moveTo(startPosition, duration: 1)
             let moveDown = SKAction.moveByX(0, y: -100, duration: 1)
             let sequence = SKAction.sequence([moveDown, moveUp])
             runAction(SKAction.repeatActionForever(sequence))
@@ -95,8 +84,8 @@ class Detail: SKSpriteNode {
     
     func fixPosition() {
         removeAllActions()
-        let time: NSTimeInterval = Double((startPosition!.y - position.y)/60 * 0.7)
-        runAction(SKAction.moveTo(startPosition!, duration: time))
+        let time: NSTimeInterval = Double((startPosition.y - position.y)/60 * 0.7)
+        runAction(SKAction.moveTo(startPosition, duration: time))
     }
     
     func getDetailType() -> DetailType {
@@ -104,11 +93,11 @@ class Detail: SKSpriteNode {
     }
     
     func getTrackPosition() -> Int {
-        return trackPosition
+        return track!.detailPosition
     }
     
     func getFloorPosition() -> FloorPosition {
-        return floorPosition
+        return track!.detailFloorPosition
     }
     
     required init?(coder aDecoder: NSCoder) {
