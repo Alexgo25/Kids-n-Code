@@ -25,7 +25,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     private var robotTookDetail = false
     private var debugging = false
     private var runningActions = false
-    private var currentTrackPosition = 0
+    private var currentTrackPosition = 0 // рассчитывается во время движения
     private var currentFloorPosition = FloorPosition.first
     
     private weak var detail: Detail?
