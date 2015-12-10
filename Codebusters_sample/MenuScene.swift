@@ -48,6 +48,19 @@ class MenuScene: SKScene {
         } else {
             showRobot(textString)
         }
+        
+        let garlandTexture = SKTexture(imageNamed: "garland1")
+        let garland = SKSpriteNode(texture: garlandTexture)
+        garland.anchorPoint = CGPointZero
+        garland.position = CGPoint(x: 808, y: 1369)
+        addChild(garland)
+        
+        let garlandTexture2 = SKTexture(imageNamed: "garland2")
+        let action1 = SKAction.setTexture(garlandTexture2)
+        let action2 = SKAction.setTexture(garlandTexture)
+        
+        let sequence = SKAction.sequence([SKAction.waitForDuration(1), action1, SKAction.waitForDuration(1), action2])
+        garland.runAction(SKAction.repeatActionForever(sequence))
     }
     
     func showFinalView() {
