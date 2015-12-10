@@ -85,7 +85,7 @@ struct Constants {
     static let Battery_EndLevelViewPosition = CGPoint(x: 1032.5, y: 889)
     
     static let Robot_FirstBlockPosition = CGPoint(x: 315, y: 760)
-    static let Block_FirstPosition = CGPoint(x: 125, y: 523)
+    static let Block_FirstPosition = CGPoint(x: 168, y: 389)
     static let BlockFace_Size = CGSize(width: 204, height: 203)
     static let GroundFloor = CGFloat(561)
     static let FirstFloor = CGFloat(734)
@@ -93,7 +93,7 @@ struct Constants {
 }
 
 func getXBlockPosition(trackPosition: Int) -> CGFloat {
-    return Constants.Block_FirstPosition.x + CGFloat(trackPosition) * Constants.BlockFace_Size.width
+    return Constants.Block_FirstPosition.x + (CGFloat(trackPosition) - 1) * Constants.BlockFace_Size.width
 }
 
 func getYBlockPosition(floorPosition: FloorPosition) -> CGFloat {

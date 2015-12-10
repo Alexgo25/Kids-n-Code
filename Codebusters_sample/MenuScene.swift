@@ -59,7 +59,7 @@ class MenuScene: SKScene {
         let action1 = SKAction.setTexture(garlandTexture2)
         let action2 = SKAction.setTexture(garlandTexture)
         
-        let sequence = SKAction.sequence([SKAction.waitForDuration(1), action1, SKAction.waitForDuration(1), action2])
+        let sequence = SKAction.sequence([SKAction.waitForDuration(1.5), action1, SKAction.waitForDuration(1.5), action2])
         garland.runAction(SKAction.repeatActionForever(sequence))
     }
     

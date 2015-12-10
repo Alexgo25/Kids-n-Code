@@ -44,7 +44,7 @@ class RobotTrack {
     }
     
     func trackLength(scale: CGFloat) -> CGFloat {
-        return CGFloat(track.count) * Constants.BlockFace_Size.width * scale
+        return (CGFloat(track.count) + 1) * Constants.BlockFace_Size.width * scale
     }
     
     func deleteBlocks() {
