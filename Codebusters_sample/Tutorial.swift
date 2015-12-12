@@ -26,7 +26,8 @@ public class Tutorial: SKSpriteNode {
         
         sliderNode = SKSpriteNode(texture: nil, color: UIColor.clearColor(), size: CGSize())
         sliderNode.position = CGPoint(x: 940, y: 80)
-
+        sliderNode.zPosition = 1
+        
         switch tutorialNumber {
         case 1:
             firstSlide = 0
@@ -45,10 +46,11 @@ public class Tutorial: SKSpriteNode {
         for var i = firstSlide; i <= lastSlide; i++ {
             images.append(SKSpriteNode(imageNamed: "Tutorial_\(i)"))
             images[i - firstSlide].anchorPoint = CGPointZero
-            images[i - firstSlide].position = CGPoint(x: CGFloat(i - firstSlide) * images[0].size.width, y: 0)
-            let number = -((firstSlide + lastSlide)/2 - (i - firstSlide))
+            //images[i - firstSlide].position = CGPoint(x: CGFloat(i - firstSlide) * images[0].size.width, y: 0)
+            let number = -((lastSlide - firstSlide)/2 - (i - firstSlide))
             let sliderElement = SKSpriteNode(imageNamed: "Slider_NonActive")
             sliderElement.position = CGPoint(x: number * 60, y: 0)
+            sliderElement.name = "\(i - firstSlide)"
             slider.append(sliderElement)
             sliderNode.addChild(sliderElement)
         }
@@ -66,6 +68,7 @@ public class Tutorial: SKSpriteNode {
         slider[0].texture = SKTexture(imageNamed: "Slider_Active")
         
         anchorPoint = CGPointZero
+        userInteractionEnabled = true
         
         show()
     }
@@ -74,10 +77,6 @@ public class Tutorial: SKSpriteNode {
         alpha = 0
         slides.addChild(images[currentSlideIndex])
        
-        if currentSlideIndex + 1 < lastSlide - firstSlide {
-            slides.addChild(images[currentSlideIndex + 1])
-        }
-        
         runAction(SKAction.fadeInWithDuration(0.4))
     }
     
@@ -90,30 +89,50 @@ public class Tutorial: SKSpriteNode {
     }
     
     func showNextSlide(direction: Direction) {
-        let move = SKAction.moveByX(images[currentSlideIndex].size.width * CGFloat(direction.rawValue), y: 0, duration: 0.3)
-        slides.runAction(move, completion: {
-            self.slider[self.currentSlideIndex].texture = SKTexture(imageNamed: "Slider_NonActive")
-            if self.currentSlideIndex + direction.rawValue >= 0 && self.currentSlideIndex + direction.rawValue <= self.lastSlide - self.firstSlide {
-                self.images[self.currentSlideIndex + direction.rawValue].removeFromParent()
-            }
+        if currentSlideIndex == 0 && direction == .ToRight {
+            return
+        }
+        
+        showSlide(currentSlideIndex - direction.rawValue)
+    }
+    
+    func showSlide(number: Int) {
+        let direction = (number < currentSlideIndex) ? Direction.ToRight : Direction.ToLeft
             
-            if self.currentSlideIndex - direction.rawValue <= self.lastSlide - self.firstSlide && self.currentSlideIndex - direction.rawValue >= 0 {
-                self.slider[self.currentSlideIndex - direction.rawValue].texture = SKTexture(imageNamed: "Slider_Active")
-                self.currentSlideIndex -= direction.rawValue
-                if self.currentSlideIndex > 0 && self.currentSlideIndex < self.lastSlide - self.firstSlide {
-                    self.slides.addChild(self.images[self.currentSlideIndex - direction.rawValue])
-                }
-            } else {
+        if number <= lastSlide - firstSlide && number >= 0 {
+            slides.addChild(images[number])
+            images[number].position = CGPoint(x: -slides.position.x - 2048 * CGFloat(direction.rawValue), y: slides.position.y)
+        } else {
+            let moveSlides = SKAction.moveByX(2048 * CGFloat(direction.rawValue), y: 0, duration: 0.3)
+            slides.runAction(moveSlides, completion: {
                 self.hide()
+                return
+            })
+        }
+        
+        let moveSlides = SKAction.moveByX(2048 * CGFloat(direction.rawValue), y: 0, duration: 0.3)
+        slides.runAction(moveSlides, completion: {
+            self.images[self.currentSlideIndex].removeFromParent()
+            self.slider[self.currentSlideIndex].texture = SKTexture(imageNamed: "Slider_NonActive")
+            if number <= self.lastSlide - self.firstSlide && number >= 0 {
+                self.currentSlideIndex = number
+                self.slider[self.currentSlideIndex].texture = SKTexture(imageNamed: "Slider_Active")
             }
         })
     }
-    
+
     public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.locationInNode(self)
             if nodeAtPoint(touchLocation) == ok {
                 self.hide()
+                return
+            }
+            
+            if let name = nodeAtPoint(touchLocation).name {
+                if let number = Int(name) {
+                    showSlide(number)
+                }
             }
         }
     }
