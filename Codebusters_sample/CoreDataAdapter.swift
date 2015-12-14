@@ -11,13 +11,13 @@ import CoreData
 
 class CoreDataAdapter: NSObject {
     
-    class var sharedAdapter : CoreDataAdapter {
+    class var sharedAdapter: CoreDataAdapter {
         struct Singleton {
             static let sharedAdapter = CoreDataAdapter()
         }
+        
         return Singleton.sharedAdapter
     }
-    
     
     let coordinator: NSPersistentStoreCoordinator
     let model: NSManagedObjectModel

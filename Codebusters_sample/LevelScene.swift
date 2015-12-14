@@ -90,7 +90,6 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         })
 
     }
-
     
     override func didMoveToView(view: SKView) {
         userInteractionEnabled = true
@@ -235,6 +234,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     }
     
     func swipedLeft(swipe: UISwipeGestureRecognizer) {
+        
         let touchLocation = convertPointFromView(swipe.locationInView(view))
         let node = nodeAtPoint(touchLocation)
         

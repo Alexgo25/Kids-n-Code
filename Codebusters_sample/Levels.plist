@@ -138,8 +138,6 @@
 					<integer>1</integer>
 					<key>result_2</key>
 					<integer>2</integer>
-					<key>tutorial</key>
-					<integer>3</integer>
 				</dict>
 				<dict>
 					<key>blocksPattern</key>
@@ -288,6 +286,8 @@
 					<integer>3</integer>
 					<key>result_2</key>
 					<integer>4</integer>
+					<key>tutorial</key>
+					<integer>3</integer>
 				</dict>
 				<dict>
 					<key>blocksPattern</key>
