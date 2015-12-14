@@ -46,7 +46,7 @@ public class Tutorial: SKSpriteNode {
         for var i = firstSlide; i <= lastSlide; i++ {
             images.append(SKSpriteNode(imageNamed: "Tutorial_\(i)"))
             images[i - firstSlide].anchorPoint = CGPointZero
-            //images[i - firstSlide].position = CGPoint(x: CGFloat(i - firstSlide) * images[0].size.width, y: 0)
+            images[i - firstSlide].zPosition = -1
             let number = -((lastSlide - firstSlide)/2 - (i - firstSlide))
             let sliderElement = SKSpriteNode(imageNamed: "Slider_NonActive")
             sliderElement.position = CGPoint(x: number * 60, y: 0)
@@ -133,6 +133,10 @@ public class Tutorial: SKSpriteNode {
                 if let number = Int(name) {
                     showSlide(number)
                 }
+            }
+            
+            if nodeAtPoint(touchLocation) == slides {
+                showNextSlide(.ToLeft)
             }
         }
     }
