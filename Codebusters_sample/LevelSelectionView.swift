@@ -54,6 +54,16 @@ class LevelSelectionView: SKSpriteNode {
                     GameProgress.sharedInstance.setLevel(levelPackIndex, level: Int(battery.name!)!)
                     GameProgress.sharedInstance.newGame(scene!.view!)
                 }
+            } else if let battery = nodeAtPoint(touchLocation).parent as? Battery {
+                if battery.type.rawValue >= 0 {
+                    GameProgress.sharedInstance.setLevel(levelPackIndex, level: Int(battery.name!)!)
+                    GameProgress.sharedInstance.newGame(scene!.view!)
+                }
+            } else if let battery = nodeAtPoint(touchLocation).parent!.parent as? Battery {
+                if battery.type.rawValue >= 0 {
+                    GameProgress.sharedInstance.setLevel(levelPackIndex, level: Int(battery.name!)!)
+                    GameProgress.sharedInstance.newGame(scene!.view!)
+                }
             } else {
                 runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.2), SKAction.removeFromParent()]))
             }
