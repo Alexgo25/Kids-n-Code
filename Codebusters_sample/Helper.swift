@@ -11,11 +11,11 @@ import UIKit
 import SpriteKit
 
 enum ActionType: String {
-    case move = "Move",
-    turn = "Turn",
-    push = "Push",
-    jump = "Jump",
-    none = "none"
+    case Move
+    case Turn
+    case Push
+    case Jump
+    case None
 }
 
 enum FloorPosition: Int {
@@ -133,11 +133,11 @@ func getGameButtonPosition(type: GameButtonType) -> CGPoint {
 
 func getActionButtonPosition(actionType: ActionType) -> CGPoint {
     switch actionType {
-    case .move:
+    case .Move:
         return Constants.Button_MovePosition
-    case .turn:
+    case .Turn:
         return Constants.Button_TurnPosition
-    case .push:
+    case .Push:
         return Constants.Button_PushPosition
     default:
         return Constants.Button_JumpPosition
