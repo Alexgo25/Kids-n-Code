@@ -48,6 +48,7 @@ class LevelSelectionView: SKSpriteNode {
         for touch in touches {
             AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
             let touchLocation = touch.locationInNode(self)
+            
             if let battery = nodeAtPoint(touchLocation) as? Battery {
                 if battery.type.rawValue >= 0 {
                     GameProgress.sharedInstance.setLevel(levelPackIndex, level: Int(battery.name!)!)
@@ -100,32 +101,27 @@ internal class Battery: SKSpriteNode {
     
     init(type: Type) {
         self.type = type
-        super.init(texture: nil, color: SKColor.clearColor(), size: CGSize())
+
+        let texture = type.rawValue < 0 ? SKTexture(imageNamed: "battery_0") : SKTexture(imageNamed: "battery_\(type.rawValue)")
+        super.init(texture: texture, color: UIColor(), size: texture.size())
         
         name = String(Int(Battery.count))
         Battery.count++
         zPosition = 1003
         
-        var battery = SKSpriteNode(imageNamed: "battery_\(type.rawValue)")
-        
-        if type.rawValue < 0 {
-            battery = SKSpriteNode(imageNamed: "battery_0")
-        }
-        
-        battery.zPosition = -1002
-        
         if type.rawValue > 0 {
-            battery.setScale(1/2.78)
+            setScale(1/2.78)
         }
         
-        addChild(battery)
+        
         
         switch type {
         case .Excellent, .Good, .Bad:
             let number = SKSpriteNode(imageNamed: "nonActive")
             number.zPosition = -1002
             number.addChild(createLabel(String(Int(Battery.count)), fontColor: SKColor(red: 255/255.0, green: 251/255.0, blue: 233/255.0, alpha: 1), fontSize: 36, position: CGPointZero))
-            number.position.y = 114
+            number.position.y = 114 * 2.78
+            number.setScale(2.78)
             addChild(number)
         case .Opened:
             let number = SKSpriteNode(imageNamed: "active")

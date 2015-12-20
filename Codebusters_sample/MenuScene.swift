@@ -10,13 +10,11 @@ import UIKit
 import SpriteKit
 
 class MenuScene: SKScene {
-    
     let background = SKSpriteNode(imageNamed: "menuBackground")
     let textString: String
     let keyboard = SKSpriteNode(imageNamed: "keyboard")
     let screen = SKSpriteNode(imageNamed: "activeScreen")
     let finalView = SKSpriteNode(imageNamed: "finalView")
-    
     
     var details: [DetailCell] = []
 
@@ -90,7 +88,7 @@ class MenuScene: SKScene {
                 let levelData = GameProgress.sharedInstance.getCurrentLevelData()
                 if let detailTypeString  = levelData["detailType"] as? String {
                     if let type = DetailType(rawValue: detailTypeString) {
-                        showRobot("\(type.rawValue)_Text")
+                        showRobot("\(type)_Text")
                     }
                 }
 

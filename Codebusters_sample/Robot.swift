@@ -12,6 +12,15 @@ import SpriteKit
 enum Direction: Int {
     case ToRight = 1,
     ToLeft = -1
+    
+    mutating func toggle() {
+        switch self {
+        case ToRight:
+            self = ToLeft
+        case ToLeft:
+            self = ToRight
+        }
+    }
 }
 
 class Robot: SKSpriteNode, SKPhysicsContactDelegate {
@@ -31,7 +40,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     private weak var detail: Detail?
     private weak var track: RobotTrack?
     
-    private let actionButtons = [ActionButton(type: .move), ActionButton(type: .turn), ActionButton(type: .push), ActionButton(type: .jump)]
+    private let actionButtons = [ActionButton(type: .Move), ActionButton(type: .Turn), ActionButton(type: .Push), ActionButton(type: .Jump)]
     var isOnStart = true
     
     init(track: RobotTrack, detail: Detail) {
@@ -77,13 +86,13 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             let highlightEndAction = ActionCell.cells[actions.count].highlightEnd()
             var action: SKAction
             switch actionType {
-            case .move:
+            case .Move:
                 action = move()
-            case .turn:
+            case .Turn:
                 action = turn()
-            case .jump:
+            case .Jump:
                 action = jump(false)
-            case .push:
+            case .Push:
                 action = push()
             default:
                 return false
@@ -318,7 +327,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         let changeAnimationDirection = SKAction.runBlock() {
             self.changeAnimationDirection()
         }
-        changeDirection()
+        direction.toggle()
         
         let action = SKAction.group([changeAnimationDirection, sound, animate])
         return action
@@ -456,14 +465,6 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     
     func getDirection() -> Direction {
         return direction
-    }
-    
-    func changeDirection() {
-        if direction == .ToRight {
-            direction = .ToLeft
-        } else {
-            direction = .ToRight
-        }
     }
     
     func changeAnimationDirection() {

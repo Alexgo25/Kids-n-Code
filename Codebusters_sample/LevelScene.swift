@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
+class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate, GameButtonNodeResponderType {
     let background = SKNode()
     let trackLayer = SKNode()
     var touchesToRecord: [String] = []
@@ -74,7 +74,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         var strings : [String!] = []
         for cell in ActionCell.cells {
             strings.append(cell.getActionType().rawValue)
-            print(cell.getActionType().rawValue)
+            print(cell.getActionType())
         }
         let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
         CoreDataAdapter.sharedAdapter.addNewLevel(thisLevelNumber!, levelPackNumber: thisLevelPackNumber!, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
@@ -242,13 +242,15 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
                 //print("deleteCellSwipeRight")
             }
         }
-
-        if let tutorial = node as? Tutorial {
-            tutorial.showNextSlide(.ToLeft)
-            //Analytics->record showNextSlideSwipe
-            //touchesToRecord.append("showNextTutorialSlideSwipe")
-            TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
-            //print("showNextTutorialSlideSwipe")
+        
+        if let slide = node as? SKSpriteNode where node.parent!.parent!.isMemberOfClass(Tutorial) {
+            if let tutorial = slide.parent!.parent as? Tutorial {
+                tutorial.showNextSlide(.ToLeft)
+                //Analytics->record showNextSlideSwipe
+                //touchesToRecord.append("showNextTutorialSlideSwipe")
+                TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
+                //print("showNextTutorialSlideSwipe")
+            }
         }
     }
     
@@ -266,12 +268,14 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             }
         }
         
-        if let tutorial = node as? Tutorial {
-            tutorial.showNextSlide(.ToRight)
-            //Analytics->record showNextSlideSwipe
-            //touchesToRecord.append("showNextTutorialSlideSwipe")
-            TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
-            //print("showNextTutorialSlideSwipe")
+        if let slide = node as? SKSpriteNode where node.parent!.parent!.isMemberOfClass(Tutorial) {
+            if let tutorial = slide.parent!.parent as? Tutorial {
+                tutorial.showNextSlide(.ToRight)
+                //Analytics->record showNextSlideSwipe
+                //touchesToRecord.append("showNextTutorialSlideSwipe")
+                TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
+                //print("showNextTutorialSlideSwipe")
+            }
         }
     }
     
@@ -478,6 +482,41 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         
         let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: Selector("handlePinchFrom:"))
         view!.addGestureRecognizer(pinchRecognizer)
+    }
+    
+    func buttonPressed(button: GameButton) {
+        switch button.gameButtonType {
+        case .Start:
+            checkRobotPosition()
+            robot.performActions()
+        case .Pause:
+            pauseGame()
+        case .Tips:
+            if !robot.isRunningActions() {
+                addChild(Tutorial(tutorialNumber: 0))
+            }
+        case .Clear:
+            enumerateChildNodesWithName("clear") {
+                node, stop in
+                node.removeFromParent()
+            }
+            ActionCell.resetCellTextures()
+            track.deleteBlocks()
+            detail.removeFromParent()
+            robot.removeFromParent()
+            trackLayer.removeFromParent()
+            track = RobotTrack()
+            detail = Detail(track: track)
+            robot = Robot(track: track, detail: detail)
+            
+            createTrackLayer()
+        case .Debug:
+            robot.debug()
+        case .Restart:
+            GameProgress.sharedInstance.newGame(view!)
+        default:
+            return
+        }
     }
     
     override func update(currentTime: CFTimeInterval) {

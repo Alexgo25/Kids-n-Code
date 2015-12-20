@@ -21,7 +21,7 @@ class DetailCell: SKSpriteNode {
     
     init(detailType: DetailType, cellState: DetailCellState, name: String) {
         let atlas = SKTextureAtlas(named: "Details")
-        let texture = atlas.textureNamed("Detail_\(detailType.rawValue)")
+        let texture = atlas.textureNamed("Detail_\(detailType)")
         self.cellState = cellState
         self.detailType = detailType
         

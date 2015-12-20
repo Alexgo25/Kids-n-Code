@@ -21,7 +21,7 @@ class ActionCell: SKSpriteNode {
     
     init(actionType: ActionType) {
         let atlas = SKTextureAtlas(named: "ActionCells")
-        let texture = atlas.textureNamed("ActionCell_\(actionType.rawValue)")
+        let texture = atlas.textureNamed("ActionCell_\(actionType)")
         cellBackground = SKSpriteNode(texture: texture)
         cellBackground.zPosition = -2
         self.actionType = actionType
@@ -50,14 +50,14 @@ class ActionCell: SKSpriteNode {
     func highlightBegin() -> SKAction {
         let atlas = SKTextureAtlas(named: "ActionCells")
         return SKAction.runBlock() {
-            self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType.rawValue)_Highlighted")
+            self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType)_Highlighted")
         }
     }
     
     func highlightEnd() -> SKAction {
         let atlas = SKTextureAtlas(named: "ActionCells")
         return SKAction.runBlock() {
-            self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType.rawValue)")
+            self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType)")
         }
     }
     
@@ -65,13 +65,13 @@ class ActionCell: SKSpriteNode {
         let label = SKLabelNode(fontNamed: "Ubuntu Bold")
         
         switch actionType {
-        case .move:
+        case .Move:
             label.text = "ШАГНУТЬ"
-        case .jump:
+        case .Jump:
             label.text = "ПРЫГНУТЬ"
-        case .turn:
+        case .Turn:
             label.text = "ПОВЕРНУТЬСЯ"
-        case .push:
+        case .Push:
             label.text = "ТОЛКНУТЬ"
         default:
             label.text = ""
@@ -87,7 +87,7 @@ class ActionCell: SKSpriteNode {
     static func resetCellTextures() {
         let atlas = SKTextureAtlas(named: "ActionCells")
         for cell in cells {
-            cell.cellBackground.texture = atlas.textureNamed("ActionCell_\(cell.actionType.rawValue)")
+            cell.cellBackground.texture = atlas.textureNamed("ActionCell_\(cell.actionType)")
         }
     }
     

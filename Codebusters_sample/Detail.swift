@@ -10,13 +10,13 @@ import SpriteKit
 import UIKit
 
 enum DetailType: String {
-    case Battery = "Battery",
-    CPU = "CPU",
-    Fan = "Fan",
-    HardDrive = "HardDrive",
-    RAM1 = "RAM1",
-    RAM2 = "RAM2",
-    Crystall = "Crystall"
+    case Battery
+    case CPU
+    case Fan
+    case HardDrive
+    case RAM1
+    case RAM2
+    case Crystall
 }
 
 class Detail: SKSpriteNode {
@@ -36,7 +36,7 @@ class Detail: SKSpriteNode {
         }
         
         let atlas = SKTextureAtlas(named: "Details")
-        let texture = atlas.textureNamed("Detail_\(detailType.rawValue)")
+        let texture = atlas.textureNamed("Detail_\(detailType)")
         
         super.init(texture: texture, color: UIColor(), size: texture.size())
         

@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class EndLevelView: SKSpriteNode {
+class EndLevelView: SKSpriteNode, GameButtonNodeResponderType {
     private let buttonRestart = GameButton(type: .Restart_EndLevelView)
     private let buttonNextLevel = GameButton(type: .NextLevel_EndLevelView)
     private let buttonExit = GameButton(type: .Exit_EndLevelView)
@@ -42,7 +42,7 @@ class EndLevelView: SKSpriteNode {
         
         let battery = SKSpriteNode(texture: batteryTexture)
         
-        zPosition = 3000
+        zPosition = 4000
 
         anchorPoint = CGPointZero
         
@@ -70,25 +70,20 @@ class EndLevelView: SKSpriteNode {
         runAction(appear)
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            let touchLocation = touch.locationInNode(self)
-            let node = nodeAtPoint(touchLocation)
-            switch node {
-            case buttonRestart:
-                GameProgress.sharedInstance.newGame(scene!.view!)
-            case buttonNextLevel:
-                GameProgress.sharedInstance.setNextLevel()
-                GameProgress.sharedInstance.newGame(scene!.view!)
-                
-            case buttonExit:
-                GameProgress.sharedInstance.goToMenu(scene!.view!)
-            default:
-                return
-            }
+    func buttonPressed(button: GameButton) {
+        switch button.gameButtonType {
+        case .Restart_EndLevelView:
+            GameProgress.sharedInstance.newGame(scene!.view!)
+        case .NextLevel_EndLevelView:
+            GameProgress.sharedInstance.setNextLevel()
+            GameProgress.sharedInstance.newGame(scene!.view!)
+        case .Exit_EndLevelView:
+            GameProgress.sharedInstance.goToMenu(scene!.view!)
+        default:
+            return
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
