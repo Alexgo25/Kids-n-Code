@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class PauseView: SKSpriteNode {
+class PauseView: SKSpriteNode, GameButtonNodeResponderType {
     private let backgroundLeftPart = SKSpriteNode(imageNamed: "pauseBackgroundLeftPart")
     private let backgroundRightPart = SKSpriteNode(imageNamed: "pauseBackgroundRightPart")
     
@@ -66,6 +66,8 @@ class PauseView: SKSpriteNode {
     }
     
     func hide() {
+        weak var scene = self.scene as? LevelScene
+        scene!.background.paused = false
         TouchesAnalytics.sharedInstance.appendTouch("returnFromPause")
         let disappear = SKAction.fadeOutWithDuration(0.15)
         let moveLeftPart = SKAction.moveByX(-backgroundLeftPart.size.width, y: 0, duration: 0.15)
@@ -75,6 +77,7 @@ class PauseView: SKSpriteNode {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
         for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
@@ -87,12 +90,23 @@ class PauseView: SKSpriteNode {
                 GameProgress.sharedInstance.goToMenu(scene!.view!)
             case buttonContinue, backgroundRightPart:
                 hide()
-                weak var scene = self.scene as? LevelScene
-                scene!.background.paused = false
-            default:
-                return
             }
         }
+    }
+    
+    func buttonPressed(button: GameButton) {
+        switch button.gameButtonType {
+        case .Restart_PauseView:
+            GameProgress.sharedInstance.newGame(scene!.view!)
+        case .Exit_PauseView:
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+            GameProgress.sharedInstance.goToMenu(scene!.view!)
+        case .Continue_PauseView:
+            hide()
+        default:
+            return
+        }
+
     }
     
     required init?(coder aDecoder: NSCoder) {

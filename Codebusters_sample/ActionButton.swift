@@ -11,13 +11,13 @@ import SpriteKit
 
 class ActionButton: SKSpriteNode {
 
-    private var actionType: ActionType = .none
+    private var actionType: ActionType = .None
     private let label = SKLabelNode(fontNamed: "Ubuntu Bold")
     private let atlas = SKTextureAtlas(named: "ActionButtons")
     
     
     init(type: ActionType) {
-        let texture = atlas.textureNamed("ActionButton_\(type.rawValue)")
+        let texture = atlas.textureNamed("ActionButton_\(type)")
         
         super.init(texture: texture, color: UIColor(), size: texture.size())
         actionType = type
@@ -25,7 +25,7 @@ class ActionButton: SKSpriteNode {
         userInteractionEnabled = true
         setScale(1)
         showLabel()
-        name = "ActionButton_\(type.rawValue)"
+        name = "ActionButton_\(type)"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -54,7 +54,7 @@ class ActionButton: SKSpriteNode {
     }
     
     func tapBegan() {
-        texture = atlas.textureNamed("ActionButton_\(actionType.rawValue)_Highlighted")
+        texture = atlas.textureNamed("ActionButton_\(actionType)_Highlighted")
         runAction(SKAction.scaleTo(1.12, duration: 0.1))
         label.runAction(SKAction.scaleTo(0.9, duration: 0.1))
     }
@@ -62,7 +62,7 @@ class ActionButton: SKSpriteNode {
     func tapEnded() {
         runAction(SKAction.scaleTo(1, duration: 0.1))
         label.runAction(SKAction.scaleTo(1, duration: 0.1))
-        texture = atlas.textureNamed("ActionButton_\(actionType.rawValue)")
+        texture = atlas.textureNamed("ActionButton_\(actionType)")
     }
     
     func showButton() {
@@ -78,19 +78,19 @@ class ActionButton: SKSpriteNode {
     
     func showLabel() {
         switch actionType {
-        case .move:
+        case .Move:
             label.text = "ШАГНУТЬ"
             label.position = CGPoint(x: -8, y: 75)
             zPosition = 11
-        case .turn:
+        case .Turn:
             label.text = "ПОВЕРНУТЬСЯ"
             label.position = CGPoint(x: -35, y: 75)
             zPosition = 10
-        case .push:
+        case .Push:
             label.text = "ТОЛКНУТЬ"
             label.position = CGPoint(x: 8, y: 75)
             zPosition = 10
-        case .jump:
+        case .Jump:
             label.text = "ПРЫГНУТЬ"
             label.position = CGPoint(x: 15, y: 75)
             zPosition = 11

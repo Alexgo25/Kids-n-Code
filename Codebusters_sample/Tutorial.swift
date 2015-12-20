@@ -56,7 +56,7 @@ public class Tutorial: SKSpriteNode {
         }
         
         ok = GameButton(type: .Ok)
-        ok.zPosition = 0
+        ok.zPosition = 1
         
         super.init(texture: nil, color: SKColor.clearColor(), size: CGSize())
         zPosition = 3000
@@ -76,7 +76,7 @@ public class Tutorial: SKSpriteNode {
     private func show() {
         alpha = 0
         slides.addChild(images[currentSlideIndex])
-       
+
         runAction(SKAction.fadeInWithDuration(0.4))
     }
     
@@ -97,6 +97,7 @@ public class Tutorial: SKSpriteNode {
     }
     
     func showSlide(number: Int) {
+        texture = nil
         let direction = (number < currentSlideIndex) ? Direction.ToRight : Direction.ToLeft
             
         if number <= lastSlide - firstSlide && number >= 0 {

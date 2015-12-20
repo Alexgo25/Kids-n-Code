@@ -6,95 +6,113 @@
 //  Copyright (c) 2015 Kids'n'Code. All rights reserved.
 //
 
-import UIKit
 import SpriteKit
 
+protocol GameButtonNodeResponderType: class {
+    func buttonPressed(button: GameButton)
+}
+
 enum GameButtonType: String {
-    case Pause = "Pause",
-    Tips = "Tips",
-    Debug = "Debug",
-    Clear = "Clear",
-    Start = "Start",
-    Restart = "Restart",
-    Restart_PauseView = "Restart_PauseView",
-    Continue_PauseView = "Continue_PauseView",
-    Exit_PauseView = "Exit_PauseView",
-    Exit_EndLevelView = "Exit_EndLevelView",
-    Restart_EndLevelView = "Restart_EndLevelView",
-    NextLevel_EndLevelView = "NextLevel_EndLevelView",
-    Ok = "Ok"
+    case Pause
+    case Tips
+    case Debug
+    case Clear
+    case Start
+    case Restart
+    case Restart_PauseView
+    case Continue_PauseView
+    case Exit_PauseView
+    case Exit_EndLevelView
+    case Restart_EndLevelView
+    case NextLevel_EndLevelView
+    case Ok
 }
 
 class GameButton: SKSpriteNode {
-    private var background: SKSpriteNode
-    private let gameButtonType: GameButtonType
+    let gameButtonType: GameButtonType
+    
+    var responder: GameButtonNodeResponderType {
+        guard let responder = parent as? GameButtonNodeResponderType else { fatalError() }
+        return responder
+    }
+    
+    var isTouched = false {
+        didSet {
+            guard oldValue != isTouched else { return }
+
+            let textureString = isTouched ? "GameButton_\(gameButtonType)_Pressed" : "GameButton_\(gameButtonType)"
+            let texture = SKTexture(imageNamed: textureString)
+            let action = SKAction.setTexture(texture)
+            runAction(action)
+        }
+    }
     
     init(type: GameButtonType) {
         let atlas = SKTextureAtlas(named: "GameButtons")
-        let texture = atlas.textureNamed("GameButton_\(type.rawValue)")
-        background = SKSpriteNode(texture: texture)
-        background.zPosition = -2
+        let texture = atlas.textureNamed("GameButton_\(type)")
         
         gameButtonType = type
         
-        super.init(texture: nil, color: UIColor(), size: CGSize())
+        super.init(texture: texture, color: UIColor(), size: texture.size())
         position = getGameButtonPosition(type)
-        zPosition = 1003
+        zPosition = 1002
         
         userInteractionEnabled = true
-        name = "GameButton_\(type.rawValue)"
         
-        addChild(background)
+        name = "GameButton_\(type.rawValue)"
+
+        guard gameButtonType == .Continue_PauseView || gameButtonType == .Exit_PauseView || gameButtonType == .Restart_PauseView else { return }
+        
+        let label = createLabel("", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero)
         
         switch gameButtonType {
         case .Continue_PauseView:
-            let label = createLabel("ПРОДОЛЖИТЬ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero)
-            label.zPosition = -1
-            addChild(label)
+            label.text = "ПРОДОЛЖИТЬ"
         case .Exit_PauseView:
-            let label = createLabel("ВЫЙТИ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero)
-            label.zPosition = -1
-            addChild(label)
+            label.text = "ВЫЙТИ"
         case .Restart_PauseView:
-            let label = createLabel("ЗАНОВО", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero)
-            label.zPosition = -1
-            addChild(label)
+            label.text = "ЗАНОВО"
         default:
             break
+        }
+    
+        addChild(label)
+    }
+    
+    func buttonPressed() {
+        if userInteractionEnabled {
+            responder.buttonPressed(self)
         }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        touched()
+        super.touchesBegan(touches, withEvent: event)
+        
+        isTouched = true
+        AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            weak var parent = self.parent
-            let touchLocation = touch.locationInNode(parent!)
-            if containsPoint(touchLocation) {
-                parent!.touchesEnded(touches, withEvent: event)
-            }
-            parent = nil
-            resetTexture()
+        super.touchesBegan(touches, withEvent: event)
+        
+        isTouched = false
+        if containsTouches(touches) {
+            buttonPressed()
         }
     }
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        resetTexture()
+        super.touchesCancelled(touches, withEvent: event)
     }
     
-    func touched() {
-        AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
-        let atlas = SKTextureAtlas(named: "GameButtons")
-        let texture = atlas.textureNamed("GameButton_\(gameButtonType.rawValue)_Pressed")
-        background.texture = texture
-    }
-    
-    func resetTexture() {
-        let atlas = SKTextureAtlas(named: "GameButtons")
-        let texture = atlas.textureNamed("GameButton_\(gameButtonType.rawValue)")
-        background.texture = texture
+    func containsTouches(touches: Set<UITouch>) -> Bool {
+        guard let scene = parent else { fatalError() }
+        
+        return touches.contains { touch in
+            let touchLocation = touch.locationInNode(scene)
+            let touchedNode = scene.nodeAtPoint(touchLocation)
+            return touchedNode === self || touchedNode.inParentHierarchy(self)
+        }
     }
     
     func getActionType() -> GameButtonType {
