@@ -90,6 +90,8 @@ class PauseView: SKSpriteNode, GameButtonNodeResponderType {
                 GameProgress.sharedInstance.goToMenu(scene!.view!)
             case buttonContinue, backgroundRightPart:
                 hide()
+            default:
+                break
             }
         }
     }
@@ -99,7 +101,7 @@ class PauseView: SKSpriteNode, GameButtonNodeResponderType {
         case .Restart_PauseView:
             GameProgress.sharedInstance.newGame(scene!.view!)
         case .Exit_PauseView:
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+            NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
             GameProgress.sharedInstance.goToMenu(scene!.view!)
         case .Continue_PauseView:
             hide()

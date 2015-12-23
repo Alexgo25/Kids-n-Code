@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
+class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate, GameButtonNodeResponderType {
 
     let background = SKNode()
     let trackLayer = SKNode()
