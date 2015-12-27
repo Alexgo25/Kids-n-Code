@@ -12,6 +12,8 @@ import GoogleMobileAds
 
 
 
+var sceneManager: SceneManager!
+
 class GameViewController: UIViewController {
     
     var interstitial: GADInterstitial!

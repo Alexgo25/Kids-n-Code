@@ -14,9 +14,6 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     let background = SKNode()
     let trackLayer = SKNode()
     var touchesToRecord: [String] = []
-    //level info
-    let thisLevelNumber: Int?
-    let thisLevelPackNumber: Int?
     
     let levelBackground1 = SKSpriteNode(imageNamed: "levelBackground1")
     let levelBackground2 = SKSpriteNode(imageNamed: "levelBackground2")
@@ -34,19 +31,35 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
     var selectedNode: SKNode?
     
-    let playAreaSize: CGSize
+    var playAreaSize: CGSize!
     var canScaleBackground = true
     
-    override init(size: CGSize) {
-        track = RobotTrack()
-        detail = Detail(track: track)
+    override var overlay: SKSpriteNode? {
+        willSet {
+            if let overlay = overlay as? PauseView {
+                background.paused = false
+                overlay.hide()
+            }
+            
+            if ((newValue?.isMemberOfClass(EndLevelView)) != nil) {
+                background.paused = false
+            }
+
+            if let overlay = overlay as? Tutorial {
+                overlay.hide()
+            }
+            else {
+                print(overlay)
+            }
+        }
+    }
+    
+    init(levelInfo: LevelConfiguration) {
+        self.levelInfo = levelInfo
+        track = RobotTrack(levelInfo: levelInfo)
+        detail = Detail(track: track, levelInfo: levelInfo)
         robot = Robot(track: track, detail: detail)
-        
-        playAreaSize = CGSize(width: size.width - levelBackground2.size.width, height: size.height)
-        thisLevelNumber = GameProgress.sharedInstance.getCurrentLevelNumber()
-        thisLevelPackNumber = GameProgress.sharedInstance.getCurrentLevelPackNumber()
-        
-        super.init(size: size)
+        super.init()
         
         //Listening to notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name: kRobotTookDetailNotificationKey, object: robot)
@@ -92,11 +105,13 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     }
     
     override func didMoveToView(view: SKView) {
+        let size = sceneManager.size
+        playAreaSize = CGSize(width: size.width - levelBackground2.size.width, height: size.height)
+        
         userInteractionEnabled = true
         anchorPoint = CGPointZero
         physicsWorld.gravity = CGVectorMake(0, 0)
         physicsWorld.contactDelegate = self
-        
         
         ActionCell.cellsLayer.removeFromParent()
         addChild(ActionCell.cellsLayer)
@@ -112,11 +127,9 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         
         showDetailAndRobot()
         
-        if GameProgress.sharedInstance.getTutorialNumber() > 0 {
-            let number = GameProgress.sharedInstance.getTutorialNumber()
-            addChild(Tutorial(tutorialNumber: number))
-            
-            GameProgress.sharedInstance.removeTutorial()
+        if let tutorial = levelInfo.tutorial {
+            overlay = Tutorial(tutorialNumber: tutorial)
+            sceneManager.gameProgressManager.removeTutorial()
         }
     }
     
@@ -248,13 +261,15 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             }
         }
         
-        if let slide = node as? SKSpriteNode where node.parent!.parent!.isMemberOfClass(Tutorial) {
-            if let tutorial = slide.parent!.parent as? Tutorial {
-                tutorial.showNextSlide(.ToLeft)
-                //Analytics->record showNextSlideSwipe
-                //touchesToRecord.append("showNextTutorialSlideSwipe")
-                TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
-                //print("showNextTutorialSlideSwipe")
+        if let parent = node.parent {
+            if let parent = parent.parent where parent.isMemberOfClass(Tutorial) {
+                if let tutorial = parent as? Tutorial {
+                    tutorial.showNextSlide(.ToLeft)
+                    //Analytics->record showNextSlideSwipe
+                    //touchesToRecord.append("showNextTutorialSlideSwipe")
+                    TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
+                    //print("showNextTutorialSlideSwipe")
+                }
             }
         }
     }
@@ -272,14 +287,15 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
                 //print("deleteCellSwipeRight")
             }
         }
-        
-        if let slide = node as? SKSpriteNode where node.parent!.parent!.isMemberOfClass(Tutorial) {
-            if let tutorial = slide.parent!.parent as? Tutorial {
-                tutorial.showNextSlide(.ToRight)
-                //Analytics->record showNextSlideSwipe
-                //touchesToRecord.append("showNextTutorialSlideSwipe")
-                TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
-                //print("showNextTutorialSlideSwipe")
+        if let parent = node.parent {
+            if let parent = parent.parent where parent.isMemberOfClass(Tutorial) {
+                if let tutorial = parent as? Tutorial {
+                    tutorial.showNextSlide(.ToRight)
+                    //Analytics->record showNextSlideSwipe
+                    //touchesToRecord.append("showNextTutorialSlideSwipe")
+                    TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
+                    //print("showNextTutorialSlideSwipe")
+                }
             }
         }
     }
@@ -314,10 +330,8 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         case PhysicsCategory.Robot | PhysicsCategory.Detail:
             detail.hideDetail()
             robot.takeDetail()
-            if detail.getDetailType() != DetailType.Crystall {
-                GameProgress.sharedInstance.checkDetailCellState()
-            }
-            runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() { self.addChild(EndLevelView()) } ]))
+            sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
+            runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() { self.overlay = EndLevelView(levelInfo: self.levelInfo) } ]))
         default:
             return
         }
@@ -327,60 +341,8 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         for touch in touches {
             let touchLocation = touch.locationInNode(self)
             let node = nodeAtPoint(touchLocation)
-            if robot.isTurnedToFront() && !node.isMemberOfClass(ActionCell) {
+            if robot.isTurnedToFront && !node.isMemberOfClass(ActionCell) {
                 robot.runAction(robot.turnFromFront())
-            }
-        }
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            let touchLocation = touch.locationInNode(self)
-            let node = nodeAtPoint(touchLocation)
-            //touchesToRecord.append(node.name!)
-            if let name = node.name {
-                TouchesAnalytics.sharedInstance.appendTouch(name)
-            }
-            //print(node.name!)
-            switch node {
-            case button_Start:
-                checkRobotPosition()
-                //Analytics->record start button
-                robot.performActions()
-            case button_Pause:
-                //Analytics->record pause
-                pauseGame()
-            case button_Tips:
-                //Analytics->record tips
-                if !robot.isRunningActions() {
-                    addChild(Tutorial(tutorialNumber: 0))
-                }
-            case button_Clear:
-                enumerateChildNodesWithName("clear") {
-                    node, stop in
-                    node.removeFromParent()
-                }
-                
-                ActionCell.resetCellTextures()
-                track.deleteBlocks()
-                detail.removeFromParent()
-                robot.removeFromParent()
-                trackLayer.removeFromParent()
-                track = RobotTrack()
-                detail = Detail(track: track)
-                robot = Robot(track: track, detail: detail)
-                
-                createTrackLayer()
-                //Analytics->record clear button
-            case button_Debug:
-                //Analytics->record debug button
-                robot.debug()
-            case button_Restart:
-                //Analytics-->record Restart button
-                weak var view = self.view
-                GameProgress.sharedInstance.newGame(view!)
-            default:
-                return
             }
         }
     }
@@ -415,8 +377,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     
     func pauseGame() {
         background.paused = true
-        let pauseView = PauseView()
-        addChild(pauseView)
+        overlay = PauseView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -424,7 +385,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     }
     
     func checkRobotPosition(durationOfAnimation: NSTimeInterval = 0.4) {
-        let bound: CGFloat = Constants.BlockFace_Size.width
+        let bound: CGFloat = Block.BlockFaceSize.width
         let robotPosition = trackLayer.position.x + robot.position.x
         
         if robotPosition < bound {
@@ -438,7 +399,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     }
     
     func showDetailAndRobot() {
-        let bound: CGFloat = Constants.BlockFace_Size.width
+        let bound: CGFloat = Block.BlockFaceSize.width
         let detailPosition = trackLayer.position.x + detail.position.x
         
         if detailPosition < bound {
@@ -489,38 +450,45 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         view!.addGestureRecognizer(pinchRecognizer)
     }
     
-    func buttonPressed(button: GameButton) {
-        switch button.gameButtonType {
-        case .Start:
-            checkRobotPosition()
-            robot.performActions()
-        case .Pause:
-            pauseGame()
-        case .Tips:
-            if !robot.isRunningActions() {
-                addChild(Tutorial(tutorialNumber: 0))
-            }
-        case .Clear:
-            enumerateChildNodesWithName("clear") {
-                node, stop in
-                node.removeFromParent()
-            }
-            ActionCell.resetCellTextures()
-            track.deleteBlocks()
-            detail.removeFromParent()
-            robot.removeFromParent()
-            trackLayer.removeFromParent()
-            track = RobotTrack()
-            detail = Detail(track: track)
-            robot = Robot(track: track, detail: detail)
+    override func buttonPressed(button: ButtonNode) {
+        if let gameButton = button as? GameButton {
+            switch gameButton.gameButtonType {
+            case .Start:
+                checkRobotPosition()
+                robot.performActions()
+            case .Pause:
+                pauseGame()
+            case .Tips:
+                if !robot.isRunningActions() {
+                    overlay = Tutorial(tutorialNumber: 0)
+                }
+            case .Clear:
+                enumerateChildNodesWithName("clear") {
+                    node, stop in
+                    node.removeFromParent()
+                }
+                ActionCell.resetCellTextures()
+                track.deleteBlocks()
+                detail.removeFromParent()
+                robot.removeFromParent()
+                trackLayer.removeFromParent()
+                track = RobotTrack(levelInfo: levelInfo)
+                detail = Detail(track: track, levelInfo: levelInfo)
+                robot = Robot(track: track, detail: detail)
             
-            createTrackLayer()
-        case .Debug:
-            robot.debug()
-        case .Restart:
-            GameProgress.sharedInstance.newGame(view!)
-        default:
-            return
+                createTrackLayer()
+            case .Debug:
+                robot.debug()
+            case .Continue_PauseView, .Ok:
+                overlay = nil
+            case .Exit_PauseView, .Exit_EndLevelView:
+                NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+                sceneManager.presentScene(.Menu)
+            case .Restart_PauseView, .Restart_EndLevelView, .Restart:
+                sceneManager.presentScene(.CurrentLevel)
+            case .NextLevel_EndLevelView:
+                sceneManager.presentScene(.NextLevel)
+            }
         }
     }
     

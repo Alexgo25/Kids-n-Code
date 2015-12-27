@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Kids'n'Code. All rights reserved.
 //
 
-import Foundation
 import SpriteKit
 
 enum Direction: Int {
@@ -24,18 +23,20 @@ enum Direction: Int {
 }
 
 class Robot: SKSpriteNode, SKPhysicsContactDelegate {
+    let FirstBlockPosition = CGPoint(x: 315, y: 760)
+    
     private var actions: [SKAction] = []
     private var currentActionIndex = 0
 
-    private var direction = Direction.ToRight // рассчитывается заранее
+    var direction = Direction.ToRight // рассчитывается заранее
     private var animationDirection = Direction.ToRight // рассчитывается во время движения
-    private var turnedToFront = false
+    var isTurnedToFront = false
     private var stopRobot = false
     private var robotTookDetail = false
     private var debugging = false
     private var runningActions = false
     private var currentTrackPosition = 0 // рассчитывается во время движения
-    private var currentFloorPosition = FloorPosition.first
+    private var currentFloorPosition = FloorPosition.First
     
     private weak var detail: Detail?
     private weak var track: RobotTrack?
@@ -123,7 +124,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                 isOnStart = false
                 
                 for cell in ActionCell.cells {
-                    if appendAction(cell.getActionType()) {
+                    if appendAction(cell.actionType) {
                         break
                     }
                 }
@@ -132,7 +133,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                 
                 var sequence = [SKAction.runBlock() { self.detail!.fixPosition() }]
                 
-                if turnedToFront {
+                if isTurnedToFront {
                     sequence.append(turnFromFront())
                 }
                 
@@ -154,7 +155,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                         self.checkDetail()
                         //stop robot
                         if self.stopRobot {
-                            let turn = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05, resize: true, restore: false)
+                            let turn = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05, resize: true, restore: false)
                             
                             if self.robotTookDetail {
                                 self.runAction(turn)
@@ -173,7 +174,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                             } else {
                                 self.stopRobot = true
 
-                                let turn = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05)
+                                let turn = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05)
                                 
                                 self.runAction(turn)
                             }
@@ -199,7 +200,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             self.runAction(SKAction.runBlock() {
                 self.checkDetail()
                 if self.stopRobot {
-                    let turn = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05, resize: true, restore: false)
+                    let turn = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05, resize: true, restore: false)
                 
                     
                     if self.robotTookDetail {
@@ -222,7 +223,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                         self.runActions()
                     } else {
                         self.stopRobot = true
-                        let turn = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05)
+                        let turn = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05)
                         self.runAction(turn)
                         self.lightClearButton()
                     }
@@ -234,7 +235,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     func lightClearButton() {
         let clearButton = SKSpriteNode(imageNamed: "buttonClearWithLight")
         clearButton.name = "clear"
-        clearButton.position = Constants.Button_ClearPosition
+        clearButton.position = GameButtonType.getPosition(.Clear)()
         clearButton.userInteractionEnabled = true
         clearButton.zPosition = 1001
         scene!.addChild(clearButton)
@@ -245,7 +246,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             isOnStart = false
             
             for cell in ActionCell.cells {
-                if appendAction(cell.getActionType()) {
+                if appendAction(cell.actionType) {
                     break
                 }
             }
@@ -253,7 +254,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             ActionCell.moveCellsLayerToTop()
             var sequence = [SKAction.runBlock() { self.detail!.fixPosition() }]
 
-            if turnedToFront {
+            if isTurnedToFront {
                 sequence.append(turnFromFront())
             }
             
@@ -293,7 +294,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         }
         
         if floorPosition() == track!.getFloorPositionAt(track!.getNextRobotTrackPosition(direction)) {
-            let move = SKAction.moveByX(Constants.BlockFace_Size.width * CGFloat(direction.rawValue), y: 0, duration: 1.6)
+            let move = SKAction.moveByX(Block.BlockFaceSize.width * CGFloat(direction.rawValue), y: 0, duration: 1.6)
         
             let animate = SKAction.group([SKAction.animateWithTextures(getRobotAnimation("Move", direction: direction), timePerFrame: 0.04, resize: true, restore: false)])
             let repeatAnimation = SKAction.repeatAction(animate, count: 5)
@@ -304,7 +305,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         
             return moveAndAnimate
         } else {
-            let move = SKAction.moveByX(Constants.BlockFace_Size.width * CGFloat(direction.rawValue)/5, y: 0, duration: 0.32)
+            let move = SKAction.moveByX(Block.BlockFaceSize.width * CGFloat(direction.rawValue)/5, y: 0, duration: 0.32)
             
             let animate = SKAction.group([SKAction.animateWithTextures(getRobotAnimation("Move", direction: direction), timePerFrame: 0.04, resize: true, restore: false)])
             let repeatAnimation = SKAction.repeatAction(animate, count: 1)
@@ -336,7 +337,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
         if isOnStart {
-            if !turnedToFront {
+            if !isTurnedToFront {
                 runAction(turnToFront())
                 TouchesAnalytics.sharedInstance.appendTouch("RobotTurnToFrontTouch")
             } else {
@@ -353,9 +354,9 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                 button.showButton()
             }
         
-            let animate = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: .ToRight), timePerFrame: 0.05, resize: true, restore: false)
+            let animate = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: .ToRight), timePerFrame: 0.05, resize: true, restore: false)
             self.runAction(animate)
-            self.turnedToFront = true
+            self.isTurnedToFront = true
         }
         
         return block
@@ -365,7 +366,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         let animate = SKAction.animateWithTextures(getRobotAnimation("TurnFromFront", direction: .ToRight), timePerFrame: duration, resize: true, restore: false)
 
         let turnFromFront = SKAction.runBlock() {
-            self.turnedToFront = false
+            self.isTurnedToFront = false
         }
         
         var hideButtonActions: [SKAction] = []
@@ -386,29 +387,29 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     
     func jump(afterStep: Bool) -> SKAction {
         let nextTrackPosition = track!.getNextRobotTrackPosition(direction)
-        var currentPositionPoint = getCurrentPositionPoint()
+        var currentPositionPoint = getCurrentPosition()
         let nextFloorPosition = track!.getFloorPositionAt(nextTrackPosition)
         
         if afterStep {
-            let x = Int(currentPositionPoint.x) + Int(Constants.BlockFace_Size.width * CGFloat(direction.rawValue)/5)
+            let x = Int(currentPositionPoint.x) + Int(Block.BlockFaceSize.width * CGFloat(direction.rawValue)/5)
             currentPositionPoint.x = CGFloat(x)
         }
     
         let path = UIBezierPath()
         path.moveToPoint(currentPositionPoint)
-        let endPoint = CGPoint(x: getNextPositionPoint(direction).x , y: getNextPositionPoint(direction).y + 60)
+        let endPoint = CGPoint(x: getNextPosition(direction).x , y: getNextPosition(direction).y + 60)
         var controlPoint: CGPoint
 
         if floorPosition() != track!.getFloorPositionAt(nextTrackPosition) {
-            controlPoint = CGPoint(x: (getNextPositionPoint(direction).x + currentPositionPoint.x)/2, y: max(getNextPositionPoint(direction).y, currentPositionPoint.y) + Constants.BlockFace_Size.height)
+            controlPoint = CGPoint(x: (getNextPosition(direction).x + currentPositionPoint.x)/2, y: max(getNextPosition(direction).y, currentPositionPoint.y) + Block.BlockFaceSize.height)
         } else {
-            controlPoint = CGPoint(x: (getNextPositionPoint(direction).x + currentPositionPoint.x)/2, y: max(getNextPositionPoint(direction).y, currentPositionPoint.y) + Constants.BlockFace_Size.height/2)
+            controlPoint = CGPoint(x: (getNextPosition(direction).x + currentPositionPoint.x)/2, y: max(getNextPosition(direction).y, currentPositionPoint.y) + Block.BlockFaceSize.height/2)
         }
         path.addQuadCurveToPoint(endPoint, controlPoint: controlPoint)
         
         let animateBegin = SKAction.animateWithTextures(getRobotAnimation("Jump", direction: direction), timePerFrame: 0.04, resize: true, restore: false)
         let moveByCurve = SKAction.followPath(path.CGPath, asOffset: false, orientToPath: false, duration: 1)
-        let animateEnd =  SKAction.group([SKAction.moveTo(self.getNextPositionPoint(direction), duration: 0.2), animateBegin.reversedAction()])
+        let animateEnd =  SKAction.group([SKAction.moveTo(self.getNextPosition(direction), duration: 0.2), animateBegin.reversedAction()])
         
         let sound = SKAction.runBlock() {
             AudioPlayer.sharedInstance.playSoundEffect("Jump.wav")
@@ -447,24 +448,12 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     func moveToStart() {
         currentTrackPosition = track!.getRobotStartPosition()
         currentFloorPosition = track!.getFloorPositionAt(currentTrackPosition)
-        position = getCGPointOfPosition(track!.getRobotStartPosition(), floorPosition: track!.getFloorPositionAt(track!.getRobotStartPosition()))
+        position = getCurrentPosition()
         changeZPosition(floorPosition())
     }
     
     func getStartPosition() -> Int {
         return track!.getRobotStartPosition()
-    }
-    
-    func getCurrentPositionPoint() -> CGPoint {
-        return getCGPointOfPosition(trackPosition(), floorPosition: floorPosition())
-    }
-    
-    func getNextPositionPoint(direction: Direction) -> CGPoint {
-        return getCGPointOfPosition(trackPosition() + direction.rawValue, floorPosition: track!.getFloorPositionAt(trackPosition() + direction.rawValue))
-    }
-    
-    func getDirection() -> Direction {
-        return direction
     }
     
     func changeAnimationDirection() {
@@ -473,10 +462,6 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         } else {
             animationDirection = .ToRight
         }
-    }
-    
-    func isTurnedToFront() -> Bool {
-        return turnedToFront
     }
     
     func isOnDetailPosition() -> Bool {
@@ -507,7 +492,41 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         }
     }
 
+    func getPosition(trackPosition: Int, floorPosition: FloorPosition) -> CGPoint {
+        let X = FirstBlockPosition.x + CGFloat(trackPosition - 1) * Block.BlockFaceSize.width
+        let Y: CGFloat = floorPosition == .First ? 734 : 937
+        return CGPoint(x: X, y: Y)
+    }
+    
+    func getCurrentPosition() -> CGPoint {
+        return getPosition(trackPosition(), floorPosition: floorPosition())
+    }
+    
+    func getNextPosition(direction: Direction) -> CGPoint {
+        return getPosition(trackPosition() + direction.rawValue, floorPosition: track!.getFloorPositionAt(trackPosition() + direction.rawValue))
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getRobotAnimation(actionType: String, direction: Direction) -> [SKTexture] {
+        var textures: [SKTexture] = []
+        var directionString: String = ""
+        
+        if direction == .ToRight && actionType != "mistake" {
+            directionString = "_ToRight"
+        } else {
+            directionString = "_ToLeft"
+        }
+        
+        let atlasName = "Animation_\(actionType)\(directionString)"
+        let atlas = SKTextureAtlas(named: atlasName)
+        
+        for var i = 1; i <= atlas.textureNames.count; i++ {
+            textures.append(atlas.textureNamed("\(atlasName)_\(i)"))
+        }
+        
+        return textures
     }
 }

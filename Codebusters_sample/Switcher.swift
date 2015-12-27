@@ -5,14 +5,13 @@
 //  Created by Владислав Кутейников on 18.09.15.
 //  Copyright (c) 2015 Kids'n'Code. All rights reserved.
 //
-import Foundation
 import SpriteKit
 import AVFoundation
 
 class Switcher: SKSpriteNode {
     private let switcher: SKSpriteNode
     private var label: SKLabelNode
-    private var switchedOn: Bool = true
+    var isSwitchedOn: Bool = true
     
     init() {
         let atlas = SKTextureAtlas(named: "PauseView")
@@ -31,13 +30,9 @@ class Switcher: SKSpriteNode {
         
         userInteractionEnabled = false
     }
-
-    func isSwitchedOn() -> Bool {
-        return switchedOn
-    }
     
     private func switchOn() {
-        switchedOn = true
+        isSwitchedOn = true
         
         let atlas = SKTextureAtlas(named: "PauseView")
         let texture = atlas.textureNamed("SwitcherBackground_On_PauseView")
@@ -55,7 +50,7 @@ class Switcher: SKSpriteNode {
     }
     
     func switchOff() {
-        switchedOn = false
+        isSwitchedOn = false
         
         let atlas = SKTextureAtlas(named: "PauseView")
         let texture = atlas.textureNamed("SwitcherBackground_Off_PauseView")
@@ -74,7 +69,7 @@ class Switcher: SKSpriteNode {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if switchedOn {
+        if isSwitchedOn {
             switchOff()
         } else {
             switchOn()
@@ -108,7 +103,7 @@ class MusicSwitcher: SKSpriteNode {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        if switcher.isSwitchedOn() {
+        if switcher.isSwitchedOn {
             AudioPlayer.sharedInstance.pauseBackgroundMusic()
             defaults.setBool(false, forKey: "music")
         } else {
@@ -146,7 +141,7 @@ class SoundSwitcher: SKSpriteNode {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        if switcher.isSwitchedOn() {
+        if switcher.isSwitchedOn {
             AudioPlayer.sharedInstance.soundsAreOn = false
             defaults.setBool(false, forKey: "sounds")
         } else {

@@ -9,44 +9,54 @@
 import UIKit
 import SpriteKit
 
-class MenuScene: SKScene {
+class MenuScene: SceneTemplate {
     let background = SKSpriteNode(imageNamed: "menuBackground")
     let textString: String
+    
     let keyboard = SKSpriteNode(imageNamed: "keyboard")
     let screen = SKSpriteNode(imageNamed: "activeScreen")
     let finalView = SKSpriteNode(imageNamed: "finalView")
     
+    let data: [LevelPackData]
     var details: [DetailCell] = []
-
-    init(robotTextImage: String = "First_Text") {
+    
+    init(robotTextImage: String = "First_Text", data: [LevelPackData]) {
         textString = robotTextImage
-        
-        super.init(size: CGSize(width: 2048, height: 1536))
+        self.data = data
+
+        super.init()
+       
         background.anchorPoint = CGPointZero
         background.zPosition = -1
         addChild(background)
-        userInteractionEnabled = true
+        
         keyboard.zPosition = 1010
         keyboard.anchorPoint = CGPoint(x: 1, y: 1)
         keyboard.position = CGPoint(x: 758, y: 523)
         addChild(keyboard)
-    }
     
+        userInteractionEnabled = true
+    }
+
     override func didMoveToView(view: SKView) {
+
         if let _ = view.gestureRecognizers {
             view.gestureRecognizers!.removeAll(keepCapacity: false)
         }
         
-        GameProgress.sharedInstance.writePropertyListFileToDevice()
         showDetails()
         
-        if GameProgress.sharedInstance.finished() {
+        if sceneManager.gameProgressManager.finished() {
             turnOnScreenAndMoveKeyboard()
             runAction(SKAction.waitForDuration(2.3), completion: { self.showFinalView() } )
         } else {
             showRobot(textString)
         }
         
+        showGarland()
+    }
+    
+    func showGarland() {
         let garlandTexture = SKTexture(imageNamed: "garland1")
         let garland = SKSpriteNode(texture: garlandTexture)
         garland.anchorPoint = CGPointZero
@@ -76,10 +86,11 @@ class MenuScene: SKScene {
             let touchLocation = touch.locationInNode(self)
             
             if let cell = nodeAtPoint(touchLocation) as? DetailCell {
-                switch cell.getCellState() {
+                switch cell.cellState {
                 case .Active, .Placed:
                     AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
-                    addChild(LevelSelectionView(levelPackIndex: Int(cell.name!)!))
+                    let levels = data[cell.index].levels
+                    overlay = LevelSelectionView(levelPackIndex: cell.index, levels: levels)
                 case .NonActive:
                     return
                 }
@@ -87,30 +98,23 @@ class MenuScene: SKScene {
                 finalView.runAction(SKAction.fadeOutWithDuration(0.4), completion: { self.finalView.removeFromParent() } )
                 turnOffScreenAndMoveKeyboard()
                 
-                let levelData = GameProgress.sharedInstance.getCurrentLevelData()
-                if let detailTypeString  = levelData["detailType"] as? String {
-                    if let type = DetailType(rawValue: detailTypeString) {
-                        showRobot("\(type)_Text")
-                    }
+                let currentLevelPackIndex = sceneManager.currentLevelPack
+                let currentLevelPackData = data[currentLevelPackIndex]
+                showRobot("\(currentLevelPackData.detailType)_Text")
+              
+                let defaults = NSUserDefaults.standardUserDefaults()
+                if defaults.objectForKey("Finished") as? Bool == true {
+                    defaults.removeObjectForKey("Finished")
                 }
-
-                let config = GameProgress.sharedInstance.getLevelsData()
-                config.setValue("", forKey: "Finished")
-                config.writeToFile(GameProgress.sharedInstance.getLevelsDataPath(), atomically: true)
             }
         }
     }
     
     func showDetails() {
-        let levelPacks = GameProgress.sharedInstance.getLevelPacks()
-        for levelPack in levelPacks {
-            if let detailTypeString = levelPack["detailType"] as? String, let cellStateString = levelPack["cellState"] as? String {
-                if let detailType = DetailType(rawValue: detailTypeString), let cellState = DetailCellState(rawValue: cellStateString) {
-                    let detailCell = DetailCell(detailType: detailType, cellState: cellState, name: String(details.count))
-                    details.append(detailCell)
-                    addChild(detailCell)
-                }
-            }
+        for levelPack in data {
+            let detailCell = DetailCell(detailType: levelPack.detailType, cellState: levelPack.cellState, index: details.count)
+            details.append(detailCell)
+            addChild(detailCell)
         }
     }
     
@@ -128,10 +132,9 @@ class MenuScene: SKScene {
         stick.position = CGPoint(x: 18.5, y: 580)
         robot.addChild(stick)
         
-        if GameProgress.sharedInstance.isGameFinished() && textImageString == "First_Text" {
+        if sceneManager.gameProgressManager.isGameFinished() && textImageString == "First_Text" {
             textImageString.appendContentsOf("_Final")
         }
-        
         
         let label = SKSpriteNode(imageNamed: textImageString)
         

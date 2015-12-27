@@ -9,9 +9,27 @@
 import UIKit
 import SpriteKit
 
-class ActionButton: SKSpriteNode {
+enum ActionType: String {
+    case Move,
+    Turn,
+    Push,
+    Jump,
+    None
+    
+    func ActionButtonPosition() -> CGPoint {
+        switch self {
+        case .Move: return CGPoint(x: -188, y: 156)
+        case .Turn: return CGPoint(x: -61, y: 224)
+        case .Push: return CGPoint(x: 94, y: 224)
+        case .Jump: return CGPoint(x: 215, y: 156)
+        default: return CGPoint.zero
+        }
+    }
+}
 
-    private var actionType: ActionType = .None
+class ActionButton: SKSpriteNode {
+    
+    var actionType: ActionType = .None
     private let label = SKLabelNode(fontNamed: "Ubuntu Bold")
     private let atlas = SKTextureAtlas(named: "ActionButtons")
     
@@ -49,10 +67,6 @@ class ActionButton: SKSpriteNode {
         }
     }
     
-    func getActionType() -> ActionType {
-        return actionType
-    }
-    
     func tapBegan() {
         texture = atlas.textureNamed("ActionButton_\(actionType)_Highlighted")
         runAction(SKAction.scaleTo(1.12, duration: 0.1))
@@ -66,7 +80,8 @@ class ActionButton: SKSpriteNode {
     }
     
     func showButton() {
-        let move = SKAction.moveTo(getActionButtonPosition(actionType), duration: 0.1)
+        let position = actionType.ActionButtonPosition()
+        let move = SKAction.moveTo(position, duration: 0.1)
         runAction(move)
     }
 
@@ -108,4 +123,14 @@ class ActionButton: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    static let Button_MovePosition = CGPoint(x: -188, y: 156)
+    static let Button_TurnPosition = CGPoint(x: -61, y: 224)
+    static let Button_PushPosition = CGPoint(x: 94, y: 224)
+    static let Button_JumpPosition = CGPoint(x: 215, y: 156)
+    
+    
+    
+    
+    
 }

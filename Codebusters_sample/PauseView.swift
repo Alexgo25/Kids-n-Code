@@ -6,10 +6,9 @@
 //  Copyright (c) 2015 Kids'n'Code. All rights reserved.
 //
 
-import UIKit
 import SpriteKit
 
-class PauseView: SKSpriteNode, GameButtonNodeResponderType {
+class PauseView: SKSpriteNode, ButtonNodeResponderType {
     private let backgroundLeftPart = SKSpriteNode(imageNamed: "pauseBackgroundLeftPart")
     private let backgroundRightPart = SKSpriteNode(imageNamed: "pauseBackgroundRightPart")
     
@@ -66,8 +65,6 @@ class PauseView: SKSpriteNode, GameButtonNodeResponderType {
     }
     
     func hide() {
-        weak var scene = self.scene as? LevelScene
-        scene!.background.paused = false
         TouchesAnalytics.sharedInstance.appendTouch("returnFromPause")
         let disappear = SKAction.fadeOutWithDuration(0.15)
         let moveLeftPart = SKAction.moveByX(-backgroundLeftPart.size.width, y: 0, duration: 0.15)
