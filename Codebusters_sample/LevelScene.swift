@@ -264,13 +264,15 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             }
         }
         
-        if let slide = node as? SKSpriteNode where node.parent!.parent!.isMemberOfClass(Tutorial) {
-            if let tutorial = slide.parent!.parent as? Tutorial {
-                tutorial.showNextSlide(.ToLeft)
-                //Analytics->record showNextSlideSwipe
-                //touchesToRecord.append("showNextTutorialSlideSwipe")
-                TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
-                //print("showNextTutorialSlideSwipe")
+        if let parent = node.parent {
+            if let parent = parent.parent where parent.isMemberOfClass(Tutorial) {
+                if let tutorial = parent as? Tutorial {
+                    tutorial.showNextSlide(.ToLeft)
+                    //Analytics->record showNextSlideSwipe
+                    //touchesToRecord.append("showNextTutorialSlideSwipe")
+                    TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
+                    //print("showNextTutorialSlideSwipe")
+                }
             }
         }
     }
@@ -288,14 +290,15 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 //print("deleteCellSwipeRight")
             }
         }
-        
-        if let slide = node as? SKSpriteNode where node.parent!.parent!.isMemberOfClass(Tutorial) {
-            if let tutorial = slide.parent!.parent as? Tutorial {
-                tutorial.showNextSlide(.ToRight)
-                //Analytics->record showNextSlideSwipe
-                //touchesToRecord.append("showNextTutorialSlideSwipe")
-                TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
-                //print("showNextTutorialSlideSwipe")
+        if let parent = node.parent {
+            if let parent = parent.parent where parent.isMemberOfClass(Tutorial) {
+                if let tutorial = parent as? Tutorial {
+                    tutorial.showNextSlide(.ToRight)
+                    //Analytics->record showNextSlideSwipe
+                    //touchesToRecord.append("showNextTutorialSlideSwipe")
+                    TouchesAnalytics.sharedInstance.appendTouch("showNextTutorialsSlideSwipe")
+                    //print("showNextTutorialSlideSwipe")
+                }
             }
         }
     }
