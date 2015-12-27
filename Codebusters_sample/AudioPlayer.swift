@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 Kids'n'Code. All rights reserved.
 //
 
-
-import Foundation
-import SpriteKit
 import AVFoundation
 
 public class AudioPlayer {

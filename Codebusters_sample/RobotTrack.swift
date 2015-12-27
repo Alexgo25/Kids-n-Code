@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Kids'n'Code. All rights reserved.
 //
 
-import Foundation
 import SpriteKit
 
 class RobotTrack {
@@ -14,37 +13,23 @@ class RobotTrack {
     private var currentRobotPosition = 0
     private var startRobotPosition = 0
     var detailPosition = 0
-    var detailFloorPosition = FloorPosition.first
+    var detailFloorPosition = FloorPosition.First
     
-    init() {
-        getCurrentLevelTrackInfo()
+    init(levelInfo: LevelConfiguration) {
+        getCurrentLevelTrackInfo(levelInfo)
     }
     
-    private func getCurrentLevelTrackInfo() {
-        let levelData = GameProgress.sharedInstance.getCurrentLevelData()
-        
-        if let pattern = levelData["blocksPattern"] as? [Int] {
-            initTrackFromPattern(pattern)
-        }
-        
-        if let robotPosition = levelData["robotPosition"] as? Int {
-            currentRobotPosition = robotPosition
-            startRobotPosition = robotPosition
-        }
-        
-        if let detailPosition = levelData["detailPosition"] as? Int {
-            self.detailPosition = detailPosition
-        }
-        
-        if let detailFloorPositionInt = levelData["detailFloorPosition"] as? Int {
-            if let detailFloorPosition = FloorPosition(rawValue: detailFloorPositionInt) {
-                self.detailFloorPosition = detailFloorPosition
-            }
-        }
+    private func getCurrentLevelTrackInfo(levelInfo: LevelConfiguration) {
+        let pattern = levelInfo.blocksPattern
+        initTrackFromPattern(pattern)
+        startRobotPosition = levelInfo.robotPosition
+        currentRobotPosition = startRobotPosition
+        detailPosition = levelInfo.detailPosition
+        detailFloorPosition = levelInfo.detailFloorPosition
     }
     
     func trackLength(scale: CGFloat) -> CGFloat {
-        return (CGFloat(track.count) + 1) * Constants.BlockFace_Size.width * scale
+        return (CGFloat(track.count) + 1) * Block.BlockFaceSize.width * scale
     }
     
     func deleteBlocks() {
@@ -55,12 +40,10 @@ class RobotTrack {
         track.removeAll(keepCapacity: false)
     }
     
-    func initTrackFromPattern(pattern: [Int]) {
-        track.append(RobotStanding(trackPosition: track.count, floorPosition: .ground))
+    func initTrackFromPattern(pattern: [FloorPosition]) {
+        track.append(RobotStanding(trackPosition: track.count, floorPosition: .Ground))
         for var i = 0; i < pattern.count; i++ {
-            if let floor = FloorPosition(rawValue: pattern[i]) {
-                track.append(RobotStanding(trackPosition: i + 1, floorPosition: floor))
-            }
+            track.append(RobotStanding(trackPosition: i + 1, floorPosition: pattern[i]))
         }
     }
 
@@ -71,20 +54,20 @@ class RobotTrack {
                 return false
             }
             
-            return ((track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue) && (track[getNextRobotTrackPosition(direction)].getFloorPosition() != .ground))
+            return ((track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue) && (track[getNextRobotTrackPosition(direction)].getFloorPosition() != .Ground))
         case .Jump:
             if currentRobotPosition + direction.rawValue < 0 || currentRobotPosition + direction.rawValue >= track.count {
                 return false
             }
             
-            return track[currentRobotPosition].getFloorPosition() != .ground && track[getNextRobotTrackPosition(direction)].getFloorPosition() != .ground
+            return track[currentRobotPosition].getFloorPosition() != .Ground && track[getNextRobotTrackPosition(direction)].getFloorPosition() != .Ground
         case .Push:
             if currentRobotPosition + 2 * direction.rawValue < 0 {
                 return false
             }
             
             if currentRobotPosition + 2 * direction.rawValue >= track.count {
-                track.append(RobotStanding(trackPosition: track.count, floorPosition: .ground))
+                track.append(RobotStanding(trackPosition: track.count, floorPosition: .Ground))
             }
             
             if detailPosition == currentRobotPosition + 2 * direction.rawValue && detailFloorPosition == track[currentRobotPosition + 2 * direction.rawValue].getFloorPosition() {

@@ -9,21 +9,25 @@
 import UIKit
 import SpriteKit
 
+var sceneManager: SceneManager!
+
 class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let scene = MenuScene()
-            let skView = self.view as! SKView
-            //skView.showsFPS = true
-            //skView.showsNodeCount = true
-            skView.ignoresSiblingOrder = true
-            //skView.showsPhysics = true
-            scene.scaleMode = .AspectFill
         
-            skView.presentScene(scene)
-        if (NSUserDefaults.standardUserDefaults().objectForKey("deviceID") == nil){
-            let deviceid = String(stringInterpolationSegment: UIDevice.currentDevice().identifierForVendor)
-            NSUserDefaults.standardUserDefaults().setObject(deviceid, forKey: "deviceID")
+        let skView = self.view as! SKView
+        sceneManager = SceneManager(view: skView)
+        sceneManager.presentScene(.Menu)
+        
+        //skView.showsPhysics = true
+        //scene.scaleMode = .AspectFill
+        //skView.showsFPS = true
+        //skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        
+        if (NSUserDefaults.standardUserDefaults().objectForKey("deviceID") == nil) {
+            let deviceID = String(stringInterpolationSegment: UIDevice.currentDevice().identifierForVendor)
+            NSUserDefaults.standardUserDefaults().setObject(deviceID, forKey: "deviceID")
         }
         AnalyticsCore.sharedAnalyticsCore.sendData()
 

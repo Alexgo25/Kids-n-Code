@@ -10,8 +10,9 @@ import UIKit
 import SpriteKit
 
 class ActionCell: SKSpriteNode {
+    static let actionCellSize = CGSize(width: 239, height: 66)
     
-    private var actionType: ActionType
+    var actionType: ActionType
     private static var upperCellIndex = 0
     private var cellBackground: SKSpriteNode
     
@@ -38,11 +39,7 @@ class ActionCell: SKSpriteNode {
         
         showLabel()
     }
-    
-    func getActionType() -> ActionType {
-        return actionType
-    }
-    
+
     func getNextPosition() -> CGPoint {
         return CGPoint(x: 0, y: -CGFloat(ActionCell.cells.count) * cellBackground.size.height)
     }
@@ -126,7 +123,7 @@ class ActionCell: SKSpriteNode {
     
     static func moveCellsUpAfterDeleting(index: Int) {
         for var i = index + 1; i < cellsCount(); i++ {
-            cells[i].runAction(SKAction.moveByX(0, y: Constants.ActionCellSize.height + 2, duration: 0.25))
+            cells[i].runAction(SKAction.moveByX(0, y: actionCellSize.height + 2, duration: 0.25))
             cells[i].name = "\(i - 1)"
         }
         
@@ -134,7 +131,7 @@ class ActionCell: SKSpriteNode {
             cells[upperCellIndex + 11].runAction(SKAction.fadeInWithDuration(0.25))
         } else {
             if upperCellIndex > 0 {
-                cellsLayer.runAction(SKAction.moveByX(0, y: -Constants.ActionCellSize.height - 2, duration: 0.25))
+                cellsLayer.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 2, duration: 0.25))
                 cells[upperCellIndex - 1].runAction(SKAction.fadeInWithDuration(0.25))
                 upperCellIndex--
             }
@@ -157,7 +154,7 @@ class ActionCell: SKSpriteNode {
     
     static func moveCellsLayerUp() {
         if canMoveCellsLayerUp() {
-            cellsLayer.runAction(SKAction.moveByX(0, y: Constants.ActionCellSize.height + 2, duration: 0.25))
+            cellsLayer.runAction(SKAction.moveByX(0, y: actionCellSize.height + 2, duration: 0.25))
             cells[upperCellIndex].runAction(SKAction.fadeOutWithDuration(0.25))
             cells[upperCellIndex + 11].runAction(SKAction.fadeInWithDuration(0.25))
             
@@ -167,7 +164,7 @@ class ActionCell: SKSpriteNode {
     
     static func moveCellsLayerDown() {
         if upperCellIndex > 0 {
-            cellsLayer.runAction(SKAction.moveByX(0, y: -Constants.ActionCellSize.height - 2, duration: 0.25))
+            cellsLayer.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 2, duration: 0.25))
             cells[upperCellIndex - 1].runAction(SKAction.fadeInWithDuration(0.25))
             cells[upperCellIndex + 10].runAction(SKAction.fadeOutWithDuration(0.25))
             upperCellIndex--

@@ -6,7 +6,6 @@
 //  Copyright © 2015 Kids'n'Code. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 class CoreDataAdapter: NSObject {

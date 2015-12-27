@@ -6,10 +6,12 @@
 //  Copyright (c) 2015 Kids'n'Code. All rights reserved.
 //
 
-import Foundation
 import SpriteKit
 
 class Block: SKSpriteNode {
+    static let BlockStartPosition = CGPoint(x: 168, y: 389)
+    static let BlockFaceSize = CGSize(width: 204, height: 203)
+    
     private var floorPosition: FloorPosition
     private var trackPosition: Int
     
@@ -32,7 +34,7 @@ class Block: SKSpriteNode {
         
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSize())
         anchorPoint = CGPointZero
-        position = CGPoint(x: getXBlockPosition(trackPosition), y: getYBlockPosition(floorPosition))
+        position = getCurrentPosition()
         addChild(blockFace)
         addChild(blockRight)
         addChild(blockUpper)
@@ -79,11 +81,21 @@ class Block: SKSpriteNode {
         } )
     }
     
+    func getPosition(trackPosition: Int, floorPosition: FloorPosition) -> CGPoint {
+        let X = Block.BlockStartPosition.x + CGFloat(trackPosition - 1) * Block.BlockFaceSize.width
+        let Y = Block.BlockStartPosition.y + CGFloat(floorPosition.rawValue - 1) * Block.BlockFaceSize.height
+        return CGPoint(x: X, y: Y)
+    }
+    
+    func getCurrentPosition() -> CGPoint {
+        return getPosition(trackPosition, floorPosition: floorPosition)
+    }
+    
     func getNextPosition(direction: Direction) -> CGPoint {
-        return CGPoint(x: getXBlockPosition(trackPosition + direction.rawValue), y: getYBlockPosition(floorPosition))
+        return getPosition(trackPosition + direction.rawValue, floorPosition: floorPosition)
     }
     
     func getNextPosition(direction: Direction, floorPosition: FloorPosition) -> CGPoint {
-        return CGPoint(x: getXBlockPosition(trackPosition + direction.rawValue), y: getYBlockPosition(floorPosition))
+        return getPosition(trackPosition + direction.rawValue, floorPosition: floorPosition)
     }
 }

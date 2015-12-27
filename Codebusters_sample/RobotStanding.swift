@@ -6,8 +6,13 @@
 //  Copyright (c) 2015 Kids'n'Code. All rights reserved.
 //
 
-import Foundation
 import SpriteKit
+
+enum FloorPosition: Int {
+    case Ground = 0,
+    First = 1,
+    Second = 2
+}
 
 class RobotStanding {
     

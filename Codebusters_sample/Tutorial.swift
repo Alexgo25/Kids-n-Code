@@ -6,7 +6,6 @@
 //  Copyright © 2015 Kids'n'Code. All rights reserved.
 //
 
-import Foundation
 import SpriteKit
 
 public class Tutorial: SKSpriteNode {
@@ -70,17 +69,10 @@ public class Tutorial: SKSpriteNode {
         anchorPoint = CGPointZero
         userInteractionEnabled = true
         
-        show()
-    }
-    
-    private func show() {
-        alpha = 0
         slides.addChild(images[currentSlideIndex])
-
-        runAction(SKAction.fadeInWithDuration(0.4))
     }
     
-    private func hide() {
+    func hide() {
         runAction(SKAction.fadeOutWithDuration(0.3), completion: {
             TouchesAnalytics.sharedInstance.appendTouch("TutorialSkipTouch")
             self.removeAllChildren()
