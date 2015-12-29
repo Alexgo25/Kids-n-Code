@@ -9,35 +9,38 @@
 import UIKit
 import SpriteKit
 
+let kGoodAlgorithmString = NSLocalizedString("GOOD_ALGORITHM", comment: "Good algorithm")
+let kAvgAlgorithm1String = NSLocalizedString("AVG_ALGORITHM1", comment: "Avg algorith 1st part")
+let kAvgAlgorithm2String = NSLocalizedString("AVG_ALGORITHM2", comment: "Avg algorithm 2nd part")
+let kBadAlgorithm1String = NSLocalizedString("BAD_ALGORITHM1", comment: "Bad algorithm 1st part")
+let kBadAlgorithm2String = NSLocalizedString("BAD_ALGORITHM2", comment: "Bad algorithm 2nd part")
+
 class EndLevelView: SKSpriteNode {
     let Battery_EndLevelViewPosition = CGPoint(x: 1032.5, y: 889)
     
     private let buttonRestart = GameButton(type: .Restart_EndLevelView)
     private let buttonNextLevel = GameButton(type: .NextLevel_EndLevelView)
     private let buttonExit = GameButton(type: .Exit_EndLevelView)
-
     
-    init() {
-
+    init(levelInfo: LevelConfiguration, result: Int) {
         let texture = SKTexture(imageNamed: "EndLevelView_Background") //background.texture!
         super.init(texture: texture, color: UIColor(), size: texture.size())
         
-        let result = levelInfo.currentResult
         let goodResult = levelInfo.goodResult
         let badResult = levelInfo.badResult
-
+        
         var batteryTexture = SKTexture()
         if result <= goodResult {
             batteryTexture = SKTexture(imageNamed: "battery_3")
-            addChild(createLabel("Молодец! Ты нашел оптимальный алгоритм!", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1125.5)))
+            addChild(createLabel(kGoodAlgorithmString, fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1125.5)))
         } else if result <= badResult {
             batteryTexture = SKTexture(imageNamed: "battery_2")
-            addChild(createLabel("Отлично! Осталось изменить всего несколько", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1151)))
-            addChild(createLabel("действий, чтобы алгоритм стал оптимальным...", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1093)))
+            addChild(createLabel(kAvgAlgorithm1String, fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1151)))
+            addChild(createLabel(kAvgAlgorithm2String, fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1093)))
         } else {
             batteryTexture = SKTexture(imageNamed: "battery_1")
-            addChild(createLabel("Хорошо! Теперь давай попробуем составить", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1151)))
-            addChild(createLabel("программу с меньшим количеством действий", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1093)))
+            addChild(createLabel(kBadAlgorithm1String, fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1151)))
+            addChild(createLabel(kBadAlgorithm2String, fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1093)))
         }
         
         let battery = SKSpriteNode(texture: batteryTexture)
@@ -58,33 +61,8 @@ class EndLevelView: SKSpriteNode {
         addChild(battery)
         
         userInteractionEnabled = true
-
-        show()
-        NSNotificationCenter.defaultCenter().postNotificationName(kShowAdsNotificationKey, object: NotificationZombie.sharedInstance)
     }
     
-    
-    
-    func show() {
-        alpha = 0
-        let appear = SKAction.fadeInWithDuration(0.2)
-        runAction(appear)
-    }
-    
-    func buttonPressed(button: GameButton) {
-        switch button.gameButtonType {
-        case .Restart_EndLevelView:
-            GameProgress.sharedInstance.newGame(scene!.view!)
-        case .NextLevel_EndLevelView:
-            GameProgress.sharedInstance.setNextLevel()
-            GameProgress.sharedInstance.newGame(scene!.view!)
-        case .Exit_EndLevelView:
-            GameProgress.sharedInstance.goToMenu(scene!.view!)
-        default:
-            return
-        }
-    }
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

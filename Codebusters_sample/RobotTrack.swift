@@ -46,23 +46,21 @@ class RobotTrack {
             track.append(RobotStanding(trackPosition: i + 1, floorPosition: pattern[i]))
         }
     }
-
+    
     func canPerformActionWithDirection(action: ActionType, direction: Direction) -> Bool {
         switch action {
         case .Move:
-            if (getNextRobotTrackPosition(direction) < 0 || getNextRobotTrackPosition(direction) >= track.count) {
+            if currentRobotPosition + direction.rawValue < 0 || currentRobotPosition + direction.rawValue >= track.count {
                 return false
             }
-            else {
-            return ((track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue) && (track[getNextRobotTrackPosition(direction)].getFloorPosition() != .ground))
-            }
+            
+            return ((track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue) && (track[getNextRobotTrackPosition(direction)].getFloorPosition() != .Ground))
         case .Jump:
-            if (getNextRobotTrackPosition(direction) < 0 || getNextRobotTrackPosition(direction) >= track.count) {
+            if currentRobotPosition + direction.rawValue < 0 || currentRobotPosition + direction.rawValue >= track.count {
                 return false
             }
-            else {
-             return track[currentRobotPosition].getFloorPosition() != .ground && track[getNextRobotTrackPosition(direction)].getFloorPosition() != .ground
-            }
+            
+            return track[currentRobotPosition].getFloorPosition() != .Ground && track[getNextRobotTrackPosition(direction)].getFloorPosition() != .Ground
         case .Push:
             if currentRobotPosition + 2 * direction.rawValue < 0 {
                 return false
@@ -84,14 +82,14 @@ class RobotTrack {
     
     func getBlocksPattern() -> [FloorPosition] {
         var array: [FloorPosition] = []
-       
+        
         for block in track {
             array.append(block.getFloorPosition())
         }
         
         return array
     }
-
+    
     func robotIsOnDetailPosition() -> Bool {
         return currentRobotPosition == detailPosition
     }
@@ -111,7 +109,7 @@ class RobotTrack {
     func setNextRobotTrackPosition(direction: Direction) {
         currentRobotPosition = getNextRobotTrackPosition(direction)
     }
-
+    
     func getCurrentRobotPosition() -> Int {
         return currentRobotPosition
     }

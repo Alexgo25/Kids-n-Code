@@ -23,7 +23,7 @@ class PauseView: SKSpriteNode, ButtonNodeResponderType {
         musicSwitcher = MusicSwitcher()
         soundSwitcher = SoundSwitcher()
         super.init(texture: nil, color: UIColor(), size: CGSize())
-
+        
         anchorPoint = CGPointZero
         userInteractionEnabled = true
         zPosition = 3000
@@ -73,39 +73,20 @@ class PauseView: SKSpriteNode, ButtonNodeResponderType {
         runAction(SKAction.sequence([disappear, SKAction.removeFromParent()]))
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
-        for touch in touches {
-            let touchLocation = touch.locationInNode(self)
-            let node = nodeAtPoint(touchLocation)
-            TouchesAnalytics.sharedInstance.appendTouch(buttonRestart.name!)
-            switch node {
-            case buttonRestart:
-                GameProgress.sharedInstance.newGame(scene!.view!)
-            case buttonExit:
+    func buttonPressed(button: ButtonNode) {
+        if let gameButton = button as? GameButton {
+            switch gameButton.gameButtonType {
+            case .Restart_PauseView:
+                sceneManager.presentScene(.CurrentLevel)
+            case .Exit_PauseView:
                 NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-                GameProgress.sharedInstance.goToMenu(scene!.view!)
-            case buttonContinue, backgroundRightPart:
+                sceneManager.presentScene(.Menu)
+            case .Continue_PauseView:
                 hide()
             default:
-                break
+                return
             }
         }
-    }
-    
-    func buttonPressed(button: GameButton) {
-        switch button.gameButtonType {
-        case .Restart_PauseView:
-            GameProgress.sharedInstance.newGame(scene!.view!)
-        case .Exit_PauseView:
-            NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-            GameProgress.sharedInstance.goToMenu(scene!.view!)
-        case .Continue_PauseView:
-            hide()
-        default:
-            return
-        }
-
     }
     
     required init?(coder aDecoder: NSCoder) {

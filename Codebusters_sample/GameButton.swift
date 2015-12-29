@@ -90,6 +90,9 @@ class GameButton: ButtonNode {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         isTouched = true
         AudioPlayer.sharedInstance.playSoundEffect("Sound_Tap.mp3")
+        if (self.gameButtonType == .Start || gameButtonType == .Restart || gameButtonType == .Clear || gameButtonType == .Restart_PauseView || gameButtonType == .Tips || gameButtonType == .Pause || gameButtonType == GameButtonType.Exit_PauseView || gameButtonType == .Continue_PauseView) {
+            TouchesAnalytics.sharedInstance.appendTouch(name!)
+        }
         super.touchesBegan(touches, withEvent: event)
     }
     

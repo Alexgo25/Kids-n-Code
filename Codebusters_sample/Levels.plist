@@ -682,7 +682,7 @@
 		<array>
 			<dict>
 				<key>isOpened</key>
-				<false/>
+				<true/>
 				<key>blocksPattern</key>
 				<array>
 					<integer>1</integer>

@@ -9,8 +9,15 @@
 import UIKit
 import SpriteKit
 
-class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate, GameButtonNodeResponderType {
+struct PhysicsCategory {
+    static let None: UInt32 = 0
+    static let Robot: UInt32 = 0b1  // 1
+    static let Detail: UInt32 = 0b10  // 2
+}
 
+class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
+    let levelInfo: LevelConfiguration
+    
     let background = SKNode()
     let trackLayer = SKNode()
     var touchesToRecord: [String] = []
@@ -44,7 +51,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
             if ((newValue?.isMemberOfClass(EndLevelView)) != nil) {
                 background.paused = false
             }
-
+            
             if let overlay = overlay as? Tutorial {
                 overlay.hide()
             }
@@ -62,46 +69,42 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         super.init()
         
         //Listening to notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name: kRobotTookDetailNotificationKey, object: robot)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kApplicationWillTerminateKey, object: NotificationZombie.sharedInstance)
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: kNeedUpdatesKey)
     }
     
     //Handling notifications
-
     
-    
-     func finishWithSuccess() {
+    func finishWithSuccess() {
         print("Finished")
-        dispatch_async(dispatch_get_main_queue(), {
-            //record
-            var strings : [String!] = []
-            for cell in ActionCell.cells {
-                strings.append(cell.getActionType().rawValue)
-                print(cell.getActionType().rawValue)
-            }
-            let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
-         CoreDataAdapter.sharedAdapter.addNewLevel(self.thisLevelNumber!, levelPackNumber: self.thisLevelPackNumber!, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
-             TouchesAnalytics.sharedInstance.resetTouches()
-        })
-        
+        //record
+        var strings : [String!] = []
+        for cell in ActionCell.cells {
+            strings.append(cell.actionType.rawValue)
+            print(cell.actionType.rawValue)
+        }
+        let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+        CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel , levelPackNumber: sceneManager.currentLevelPack, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
+        TouchesAnalytics.sharedInstance.resetTouches()
     }
     
     func finishWithMistake() {
         print("Mistake")
-        dispatch_async(dispatch_get_main_queue(), {
-            //record
-            var strings : [String!] = []
-            for cell in ActionCell.cells {
-                strings.append(cell.getActionType().rawValue)
-                print(cell.getActionType().rawValue)
-            }
-            let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
-            CoreDataAdapter.sharedAdapter.addNewLevel(self.thisLevelNumber!, levelPackNumber: self.thisLevelPackNumber!, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
-            TouchesAnalytics.sharedInstance.resetTouches()
-        })
-
+        TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+        //record
+        var strings : [String!] = []
+        for cell in ActionCell.cells {
+            strings.append(cell.actionType.rawValue)
+            print(cell.actionType)
+        }
+        let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+        CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel, levelPackNumber: sceneManager.currentLevelPack, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
+        TouchesAnalytics.sharedInstance.resetTouches()
+    }
+    
+    func handleTouch(notification : NSNotification) {
+        touchesToRecord.append(notification.userInfo!["touch"]! as! String)
+        print(notification.userInfo!["touch"]!)
     }
     
     override func didMoveToView(view: SKView) {
@@ -242,7 +245,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         retval.x = CGFloat(min(retval.x, 0))
         retval.x = CGFloat(max(retval.x, -(track.trackLength(trackLayer.xScale)) + playAreaSize.width))
         retval.y = position.y
-    
+        
         return retval
     }
     
@@ -277,7 +280,7 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
     func swipedRight(swipe: UISwipeGestureRecognizer) {
         let touchLocation = convertPointFromView(swipe.locationInView(view))
         let node = nodeAtPoint(touchLocation)
-
+        
         if let cell = node as? ActionCell {
             if robot.isOnStart {
                 ActionCell.deleteCell(Int(cell.name!)!, direction: .ToRight)
@@ -330,13 +333,13 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
         case PhysicsCategory.Robot | PhysicsCategory.Detail:
             detail.hideDetail()
             robot.takeDetail()
-            sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
-            runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() { self.overlay = EndLevelView(levelInfo: self.levelInfo) } ]))
+            runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
+                self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
+                self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
         default:
             return
         }
     }
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.locationInNode(self)
@@ -422,12 +425,12 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
                 view!.gestureRecognizers?.removeAll(keepCapacity: false)
             }
         }
-
+        
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
         swipeLeft.direction = .Left
         swipeLeft.delegate = self
         view!.addGestureRecognizer(swipeLeft)
-
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: Selector("swipedRight:"))
         swipeRight.direction = .Right
         swipeRight.delegate = self
@@ -475,14 +478,14 @@ class LevelScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate
                 track = RobotTrack(levelInfo: levelInfo)
                 detail = Detail(track: track, levelInfo: levelInfo)
                 robot = Robot(track: track, detail: detail)
-            
+                
                 createTrackLayer()
             case .Debug:
                 robot.debug()
             case .Continue_PauseView, .Ok:
                 overlay = nil
             case .Exit_PauseView, .Exit_EndLevelView:
-                NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+                NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
                 sceneManager.presentScene(.Menu)
             case .Restart_PauseView, .Restart_EndLevelView, .Restart:
                 sceneManager.presentScene(.CurrentLevel)

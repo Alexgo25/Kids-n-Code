@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Kids'n'Code
+
+  Created by Alexander on 29/12/15.
+  Copyright © 2015 Kids'n'Code. All rights reserved.
+*/
+
+
+GOOD_ALGORITHM = "Молодец! Ты нашел оптимальный алгоритм!";
+
+AVG_ALGORITHM1 =  "Отлично! Осталось изменить всего несколько";
+AVG_ALGORITHM2 = "действий, чтобы алгоритм стал оптимальным...";
+
+BAD_ALGORITHM = "Хорошо! Теперь давай попробуем составить";
+BAD_ALGORITHM = "программу с меньшим количеством действий";

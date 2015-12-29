@@ -9,6 +9,7 @@
 import SpriteKit
 import UIKit
 
+
 enum DetailType: String {
     case Battery, CPU,
     Fan, HardDrive,
@@ -68,6 +69,7 @@ class Detail: SKSpriteNode {
         physicsBody!.contactTestBitMask = PhysicsCategory.Robot
         physicsBody!.collisionBitMask = 0
         name = "Detail"
+        
     }
     
     func hideDetail() {

@@ -14,6 +14,7 @@
 		110952D01AC6DF5B000A960A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 110952CE1AC6DF5B000A960A /* LaunchScreen.xib */; };
 		110952DC1AC6DF5B000A960A /* Codebusters_sampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */; };
 		115C6E971ACBFA4200B79250 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C6E961ACBFA4200B79250 /* Robot.swift */; };
+		11845F611C32FE0A00FDCBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11845F631C32FE0A00FDCBB2 /* Localizable.strings */; };
 		11913EFD1C0CE70900E3482A /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFC1C0CE70900E3482A /* libFMDB.a */; };
 		11913EFF1C0CE70E00E3482A /* libKSCrash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFE1C0CE70E00E3482A /* libKSCrash.a */; };
 		11913F011C0CE71300E3482A /* libprotobuf-c.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913F001C0CE71300E3482A /* libprotobuf-c.a */; };
@@ -137,6 +138,8 @@
 		110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codebusters_sampleTests.swift; sourceTree = "<group>"; };
 		1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kids'n'Code-Bridging-Header.h"; sourceTree = "<group>"; };
 		115C6E961ACBFA4200B79250 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		11845F621C32FE0A00FDCBB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		11845F641C32FE1000FDCBB2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		11913EFC1C0CE70900E3482A /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "Pods/../build/Debug-iphoneos/libFMDB.a"; sourceTree = "<group>"; };
 		11913EFE1C0CE70E00E3482A /* libKSCrash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libKSCrash.a; path = "Pods/../build/Debug-iphoneos/libKSCrash.a"; sourceTree = "<group>"; };
 		11913F001C0CE71300E3482A /* libprotobuf-c.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libprotobuf-c.a"; path = "Pods/../build/Debug-iphoneos/libprotobuf-c.a"; sourceTree = "<group>"; };
@@ -324,6 +327,7 @@
 				614DA0B21AEF19780088A557 /* Reverse.mp3 */,
 				61A15FE81AEE4AA1008B36EA /* Jump.wav */,
 				110952C01AC6DF5B000A960A /* Info.plist */,
+				11845F631C32FE0A00FDCBB2 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -567,6 +571,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 110952B31AC6DF5B000A960A;
 			productRefGroup = 110952BD1AC6DF5B000A960A /* Products */;
@@ -615,6 +620,7 @@
 				61AC5DDC1BA5881300CA109C /* Animation_Turn_ToLeft.atlas in Resources */,
 				61AC5DDD1BA5881300CA109C /* Animation_TurnFromFront_ToLeft.atlas in Resources */,
 				614DA0B51AEF19D00088A557 /* Sound_Tap.mp3 in Resources */,
+				11845F611C32FE0A00FDCBB2 /* Localizable.strings in Resources */,
 				615ADA101B51578400CA5D7F /* Levels.plist in Resources */,
 				6157866A1BA37FBA008AF886 /* Ubuntu.ttf in Resources */,
 				61AC5DDB1BA5881300CA109C /* Animation_Push_SecondPart_ToLeft.atlas in Resources */,
@@ -775,6 +781,15 @@
 				1198E7571BE906E900AFE73A /* ru */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		11845F631C32FE0A00FDCBB2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11845F621C32FE0A00FDCBB2 /* en */,
+				11845F641C32FE1000FDCBB2 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

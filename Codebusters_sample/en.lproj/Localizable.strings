@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Kids'n'Code
+
+  Created by Alexander on 29/12/15.
+  Copyright © 2015 Kids'n'Code. All rights reserved.
+*/
+
+GOOD_ALGORITHM = "goodalg";
+
+AVG_ALGORITHM1 =  "avgalg";
+AVG_ALGORITHM2 = "avg2";
+
+BAD_ALGORITHM = "bad";
+BAD_ALGORITHM = "bad2";
