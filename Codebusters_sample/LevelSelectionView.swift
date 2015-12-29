@@ -29,7 +29,7 @@ class LevelSelectionView: SKSpriteNode {
     }
     
     func getBatteryType(level: [String: AnyObject]) -> Type {
-        if !(level["isOpened"] as! Bool) {
+        if let isOpened = level["isOpened"] as? Bool where !isOpened {
             return .Closed
         }
         
