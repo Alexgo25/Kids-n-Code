@@ -116,6 +116,47 @@ public class GameProgress {
                     print("mh")
                 }
             }
+        } else {
+            if let _ = NSMutableDictionary(contentsOfFile: path) {
+                updatePList()
+                do {
+                    try fileManager.removeItemAtPath(path)
+                }
+                catch _ {
+                    print("123")
+                }
+                writePListToDevice()
+                updateLevelsFile()
+            }
+        }
+    }
+    
+    func updatePList() {
+        let path = getLevelsDataPath()
+        let config = NSMutableDictionary(contentsOfFile: path)!
+        let levelPacks = config["levelPacks"] as! [[String : AnyObject]]
+        
+        levelPacksInfo = levelPacks.map {
+            LevelPackData(levelPackData: $0)
+        }
+        
+        for var i = 0; i < levelPacksInfo.count; i++ {
+            var levelPackInfo = levelPacksInfo[i]
+            var levels = levelPackInfo.levels
+            for var j = 0; j < levels.count; j++ {
+                var level = levels[j]
+                let result = level["result"] as! Int
+                if result == -1 {
+                    level.updateValue(false, forKey: "isOpened")
+                    level.updateValue(0, forKey: "result")
+                } else {
+                    level.updateValue(true, forKey: "isOpened")
+                }
+                levels[j] = level
+            }
+            
+            levelPackInfo.levels = levels
+            levelPacksInfo[i] = levelPackInfo
         }
     }
     
