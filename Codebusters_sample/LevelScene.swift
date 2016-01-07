@@ -14,6 +14,15 @@ struct PhysicsCategory {
     static let Robot: UInt32 = 0b1  // 1
     static let Detail: UInt32 = 0b10  // 2
 }
+//Button labels
+let kStartButtonLabel = NSLocalizedString("START_BUTTON_LABEL", comment: "Start button label")
+let kDebugButtonLabel = NSLocalizedString("DEBUG_BUTTON_LABEL", comment: "Debug button label")
+let kReturnButtonLabel = NSLocalizedString("RETURN_BUTTON_LABEL", comment: "Return button label")
+let kRestartButtonLabel = NSLocalizedString("RESTART_BUTTON_LABEL", comment: "Restart button label")
+//Other labels
+let kProgramLabel = NSLocalizedString("PROGRAM_LABEL", comment: "Program label top-right")
+let kOnstartLabel = NSLocalizedString("ONSTART_LABEL", comment: "ON Start label below the program")
+
 
 class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
     let levelInfo: LevelConfiguration
@@ -71,6 +80,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         //Listening to notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: kNeedUpdatesKey)
     }
     
     //Handling notifications
@@ -361,13 +371,13 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         background.addChild(levelBackground2)
         
         addChild(background)
-        
-        background.addChild(createLabel("Программа", fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1773, y: 1429)))
-        button_Debug.addChild(createLabel("Отладка", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
-        button_Start.addChild(createLabel("Запуск", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
-        button_Clear.addChild(createLabel("В начало", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
-        button_Restart.addChild(createLabel("Заново", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
-        background.addChild(createLabel("ПОСЛЕ ЗАПУСКА", fontColor: UIColor.whiteColor(), fontSize: 23, position: CGPoint(x: 1773, y: 1296)))
+//markLabels
+        background.addChild(createLabel(kProgramLabel, fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1773, y: 1429)))
+        button_Debug.addChild(createLabel(kDebugButtonLabel, fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
+        button_Start.addChild(createLabel(kStartButtonLabel, fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
+        button_Clear.addChild(createLabel(kReturnButtonLabel, fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
+        button_Restart.addChild(createLabel(kRestartButtonLabel, fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 0, y: 90)))
+        background.addChild(createLabel(kOnstartLabel, fontColor: UIColor.whiteColor(), fontSize: 23, position: CGPoint(x: 1773, y: 1296)))
         
         addChild(button_Pause)
         button_Pause.zPosition = 3001

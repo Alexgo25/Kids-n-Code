@@ -8,6 +8,9 @@
 
 import SpriteKit
 
+let kSoundLabelText = NSLocalizedString("SOUNDS_SWITCHER", comment: "Switcher sounds label")
+let kMusicLabelText = NSLocalizedString("MUSIC_SWITCHER", comment: "Switcher music label")
+
 class PauseView: SKSpriteNode, ButtonNodeResponderType {
     private let backgroundLeftPart = SKSpriteNode(imageNamed: "pauseBackgroundLeftPart")
     private let backgroundRightPart = SKSpriteNode(imageNamed: "pauseBackgroundRightPart")
@@ -41,10 +44,10 @@ class PauseView: SKSpriteNode, ButtonNodeResponderType {
         backgroundLeftPart.addChild(soundSwitcher)
         backgroundLeftPart.addChild(musicSwitcher)
         
-        let soundLabel = createLabel("Звуки", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 205.5, y: 473))
+        let soundLabel = createLabel(kSoundLabelText, fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 205.5, y: 473))
         backgroundLeftPart.addChild(soundLabel)
         
-        let musicLabel = createLabel("Музыка", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 404.5, y: 473))
+        let musicLabel = createLabel(kMusicLabelText, fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 404.5, y: 473))
         backgroundLeftPart.addChild(musicLabel)
         
         addChild(buttonRestart)

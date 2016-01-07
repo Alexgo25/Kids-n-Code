@@ -9,6 +9,11 @@
 import UIKit
 import SpriteKit
 
+let kStepButtonLabel = NSLocalizedString("STEP_BUTTON_LABEL", comment: "Step button label")
+let kTurnButtonLabel = NSLocalizedString("TURN_BUTTON_LABEL", comment: "Turn button label")
+let kPushButtonLabel = NSLocalizedString("PUSH_BUTTON_LABEL", comment: "Push button label")
+let kJumpButtonLabel = NSLocalizedString("JUMP_BUTTON_LABEL", comment: "Jump button label")
+
 enum ActionType: String {
     case Move,
     Turn,
@@ -90,23 +95,23 @@ class ActionButton: SKSpriteNode {
         let sequence = SKAction.sequence([move, SKAction.removeFromParent()])
         runAction(sequence)
     }
-    
+//markLabels
     func showLabel() {
         switch actionType {
         case .Move:
-            label.text = "ШАГНУТЬ"
+            label.text = kStepButtonLabel
             label.position = CGPoint(x: -8, y: 75)
             zPosition = 11
         case .Turn:
-            label.text = "ПОВЕРНУТЬСЯ"
+            label.text = kTurnButtonLabel
             label.position = CGPoint(x: -35, y: 75)
             zPosition = 10
         case .Push:
-            label.text = "ТОЛКНУТЬ"
+            label.text = kPushButtonLabel
             label.position = CGPoint(x: 8, y: 75)
             zPosition = 10
         case .Jump:
-            label.text = "ПРЫГНУТЬ"
+            label.text = kJumpButtonLabel
             label.position = CGPoint(x: 15, y: 75)
             zPosition = 11
         default:

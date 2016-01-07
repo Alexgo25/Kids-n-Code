@@ -8,6 +8,11 @@
 import SpriteKit
 import AVFoundation
 
+let kSwitcherModeOnString = NSLocalizedString("SWITCHER_MODE_ON", comment: "switcher_on")
+let kSwitcherModeOffString = NSLocalizedString("SWITCHER_MODE_OFF", comment: "switcher_off")
+let kMusicSwitcherKey = "music"
+let kSoundSwitcherKey = "sounds"
+
 class Switcher: SKSpriteNode {
     private let switcher: SKSpriteNode
     private var label: SKLabelNode
@@ -20,8 +25,7 @@ class Switcher: SKSpriteNode {
         let switcherTexture = SKTexture(imageNamed: "Switcher_PauseView.png")
         switcher = SKSpriteNode(texture: switcherTexture)
         switcher.position = CGPoint(x: -52, y: 0)
-        
-        label = createLabel("ВКЛ", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPoint(x: 22.5, y: 0))
+        label = createLabel(kSwitcherModeOnString, fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPoint(x: 22.5, y: 0))
         
         super.init(texture: texture, color: UIColor(), size: texture.size())
         
@@ -45,7 +49,7 @@ class Switcher: SKSpriteNode {
         switcher.runAction(moveSwitcher, completion: {
             self.runAction(changeTexture)
             self.label.position = newLabelPosition
-            self.label.text = "ВКЛ"
+            self.label.text = kSwitcherModeOnString
         })
     }
     
@@ -64,7 +68,7 @@ class Switcher: SKSpriteNode {
         switcher.runAction(moveSwitcher, completion: {
             self.runAction(changeTexture)
             self.label.position = newLabelPosition
-            self.label.text = "ВЫКЛ"
+            self.label.text = kSwitcherModeOffString
         })
     }
     
@@ -105,10 +109,10 @@ class MusicSwitcher: SKSpriteNode {
         
         if switcher.isSwitchedOn {
             AudioPlayer.sharedInstance.pauseBackgroundMusic()
-            defaults.setBool(false, forKey: "music")
+            defaults.setBool(false, forKey: kMusicSwitcherKey)
         } else {
             AudioPlayer.sharedInstance.resumeBackgroundMusic()
-            defaults.setBool(true, forKey: "music")
+            defaults.setBool(true, forKey: kMusicSwitcherKey)
         }
         
         switcher.touchesEnded(touches, withEvent: event)
@@ -143,10 +147,10 @@ class SoundSwitcher: SKSpriteNode {
         
         if switcher.isSwitchedOn {
             AudioPlayer.sharedInstance.soundsAreOn = false
-            defaults.setBool(false, forKey: "sounds")
+            defaults.setBool(false, forKey: kSoundSwitcherKey)
         } else {
             AudioPlayer.sharedInstance.soundsAreOn = true
-            defaults.setBool(true, forKey: "sounds")
+            defaults.setBool(true, forKey: kSoundSwitcherKey)
         }
         
         switcher.touchesEnded(touches, withEvent: event)

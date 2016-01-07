@@ -51,7 +51,7 @@ class SceneManager {
         switch sceneType {
         case .Menu:
             if currentLevelPack == -1 && gameProgressManager.currentDetailType != .Crystall {
-                presentScene(MenuScene(robotTextImage: gameProgressManager.currentDetailType.rawValue + "_Text", data: levelPacksInfo))
+                presentScene(MenuScene(robotTextImage: gameProgressManager.currentDetailType.rawValue + kDetailTextSuffix, data: levelPacksInfo))
             } else {
                 presentScene(MenuScene(data: levelPacksInfo))
             }

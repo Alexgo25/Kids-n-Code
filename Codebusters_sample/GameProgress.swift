@@ -43,12 +43,15 @@ public class GameProgress {
     
     func openNextLevelPack() {
         var levelPacks = levelPacksInfo
+        levelPacks[currentLevelPack].cellState = .Placed
+        levelPacksInfo = levelPacks
         
-        if levelPacks[currentLevelPack + 1].cellState == .NonActive {
-            levelPacks[currentLevelPack + 1].cellState = .Active
+        if currentLevelPack + 1 < levelPacksInfo.count {
+            if levelPacks[currentLevelPack + 1].cellState == .NonActive {
+                levelPacks[currentLevelPack + 1].cellState = .Active
+            }
         }
         
-        levelPacks[currentLevelPack].cellState = .Placed
         levelPacksInfo = levelPacks
     }
     
@@ -61,11 +64,6 @@ public class GameProgress {
             levelPacksInfo[currentLevelPack].levels[currentLevel + 1].updateValue(true, forKey: kIsOpenedKey)
         } else {
             openNextLevelPack()
-            
-            if currentLevelPack == 5 {
-                let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setBool(true, forKey: kFinishedKey)
-            }
         }
     }
     
@@ -99,6 +97,12 @@ public class GameProgress {
             levelPacksInfo[currentLevelPack].levels[currentLevel].updateValue(result, forKey: "result")
             self.levelPacksInfo = levelPacksInfo
             openNextLevel()
+        }
+        
+        if currentLevelPack == levelPacksInfo.count - 1 && currentLevel == levelPacksInfo[levelPacksInfo.count - 1].levels.count - 1 {
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setBool(true, forKey: kFinishedKey)
         }
     }
     

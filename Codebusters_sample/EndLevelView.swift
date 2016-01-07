@@ -15,6 +15,9 @@ let kAvgAlgorithm2String = NSLocalizedString("AVG_ALGORITHM2", comment: "Avg alg
 let kBadAlgorithm1String = NSLocalizedString("BAD_ALGORITHM1", comment: "Bad algorithm 1st part")
 let kBadAlgorithm2String = NSLocalizedString("BAD_ALGORITHM2", comment: "Bad algorithm 2nd part")
 
+let kContinuePlayingLabel = NSLocalizedString("CONTINUE_PLAYING_LABEL", comment: "Continue playing label")
+let kQuitToMenuLabel = NSLocalizedString("QUIT_TO_MENU_LABEL", comment: "Quit to menu label")
+
 class EndLevelView: SKSpriteNode {
     let Battery_EndLevelViewPosition = CGPoint(x: 1032.5, y: 889)
     
@@ -48,13 +51,13 @@ class EndLevelView: SKSpriteNode {
         zPosition = 4000
         anchorPoint = CGPointZero
         addChild(buttonRestart)
-        addChild(createLabel("Заново", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1018.5, y: 670)))
-        
+        addChild(createLabel(kRestartButtonLabel, fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1018.5, y: 670)))
+//markLabels
         addChild(buttonNextLevel)
-        addChild(createLabel("Играть дальше", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1363, y: 670)))
+        addChild(createLabel(kContinuePlayingLabel, fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 1363, y: 670)))
         
         addChild(buttonExit)
-        addChild(createLabel("Выйти в меню", fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 672, y: 670)))
+        addChild(createLabel(kQuitToMenuLabel, fontColor: UIColor.blackColor(), fontSize: 29, position: CGPoint(x: 672, y: 670)))
         
         battery.position = Battery_EndLevelViewPosition
         battery.zPosition = 1

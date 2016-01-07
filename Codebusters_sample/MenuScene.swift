@@ -9,23 +9,27 @@
 import UIKit
 import SpriteKit
 
+let kRobotFirstTextImageName = NSLocalizedString("First_Text", comment: "first text")
+let kDetailTextSuffix = NSLocalizedString("DetailTextSuffix", comment: "Detail text suffix")
+let kFinalViewImageName = NSLocalizedString("finalView", comment: "Final view")
+
 class MenuScene: SceneTemplate {
     let background = SKSpriteNode(imageNamed: "menuBackground")
     let textString: String
     
     let keyboard = SKSpriteNode(imageNamed: "keyboard")
     let screen = SKSpriteNode(imageNamed: "activeScreen")
-    let finalView = SKSpriteNode(imageNamed: "finalView")
+    let finalView = SKSpriteNode(imageNamed: kFinalViewImageName)
     
     let data: [LevelPackData]
     var details: [DetailCell] = []
     
-    init(robotTextImage: String = "First_Text", data: [LevelPackData]) {
+    init(robotTextImage: String = kRobotFirstTextImageName, data: [LevelPackData]) {
         textString = robotTextImage
         self.data = data
-
+        
         super.init()
-       
+        
         background.anchorPoint = CGPointZero
         background.zPosition = -1
         addChild(background)
@@ -34,12 +38,12 @@ class MenuScene: SceneTemplate {
         keyboard.anchorPoint = CGPoint(x: 1, y: 1)
         keyboard.position = CGPoint(x: 758, y: 523)
         addChild(keyboard)
-    
+        
         userInteractionEnabled = true
     }
-
+    
     override func didMoveToView(view: SKView) {
-
+        
         if let _ = view.gestureRecognizers {
             view.gestureRecognizers!.removeAll(keepCapacity: false)
         }
@@ -66,11 +70,9 @@ class MenuScene: SceneTemplate {
         let garlandTexture2 = SKTexture(imageNamed: "garland2")
         let action1 = SKAction.setTexture(garlandTexture2)
         let action2 = SKAction.setTexture(garlandTexture)
-        dispatch_async(dispatch_get_main_queue(), {
-            let sequence = SKAction.sequence([SKAction.waitForDuration(1), action1, SKAction.waitForDuration(1), action2])
-            garland.runAction(SKAction.repeatActionForever(sequence))
-        })
         
+        let sequence = SKAction.sequence([SKAction.waitForDuration(1.5), action1, SKAction.waitForDuration(1.5), action2])
+        garland.runAction(SKAction.repeatActionForever(sequence))
     }
     
     func showFinalView() {
@@ -98,10 +100,10 @@ class MenuScene: SceneTemplate {
                 finalView.runAction(SKAction.fadeOutWithDuration(0.4), completion: { self.finalView.removeFromParent() } )
                 turnOffScreenAndMoveKeyboard()
                 
-                let currentLevelPackIndex = sceneManager.currentLevelPack
+                let currentLevelPackIndex = sceneManager.levelPacksInfo.count - 1
                 let currentLevelPackData = data[currentLevelPackIndex]
-                showRobot("\(currentLevelPackData.detailType)_Text")
-              
+                showRobot("\(currentLevelPackData.detailType)" + kDetailTextSuffix)
+                
                 let defaults = NSUserDefaults.standardUserDefaults()
                 if defaults.objectForKey("Finished") as? Bool == true {
                     defaults.removeObjectForKey("Finished")
@@ -118,7 +120,7 @@ class MenuScene: SceneTemplate {
         }
     }
     
-    func showRobot(var textImageString: String = "First_Text") {
+    func showRobot(var textImageString: String = kRobotFirstTextImageName) {
         let texture = SKTexture(imageNamed: "menuRobot")
         let robot = SKSpriteNode(texture: texture)
         robot.anchorPoint = CGPointZero
@@ -132,7 +134,7 @@ class MenuScene: SceneTemplate {
         stick.position = CGPoint(x: 18.5, y: 580)
         robot.addChild(stick)
         
-        if sceneManager.gameProgressManager.isGameFinished() && textImageString == "First_Text" {
+        if sceneManager.gameProgressManager.isGameFinished() && textImageString == kRobotFirstTextImageName {
             textImageString.appendContentsOf("_Final")
         }
         
@@ -163,6 +165,6 @@ class MenuScene: SceneTemplate {
     }
     
     override func update(currentTime: CFTimeInterval) {
-    
     }
+    
 }

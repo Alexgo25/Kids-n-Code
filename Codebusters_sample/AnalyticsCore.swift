@@ -5,7 +5,7 @@
 //  Created by Alexander on 03/11/15.
 //  Copyright © 2015 Kids'n'Code. All rights reserved.
 //
-
+//1.6
 import UIKit
 
 let urlstr = "http://kidsncode.com/php/analytics.php"
@@ -106,6 +106,7 @@ class AnalyticsCore : NSObject{
                 //deleting coredata
                 do {
                     try CoreDataAdapter.sharedAdapter.deleteAllLevels()
+                    NSUserDefaults.standardUserDefaults().setBool(false, forKey: kNeedUpdatesKey)
                 }
                 catch _ {
                     print("Error deleting coredata")

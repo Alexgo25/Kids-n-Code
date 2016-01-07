@@ -6,10 +6,57 @@
   Copyright © 2015 Kids'n'Code. All rights reserved.
 */
 
-GOOD_ALGORITHM = "goodalg";
+GOOD_ALGORITHM = "Excellent! Your code is perfect!";
 
-AVG_ALGORITHM1 =  "avgalg";
-AVG_ALGORITHM2 = "avg2";
+AVG_ALGORITHM1 =  "Good! Optimize the algorithm to make it more efficient";
+AVG_ALGORITHM2 = "";
 
-BAD_ALGORITHM = "bad";
-BAD_ALGORITHM = "bad2";
+BAD_ALGORITHM1 = "You've done it! Now, let’s change";
+BAD_ALGORITHM2 = "the program to make it shorter";
+
+//Tutorial slides//
+Tutorial_0 = "Tutorial_0_en";
+Tutorial_1 = "Tutorial_1_en";
+Tutorial_2 = "Tutorial_2_en";
+Tutorial_3 = "Tutorial_3_en";
+Tutorial_4 = "Tutorial_4_en";
+Tutorial_5 = "Tutorial_5_en";
+Tutorial_6 = "Tutorial_6_en";
+Tutorial_7 = "Tutorial_7_en";
+Tutorial_8 = "Tutorial_8_en";
+
+//Robot texts in main menu
+DetailTextSuffix = "_Text_en";
+First_Text = "First_Text_en";
+
+//Final view text
+finalView = "finalView_en";
+
+//Buttons
+RESUME_BUTTON = "RESUME";
+QUIT_BUTTON = "QUIT";
+RESTART_BUTTON = "RESTART";
+
+//Switcher
+SOUNDS_SWITCHER = "Sound";
+MUSIC_SWITCHER = "Music";
+SWITCHER_MODE_ON = "ON";
+SWITCHER_MODE_OFF = "OFF";
+
+//Level scene elements
+PROGRAM_LABEL = "Program";
+ONSTART_LABEL = "ON START";
+RESTART_BUTTON_LABEL = "Restart";
+DEBUG_BUTTON_LABEL = "Debug";
+RETURN_BUTTON_LABEL = "Return";
+START_BUTTON_LABEL = "Run";
+
+//Action buttons label
+STEP_BUTTON_LABEL = "STEP";
+TURN_BUTTON_LABEL = "TURN";
+PUSH_BUTTON_LABEL = "PUSH";
+JUMP_BUTTON_LABEL = "JUMP";
+
+//End level view
+CONTINUE_PLAYING_LABEL = "Next level";
+QUIT_TO_MENU_LABEL = "Quit to menu";

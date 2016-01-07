@@ -43,7 +43,8 @@ public class Tutorial: SKSpriteNode {
         }
         
         for var i = firstSlide; i <= lastSlide; i++ {
-            images.append(SKSpriteNode(imageNamed: "Tutorial_\(i)"))
+            let nameStr = NSLocalizedString("Tutorial_\(i)", comment: "tutorial")
+            images.append(SKSpriteNode(imageNamed: nameStr))
             images[i - firstSlide].anchorPoint = CGPointZero
             images[i - firstSlide].zPosition = -1
             let number = -((lastSlide - firstSlide)/2 - (i - firstSlide))

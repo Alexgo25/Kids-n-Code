@@ -6,11 +6,60 @@
   Copyright © 2015 Kids'n'Code. All rights reserved.
 */
 
-
 GOOD_ALGORITHM = "Молодец! Ты нашел оптимальный алгоритм!";
 
 AVG_ALGORITHM1 =  "Отлично! Осталось изменить всего несколько";
 AVG_ALGORITHM2 = "действий, чтобы алгоритм стал оптимальным...";
 
-BAD_ALGORITHM = "Хорошо! Теперь давай попробуем составить";
-BAD_ALGORITHM = "программу с меньшим количеством действий";
+BAD_ALGORITHM1 = "Хорошо! Теперь давай попробуем составить";
+BAD_ALGORITHM2 = "программу с меньшим количеством действий";
+
+//Tutorial slide names//
+Tutorial_0 = "Tutorial_0_ru";
+Tutorial_1 = "Tutorial_1_ru";
+Tutorial_2 = "Tutorial_2_ru";
+Tutorial_3 = "Tutorial_3_ru";
+Tutorial_4 = "Tutorial_4_ru";
+Tutorial_5 = "Tutorial_5_ru";
+Tutorial_6 = "Tutorial_6_ru";
+Tutorial_7 = "Tutorial_7_ru";
+Tutorial_8 = "Tutorial_8_ru";
+
+//Robot texts in main menu
+DetailTextSuffix = "_Text_ru";
+First_Text = "First_Text_ru";
+
+//Final view text
+finalView = "finalView_ru";
+
+//Buttons
+RESUME_BUTTON = "ПРОДОЛЖИТЬ";
+QUIT_BUTTON = "ВЫЙТИ";
+RESTART_BUTTON = "ЗАНОВО";
+
+//Switcher
+SOUNDS_SWITCHER = "Звуки";
+MUSIC_SWITCHER = "Музыка";
+SWITCHER_MODE_ON = "ВКЛ";
+SWITCHER_MODE_OFF = "ВЫКЛ";
+
+//Level scene elements
+PROGRAM_LABEL = "Программа";
+ONSTART_LABEL = "ПОСЛЕ ЗАПУСКА";
+RESTART_BUTTON_LABEL = "Заново";
+DEBUG_BUTTON_LABEL = "Отладка";
+RETURN_BUTTON_LABEL = "В начало";
+START_BUTTON_LABEL = "Запуск";
+
+//Action buttons label
+STEP_BUTTON_LABEL = "ШАГНУТЬ";
+TURN_BUTTON_LABEL = "ПОВЕРНУТЬСЯ";
+PUSH_BUTTON_LABEL = "ТОЛКНУТЬ";
+JUMP_BUTTON_LABEL = "ПРЫГНУТЬ";
+
+//End level view
+CONTINUE_PLAYING_LABEL = "Играть дальше";
+QUIT_TO_MENU_LABEL = "Выйти в меню";
+
+
+

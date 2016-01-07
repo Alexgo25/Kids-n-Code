@@ -57,19 +57,19 @@ class ActionCell: SKSpriteNode {
             self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType)")
         }
     }
-    
+//markLabels
     func showLabel() {
         let label = SKLabelNode(fontNamed: "Ubuntu Bold")
         
         switch actionType {
         case .Move:
-            label.text = "ШАГНУТЬ"
+            label.text = kStepButtonLabel
         case .Jump:
-            label.text = "ПРЫГНУТЬ"
+            label.text = kJumpButtonLabel
         case .Turn:
-            label.text = "ПОВЕРНУТЬСЯ"
+            label.text = kTurnButtonLabel
         case .Push:
-            label.text = "ТОЛКНУТЬ"
+            label.text = kPushButtonLabel
         default:
             label.text = ""
         }

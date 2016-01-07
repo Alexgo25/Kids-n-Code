@@ -73,11 +73,14 @@ class GameButton: ButtonNode {
         
         switch gameButtonType {
         case .Continue_PauseView:
-            label.text = "ПРОДОЛЖИТЬ"
+            let resumeStr = NSLocalizedString("RESUME_BUTTON", comment: "Resume")
+            label.text = resumeStr
         case .Exit_PauseView:
-            label.text = "ВЫЙТИ"
+            let quitString = NSLocalizedString("QUIT_BUTTON", comment: "Quit")
+            label.text = quitString
         case .Restart_PauseView:
-            label.text = "ЗАНОВО"
+            let restartString = NSLocalizedString("RESTART_BUTTON", comment: "Restart")
+            label.text = restartString
         default:
             break
         }
