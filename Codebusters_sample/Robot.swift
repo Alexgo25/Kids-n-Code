@@ -28,6 +28,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     private var actions: [SKAction] = []
     private var currentActionIndex = 0
 
+    
     var direction = Direction.ToRight // рассчитывается заранее
     private var animationDirection = Direction.ToRight // рассчитывается во время движения
     var isTurnedToFront = false
@@ -348,6 +349,8 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func turnToFront() -> SKAction {
+        if (!self.hasActions()) {
+        self.isTurnedToFront = true
         let block = SKAction.runBlock() {
             for button in self.actionButtons {
                 self.addChild(button)
@@ -356,13 +359,17 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         
             let animate = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: .ToRight), timePerFrame: 0.05, resize: true, restore: false)
             self.runAction(animate)
-            self.isTurnedToFront = true
         }
         
         return block
+        }
+        else {
+            return SKAction()
+        }
     }
     
     func turnFromFront(duration: NSTimeInterval = 0.05) -> SKAction {
+        if (!self.hasActions()) {
         let animate = SKAction.animateWithTextures(getRobotAnimation("TurnFromFront", direction: .ToRight), timePerFrame: duration, resize: true, restore: false)
 
         let turnFromFront = SKAction.runBlock() {
@@ -379,6 +386,10 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         let sequence = SKAction.sequence([SKAction.runBlock() { self.runningActions = true }, turnFromFront, SKAction.group(hideButtonActions), animate, SKAction.runBlock() { self.runningActions = false }])
         
         return sequence
+        }
+        else {
+            return SKAction()
+        }
     }
     
     private func changeZPosition(floorPosition: FloorPosition) {

@@ -4,22 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>FMDB.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>KSCrash.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Kids'n'Code.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>protobuf-c.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>7FC0D889FFC9B13C714DA9BE26D9E172</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C11BF81B7CE44F74529FDADCC5A33BB6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CE739BF35F0D85EAE535757794FF23F1</key>
+		<key>AFF3B2C33AB27F8C326F84F7A8328FE5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

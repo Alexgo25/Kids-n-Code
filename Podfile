@@ -5,7 +5,7 @@
 
 target 'Kids\'n\'Code' do
 
-pod 'YandexMobileMetrica', '2.1.1'
+pod 'Google/Analytics'
 
 
 end

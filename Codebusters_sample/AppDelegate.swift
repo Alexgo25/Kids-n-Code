@@ -9,6 +9,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import Google
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,13 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
         
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Optional: configure GAI options.
+        let gai = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
         // TODO: Move this to where you establish a user session
+        
         self.logUser()
-        YMMYandexMetrica.activateWithApiKey("d9143aae-dc60-4dbe-b7e2-638f574bedc1")
         
         let settings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound , UIUserNotificationType.Badge , UIUserNotificationType.Alert], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
+        //forceCrash()
         return true
     }
 
@@ -75,6 +86,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // You can call any combination of these three methods
         Crashlytics.sharedInstance().setUserEmail("alexgo25616@gmail.com")
     }
+    
+    private func forceCrash() {
+        Crashlytics.sharedInstance().crash()
+    }
     private func convertDeviceTokenToString(deviceToken : NSData) ->String {
         var deviceTokenStr = deviceToken.description.stringByReplacingOccurrencesOfString("<", withString: "")
         deviceTokenStr = deviceTokenStr.stringByReplacingOccurrencesOfString(">", withString: "")
@@ -82,5 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return deviceTokenStr
         
     }
+    
 
 }

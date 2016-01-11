@@ -14,6 +14,7 @@
 		110952D01AC6DF5B000A960A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 110952CE1AC6DF5B000A960A /* LaunchScreen.xib */; };
 		110952DC1AC6DF5B000A960A /* Codebusters_sampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */; };
 		115C6E971ACBFA4200B79250 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C6E961ACBFA4200B79250 /* Robot.swift */; };
+		1183EB671C44296A00DA88A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1183EB661C44296A00DA88A8 /* GoogleService-Info.plist */; };
 		11845F611C32FE0A00FDCBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11845F631C32FE0A00FDCBB2 /* Localizable.strings */; };
 		11913EFD1C0CE70900E3482A /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFC1C0CE70900E3482A /* libFMDB.a */; };
 		11913EFF1C0CE70E00E3482A /* libKSCrash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFE1C0CE70E00E3482A /* libKSCrash.a */; };
@@ -138,6 +139,7 @@
 		110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codebusters_sampleTests.swift; sourceTree = "<group>"; };
 		1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kids'n'Code-Bridging-Header.h"; sourceTree = "<group>"; };
 		115C6E961ACBFA4200B79250 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		1183EB661C44296A00DA88A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11845F621C32FE0A00FDCBB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		11845F641C32FE1000FDCBB2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		11913EFC1C0CE70900E3482A /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "Pods/../build/Debug-iphoneos/libFMDB.a"; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				1198E74A1BE9055600AFE73A /* Game Views&Controllers */,
 				1198E7491BE904B900AFE73A /* Game Sprites */,
 				110952C11AC6DF5B000A960A /* AppDelegate.swift */,
+				1183EB661C44296A00DA88A8 /* GoogleService-Info.plist */,
 				110952DA1AC6DF5B000A960A /* Info.plist */,
 				110952C91AC6DF5B000A960A /* Main.storyboard */,
 				615ADA0F1B51578400CA5D7F /* Levels.plist */,
@@ -599,6 +602,7 @@
 				614DA0BB1AEF1C750088A557 /* LevelCompleted.mp3 in Resources */,
 				61AC5DE11BA5881300CA109C /* Animation_Push_FirstPart_ToRight.atlas in Resources */,
 				110952CD1AC6DF5B000A960A /* Images.xcassets in Resources */,
+				1183EB671C44296A00DA88A8 /* GoogleService-Info.plist in Resources */,
 				61AC5DB31BA586C000CA109C /* GameButtons.atlas in Resources */,
 				61AC5DDF1BA5881300CA109C /* Animation_Jump_ToRight.atlas in Resources */,
 				61AC5DE51BA5881300CA109C /* Animation_TurnToFront_ToRight.atlas in Resources */,

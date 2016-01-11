@@ -18,6 +18,8 @@ public class Tutorial: SKSpriteNode {
     private var slider: [SKSpriteNode] = []
     private var sliderNode: SKSpriteNode
     
+    private var canAddSlide = true
+    
     
     init(tutorialNumber: Int) {
         slides = SKSpriteNode(texture: nil, color: UIColor.clearColor(), size: CGSize())
@@ -90,6 +92,8 @@ public class Tutorial: SKSpriteNode {
     }
     
     func showSlide(number: Int) {
+        if (canAddSlide) {
+        canAddSlide = false
         texture = nil
         let direction = (number < currentSlideIndex) ? Direction.ToRight : Direction.ToLeft
             
@@ -107,12 +111,14 @@ public class Tutorial: SKSpriteNode {
         let moveSlides = SKAction.moveByX(2048 * CGFloat(direction.rawValue), y: 0, duration: 0.3)
         slides.runAction(moveSlides, completion: {
             self.images[self.currentSlideIndex].removeFromParent()
+            self.canAddSlide = true
             self.slider[self.currentSlideIndex].texture = SKTexture(imageNamed: "Slider_NonActive")
             if number <= self.lastSlide - self.firstSlide && number >= 0 {
                 self.currentSlideIndex = number
                 self.slider[self.currentSlideIndex].texture = SKTexture(imageNamed: "Slider_Active")
             }
         })
+        }
     }
 
     public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
