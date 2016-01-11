@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import Google
 
 struct PhysicsCategory {
     static let None: UInt32 = 0
@@ -76,7 +77,11 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         detail = Detail(track: track, levelInfo: levelInfo)
         robot = Robot(track: track, detail: detail)
         super.init()
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Level Scene")
         
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
         //Listening to notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)

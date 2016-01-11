@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import Google
 
 let kRobotFirstTextImageName = NSLocalizedString("First_Text", comment: "first text")
 let kDetailTextSuffix = NSLocalizedString("DetailTextSuffix", comment: "Detail text suffix")
@@ -25,6 +26,12 @@ class MenuScene: SceneTemplate {
     var details: [DetailCell] = []
     
     init(robotTextImage: String = kRobotFirstTextImageName, data: [LevelPackData]) {
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "MainMenu")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
         textString = robotTextImage
         self.data = data
         
