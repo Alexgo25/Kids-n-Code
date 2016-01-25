@@ -11,6 +11,12 @@ import Fabric
 import Crashlytics
 import Google
 
+
+
+
+let kMixpanleToken = ""
+let flurryAPIKey = "H3S4DVJMXS6XWC9BRZH3"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -36,6 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
         //forceCrash()
+        
+        //Mixpanel & Flurry setup
+        //let mixpanel = Mixpanel.sharedInstanceWithToken(kMixpanleToken)
+        Flurry.startSession(flurryAPIKey)
         return true
     }
 

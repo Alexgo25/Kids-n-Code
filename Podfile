@@ -6,6 +6,7 @@
 target 'Kids\'n\'Code' do
 
 pod 'Google/Analytics'
+pod 'Mixpanel'
 
 
 end

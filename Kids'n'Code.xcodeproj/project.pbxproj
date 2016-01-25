@@ -13,12 +13,12 @@
 		110952CD1AC6DF5B000A960A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 110952CC1AC6DF5B000A960A /* Images.xcassets */; };
 		110952D01AC6DF5B000A960A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 110952CE1AC6DF5B000A960A /* LaunchScreen.xib */; };
 		110952DC1AC6DF5B000A960A /* Codebusters_sampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */; };
+		111F52371C540A4C007A40A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111F52361C540A4C007A40A7 /* Security.framework */; };
+		114DE4C01C4442A6004B1EDF /* libprotobuf.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */; };
 		115C6E971ACBFA4200B79250 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C6E961ACBFA4200B79250 /* Robot.swift */; };
+		117CB8FF1C540CDC0020E240 /* libFlurry_7.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 117CB8FE1C540CDC0020E240 /* libFlurry_7.3.0.a */; };
 		1183EB671C44296A00DA88A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1183EB661C44296A00DA88A8 /* GoogleService-Info.plist */; };
 		11845F611C32FE0A00FDCBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11845F631C32FE0A00FDCBB2 /* Localizable.strings */; };
-		11913EFD1C0CE70900E3482A /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFC1C0CE70900E3482A /* libFMDB.a */; };
-		11913EFF1C0CE70E00E3482A /* libKSCrash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFE1C0CE70E00E3482A /* libKSCrash.a */; };
-		11913F011C0CE71300E3482A /* libprotobuf-c.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913F001C0CE71300E3482A /* libprotobuf-c.a */; };
 		1198E74E1BE905AA00AFE73A /* TimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E74D1BE905AA00AFE73A /* TimerDelegate.swift */; };
 		1198E7511BE9064E00AFE73A /* CBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1198E74F1BE9064E00AFE73A /* CBDataModel.xcdatamodeld */; };
 		1198E7531BE9067100AFE73A /* CoreDataAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E7521BE9067100AFE73A /* CoreDataAdapter.swift */; };
@@ -40,6 +40,7 @@
 		11A5F2E71C1894EB004A1A0A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A5F2E61C1894EB004A1A0A /* SystemConfiguration.framework */; };
 		11AEAAD91C0CC7CE000EB2E0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AEAAD71C0CC7CE000EB2E0 /* Fabric.framework */; };
 		11AEAADA1C0CC7CE000EB2E0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AEAAD81C0CC7CE000EB2E0 /* Crashlytics.framework */; };
+		11BB83101C4EA3DA0074FB99 /* VCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BB830F1C4EA3DA0074FB99 /* VCTest.swift */; };
 		11E1088C1C0F799F00D207A1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 110952DA1AC6DF5B000A960A /* Info.plist */; };
 		11E38C671AD949460061BE81 /* RobotStanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E38C661AD949460061BE81 /* RobotStanding.swift */; };
 		11E38C691AD94BCC0061BE81 /* RobotTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E38C681AD94BCC0061BE81 /* RobotTrack.swift */; };
@@ -137,14 +138,15 @@
 		110952D51AC6DF5B000A960A /* Kids'n'Code.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kids'n'Code.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		110952DA1AC6DF5B000A960A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Codebusters_sampleTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codebusters_sampleTests.swift; sourceTree = "<group>"; };
+		111F52361C540A4C007A40A7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kids'n'Code-Bridging-Header.h"; sourceTree = "<group>"; };
+		114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libprotobuf.tbd; path = usr/lib/libprotobuf.tbd; sourceTree = SDKROOT; };
 		115C6E961ACBFA4200B79250 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		117CB8FD1C540CD20020E240 /* Flurry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		117CB8FE1C540CDC0020E240 /* libFlurry_7.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.3.0.a; sourceTree = "<group>"; };
 		1183EB661C44296A00DA88A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11845F621C32FE0A00FDCBB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		11845F641C32FE1000FDCBB2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		11913EFC1C0CE70900E3482A /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "Pods/../build/Debug-iphoneos/libFMDB.a"; sourceTree = "<group>"; };
-		11913EFE1C0CE70E00E3482A /* libKSCrash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libKSCrash.a; path = "Pods/../build/Debug-iphoneos/libKSCrash.a"; sourceTree = "<group>"; };
-		11913F001C0CE71300E3482A /* libprotobuf-c.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libprotobuf-c.a"; path = "Pods/../build/Debug-iphoneos/libprotobuf-c.a"; sourceTree = "<group>"; };
 		1198E74D1BE905AA00AFE73A /* TimerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerDelegate.swift; sourceTree = "<group>"; };
 		1198E7501BE9064E00AFE73A /* CBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CBDataModel.xcdatamodel; sourceTree = "<group>"; };
 		1198E7521BE9067100AFE73A /* CoreDataAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAdapter.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		11A5F2E61C1894EB004A1A0A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		11AEAAD71C0CC7CE000EB2E0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		11AEAAD81C0CC7CE000EB2E0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		11BB830F1C4EA3DA0074FB99 /* VCTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCTest.swift; sourceTree = "<group>"; };
 		11E38C661AD949460061BE81 /* RobotStanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotStanding.swift; sourceTree = "<group>"; };
 		11E38C681AD94BCC0061BE81 /* RobotTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotTrack.swift; sourceTree = "<group>"; };
 		371DE81FA58A1197E757ADF8 /* libPods-Kids'n'Code.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kids'n'Code.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +241,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				111F52371C540A4C007A40A7 /* Security.framework in Frameworks */,
+				114DE4C01C4442A6004B1EDF /* libprotobuf.tbd in Frameworks */,
 				11A5F2E71C1894EB004A1A0A /* SystemConfiguration.framework in Frameworks */,
 				11A5F2E51C1894E0004A1A0A /* StoreKit.framework in Frameworks */,
 				11A5F2E31C1894D0004A1A0A /* MessageUI.framework in Frameworks */,
@@ -248,10 +253,8 @@
 				11A5F2D91C18948E004A1A0A /* CoreGraphics.framework in Frameworks */,
 				11A5F2D71C189480004A1A0A /* AVFoundation.framework in Frameworks */,
 				11A5F2D51C189476004A1A0A /* AudioToolbox.framework in Frameworks */,
+				117CB8FF1C540CDC0020E240 /* libFlurry_7.3.0.a in Frameworks */,
 				11A5F2D31C189469004A1A0A /* AdSupport.framework in Frameworks */,
-				11913F011C0CE71300E3482A /* libprotobuf-c.a in Frameworks */,
-				11913EFF1C0CE70E00E3482A /* libKSCrash.a in Frameworks */,
-				11913EFD1C0CE70900E3482A /* libFMDB.a in Frameworks */,
 				11AEAAD91C0CC7CE000EB2E0 /* Fabric.framework in Frameworks */,
 				11AEAADA1C0CC7CE000EB2E0 /* Crashlytics.framework in Frameworks */,
 				C1D04753D94947A12BC6EFFB /* libPods-Kids'n'Code.a in Frameworks */,
@@ -338,6 +341,7 @@
 		110952D81AC6DF5B000A960A /* Kids-n-Code_sampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				11BB830F1C4EA3DA0074FB99 /* VCTest.swift */,
 				110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */,
 				110952D91AC6DF5B000A960A /* Supporting Files */,
 			);
@@ -399,6 +403,8 @@
 		1198E74C1BE9058800AFE73A /* Mechanisms&Services */ = {
 			isa = PBXGroup;
 			children = (
+				117CB8FE1C540CDC0020E240 /* libFlurry_7.3.0.a */,
+				117CB8FD1C540CD20020E240 /* Flurry.h */,
 				6131E1321AD2C9FF00D69DD6 /* Helper.swift */,
 				61F698C11BAC1F120022018A /* Switcher.swift */,
 				617AB2131BAB68DF00DC71BD /* AudioPlayer.swift */,
@@ -417,6 +423,8 @@
 		1841D57F6CCD39FE3C08D554 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				111F52361C540A4C007A40A7 /* Security.framework */,
+				114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */,
 				11A5F2E61C1894EB004A1A0A /* SystemConfiguration.framework */,
 				11A5F2E41C1894E0004A1A0A /* StoreKit.framework */,
 				11A5F2E21C1894D0004A1A0A /* MessageUI.framework */,
@@ -428,9 +436,6 @@
 				11A5F2D61C189480004A1A0A /* AVFoundation.framework */,
 				11A5F2D41C189476004A1A0A /* AudioToolbox.framework */,
 				11A5F2D21C189469004A1A0A /* AdSupport.framework */,
-				11913F001C0CE71300E3482A /* libprotobuf-c.a */,
-				11913EFE1C0CE70E00E3482A /* libKSCrash.a */,
-				11913EFC1C0CE70900E3482A /* libFMDB.a */,
 				371DE81FA58A1197E757ADF8 /* libPods-Kids'n'Code.a */,
 			);
 			name = Frameworks;
@@ -754,6 +759,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11BB83101C4EA3DA0074FB99 /* VCTest.swift in Sources */,
 				110952DC1AC6DF5B000A960A /* Codebusters_sampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -890,6 +896,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -901,6 +908,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Codebusters_sample/Flurry",
+					"$(PROJECT_DIR)/Codebusters_sample",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Alexander.kidsncode;
 				PRODUCT_NAME = Codebusters_sample;
@@ -916,6 +925,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -927,6 +937,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Codebusters_sample/Flurry",
+					"$(PROJECT_DIR)/Codebusters_sample",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Alexander.kidsncode;
 				PRODUCT_NAME = Codebusters_sample;
