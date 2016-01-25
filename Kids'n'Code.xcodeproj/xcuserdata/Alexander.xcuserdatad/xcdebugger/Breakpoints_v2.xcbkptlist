@@ -42,12 +42,12 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/LevelScene.swift"
-                  timestampString = "475266315.14213"
+                  timestampString = "475409256.501125"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "219"
                   endingLineNumber = "219"
-                  offsetFromSymbolStart = "1552">
+                  offsetFromSymbolStart = "2084">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -57,12 +57,12 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/LevelScene.swift"
-                  timestampString = "475266315.142307"
+                  timestampString = "475409256.501353"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "219"
                   endingLineNumber = "219"
-                  offsetFromSymbolStart = "1568">
+                  offsetFromSymbolStart = "2112">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "474234405.624531"
+            timestampString = "475408765.503458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "455"

@@ -25,6 +25,8 @@
 #define kApplicationWillTerminateKey "TerminateQuit"
 #define kIfLastLevelInPack "LastLevelInPack"
 #define kShowAdsNotificationKey "showAdsAtTheEnd"
+#define kActionCellSelectedKey "actionCellSelectedKey"
+#define kActionCellDeselectAllKey "actionCellDeselectAll"
 //action keys
 #define kTerminateApplicationKey "terminateApplication"
 //name keys

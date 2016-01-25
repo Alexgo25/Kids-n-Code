@@ -85,10 +85,20 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         //Listening to notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "AddNewControls", name: kActionCellSelectedKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeNewControls", name: kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kNeedUpdatesKey)
     }
     
     //Handling notifications
+    
+    func addNewControls() {
+        
+    }
+    
+    func removeNewControls() {
+        
+    }
     
     func finishWithSuccess() {
         print("Finished")

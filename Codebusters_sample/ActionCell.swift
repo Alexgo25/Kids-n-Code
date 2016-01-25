@@ -11,10 +11,12 @@ import SpriteKit
 
 class ActionCell: SKSpriteNode {
     static let actionCellSize = CGSize(width: 239, height: 66)
+    static var selectedIndexes : [Int] = []
     
     var actionType: ActionType
     private static var upperCellIndex = 0
     private var cellBackground: SKSpriteNode
+    var selected = false
     
     private static let cellsLayerStartPosition = CGPoint(x: 1765, y: 1232)
     static var cells: [ActionCell] = []
@@ -28,7 +30,7 @@ class ActionCell: SKSpriteNode {
         self.actionType = actionType
         
         super.init(texture: nil, color: SKColor.clearColor(), size: texture.size())
-
+        self.userInteractionEnabled = true
         addChild(cellBackground)
         position = getNextPosition()
         zPosition = 2001
@@ -57,6 +59,59 @@ class ActionCell: SKSpriteNode {
             self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType)")
         }
     }
+    
+    func setSelected() -> SKAction {
+        let atlas = SKTextureAtlas(named: "ActionCells")
+        return SKAction.runBlock({
+            if (ActionCell.selectedIndexes.count == 0) {
+                self.cellBackground.texture = atlas.textureNamed("ActionCell_selected")
+                self.selected = true
+                ActionCell.selectedIndexes.append(Int(self.name!)!)
+                print(ActionCell.selectedIndexes)
+                NSNotificationCenter.defaultCenter().postNotificationName(kActionCellSelectedKey , object: NotificationZombie.sharedInstance)
+            }
+            else {
+                let index = Int(self.name!)!
+                var findElement = false
+                for element in ActionCell.selectedIndexes {
+                    if (index == element + 1 || index == element - 1) {
+                        findElement = true
+                        break
+                    }
+                }
+                if (findElement) {
+                    self.cellBackground.texture = atlas.textureNamed("ActionCell_selected")
+                    self.selected = true
+                    ActionCell.selectedIndexes.append(Int(self.name!)!)
+                    print(ActionCell.selectedIndexes)
+                }
+            }
+            
+        })
+    }
+    
+    func deselect() -> SKAction {
+        let atlas = SKTextureAtlas(named: "ActionCells")
+        return SKAction.runBlock() {
+            var findElement = true
+            let value = Int(self.name!)!
+            if (ActionCell.selectedIndexes.contains(value - 1) && ActionCell.selectedIndexes.contains(value + 1)) {
+                findElement = false
+            }
+            if (findElement) {
+                self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType)")
+                self.selected = false
+                let element = Int(self.name!)!
+                let index = ActionCell.selectedIndexes.indexOf(element)
+                ActionCell.selectedIndexes.removeAtIndex(index!)
+                print(ActionCell.selectedIndexes)
+            }
+            if (ActionCell.selectedIndexes.count == 0){
+                NSNotificationCenter.defaultCenter().postNotificationName(kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
+            }
+            
+        }
+    }
 //markLabels
     func showLabel() {
         let label = SKLabelNode(fontNamed: "Ubuntu Bold")
@@ -79,6 +134,19 @@ class ActionCell: SKSpriteNode {
         label.verticalAlignmentMode = .Center
         label.zPosition = -1
         addChild(label)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        //tetect touch
+        print("ActionCell is touched")
+        if (selected) {
+            self.runAction(deselect())
+            //Drop notification to LevelScene
+        }
+        else {
+            self.runAction(setSelected())
+            //Drop notification to LevelScene
+        }
     }
     
     static func resetCellTextures() {

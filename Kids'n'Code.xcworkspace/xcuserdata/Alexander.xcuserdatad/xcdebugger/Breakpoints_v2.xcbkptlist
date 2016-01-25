@@ -122,12 +122,12 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/PauseView.swift"
-                  timestampString = "475266315.13691"
+                  timestampString = "475409256.480954"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "80"
                   endingLineNumber = "80"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "30">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -137,12 +137,12 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/PauseView.swift"
-                  timestampString = "475266315.13708"
+                  timestampString = "475409256.482313"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "79"
                   endingLineNumber = "79"
-                  offsetFromSymbolStart = "0">
+                  offsetFromSymbolStart = "13">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -168,12 +168,12 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/EndLevelView.swift"
-                  timestampString = "475266315.1383"
+                  timestampString = "475409256.485368"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "12"
                   endingLineNumber = "12"
-                  offsetFromSymbolStart = "0">
+                  offsetFromSymbolStart = "34">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -183,12 +183,12 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/EndLevelView.swift"
-                  timestampString = "475266315.138488"
+                  timestampString = "475409256.485664"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "12"
                   endingLineNumber = "12"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "3">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -232,12 +232,12 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/ButtonNode.swift"
-                  timestampString = "475266657.61204"
+                  timestampString = "475409256.491541"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "47"
                   endingLineNumber = "47"
-                  offsetFromSymbolStart = "136">
+                  offsetFromSymbolStart = "143">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -247,12 +247,12 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/ButtonNode.swift"
-                  timestampString = "475266657.612258"
+                  timestampString = "475409256.491833"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "48"
                   endingLineNumber = "48"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "33">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -286,6 +286,38 @@
             startingLineNumber = "104"
             endingLineNumber = "104"
             landmarkName = "touchesEnded(_:withEvent:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/Robot.swift"
+            timestampString = "475406583.234569"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
+            landmarkName = "touchesBegan(_:withEvent:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "475410715.401203"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "touchesBegan(_:withEvent:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
