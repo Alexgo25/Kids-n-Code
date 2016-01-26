@@ -21,6 +21,8 @@ enum GameButtonType: String {
     Exit_EndLevelView,
     Restart_EndLevelView,
     NextLevel_EndLevelView,
+    Cancel_Loop,
+    Ready_Loop,
     Ok
     
     func getPosition() -> CGPoint {
@@ -37,6 +39,8 @@ enum GameButtonType: String {
         case .NextLevel_EndLevelView: return CGPoint(x: 1363, y: 581.5)
         case .Restart_EndLevelView: return CGPoint(x: 1018.5, y: 581.5)
         case .Exit_EndLevelView: return CGPoint(x: 672, y: 581.5)
+        case .Cancel_Loop: return CGPoint(x: 1613, y: 105)
+        case .Ready_Loop: return CGPoint(x: 1913, y: 105)
         }
     }
 }
@@ -61,9 +65,15 @@ class GameButton: ButtonNode {
         
         gameButtonType = type
         
+        
+        
         super.init(texture: texture, color: UIColor(), size: texture.size())
         position = type.getPosition()
         zPosition = 1002
+        
+        if (type == .Ready_Loop || type == .Cancel_Loop) {
+            alpha = 0
+        }
         
         name = "GameButton_\(type.rawValue)"
         

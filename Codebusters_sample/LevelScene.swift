@@ -41,6 +41,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     let button_Start = GameButton(type: .Start)
     let button_Debug = GameButton(type: .Debug)
     let button_Clear = GameButton(type: .Clear)
+    let button_ReadyLoop = GameButton(type: .Ready_Loop)
+    let button_CancelLoop = GameButton(type: .Cancel_Loop)
     
     var robot: Robot
     var detail: Detail
@@ -85,15 +87,22 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         //Listening to notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "AddNewControls", name: kActionCellSelectedKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeNewControls", name: kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addNewControls", name: kActionCellSelectedKey, object: NotificationZombie.sharedInstance)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeNewControls", name: kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kNeedUpdatesKey)
     }
     
     //Handling notifications
     
     func addNewControls() {
-        
+        //remove old
+        let fadeOut = SKAction.group([SKAction.moveByX(-400, y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
+        button_Clear.runAction(fadeOut)
+        button_Start.runAction(fadeOut)
+        button_Restart.runAction(fadeOut)
+        button_Debug.runAction(fadeOut)
+        button_ReadyLoop.runAction(SKAction.fadeInWithDuration(0.2))
+        button_CancelLoop.runAction(SKAction.fadeInWithDuration(0.2))
     }
     
     func removeNewControls() {
@@ -516,6 +525,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 sceneManager.presentScene(.CurrentLevel)
             case .NextLevel_EndLevelView:
                 sceneManager.presentScene(.NextLevel)
+            case .Ready_Loop , .Cancel_Loop:
+                break
             }
         }
     }
