@@ -67,7 +67,13 @@ class AnalyticsCore : NSObject{
             arr.addObject(returnLevelAsNSDictionary(level))
         }
         let deviceid = NSUserDefaults.standardUserDefaults().objectForKey("deviceID") as! String
-        let pushToken = NSUserDefaults.standardUserDefaults().objectForKey(kDevicePushTokenKey) as! String
+        let pushToken : String!
+        if (NSUserDefaults.standardUserDefaults().objectForKey(kDevicePushTokenKey) != nil) {
+            pushToken = NSUserDefaults.standardUserDefaults().objectForKey(kDevicePushTokenKey) as! String
+        }
+        else {
+            pushToken = "null"
+        }
         let dict = ["device" : deviceid,
             "levels" : arr,
             "pushToken" : pushToken
