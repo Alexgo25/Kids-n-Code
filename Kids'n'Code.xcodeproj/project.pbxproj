@@ -16,9 +16,6 @@
 		115C6E971ACBFA4200B79250 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C6E961ACBFA4200B79250 /* Robot.swift */; };
 		1183EB671C44296A00DA88A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1183EB661C44296A00DA88A8 /* GoogleService-Info.plist */; };
 		11845F611C32FE0A00FDCBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11845F631C32FE0A00FDCBB2 /* Localizable.strings */; };
-		11913EFD1C0CE70900E3482A /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFC1C0CE70900E3482A /* libFMDB.a */; };
-		11913EFF1C0CE70E00E3482A /* libKSCrash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913EFE1C0CE70E00E3482A /* libKSCrash.a */; };
-		11913F011C0CE71300E3482A /* libprotobuf-c.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11913F001C0CE71300E3482A /* libprotobuf-c.a */; };
 		1198E74E1BE905AA00AFE73A /* TimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E74D1BE905AA00AFE73A /* TimerDelegate.swift */; };
 		1198E7511BE9064E00AFE73A /* CBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1198E74F1BE9064E00AFE73A /* CBDataModel.xcdatamodeld */; };
 		1198E7531BE9067100AFE73A /* CoreDataAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E7521BE9067100AFE73A /* CoreDataAdapter.swift */; };
@@ -249,9 +246,6 @@
 				11A5F2D71C189480004A1A0A /* AVFoundation.framework in Frameworks */,
 				11A5F2D51C189476004A1A0A /* AudioToolbox.framework in Frameworks */,
 				11A5F2D31C189469004A1A0A /* AdSupport.framework in Frameworks */,
-				11913F011C0CE71300E3482A /* libprotobuf-c.a in Frameworks */,
-				11913EFF1C0CE70E00E3482A /* libKSCrash.a in Frameworks */,
-				11913EFD1C0CE70900E3482A /* libFMDB.a in Frameworks */,
 				11AEAAD91C0CC7CE000EB2E0 /* Fabric.framework in Frameworks */,
 				11AEAADA1C0CC7CE000EB2E0 /* Crashlytics.framework in Frameworks */,
 				C1D04753D94947A12BC6EFFB /* libPods-Kids'n'Code.a in Frameworks */,

@@ -135,9 +135,7 @@ public class Tutorial: SKSpriteNode {
                 }
             }
             
-            if nodeAtPoint(touchLocation) == slides {
-                showNextSlide(.ToLeft)
-            }
+            showNextSlide(.ToLeft)
         }
     }
     
