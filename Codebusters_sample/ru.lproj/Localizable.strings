@@ -50,6 +50,7 @@ RESTART_BUTTON_LABEL = "Заново";
 DEBUG_BUTTON_LABEL = "Отладка";
 RETURN_BUTTON_LABEL = "В начало";
 START_BUTTON_LABEL = "Запуск";
+NUMBER_OF_REPEATS_LABEL = "Число повторений:";
 
 //Action buttons label
 STEP_BUTTON_LABEL = "ШАГНУТЬ";

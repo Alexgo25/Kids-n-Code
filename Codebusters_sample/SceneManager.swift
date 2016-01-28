@@ -44,7 +44,14 @@ class SceneManager {
         scene.sceneManager = self
         
         let transition = SKTransition.fadeWithDuration(0.5)
+        if (self.view.scene != nil){
+            let currentScene = self.view.scene!
+            currentScene.removeAllActions()
+            currentScene.removeAllChildren()
+            currentScene.removeFromParent()
+        }
         self.view.presentScene(scene, transition: transition)
+        
     }
     
     func presentScene(sceneType: SceneType) {
@@ -53,6 +60,12 @@ class SceneManager {
             if currentLevelPack == -1 && gameProgressManager.currentDetailType != .Crystall {
                 presentScene(MenuScene(robotTextImage: gameProgressManager.currentDetailType.rawValue + kDetailTextSuffix, data: levelPacksInfo))
             } else {
+                if (self.view.scene != nil){
+                    let currentScene = self.view.scene!
+                    currentScene.removeAllActions()
+                    currentScene.removeAllChildren()
+                    currentScene.removeFromParent()
+                }
                 presentScene(MenuScene(data: levelPacksInfo))
             }
         case .Level(let levelPack, let levelNumber):
@@ -63,6 +76,12 @@ class SceneManager {
             }
             let levelConfiguration = gameProgressManager.getLevelConfiguration()
             currentLevelInfo = levelConfiguration
+            if (self.view.scene != nil){
+                let currentScene = self.view.scene!
+                currentScene.removeAllActions()
+                currentScene.removeAllChildren()
+                currentScene.removeFromParent()
+            }
             presentScene(LevelScene(levelInfo: levelConfiguration))
         case .NextLevel:
             gameProgressManager.setNextLevel()
@@ -74,6 +93,12 @@ class SceneManager {
             fallthrough
         case .CurrentLevel:
             if currentLevelInfo != nil {
+                if (self.view.scene != nil){
+                    let currentScene = self.view.scene!
+                    currentScene.removeAllActions()
+                    currentScene.removeAllChildren()
+                    currentScene.removeFromParent()
+                }
                 presentScene(LevelScene(levelInfo: currentLevelInfo!))
             }
         }

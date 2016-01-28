@@ -12,12 +12,12 @@ let kSoundLabelText = NSLocalizedString("SOUNDS_SWITCHER", comment: "Switcher so
 let kMusicLabelText = NSLocalizedString("MUSIC_SWITCHER", comment: "Switcher music label")
 
 class PauseView: SKSpriteNode, ButtonNodeResponderType {
-    private let backgroundLeftPart = SKSpriteNode(imageNamed: "pauseBackgroundLeftPart")
-    private let backgroundRightPart = SKSpriteNode(imageNamed: "pauseBackgroundRightPart")
+    private var backgroundLeftPart = SKSpriteNode(imageNamed: "pauseBackgroundLeftPart")
+    private var backgroundRightPart = SKSpriteNode(imageNamed: "pauseBackgroundRightPart")
     
-    private let buttonRestart = GameButton(type: .Restart_PauseView)
-    private let buttonContinue = GameButton(type: .Continue_PauseView)
-    private let buttonExit = GameButton(type: .Exit_PauseView)
+    private var buttonRestart = GameButton(type: .Restart_PauseView)
+    private var buttonContinue = GameButton(type: .Continue_PauseView)
+    private var buttonExit = GameButton(type: .Exit_PauseView)
     
     private let soundSwitcher: SoundSwitcher
     private let musicSwitcher: MusicSwitcher
@@ -91,6 +91,8 @@ class PauseView: SKSpriteNode, ButtonNodeResponderType {
             }
         }
     }
+    
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -23,6 +23,7 @@ let kRestartButtonLabel = NSLocalizedString("RESTART_BUTTON_LABEL", comment: "Re
 //Other labels
 let kProgramLabel = NSLocalizedString("PROGRAM_LABEL", comment: "Program label top-right")
 let kOnstartLabel = NSLocalizedString("ONSTART_LABEL", comment: "ON Start label below the program")
+let kNumberOfRepeatsLabel = NSLocalizedString("NUMBER_OF_REPEATS_LABEL", comment: "Number of repeats for the loop")
 
 
 class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
@@ -35,14 +36,15 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     let levelBackground1 = SKSpriteNode(imageNamed: "levelBackground1")
     let levelBackground2 = SKSpriteNode(imageNamed: "levelBackground2")
     
-    let button_Pause = GameButton(type: .Pause)
-    let button_Restart = GameButton(type: .Restart)
-    let button_Tips = GameButton(type: .Tips)
-    let button_Start = GameButton(type: .Start)
-    let button_Debug = GameButton(type: .Debug)
-    let button_Clear = GameButton(type: .Clear)
-    let button_ReadyLoop = GameButton(type: .Ready_Loop)
-    let button_CancelLoop = GameButton(type: .Cancel_Loop)
+    var button_Pause : GameButton!
+    var button_Restart : GameButton!
+    var button_Tips : GameButton!
+    var button_Start : GameButton!
+    var button_Debug : GameButton!
+    var button_Clear : GameButton!
+    var button_ReadyLoop : GameButton!
+    var button_CancelLoop : GameButton!
+    var loopControl = LoopControlFullRect()
     
     var robot: Robot
     var detail: Detail
@@ -88,25 +90,48 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addNewControls", name: kActionCellSelectedKey, object: NotificationZombie.sharedInstance)
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeNewControls", name: kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeNewControls", name: kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kNeedUpdatesKey)
+        //Game buttons
+        createGameButtons()
     }
     
     //Handling notifications
     
     func addNewControls() {
         //remove old
+        print("addNewControls")
         let fadeOut = SKAction.group([SKAction.moveByX(-400, y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
         button_Clear.runAction(fadeOut)
         button_Start.runAction(fadeOut)
         button_Restart.runAction(fadeOut)
         button_Debug.runAction(fadeOut)
-        button_ReadyLoop.runAction(SKAction.fadeInWithDuration(0.2))
-        button_CancelLoop.runAction(SKAction.fadeInWithDuration(0.2))
+        let addnew = SKAction.fadeInWithDuration(0.2)
+        button_CancelLoop.runAction(addnew)
+        button_ReadyLoop.alpha = 1
+        loopControl.appearInScene()
     }
     
     func removeNewControls() {
-        
+        print("removeNewControls")
+        let fadeIn = SKAction.group([SKAction.moveByX(400, y: 0, duration: 0.2) , SKAction.fadeInWithDuration(0.2)])
+        button_Clear.runAction(fadeIn)
+        button_Start.runAction(fadeIn)
+        button_Restart.runAction(fadeIn)
+        button_Debug.runAction(fadeIn)
+        loopControl.disappear()
+    }
+    
+    func createGameButtons(){
+         button_Pause = GameButton(type: .Pause)
+         button_Restart = GameButton(type: .Restart)
+         button_Tips = GameButton(type: .Tips)
+         button_Start = GameButton(type: .Start)
+         button_Debug = GameButton(type: .Debug)
+         button_Clear = GameButton(type: .Clear)
+         button_ReadyLoop = GameButton(type: .Ready_Loop)
+         button_CancelLoop = GameButton(type: .Cancel_Loop)
+        createLabel(kNumberOfRepeatsLabel, fontColor: UIColor.blackColor(), fontSize: 28.56, position: CGPoint(x: 1800, y: 412))
     }
     
     func finishWithSuccess() {
@@ -410,6 +435,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         addChild(button_Restart)
         addChild(button_Debug)
         addChild(button_Clear)
+        addChild(loopControl)
     }
     
     func pauseGame() {

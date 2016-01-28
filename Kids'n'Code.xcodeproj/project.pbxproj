@@ -13,6 +13,8 @@
 		110952CD1AC6DF5B000A960A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 110952CC1AC6DF5B000A960A /* Images.xcassets */; };
 		110952D01AC6DF5B000A960A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 110952CE1AC6DF5B000A960A /* LaunchScreen.xib */; };
 		110952DC1AC6DF5B000A960A /* Codebusters_sampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */; };
+		110F7EF01C5AAB01000E947B /* LoopControlPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110F7EEF1C5AAB01000E947B /* LoopControlPolygon.swift */; };
+		110F7EF21C5AAB2D000E947B /* LoopControlFullRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110F7EF11C5AAB2D000E947B /* LoopControlFullRect.swift */; };
 		111F52371C540A4C007A40A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111F52361C540A4C007A40A7 /* Security.framework */; };
 		114DE4C01C4442A6004B1EDF /* libprotobuf.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */; };
 		115C6E971ACBFA4200B79250 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C6E961ACBFA4200B79250 /* Robot.swift */; };
@@ -138,6 +140,8 @@
 		110952D51AC6DF5B000A960A /* Kids'n'Code.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kids'n'Code.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		110952DA1AC6DF5B000A960A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Codebusters_sampleTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		110952DB1AC6DF5B000A960A /* Codebusters_sampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codebusters_sampleTests.swift; sourceTree = "<group>"; };
+		110F7EEF1C5AAB01000E947B /* LoopControlPolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopControlPolygon.swift; sourceTree = "<group>"; };
+		110F7EF11C5AAB2D000E947B /* LoopControlFullRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopControlFullRect.swift; sourceTree = "<group>"; };
 		111F52361C540A4C007A40A7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kids'n'Code-Bridging-Header.h"; sourceTree = "<group>"; };
 		114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libprotobuf.tbd; path = usr/lib/libprotobuf.tbd; sourceTree = SDKROOT; };
@@ -356,9 +360,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		110F7EEE1C5AAACC000E947B /* Loop controls */ = {
+			isa = PBXGroup;
+			children = (
+				110F7EEF1C5AAB01000E947B /* LoopControlPolygon.swift */,
+				110F7EF11C5AAB2D000E947B /* LoopControlFullRect.swift */,
+			);
+			name = "Loop controls";
+			sourceTree = "<group>";
+		};
 		1198E7491BE904B900AFE73A /* Game Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				110F7EEE1C5AAACC000E947B /* Loop controls */,
 				61A4362A1AD16D1B002B8540 /* ActionCell.swift */,
 				615CEFD31AE6597B006403B5 /* Detail.swift */,
 				115C6E961ACBFA4200B79250 /* Robot.swift */,
@@ -724,6 +738,7 @@
 				616C2BE11C29FAE0008A471D /* LevelConfiguration.swift in Sources */,
 				1198E7771BE90B3C00AFE73A /* Level.swift in Sources */,
 				115C6E971ACBFA4200B79250 /* Robot.swift in Sources */,
+				110F7EF01C5AAB01000E947B /* LoopControlPolygon.swift in Sources */,
 				615CEFD41AE6597B006403B5 /* Detail.swift in Sources */,
 				1198E74E1BE905AA00AFE73A /* TimerDelegate.swift in Sources */,
 				110952C81AC6DF5B000A960A /* GameViewController.swift in Sources */,
@@ -737,6 +752,7 @@
 				61A436291AD09CC5002B8540 /* ActionButton.swift in Sources */,
 				1198E7791BE90B3C00AFE73A /* Action.swift in Sources */,
 				617AB2141BAB68DF00DC71BD /* AudioPlayer.swift in Sources */,
+				110F7EF21C5AAB2D000E947B /* LoopControlFullRect.swift in Sources */,
 				1198E77B1BE90B3C00AFE73A /* Touch.swift in Sources */,
 				618F7BAA1AEEEAC500B2DBC5 /* LevelScene.swift in Sources */,
 				61A4362B1AD16D1B002B8540 /* ActionCell.swift in Sources */,
