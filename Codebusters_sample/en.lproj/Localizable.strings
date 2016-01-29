@@ -50,7 +50,9 @@ RESTART_BUTTON_LABEL = "Restart";
 DEBUG_BUTTON_LABEL = "Debug";
 RETURN_BUTTON_LABEL = "Return";
 START_BUTTON_LABEL = "Run";
-NUMBER_OF_REPEATS_LABEL = "Number of repeats";
+CANCEL_LC_BUTTON_LABEL = "Cancel";
+OK_LC_BUTTON_LABEL = "Ok";
+NUMBER_OF_REPEATS_LABEL = "Number of repeats:";
 
 //Action buttons label
 STEP_BUTTON_LABEL = "STEP";

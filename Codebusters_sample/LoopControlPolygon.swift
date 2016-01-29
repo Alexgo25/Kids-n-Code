@@ -9,8 +9,8 @@
 import Foundation
 import SpriteKit
 
-let LCLeftPolygonPosition = CGPoint(x: 53, y: 66)
-let LCRightPolygonPosition = CGPoint(x: 343, y: 66)
+let LCLeftPolygonPosition = CGPoint(x: -150, y: -14)
+let LCRightPolygonPosition = CGPoint(x: 150, y: -14)
 
 enum LCPolygonType : String {
     case Right = "Right",
@@ -19,9 +19,9 @@ enum LCPolygonType : String {
     func getLCPolygonPosition()->CGPoint {
         switch self {
         case .Right :
-            return LCLeftPolygonPosition
-        default :
             return LCRightPolygonPosition
+        default :
+            return LCLeftPolygonPosition
         }
     }
     
@@ -47,6 +47,8 @@ class LoopControlPolygon : SKSpriteNode {
         let size = LCPolygonSize
         self.init(texture: texture, color: color, size: size)
         type = polygonType
+        zPosition = 1003
+        position = polygonType.getLCPolygonPosition()
     }
 
     required init?(coder aDecoder: NSCoder) {

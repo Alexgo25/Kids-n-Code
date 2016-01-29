@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "475706794.452446"
+            timestampString = "475794630.954951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "handlePanFrom(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "475706794.452446"
+            timestampString = "475794630.954951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "handlePanFrom(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "475706794.452446"
+            timestampString = "475794630.954951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "handlePanFrom(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "475706794.452446"
+            timestampString = "475794630.954951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "gestureRecognizer(_:shouldRecognizeSimultaneouslyWithGestureRecognizer:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "475706794.452446"
+            timestampString = "475794630.954951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "handlePinchFrom(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "475706920.849374"
+            timestampString = "475794630.954951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "495"
+            endingLineNumber = "495"
             landmarkName = "addGestures()"
             landmarkType = "5">
          </BreakpointContent>

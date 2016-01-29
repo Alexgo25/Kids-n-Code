@@ -17,6 +17,7 @@ class ActionCell: SKSpriteNode {
     private static var upperCellIndex = 0
     private var cellBackground: SKSpriteNode
     var selected = false
+    var numberOfRepeats = 1
     
     private static let cellsLayerStartPosition = CGPoint(x: 1765, y: 1232)
     static var cells: [ActionCell] = []

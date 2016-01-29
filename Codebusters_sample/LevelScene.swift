@@ -106,9 +106,9 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         button_Start.runAction(fadeOut)
         button_Restart.runAction(fadeOut)
         button_Debug.runAction(fadeOut)
-        let addnew = SKAction.fadeInWithDuration(0.2)
-        button_CancelLoop.runAction(addnew)
-        button_ReadyLoop.alpha = 1
+        let fadeIn = SKAction.group([SKAction.moveByX(-400, y: 0, duration: 0.2), SKAction.fadeInWithDuration(0.2)])
+        button_CancelLoop.runAction(fadeIn)
+        button_ReadyLoop.runAction(fadeIn)
         loopControl.appearInScene()
     }
     
@@ -119,6 +119,9 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         button_Start.runAction(fadeIn)
         button_Restart.runAction(fadeIn)
         button_Debug.runAction(fadeIn)
+        let fadeOut = SKAction.group([SKAction.moveByX(400, y: 0, duration: 0.2) , SKAction.fadeOutWithDuration(0.2)])
+        button_ReadyLoop.runAction(fadeOut)
+        button_CancelLoop.runAction(fadeOut)
         loopControl.disappear()
     }
     
@@ -435,6 +438,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         addChild(button_Restart)
         addChild(button_Debug)
         addChild(button_Clear)
+        addChild(button_CancelLoop)
+        addChild(button_ReadyLoop)
         addChild(loopControl)
     }
     
