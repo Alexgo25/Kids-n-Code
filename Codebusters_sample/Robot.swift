@@ -84,8 +84,8 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     
     func appendAction(actionType: ActionType) -> Bool {
         if canPerformAction(actionType) {
-            let highlightBeginAction = ActionCell.cells[actions.count].highlightBegin()
-            let highlightEndAction = ActionCell.cells[actions.count].highlightEnd()
+            //let highlightBeginAction = ActionCell.cells[actions.count].highlightBegin()
+            //let highlightEndAction = ActionCell.cells[actions.count].highlightEnd()
             var action: SKAction
             switch actionType {
             case .Move:
@@ -99,7 +99,10 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             default:
                 return false
             }
-            let sequence = SKAction.sequence([SKAction.runBlock() { self.runningActions = true },  highlightBeginAction, action, highlightEndAction, SKAction.runBlock() { self.runningActions = false }])
+            let sequence = SKAction.sequence([SKAction.runBlock() { self.runningActions = true },  //highlightBeginAction,
+                action,
+                //highlightEndAction,
+                SKAction.runBlock() { self.runningActions = false }])
             actions.append(sequence)
         } else {
             actions.append(SKAction.runBlock() {
@@ -246,9 +249,24 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         if !ActionCell.cells.isEmpty && isOnStart {
             isOnStart = false
             
-            for cell in ActionCell.cells {
-                if appendAction(cell.actionType) {
-                    break
+            
+            for (var i = 0 ; i < ActionCell.cells.count ; i++) {
+                if (ActionCell.cells[i].numberOfRepeats > 1) {
+                    for (var j = 0 ; j < ActionCell.cells[i].numberOfRepeats ; j++) {
+                        var index = i
+                        while(true) {
+                            if (ActionCell.cells[index].numberOfRepeats == 1) {
+                                break
+                            }
+                            else {
+                                appendAction(ActionCell.cells[index].actionType)
+                                index++                           
+                            }
+                        }
+                    }
+                }
+                else {
+                    appendAction(ActionCell.cells[i].actionType)
                 }
             }
             

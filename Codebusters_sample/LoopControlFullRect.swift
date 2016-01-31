@@ -24,7 +24,7 @@ let LCTopLabelPosition = CGPoint(x: 0, y: 92)
 //text for top label
 let kLCTopLabelText = NSLocalizedString("NUMBER_OF_REPEATS_LABEL", comment: "Top label text")
 
-class LoopControlFullRect : SKSpriteNode , LCPolygonResponder {
+class LoopControlFullRect : SKSpriteNode , LCPolygonResponder  {
     
     private let leftPolygon = LoopControlPolygon(polygonType: .Left)
     private let rightPolygon = LoopControlPolygon(polygonType: .Right)
@@ -43,8 +43,6 @@ class LoopControlFullRect : SKSpriteNode , LCPolygonResponder {
         super.init(texture: texture, color: UIColor.clearColor(), size: size)
         addChild(leftPolygon)
         addChild(rightPolygon)
-        leftPolygon.delegate = self
-        rightPolygon.delegate = self
         zPosition = 1002
         position = LCFullRectInitialPosition
         addLabels()
@@ -55,19 +53,6 @@ class LoopControlFullRect : SKSpriteNode , LCPolygonResponder {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func leftPolygonTap() {
-        print("leftTap")
-        if (numberOfRepeats > 2) {
-            numberOfRepeats--
-            updateLabel()
-        }
-    }
-    
-    func rightPolygonTap() {
-        print("rightTap")
-        numberOfRepeats++
-        updateLabel()
-    }
     
     func updateLabel() {
         numberOfRepeatsLabel.text = String(numberOfRepeats)
@@ -90,6 +75,18 @@ class LoopControlFullRect : SKSpriteNode , LCPolygonResponder {
         topLabel = createLabel(kLCTopLabelText, fontColor: UIColor.blackColor(), fontSize: 28.56, position: LCTopLabelPosition)
         addChild(topLabel)
         addChild(numberOfRepeatsLabel)
+    }
+    
+    func leftPolygonTap() {
+        print("left tap")
+        if (numberOfRepeats > 2) {
+            numberOfRepeats--
+        }
+    }
+    
+    func rightPolygonTap() {
+        print("right tap")
+        numberOfRepeats++
     }
     
 }

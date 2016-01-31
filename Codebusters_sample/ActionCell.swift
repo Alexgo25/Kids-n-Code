@@ -19,6 +19,7 @@ class ActionCell: SKSpriteNode {
     var selected = false
     var numberOfRepeats = 1
     
+    
     private static let cellsLayerStartPosition = CGPoint(x: 1765, y: 1232)
     static var cells: [ActionCell] = []
     static let cellsLayer = SKNode()
@@ -111,6 +112,12 @@ class ActionCell: SKSpriteNode {
                 NSNotificationCenter.defaultCenter().postNotificationName(kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
             }
             
+        }
+    }
+    
+    static func deselectAll() {
+        for cell in ActionCell.cells {
+            cell.runAction(cell.deselect())
         }
     }
 //markLabels

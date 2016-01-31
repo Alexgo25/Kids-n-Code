@@ -34,7 +34,10 @@ protocol LCPolygonResponder {
 
 class LoopControlPolygon : SKSpriteNode {
     
-    var delegate : LCPolygonResponder!
+    var delegate : LCPolygonResponder {
+        guard let responder = parent as? LCPolygonResponder else { fatalError() }
+        return responder
+    }
     var type : LCPolygonType?
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -47,24 +50,39 @@ class LoopControlPolygon : SKSpriteNode {
         let size = LCPolygonSize
         self.init(texture: texture, color: color, size: size)
         type = polygonType
-        zPosition = 1003
+        zPosition = 2003
         position = polygonType.getLCPolygonPosition()
+        userInteractionEnabled = true
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        switch type! {
-        case .Right :
-            delegate.leftPolygonTap()
-        default :
-            delegate.rightPolygonTap()
+    func containsTouches(touches: Set<UITouch>) -> Bool {
+        guard let scene = parent else { fatalError() }
+        
+        return touches.contains { touch in
+            let touchLocation = touch.locationInNode(scene)
+            let touchedNode = scene.nodeAtPoint(touchLocation)
+            return touchedNode === self || touchedNode.inParentHierarchy(self)
         }
     }
+
     
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if (containsTouches(touches)) {
+            switch type! {
+            case .Right :
+                delegate.rightPolygonTap()
+                super.touchesBegan(touches, withEvent: event)
+            default :
+                delegate.leftPolygonTap()
+                super.touchesBegan(touches, withEvent: event)
+            }
+        }
+        
+    }
     
-    
-    
+   
 }

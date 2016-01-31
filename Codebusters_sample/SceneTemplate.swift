@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class SceneTemplate: SKScene, ButtonNodeResponderType , LCPolygonResponder {
+class SceneTemplate: SKScene, ButtonNodeResponderType  {
     var overlay: SKSpriteNode? {
         didSet {
             if let overlay = overlay {
@@ -39,11 +39,4 @@ class SceneTemplate: SKScene, ButtonNodeResponderType , LCPolygonResponder {
         
     }
     
-    func leftPolygonTap() {
-        print("leftTap")
-    }
-    
-    func rightPolygonTap() {
-        print("rightTap")
-    }
 }

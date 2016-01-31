@@ -132,8 +132,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
          button_Start = GameButton(type: .Start)
          button_Debug = GameButton(type: .Debug)
          button_Clear = GameButton(type: .Clear)
-         button_ReadyLoop = GameButton(type: .Ready_Loop)
-         button_CancelLoop = GameButton(type: .Cancel_Loop)
+         button_ReadyLoop = GameButton(type: .ReadyLoop)
+         button_CancelLoop = GameButton(type: .CancelLoop)
         createLabel(kNumberOfRepeatsLabel, fontColor: UIColor.blackColor(), fontSize: 28.56, position: CGPoint(x: 1800, y: 412))
     }
     
@@ -168,6 +168,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         touchesToRecord.append(notification.userInfo!["touch"]! as! String)
         print(notification.userInfo!["touch"]!)
     }
+    
+    
     
     override func didMoveToView(view: SKView) {
         let size = sceneManager.size
@@ -556,8 +558,15 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 sceneManager.presentScene(.CurrentLevel)
             case .NextLevel_EndLevelView:
                 sceneManager.presentScene(.NextLevel)
-            case .Ready_Loop , .Cancel_Loop:
-                break
+            case .CancelLoop :
+                ActionCell.deselectAll()
+            case .ReadyLoop :
+                for cell in ActionCell.cells {
+                    if (cell.selected) {
+                        cell.numberOfRepeats = loopControl.numberOfRepeats
+                        print("update repeats num")
+                    }
+                }
             }
         }
     }

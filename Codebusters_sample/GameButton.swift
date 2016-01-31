@@ -21,8 +21,8 @@ enum GameButtonType: String {
     Exit_EndLevelView,
     Restart_EndLevelView,
     NextLevel_EndLevelView,
-    Cancel_Loop = "CancelLoop",
-    Ready_Loop = "ReadyLoop",
+    CancelLoop,
+    ReadyLoop,
     Ok
     
     func getPosition() -> CGPoint {
@@ -40,8 +40,8 @@ enum GameButtonType: String {
         case .Restart_EndLevelView: return CGPoint(x: 1018.5, y: 581.5)
         case .Exit_EndLevelView: return CGPoint(x: 672, y: 581.5)
             // initial x position for next 2 buttons is 1613 and 1913 ->movebyX
-        case .Cancel_Loop: return CGPoint(x: 2013, y: 105)
-        case .Ready_Loop: return CGPoint(x: 2313, y: 105)
+        case .CancelLoop: return CGPoint(x: 2013, y: 105)
+        case .ReadyLoop: return CGPoint(x: 2313, y: 105)
         }
     }
 }
@@ -72,7 +72,7 @@ class GameButton: ButtonNode {
         position = type.getPosition()
         zPosition = 1002
         
-        if (type == .Ready_Loop || type == .Cancel_Loop) {
+        if (type == .ReadyLoop || type == .CancelLoop) {
             alpha = 0
         }
         
@@ -92,10 +92,10 @@ class GameButton: ButtonNode {
         case .Restart_PauseView:
             let restartString = NSLocalizedString("RESTART_BUTTON", comment: "Restart")
             label.text = restartString
-        case .Cancel_Loop:
+        case .CancelLoop:
             let clString = NSLocalizedString("CANCEL_LC_BUTTON_LABEL", comment: "Cancel loop")
             label.text = clString
-        case .Ready_Loop:
+        case .ReadyLoop:
             let rlString = NSLocalizedString("OK_LC_BUTTON_LABEL", comment: "Ready loop")
             label.text = rlString
         default:
