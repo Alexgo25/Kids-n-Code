@@ -561,12 +561,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             case .CancelLoop :
                 ActionCell.deselectAll()
             case .ReadyLoop :
-                for cell in ActionCell.cells {
-                    if (cell.selected) {
-                        cell.numberOfRepeats = loopControl.numberOfRepeats
-                        print("update repeats num")
-                    }
-                }
+                ActionCell.deselectAll(loopControl.numberOfRepeats)
             }
         }
     }

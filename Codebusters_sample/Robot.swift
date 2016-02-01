@@ -260,8 +260,12 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                             }
                             else {
                                 appendAction(ActionCell.cells[index].actionType)
-                                index++                           
+                                index++
+                                if (index == ActionCell.cells.count) {
+                                    break
+                                }
                             }
+                            
                         }
                     }
                 }
@@ -276,7 +280,6 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             if isTurnedToFront {
                 sequence.append(turnFromFront())
             }
-            
             sequence.append(SKAction.runBlock() { self.runActions() })
             runAction(SKAction.sequence(sequence))
         }

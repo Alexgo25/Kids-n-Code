@@ -15,7 +15,7 @@ class ActionCell: SKSpriteNode {
     
     var actionType: ActionType
     private static var upperCellIndex = 0
-    private var cellBackground: SKSpriteNode
+    var cellBackground: SKSpriteNode
     var selected = false
     var numberOfRepeats = 1
     
@@ -116,9 +116,36 @@ class ActionCell: SKSpriteNode {
     }
     
     static func deselectAll() {
-        for cell in ActionCell.cells {
-            cell.runAction(cell.deselect())
+        let atlas = SKTextureAtlas(named: "ActionCells")
+        for (var i = 0 ; i < selectedIndexes.count ; i++) {
+            let cell = ActionCell.cells[selectedIndexes[i]]
+            let deselectAction = SKAction.runBlock({
+                cell.cellBackground.texture = atlas.textureNamed("ActionCell_\(cell.actionType)")
+                cell.selected = false
+                cell.numberOfRepeats = 1
+            })
+            cell.runAction(deselectAction)
+            
         }
+        NSNotificationCenter.defaultCenter().postNotificationName(kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
+        ActionCell.selectedIndexes = []
+    }
+    
+    static func deselectAll(numberOfRepeats : Int) {
+        let atlas = SKTextureAtlas(named: "ActionCells")
+        for (var i = 0 ; i < selectedIndexes.count ; i++) {
+            let cell = ActionCell.cells[selectedIndexes[i]]
+            let deselectAction = SKAction.runBlock({
+                cell.cellBackground.texture = atlas.textureNamed("ActionCell_\(cell.actionType)")
+                cell.selected = false
+                cell.numberOfRepeats = numberOfRepeats
+            })
+            cell.runAction(deselectAction)
+            
+        }
+        NSNotificationCenter.defaultCenter().postNotificationName(kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
+        ActionCell.selectedIndexes = []
+
     }
 //markLabels
     func showLabel() {
@@ -187,6 +214,10 @@ class ActionCell: SKSpriteNode {
     static func deleteCell(index: Int, direction: Direction) {
         if cells[index].alpha == 0 {
             return
+        }
+        
+        if (cells[index].selected) {
+            NSNotificationCenter.defaultCenter().postNotificationName(kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
         }
         
         let fadeOutAction = SKAction.group([SKAction.moveByX(100 * CGFloat(direction.rawValue), y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
