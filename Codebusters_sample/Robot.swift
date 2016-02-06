@@ -265,7 +265,9 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                                     break
                                 }
                             }
-                            
+                            if (j == ActionCell.cells[i].numberOfRepeats - 1) {
+                                i = index - 1
+                            }
                         }
                     }
                 }
