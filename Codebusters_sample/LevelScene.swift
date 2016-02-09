@@ -561,6 +561,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             case .CancelLoop :
                 ActionCell.deselectAll()
             case .ReadyLoop :
+                ActionCell.moveCellsDown()
                 ActionCell.deselectAll(loopControl.numberOfRepeats)
             }
         }

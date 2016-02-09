@@ -20,6 +20,7 @@ class ActionCell: SKSpriteNode {
     var numberOfRepeats = 1
     
     
+    
     private static let cellsLayerStartPosition = CGPoint(x: 1765, y: 1232)
     static var cells: [ActionCell] = []
     static let cellsLayer = SKNode()
@@ -284,6 +285,34 @@ class ActionCell: SKSpriteNode {
     
     static func cellsCount() -> Int {
         return cells.count
+    }
+    
+    static func getTopSelectedIndex()->Int {
+        var index = -1
+        for cell in ActionCell.cells {
+            if (cell.selected) {
+                index = ActionCell.cells.indexOf(cell)!
+                break
+            }
+        }
+        return index
+    }
+    
+    static func moveCellsDown() {
+        let firstSelectedIndex = ActionCell.getTopSelectedIndex()
+        for (var i = firstSelectedIndex ; i < ActionCell.cells.count ; i++) {
+            let cell = ActionCell.cells[i]
+            let action : SKAction!
+            if (cell.selected) {
+                action = SKAction.moveByX(61, y: -63, duration: 0.2)
+            }
+            else {
+                action = SKAction.moveByX(0, y: -63, duration: 0.2)
+            }
+            
+            cell.runAction(action)
+        }
+
     }
     
     required init?(coder aDecoder: NSCoder) {
