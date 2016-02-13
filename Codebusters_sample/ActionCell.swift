@@ -46,7 +46,15 @@ class ActionCell: SKSpriteNode {
     }
 
     func getNextPosition() -> CGPoint {
-        return CGPoint(x: 0, y: -CGFloat(ActionCell.cells.count) * cellBackground.size.height)
+        if (ActionCell.cells.count == 0) {
+            return CGPoint(x: 0, y: -CGFloat(ActionCell.cells.count) * cellBackground.size.height)
+        }
+        else {
+            let prevPos = ActionCell.cells[ActionCell.cells.count - 1].position
+            //return CGPoint(x: 0, y: -CGFloat(ActionCell.cells.count) * cellBackground.size.height)
+            return CGPoint(x: 0, y: prevPos.y - cellBackground.size.height)
+        }
+       
     }
     
     func highlightBegin() -> SKAction {
@@ -134,6 +142,7 @@ class ActionCell: SKSpriteNode {
     
     static func deselectAll(numberOfRepeats : Int) {
         let atlas = SKTextureAtlas(named: "ActionCells")
+        let topPos = ActionCell.cells[selectedIndexes[0]].position
         for (var i = 0 ; i < selectedIndexes.count ; i++) {
             let cell = ActionCell.cells[selectedIndexes[i]]
             let deselectAction = SKAction.runBlock({
@@ -144,6 +153,9 @@ class ActionCell: SKSpriteNode {
             cell.runAction(deselectAction)
             
         }
+        let loopRect = SKSpriteNode(imageNamed: "repeatRect")
+        loopRect.position = topPos
+        cellsLayer.addChild(loopRect)
         NSNotificationCenter.defaultCenter().postNotificationName(kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
         ActionCell.selectedIndexes = []
 
@@ -172,8 +184,8 @@ class ActionCell: SKSpriteNode {
         addChild(label)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //tetect touch
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        //detect touch
         print("ActionCell is touched")
         if (selected) {
             self.runAction(deselect())
