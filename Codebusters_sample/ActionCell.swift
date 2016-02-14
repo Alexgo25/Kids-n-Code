@@ -12,6 +12,7 @@ import SpriteKit
 class ActionCell: SKSpriteNode {
     static let actionCellSize = CGSize(width: 239, height: 66)
     static var selectedIndexes : [Int] = []
+    static var repeatRectangles : [LoopControlRepeatRect] = []
     
     var actionType: ActionType
     private static var upperCellIndex = 0
@@ -72,33 +73,39 @@ class ActionCell: SKSpriteNode {
     }
     
     func setSelected() -> SKAction {
-        let atlas = SKTextureAtlas(named: "ActionCells")
-        return SKAction.runBlock({
-            if (ActionCell.selectedIndexes.count == 0) {
-                self.cellBackground.texture = atlas.textureNamed("ActionCell_selected")
-                self.selected = true
-                ActionCell.selectedIndexes.append(Int(self.name!)!)
-                print(ActionCell.selectedIndexes)
-                NSNotificationCenter.defaultCenter().postNotificationName(kActionCellSelectedKey , object: NotificationZombie.sharedInstance)
-            }
-            else {
-                let index = Int(self.name!)!
-                var findElement = false
-                for element in ActionCell.selectedIndexes {
-                    if (index == element + 1 || index == element - 1) {
-                        findElement = true
-                        break
-                    }
-                }
-                if (findElement) {
+        if (self.numberOfRepeats == 1) {
+            let atlas = SKTextureAtlas(named: "ActionCells")
+            return SKAction.runBlock({
+                if (ActionCell.selectedIndexes.count == 0) {
                     self.cellBackground.texture = atlas.textureNamed("ActionCell_selected")
                     self.selected = true
                     ActionCell.selectedIndexes.append(Int(self.name!)!)
                     print(ActionCell.selectedIndexes)
+                    NSNotificationCenter.defaultCenter().postNotificationName(kActionCellSelectedKey , object: NotificationZombie.sharedInstance)
                 }
-            }
-            
-        })
+                else {
+                    let index = Int(self.name!)!
+                    var findElement = false
+                    for element in ActionCell.selectedIndexes {
+                        if (index == element + 1 || index == element - 1) {
+                            findElement = true
+                            break
+                        }
+                    }
+                    if (findElement) {
+                        self.cellBackground.texture = atlas.textureNamed("ActionCell_selected")
+                        self.selected = true
+                        ActionCell.selectedIndexes.append(Int(self.name!)!)
+                        print(ActionCell.selectedIndexes)
+                    }
+                }
+                
+            })
+        }
+        else {
+            return SKAction()
+        }
+        
     }
     
     func deselect() -> SKAction {
@@ -142,7 +149,6 @@ class ActionCell: SKSpriteNode {
     
     static func deselectAll(numberOfRepeats : Int) {
         let atlas = SKTextureAtlas(named: "ActionCells")
-        let topPos = ActionCell.cells[selectedIndexes[0]].position
         for (var i = 0 ; i < selectedIndexes.count ; i++) {
             let cell = ActionCell.cells[selectedIndexes[i]]
             let deselectAction = SKAction.runBlock({
@@ -153,8 +159,9 @@ class ActionCell: SKSpriteNode {
             cell.runAction(deselectAction)
             
         }
-        let loopRect = SKSpriteNode(imageNamed: "repeatRect")
-        loopRect.position = topPos
+        let minIndex = ActionCell.selectedIndexes.minElement()
+        let cell = ActionCell.cells[minIndex!]
+        let loopRect = LoopControlRepeatRect(actionCell: cell, numberOfRepeats: numberOfRepeats)
         cellsLayer.addChild(loopRect)
         NSNotificationCenter.defaultCenter().postNotificationName(kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
         ActionCell.selectedIndexes = []
@@ -321,7 +328,11 @@ class ActionCell: SKSpriteNode {
             else {
                 action = SKAction.moveByX(0, y: -63, duration: 0.2)
             }
-            
+            for rect in ActionCell.repeatRectangles {
+                if (rect.lowerCellIndex == i) {
+                    rect.runAction(action)
+                }
+            }
             cell.runAction(action)
         }
 

@@ -52,6 +52,7 @@ RETURN_BUTTON_LABEL = "Return";
 START_BUTTON_LABEL = "Run";
 CANCEL_LC_BUTTON_LABEL = "Cancel";
 OK_LC_BUTTON_LABEL = "Ok";
+REPEAT_LC_LABEL = "Repeat x ";
 NUMBER_OF_REPEATS_LABEL = "Number of repeats:";
 
 //Action buttons label
