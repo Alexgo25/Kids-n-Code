@@ -82,12 +82,12 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         robotTookDetail = true
     }
     
-    func appendAction(actionType: ActionType) -> Bool {
-        if canPerformAction(actionType) {
-            //let highlightBeginAction = ActionCell.cells[actions.count].highlightBegin()
-            //let highlightEndAction = ActionCell.cells[actions.count].highlightEnd()
+    func appendAction(actionCell : ActionCell) -> Bool {
+        if canPerformAction(actionCell.actionType) {
+            let highlightBeginAction = actionCell.highlightBegin()
+            let highlightEndAction = actionCell.highlightEnd()
             var action: SKAction
-            switch actionType {
+            switch actionCell.actionType {
             case .Move:
                 action = move()
             case .Turn:
@@ -99,9 +99,9 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             default:
                 return false
             }
-            let sequence = SKAction.sequence([SKAction.runBlock() { self.runningActions = true },  //highlightBeginAction,
+            let sequence = SKAction.sequence([SKAction.runBlock() { self.runningActions = true },  highlightBeginAction,
                 action,
-                //highlightEndAction,
+                highlightEndAction,
                 SKAction.runBlock() { self.runningActions = false }])
             actions.append(sequence)
         } else {
@@ -128,7 +128,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                 isOnStart = false
                 
                 for cell in ActionCell.cells {
-                    if appendAction(cell.actionType) {
+                    if appendAction(cell) {
                         break
                     }
                 }
@@ -259,20 +259,20 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                                 break
                             }
                             else {
-                                appendAction(ActionCell.cells[index].actionType)
+                                appendAction(ActionCell.cells[index])
                                 index++
-                                if (index == ActionCell.cells.count) {
-                                    break
-                                }
                             }
                             if (j == ActionCell.cells[i].numberOfRepeats - 1) {
                                 i = index - 1
+                            }
+                            if (index == ActionCell.cells.count) {
+                                break
                             }
                         }
                     }
                 }
                 else {
-                    appendAction(ActionCell.cells[i].actionType)
+                    appendAction(ActionCell.cells[i])
                 }
             }
             
