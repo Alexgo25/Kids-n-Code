@@ -16,9 +16,18 @@ protocol LCRepeatRectResponder {
     func moveRectDown()
 }
 
-class LoopControlRepeatRect : SKSpriteNode , ActionCellResponder {
+enum LCRepeatRectState {
+    case Normal ,
+    ShouldAppearFromTop ,
+    ShouldDisappearFromTop ,
+    ShouldAppearFromBottom ,
+    ShouldDisappearFromBottom
+}
+
+class LoopControlRepeatRect : SKSpriteNode {
     
     var repeatCells : [ActionCell] = []
+    var state = LCRepeatRectState.Normal
 
     
     init (actionCell : ActionCell , numberOfRepeats : Int) {
@@ -29,32 +38,12 @@ class LoopControlRepeatRect : SKSpriteNode , ActionCellResponder {
         let text = LCRepeatLabelText + String(numberOfRepeats)
         let label = createLabel(text, fontColor: UIColor.whiteColor(), fontSize: 23, position: CGPoint(x: 0, y: 0))
         addChild(label)
-        actionCell.delegate = self
-        actionCell.repeatRect = self
         ActionCell.repeatRectangles.append(self)
+        name = "\(ActionCell.repeatRectangles.count - 1)"
     }
     
-    func changeCell(actionCell : ActionCell) {
-        actionCell.repeatRect = self
-        actionCell.delegate = self
-    }
-    
-    func actionCellShouldMoveUp() {
-        self.runAction(SKAction.moveByX(0, y: self.size.height + 2, duration: 0.25))
-    }
-    
-    func actionCellShouldMoveDown() {
-        self.runAction(SKAction.moveByX(0, y: -self.size.height , duration: 0.25))
-    }
-    
-    func actionCellShouldAppear() {
-        self.runAction(SKAction.fadeInWithDuration(0.25))
-    }
-    
-    func actionCellShouldDisappear() {
-        self.runAction(SKAction.fadeOutWithDuration(0.25))
-    }
 
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -10,7 +10,6 @@
 #define Kids_n_Code_Bridging_Header_h
 
 #import <Google/Analytics.h>
-#import <Mixpanel/Mixpanel.h>
 #import "Flurry.h"
 
 

@@ -328,6 +328,13 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             }
         }
         
+        else if let rect = node as? LoopControlRepeatRect {
+            if (robot.isOnStart) {
+                ActionCell.deleteRect(Int(rect.name!)!, direction: .ToLeft)
+                TouchesAnalytics.sharedInstance.appendTouch("deleteRectSwipe")
+            }
+        }
+        
         if let parent = node.parent {
             if let parent = parent.parent where parent.isMemberOfClass(Tutorial) {
                 if let tutorial = parent as? Tutorial {
@@ -354,6 +361,14 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 //print("deleteCellSwipeRight")
             }
         }
+        
+        else if let rect = node as? LoopControlRepeatRect {
+            if (robot.isOnStart) {
+                ActionCell.deleteRect(Int(rect.name!)!, direction: .ToRight)
+                TouchesAnalytics.sharedInstance.appendTouch("deleteRectSwipe")
+            }
+        }
+        
         if let parent = node.parent {
             if let parent = parent.parent where parent.isMemberOfClass(Tutorial) {
                 if let tutorial = parent as? Tutorial {
@@ -382,7 +397,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     func swipedDown(swipe: UISwipeGestureRecognizer) {
         let touchLocation = convertPointFromView(swipe.locationInView(view))
         let node = nodeAtPoint(touchLocation)
-        if node.isMemberOfClass(ActionCell) && node.alpha > 0 && !robot.isRunningActions() {
+        if ((node.isMemberOfClass(ActionCell) || node.isMemberOfClass(LoopControlRepeatRect)) && node.alpha > 0 && !robot.isRunningActions()) {
             ActionCell.moveCellsLayerDown()
             //Analytics->record swipeCellLayerDown
             //touchesToRecord.append("swipeCellLayerDown")
@@ -559,10 +574,16 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             case .NextLevel_EndLevelView:
                 sceneManager.presentScene(.NextLevel)
             case .CancelLoop :
-                ActionCell.deselectAll()
+                NSOperationQueue.mainQueue().addOperationWithBlock({
+                    ActionCell.deselectAll()
+                })
             case .ReadyLoop :
-                ActionCell.moveCellsDown()
-                ActionCell.deselectAll(loopControl.numberOfRepeats)
+                NSOperationQueue.mainQueue().addOperationWithBlock({
+                    ActionCell.moveCellsDownWhenAddingRect()
+                    ActionCell.deselectAll(self.self.loopControl.numberOfRepeats)
+                })
+            case .Achievements :
+                break
             }
         }
     }

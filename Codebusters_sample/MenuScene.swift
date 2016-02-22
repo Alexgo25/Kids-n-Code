@@ -9,18 +9,21 @@
 import UIKit
 import SpriteKit
 import Google
+import GameKit
 
 let kRobotFirstTextImageName = NSLocalizedString("First_Text", comment: "first text")
 let kDetailTextSuffix = NSLocalizedString("DetailTextSuffix", comment: "Detail text suffix")
 let kFinalViewImageName = NSLocalizedString("finalView", comment: "Final view")
 
-class MenuScene: SceneTemplate {
+class MenuScene: SceneTemplate  {
+    
     let background = SKSpriteNode(imageNamed: "menuBackground")
     let textString: String
     
     let keyboard = SKSpriteNode(imageNamed: "keyboard")
     let screen = SKSpriteNode(imageNamed: "activeScreen")
     let finalView = SKSpriteNode(imageNamed: kFinalViewImageName)
+    let achievmentsButton = GameButton(type: .Achievements)
     
     let data: [LevelPackData]
     var details: [DetailCell] = []
@@ -45,6 +48,7 @@ class MenuScene: SceneTemplate {
         keyboard.anchorPoint = CGPoint(x: 1, y: 1)
         keyboard.position = CGPoint(x: 758, y: 523)
         addChild(keyboard)
+        addChild(achievmentsButton)
         
         userInteractionEnabled = true
     }
@@ -172,6 +176,14 @@ class MenuScene: SceneTemplate {
     }
     
     override func update(currentTime: CFTimeInterval) {
+    }
+    
+    override func buttonPressed(button: ButtonNode) {
+        if let gameButton = button as? GameButton {
+            if (gameButton.gameButtonType == .Achievements) {
+                
+            }
+        }
     }
     
 }

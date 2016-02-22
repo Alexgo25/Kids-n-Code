@@ -8,6 +8,7 @@
 
 import SpriteKit
 
+
 enum GameButtonType: String {
     case Pause,
     Tips,
@@ -23,7 +24,8 @@ enum GameButtonType: String {
     NextLevel_EndLevelView,
     CancelLoop,
     ReadyLoop,
-    Ok
+    Ok,
+    Achievements
     
     func getPosition() -> CGPoint {
         switch self {
@@ -42,6 +44,7 @@ enum GameButtonType: String {
             // initial x position for next 2 buttons is 1613 and 1913 ->movebyX
         case .CancelLoop: return CGPoint(x: 2013, y: 105)
         case .ReadyLoop: return CGPoint(x: 2313, y: 105)
+        case .Achievements: return CGPoint(x: 103, y: 1440)
         }
     }
 }
@@ -62,7 +65,15 @@ class GameButton: ButtonNode {
     
     init(type: GameButtonType) {
         let atlas = SKTextureAtlas(named: "GameButtons")
-        let texture = atlas.textureNamed("GameButton_\(type)")
+        
+        var texture : SKTexture!
+        if (type != .Achievements) {
+            texture = atlas.textureNamed("GameButton_\(type)")
+        }
+        else {
+            texture = atlas.textureNamed("GameButton_Tips")
+        }
+        
         
         gameButtonType = type
         

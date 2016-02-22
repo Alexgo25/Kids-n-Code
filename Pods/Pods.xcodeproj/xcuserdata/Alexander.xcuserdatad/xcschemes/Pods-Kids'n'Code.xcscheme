@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'EB3CD8AD6894D6DF0D9570B1'
+               BlueprintIdentifier = '29151F0C733E261A4F2863B9'
                BlueprintName = 'Pods-Kids&apos;n&apos;Code'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-Kids&apos;n&apos;Code.a'>
+               BuildableName = 'Pods_Kids_n_Code.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

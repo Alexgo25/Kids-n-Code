@@ -9,13 +9,15 @@
 import UIKit
 import SpriteKit
 import Google
+import GameKit
+
 
 
 
 
 var sceneManager: SceneManager!
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController  {
     
 
     
