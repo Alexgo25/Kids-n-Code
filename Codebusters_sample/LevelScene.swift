@@ -318,22 +318,25 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         let touchLocation = convertPointFromView(swipe.locationInView(view))
         let node = nodeAtPoint(touchLocation)
         
-        if let cell = node as? ActionCell {
-            if robot.isOnStart {
-                ActionCell.deleteCell(Int(cell.name!)!, direction: .ToLeft)
-                //Analytics->record deleteCellSwipeRight
-                //touchesToRecord.append("deleteCellSwipeLeft")
-                TouchesAnalytics.sharedInstance.appendTouch("deleteCellSwipeLeft")
-                //print("deleteCellSwipeRight")
+        if (ActionCell.selectedIndexes == []) {
+            if let cell = node as? ActionCell {
+                if robot.isOnStart {
+                    ActionCell.deleteCell(ActionCell.cells.indexOf(cell)!, direction: .ToLeft)
+                    //Analytics->record deleteCellSwipeRight
+                    //touchesToRecord.append("deleteCellSwipeLeft")
+                    TouchesAnalytics.sharedInstance.appendTouch("deleteCellSwipeLeft")
+                    //print("deleteCellSwipeRight")
+                }
+            }
+                
+            else if let rect = node as? LoopControlRepeatRect {
+                if (robot.isOnStart) {
+                    ActionCell.deleteRect(ActionCell.repeatRectangles.indexOf(rect)!, direction: .ToLeft)
+                    TouchesAnalytics.sharedInstance.appendTouch("deleteRectSwipe")
+                }
             }
         }
         
-        else if let rect = node as? LoopControlRepeatRect {
-            if (robot.isOnStart) {
-                ActionCell.deleteRect(Int(rect.name!)!, direction: .ToLeft)
-                TouchesAnalytics.sharedInstance.appendTouch("deleteRectSwipe")
-            }
-        }
         
         if let parent = node.parent {
             if let parent = parent.parent where parent.isMemberOfClass(Tutorial) {
@@ -351,22 +354,24 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     func swipedRight(swipe: UISwipeGestureRecognizer) {
         let touchLocation = convertPointFromView(swipe.locationInView(view))
         let node = nodeAtPoint(touchLocation)
-        
-        if let cell = node as? ActionCell {
-            if robot.isOnStart {
-                ActionCell.deleteCell(Int(cell.name!)!, direction: .ToRight)
-                //Analytics->record deleteCellSwipeRight
-                //touchesToRecord.append("deleteCellSwipeRight")
-                TouchesAnalytics.sharedInstance.appendTouch("deleteCellSwipeRight")
-                //print("deleteCellSwipeRight")
+        if (ActionCell.selectedIndexes == []) {
+            if let cell = node as? ActionCell {
+                if robot.isOnStart {
+                    ActionCell.deleteCell(ActionCell.cells.indexOf(cell)!, direction: .ToRight)
+                    //Analytics->record deleteCellSwipeRight
+                    //touchesToRecord.append("deleteCellSwipeRight")
+                    TouchesAnalytics.sharedInstance.appendTouch("deleteCellSwipeRight")
+                    //print("deleteCellSwipeRight")
+                }
             }
-        }
-        
-        else if let rect = node as? LoopControlRepeatRect {
-            if (robot.isOnStart) {
-                ActionCell.deleteRect(Int(rect.name!)!, direction: .ToRight)
-                TouchesAnalytics.sharedInstance.appendTouch("deleteRectSwipe")
+                
+            else if let rect = node as? LoopControlRepeatRect {
+                if (robot.isOnStart) {
+                    ActionCell.deleteRect(ActionCell.repeatRectangles.indexOf(rect)!, direction: .ToRight)
+                    TouchesAnalytics.sharedInstance.appendTouch("deleteRectSwipe")
+                }
             }
+
         }
         
         if let parent = node.parent {
