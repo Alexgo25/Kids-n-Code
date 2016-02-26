@@ -252,10 +252,16 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             
             for (var i = 0 ; i < ActionCell.cells.count ; i++) {
                 if (ActionCell.cells[i].numberOfRepeats > 1) {
+                    
+                    let rect = ActionCell.cells[i].topRect!
                     for (var j = 0 ; j < ActionCell.cells[i].numberOfRepeats ; j++) {
+                        for cell in rect.repeatCells {
+                            appendAction(cell)
+                        }
+                        /*
                         var index = i
                         while(true) {
-                            if (ActionCell.cells[index].numberOfRepeats == 1) {
+                            if (ActionCell.cells[index].numberOfRepeats != ActionCell.cells[index-1].numberOfRepeats) {
                                 break
                             }
                             else {
@@ -269,7 +275,9 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                                 break
                             }
                         }
+                       */
                     }
+                     i += rect.repeatCells.count - 1 
                 }
                 else {
                     appendAction(ActionCell.cells[i])

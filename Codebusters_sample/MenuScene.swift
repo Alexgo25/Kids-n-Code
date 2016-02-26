@@ -50,6 +50,14 @@ class MenuScene: SceneTemplate  {
         addChild(keyboard)
         addChild(achievmentsButton)
         
+        //temporary for testing
+        screen.anchorPoint = CGPoint(x: 1, y: 1)
+        screen.zPosition = 1010
+        screen.alpha = 1
+        screen.position = CGPoint(x: 1899, y: 1439)
+        addChild(screen)
+        //
+        
         userInteractionEnabled = true
     }
     
@@ -68,7 +76,7 @@ class MenuScene: SceneTemplate  {
             showRobot(textString)
         }
         
-        showGarland()
+        //showGarland()
     }
     
     func showGarland() {
@@ -119,6 +127,11 @@ class MenuScene: SceneTemplate  {
                 if defaults.objectForKey("Finished") as? Bool == true {
                     defaults.removeObjectForKey("Finished")
                 }
+            }
+            
+            else if nodeAtPoint(touchLocation) == screen {
+                let loopsMenu = LoopsMenuScene()
+                sceneManager.presentScene(loopsMenu)
             }
         }
     }

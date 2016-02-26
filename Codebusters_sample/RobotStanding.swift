@@ -11,7 +11,9 @@ import SpriteKit
 enum FloorPosition: Int {
     case Ground = 0,
     First = 1,
-    Second = 2
+    Second = 2,
+    Third = 3,
+    Fourth = 4
 }
 
 class RobotStanding {

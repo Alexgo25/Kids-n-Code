@@ -308,7 +308,7 @@ class ActionCell: SKSpriteNode  {
                         repeatRectangles.removeAtIndex(rindex!)
                         cells.removeAtIndex(index)
                         nodesInProgram.removeAtIndex(deleteIndex - 1)
-                        nodesInProgram.removeAtIndex(deleteIndex)
+                        nodesInProgram.removeAtIndex(deleteIndex - 1)
                         self.moveNodesAfterDeletingTwo(deleteIndex)
                     })
                 } )
