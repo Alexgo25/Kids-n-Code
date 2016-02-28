@@ -350,6 +350,12 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         }
     }
     
+    func killVirus() -> SKAction {
+        let nextTrackPosition = self.track!.getNextRobotTrackPosition(direction)
+        let nextFloorPosition = self.track!.getFloorPositionAt(nextTrackPosition)
+        return SKAction()
+    }
+    
     func turn() -> SKAction {
         let sound = SKAction.runBlock() {
             AudioPlayer.sharedInstance.playSoundEffect("Reverse.mp3")

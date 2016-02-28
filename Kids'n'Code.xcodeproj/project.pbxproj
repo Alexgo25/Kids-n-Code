@@ -51,6 +51,9 @@
 		11E38C671AD949460061BE81 /* RobotStanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E38C661AD949460061BE81 /* RobotStanding.swift */; };
 		11E38C691AD94BCC0061BE81 /* RobotTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E38C681AD94BCC0061BE81 /* RobotTrack.swift */; };
 		11E99DCF1C710F7D00273AB2 /* LoopControlRepeatRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E99DCE1C710F7D00273AB2 /* LoopControlRepeatRect.swift */; };
+		11EAB3EF1C837E9A0054C644 /* LevelDoor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EAB3EE1C837E9A0054C644 /* LevelDoor.swift */; };
+		11EAB3F11C837EAB0054C644 /* LevelVirus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EAB3F01C837EAB0054C644 /* LevelVirus.swift */; };
+		11EAB3F51C838BDB0054C644 /* VirusedLevelsGameProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EAB3F41C838BDB0054C644 /* VirusedLevelsGameProgress.swift */; };
 		6120207D1BE15FDA00682C73 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6120207C1BE15FDA00682C73 /* Tutorial.swift */; };
 		6131E1331AD2C9FF00D69DD6 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131E1321AD2C9FF00D69DD6 /* Helper.swift */; };
 		613B797C1B0613F30021658D /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613B797B1B0613F30021658D /* PauseView.swift */; };
@@ -185,6 +188,9 @@
 		11E38C661AD949460061BE81 /* RobotStanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotStanding.swift; sourceTree = "<group>"; };
 		11E38C681AD94BCC0061BE81 /* RobotTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotTrack.swift; sourceTree = "<group>"; };
 		11E99DCE1C710F7D00273AB2 /* LoopControlRepeatRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopControlRepeatRect.swift; sourceTree = "<group>"; };
+		11EAB3EE1C837E9A0054C644 /* LevelDoor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDoor.swift; sourceTree = "<group>"; };
+		11EAB3F01C837EAB0054C644 /* LevelVirus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelVirus.swift; sourceTree = "<group>"; };
+		11EAB3F41C838BDB0054C644 /* VirusedLevelsGameProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirusedLevelsGameProgress.swift; sourceTree = "<group>"; };
 		6120207C1BE15FDA00682C73 /* Tutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
 		6131E1321AD2C9FF00D69DD6 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		613B797B1B0613F30021658D /* PauseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
@@ -394,6 +400,8 @@
 				61A436281AD09CC5002B8540 /* ActionButton.swift */,
 				616C2BE21C2D599B008A471D /* ButtonNode.swift */,
 				11E38C681AD94BCC0061BE81 /* RobotTrack.swift */,
+				11EAB3EE1C837E9A0054C644 /* LevelDoor.swift */,
+				11EAB3F01C837EAB0054C644 /* LevelVirus.swift */,
 			);
 			name = "Game Sprites";
 			sourceTree = "<group>";
@@ -442,6 +450,7 @@
 				1198E7541BE9068F00AFE73A /* AnalyticsCore.swift */,
 				1198E77C1BE9329400AFE73A /* NotificationKeys.swift */,
 				1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */,
+				11EAB3F41C838BDB0054C644 /* VirusedLevelsGameProgress.swift */,
 			);
 			name = "Mechanisms&Services";
 			sourceTree = "<group>";
@@ -750,6 +759,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1198E7511BE9064E00AFE73A /* CBDataModel.xcdatamodeld in Sources */,
+				11EAB3EF1C837E9A0054C644 /* LevelDoor.swift in Sources */,
 				613B797C1B0613F30021658D /* PauseView.swift in Sources */,
 				615231DE1B5E0F3100F7E96B /* GameButton.swift in Sources */,
 				616C2BE11C29FAE0008A471D /* LevelConfiguration.swift in Sources */,
@@ -760,9 +770,11 @@
 				615CEFD41AE6597B006403B5 /* Detail.swift in Sources */,
 				1198E74E1BE905AA00AFE73A /* TimerDelegate.swift in Sources */,
 				110952C81AC6DF5B000A960A /* GameViewController.swift in Sources */,
+				11EAB3F11C837EAB0054C644 /* LevelVirus.swift in Sources */,
 				110952C21AC6DF5B000A960A /* AppDelegate.swift in Sources */,
 				616C2BDD1C29D0B4008A471D /* LevelPackData.swift in Sources */,
 				615D6E8A1BBE7E0000229AD6 /* GameProgress.swift in Sources */,
+				11EAB3F51C838BDB0054C644 /* VirusedLevelsGameProgress.swift in Sources */,
 				11E99DCF1C710F7D00273AB2 /* LoopControlRepeatRect.swift in Sources */,
 				616C2BE71C2E24C2008A471D /* SceneTemplate.swift in Sources */,
 				11E38C671AD949460061BE81 /* RobotStanding.swift in Sources */,

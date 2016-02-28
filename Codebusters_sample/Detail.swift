@@ -14,7 +14,8 @@ enum DetailType: String {
     case Battery, CPU,
     Fan, HardDrive,
     RAM1, RAM2,
-    Crystall
+    Crystall,
+    Door
     
     func getDetailCellPosition() -> CGPoint {
         switch self {

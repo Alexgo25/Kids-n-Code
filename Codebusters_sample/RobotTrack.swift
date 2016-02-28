@@ -14,11 +14,12 @@ class RobotTrack {
     private var startRobotPosition = 0
     var detailPosition = 0
     var detailFloorPosition = FloorPosition.First
+    var virused = false
     
     init(levelInfo: LevelConfiguration) {
         getCurrentLevelTrackInfo(levelInfo)
     }
-    
+
     private func getCurrentLevelTrackInfo(levelInfo: LevelConfiguration) {
         let pattern = levelInfo.blocksPattern
         initTrackFromPattern(pattern)

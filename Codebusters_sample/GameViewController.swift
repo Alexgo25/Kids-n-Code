@@ -11,15 +11,9 @@ import SpriteKit
 import Google
 import GameKit
 
-
-
-
-
 var sceneManager: SceneManager!
 
 class GameViewController: UIViewController  {
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

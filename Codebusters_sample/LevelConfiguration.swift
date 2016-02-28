@@ -25,6 +25,15 @@ struct LevelConfiguration {
         return configurationDictionary["detailPosition"] as! Int
     }
     
+    var virusPosition: Int {
+        if (configurationDictionary["virusPosition"] == nil) {
+            return -1
+        }
+        else {
+            return configurationDictionary["virusPosition"] as! Int
+        }
+    }
+    
     var detailFloorPosition: FloorPosition {
         let floorPositionInt = configurationDictionary["detailFloorPosition"] as! Int
         return FloorPosition(rawValue: floorPositionInt)!

@@ -13,7 +13,8 @@ class SceneManager {
         case Menu,
         CurrentLevel,
         NextLevel,
-        Level(Int, Int)
+        Level(Int, Int),
+        VirusedLevel(Int)
     }
     
     var currentLevel: Int {
@@ -25,6 +26,7 @@ class SceneManager {
     }
     
     var gameProgressManager: GameProgress
+    var virusedGameProgressManager : VirusedLevelsGameProgress
     
     let view: SKView
     let size = CGSize(width: 2048, height: 1536)
@@ -38,6 +40,7 @@ class SceneManager {
     init(view: SKView) {
         self.view = view
         gameProgressManager = GameProgress()
+        virusedGameProgressManager = VirusedLevelsGameProgress()
     }
     
     func presentScene(scene: SceneTemplate) {
@@ -101,6 +104,21 @@ class SceneManager {
                 }
                 presentScene(LevelScene(levelInfo: currentLevelInfo!))
             }
+        case .VirusedLevel(let levelNumber):
+            if (levelNumber >= 0 && levelNumber <= 15) {
+                let levelConfiguration = virusedGameProgressManager.getLevelConfiguration(levelNumber)
+                if (self.view.scene != nil){
+                    let currentScene = self.view.scene!
+                    currentScene.removeAllActions()
+                    currentScene.removeAllChildren()
+                    currentScene.removeFromParent()
+                }
+                presentScene(LevelScene(levelInfo: levelConfiguration))
+            }
+            else {
+                break
+            }
+            
         }
     }
 }
