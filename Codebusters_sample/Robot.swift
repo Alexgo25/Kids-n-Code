@@ -42,7 +42,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     private weak var detail: Detail?
     private weak var track: RobotTrack?
     
-    private let actionButtons = [ActionButton(type: .Move), ActionButton(type: .Turn), ActionButton(type: .Push), ActionButton(type: .Jump)]
+    private let actionButtons = [ActionButton(type: .Move), ActionButton(type: .Turn), ActionButton(type: .Push), ActionButton(type: .Jump) , ActionButton(type: .Catch)]
     var isOnStart = true
     
     init(track: RobotTrack, detail: Detail) {
@@ -542,7 +542,8 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
 
     func getPosition(trackPosition: Int, floorPosition: FloorPosition) -> CGPoint {
         let X = FirstBlockPosition.x + CGFloat(trackPosition - 1) * Block.BlockFaceSize.width
-        let Y: CGFloat = floorPosition == .First ? 734 : 937
+        let dY = (floorPosition.rawValue - 1) * 203
+        let Y: CGFloat = CGFloat(734 + dY)
         return CGPoint(x: X, y: Y)
     }
     

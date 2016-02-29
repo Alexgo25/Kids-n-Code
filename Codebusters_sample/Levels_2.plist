@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>item 0</key>
+<array>
 	<dict>
+		<key>detailType</key>
+		<string>Door</string>
 		<key>isOpened</key>
 		<true/>
 		<key>blocksPattern</key>
@@ -20,7 +21,7 @@
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>detailPosition</key>
-		<integer>5</integer>
+		<integer>6</integer>
 		<key>detailFloorPosition</key>
 		<integer>4</integer>
 		<key>result</key>
@@ -29,10 +30,7 @@
 		<integer>1</integer>
 		<key>result_2</key>
 		<integer>2</integer>
-		<key>tutorial</key>
-		<integer>1</integer>
 	</dict>
-	<key>item 1</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -59,7 +57,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 2</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -86,7 +83,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 3</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -113,7 +109,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 4</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -140,7 +135,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 5</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -167,7 +161,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 6</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -194,7 +187,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 7</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -221,7 +213,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 8</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -248,7 +239,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 9</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -275,7 +265,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 10</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -302,7 +291,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 11</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -329,7 +317,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 12</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -356,7 +343,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 13</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -383,7 +369,6 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-	<key>item 14</key>
 	<dict>
 		<key>isOpened</key>
 		<true/>
@@ -410,5 +395,5 @@
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>
-</dict>
+</array>
 </plist>

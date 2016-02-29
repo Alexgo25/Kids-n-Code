@@ -13,20 +13,23 @@ let kStepButtonLabel = NSLocalizedString("STEP_BUTTON_LABEL", comment: "Step but
 let kTurnButtonLabel = NSLocalizedString("TURN_BUTTON_LABEL", comment: "Turn button label")
 let kPushButtonLabel = NSLocalizedString("PUSH_BUTTON_LABEL", comment: "Push button label")
 let kJumpButtonLabel = NSLocalizedString("JUMP_BUTTON_LABEL", comment: "Jump button label")
+let kCatchButtonLabel = NSLocalizedString("CATCH_BUTTON_LABEL", comment: "Catch button label")
 
 enum ActionType: String {
     case Move,
     Turn,
     Push,
     Jump,
+    Catch,
     None
     
     func ActionButtonPosition() -> CGPoint {
         switch self {
-        case .Move: return CGPoint(x: -188, y: 156)
-        case .Turn: return CGPoint(x: -61, y: 224)
-        case .Push: return CGPoint(x: 94, y: 224)
+        case .Move: return CGPoint(x: -215, y: 156)
+        case .Turn: return CGPoint(x: -120, y: 250)
+        case .Push: return CGPoint(x: 120, y: 250)
         case .Jump: return CGPoint(x: 215, y: 156)
+        case .Catch: return CGPoint(x: 0, y: 292)
         default: return CGPoint.zero
         }
     }
@@ -118,6 +121,9 @@ class ActionButton: SKSpriteNode {
             label.text = kJumpButtonLabel
             label.position = CGPoint(x: 15, y: 75)
             zPosition = 11
+        case .Catch:
+            label.text = kCatchButtonLabel
+            label.position = CGPoint(x: 0, y: 75)
         default:
             label.text = ""
         }

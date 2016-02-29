@@ -60,6 +60,7 @@ STEP_BUTTON_LABEL = "ШАГНУТЬ";
 TURN_BUTTON_LABEL = "ПОВЕРНУТЬСЯ";
 PUSH_BUTTON_LABEL = "ТОЛКНУТЬ";
 JUMP_BUTTON_LABEL = "ПРЫГНУТЬ";
+CATCH_BUTTON_LABEL = "ПОЙМАТЬ";
 
 //End level view
 CONTINUE_PLAYING_LABEL = "Играть дальше";

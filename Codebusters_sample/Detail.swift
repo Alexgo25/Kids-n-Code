@@ -63,7 +63,13 @@ class Detail: SKSpriteNode {
         
         alpha = 1
         
-        move()
+        if (detailType == .Door) {
+            position.y -= 180
+            position.x += 55
+        }
+        else {
+            move()
+        }
         
         physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 50, height: 50))
         physicsBody!.categoryBitMask = PhysicsCategory.Detail
@@ -106,7 +112,8 @@ class Detail: SKSpriteNode {
     
     func getPosition() -> CGPoint {
         let X = FirstBlockPosition.x + CGFloat(getTrackPosition() - 1) * Block.BlockFaceSize.width
-        let Y: CGFloat = getFloorPosition() == .First ? 734 : 937
+        let dY = (getFloorPosition().rawValue - 1) * 203
+        let Y: CGFloat = CGFloat(734 + dY)
         return CGPoint(x: X, y: Y)
     }
     

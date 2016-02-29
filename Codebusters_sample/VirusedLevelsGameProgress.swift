@@ -23,7 +23,7 @@ class VirusedLevelsGameProgress {
     
     func getLevelsData() -> NSArray {
         let path = getLevelsDataPath()
-        let config = NSArray(contentsOfFile: path)! 
+        let config = NSArray(contentsOfFile: path)!
         return config
     }
     

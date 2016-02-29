@@ -37,7 +37,7 @@ class ActionCell: SKSpriteNode  {
     
     init(actionType: ActionType) {
         let atlas = SKTextureAtlas(named: "ActionCells")
-        let texture = atlas.textureNamed("ActionCell_\(actionType)")
+        let texture = atlas.textureNamed("ActionCell")
         cellBackground = SKSpriteNode(texture: texture)
         cellBackground.zPosition = -2
         self.actionType = actionType
@@ -74,7 +74,7 @@ class ActionCell: SKSpriteNode  {
     func highlightBegin() -> SKAction {
         let atlas = SKTextureAtlas(named: "ActionCells")
         return SKAction.runBlock() {
-            self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType)_Highlighted")
+            self.cellBackground.texture = atlas.textureNamed("ActionCell_Highlighted")
         }
     }
     
@@ -83,7 +83,7 @@ class ActionCell: SKSpriteNode  {
     func highlightEnd() -> SKAction {
         let atlas = SKTextureAtlas(named: "ActionCells")
         return SKAction.runBlock() {
-            self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType)")
+            self.cellBackground.texture = atlas.textureNamed("ActionCell")
         }
     }
     
@@ -131,7 +131,7 @@ class ActionCell: SKSpriteNode  {
                 findElement = false
             }
             if (findElement) {
-                self.cellBackground.texture = atlas.textureNamed("ActionCell_\(self.actionType)")
+                self.cellBackground.texture = atlas.textureNamed("ActionCell")
                 self.selected = false
                 let element = self.index
                 let cindex = ActionCell.selectedIndexes.indexOf(element)
@@ -150,7 +150,7 @@ class ActionCell: SKSpriteNode  {
         for (var i = 0 ; i < selectedIndexes.count ; i++) {
             let cell = ActionCell.cells[selectedIndexes[i]]
             let deselectAction = SKAction.runBlock({
-                cell.cellBackground.texture = atlas.textureNamed("ActionCell_\(cell.actionType)")
+                cell.cellBackground.texture = atlas.textureNamed("ActionCell")
                 cell.selected = false
                 cell.numberOfRepeats = 1
             })
@@ -167,7 +167,7 @@ class ActionCell: SKSpriteNode  {
         for (var i = 0 ; i < selectedIndexes.count ; i++) {
             let cell = ActionCell.cells[selectedIndexes[i]]
             let deselectAction = SKAction.runBlock({
-                cell.cellBackground.texture = atlas.textureNamed("ActionCell_\(cell.actionType)")
+                cell.cellBackground.texture = atlas.textureNamed("ActionCell")
                 cell.selected = false
                 cell.numberOfRepeats = numberOfRepeats
             })
@@ -207,6 +207,8 @@ class ActionCell: SKSpriteNode  {
             label.text = kTurnButtonLabel
         case .Push:
             label.text = kPushButtonLabel
+        case .Catch:
+            label.text = kCatchButtonLabel
         default:
             label.text = ""
         }
@@ -238,7 +240,7 @@ class ActionCell: SKSpriteNode  {
     static func resetCellTextures() {
         let atlas = SKTextureAtlas(named: "ActionCells")
         for cell in cells {
-            cell.cellBackground.texture = atlas.textureNamed("ActionCell_\(cell.actionType)")
+            cell.cellBackground.texture = atlas.textureNamed("ActionCell")
         }
     }
     
