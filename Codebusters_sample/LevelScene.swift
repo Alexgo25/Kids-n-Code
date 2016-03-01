@@ -208,6 +208,11 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 trackLayer.addChild(track.getBlockAt(i, floorPosition: j))
             }
         }
+        if (levelInfo.virusPosition != -1) {
+            track.virused = true
+            let virus = LevelVirus(levelcfg: levelInfo, track: track)
+            trackLayer.addChild(virus)
+        }
     }
     
     func createTrackLayer() {
@@ -415,11 +420,16 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         let contactMask: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         switch contactMask {
         case PhysicsCategory.Robot | PhysicsCategory.Detail:
-            detail.hideDetail()
-            robot.takeDetail()
-            runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
-                self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
-                self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
+            if (!robot.track!.virused) {
+                detail.hideDetail()
+                robot.takeDetail()
+                runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
+                    self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
+                    self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
+            }
+            else {
+                print("you cant take detail on virused track")
+            }
         default:
             return
         }
@@ -565,7 +575,6 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 track = RobotTrack(levelInfo: levelInfo)
                 detail = Detail(track: track, levelInfo: levelInfo)
                 robot = Robot(track: track, detail: detail)
-                
                 createTrackLayer()
             case .Debug:
                 robot.debug()

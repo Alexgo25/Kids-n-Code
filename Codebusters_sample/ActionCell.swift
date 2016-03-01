@@ -214,7 +214,7 @@ class ActionCell: SKSpriteNode  {
         }
         
         label.fontSize = 23
-        label.position = CGPoint(x: 19, y: 2)
+        label.position = CGPoint(x: 0, y: 2)
         label.verticalAlignmentMode = .Center
         label.zPosition = -1
         addChild(label)

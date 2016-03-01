@@ -30,8 +30,9 @@ enum DetailType: String {
     }
 }
 
+let FirstBlockPosition = CGPoint(x: 315, y: 760)
+
 class Detail: SKSpriteNode {
-    let FirstBlockPosition = CGPoint(x: 315, y: 760)
     
     var detailType = DetailType.Crystall
     private var startPosition = CGPointZero

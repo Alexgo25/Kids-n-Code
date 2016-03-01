@@ -3,6 +3,8 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>virusFloorPosition</key>
+		<integer>4</integer>
 		<key>detailType</key>
 		<string>Door</string>
 		<key>isOpened</key>
@@ -93,11 +95,22 @@
 			<integer>1</integer>
 			<integer>1</integer>
 			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
 		</array>
 		<key>robotPosition</key>
 		<integer>1</integer>
+		<key>virusPosition</key>
+		<integer>10</integer>
+		<key>virusFloorPosition</key>
+		<integer>1</integer>
 		<key>detailPosition</key>
-		<integer>2</integer>
+		<integer>11</integer>
 		<key>detailFloorPosition</key>
 		<integer>1</integer>
 		<key>result</key>
@@ -106,8 +119,6 @@
 		<integer>1</integer>
 		<key>result_2</key>
 		<integer>2</integer>
-		<key>tutorial</key>
-		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>isOpened</key>

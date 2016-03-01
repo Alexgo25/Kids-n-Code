@@ -12,6 +12,7 @@ class RobotTrack {
     private var track: [RobotStanding] = []
     private var currentRobotPosition = 0
     private var startRobotPosition = 0
+    var virus : LevelVirus?
     var detailPosition = 0
     var detailFloorPosition = FloorPosition.First
     var virused = false
@@ -27,6 +28,7 @@ class RobotTrack {
         currentRobotPosition = startRobotPosition
         detailPosition = levelInfo.detailPosition
         detailFloorPosition = levelInfo.detailFloorPosition
+        
     }
     
     func trackLength(scale: CGFloat) -> CGFloat {

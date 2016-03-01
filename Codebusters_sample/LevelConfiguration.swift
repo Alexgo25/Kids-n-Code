@@ -34,6 +34,11 @@ struct LevelConfiguration {
         }
     }
     
+    var virusFloorPosition: FloorPosition {
+        let floorPositionInt = configurationDictionary["virusFloorPosition"] as! Int
+        return FloorPosition(rawValue: floorPositionInt)!
+    }
+    
     var detailFloorPosition: FloorPosition {
         let floorPositionInt = configurationDictionary["detailFloorPosition"] as! Int
         return FloorPosition(rawValue: floorPositionInt)!

@@ -63,6 +63,9 @@ class LoopsMenuScene: SceneTemplate {
                 if (touchedNode == folders[0]) {
                     sceneManager.presentScene(.VirusedLevel(0))
                 }
+                else if (touchedNode == folders[3]) {
+                    sceneManager.presentScene(.VirusedLevel(3))
+                }
             }
         }
     }

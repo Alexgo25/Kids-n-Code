@@ -40,7 +40,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     private var currentFloorPosition = FloorPosition.First
     
     private weak var detail: Detail?
-    private weak var track: RobotTrack?
+    weak var track: RobotTrack?
     
     private let actionButtons = [ActionButton(type: .Move), ActionButton(type: .Turn), ActionButton(type: .Push), ActionButton(type: .Jump) , ActionButton(type: .Catch)]
     var isOnStart = true
@@ -78,8 +78,8 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func takeDetail() {
-        stopRobot = true
-        robotTookDetail = true
+            stopRobot = true
+            robotTookDetail = true
     }
     
     func appendAction(actionCell : ActionCell) -> Bool {
