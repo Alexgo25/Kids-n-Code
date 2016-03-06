@@ -65,8 +65,8 @@ class Detail: SKSpriteNode {
         alpha = 1
         
         if (detailType == .Door) {
-            position.y -= 180
-            position.x += 55
+            position.y -= 166
+            position.x += 68
         }
         else {
             move()

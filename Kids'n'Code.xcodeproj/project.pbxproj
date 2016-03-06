@@ -20,6 +20,8 @@
 		111F52371C540A4C007A40A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111F52361C540A4C007A40A7 /* Security.framework */; };
 		112EBC431C805C1C00E955BF /* Levels_2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 112EBC421C805C1C00E955BF /* Levels_2.plist */; };
 		112EBC451C805E6B00E955BF /* LoopsMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112EBC441C805E6B00E955BF /* LoopsMenuScene.swift */; };
+		1137F1511C8C3940003F02F5 /* VirusAnimations_Blue.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1137F1501C8C3940003F02F5 /* VirusAnimations_Blue.atlas */; };
+		1137F1531C8C3946003F02F5 /* VirusAnimations_Red.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1137F1521C8C3946003F02F5 /* VirusAnimations_Red.atlas */; };
 		114DE4C01C4442A6004B1EDF /* libprotobuf.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */; };
 		115C6E971ACBFA4200B79250 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C6E961ACBFA4200B79250 /* Robot.swift */; };
 		117CB8FF1C540CDC0020E240 /* libFlurry_7.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 117CB8FE1C540CDC0020E240 /* libFlurry_7.3.0.a */; };
@@ -153,6 +155,8 @@
 		112EBC421C805C1C00E955BF /* Levels_2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Levels_2.plist; sourceTree = "<group>"; };
 		112EBC441C805E6B00E955BF /* LoopsMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopsMenuScene.swift; sourceTree = "<group>"; };
 		1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kids'n'Code-Bridging-Header.h"; sourceTree = "<group>"; };
+		1137F1501C8C3940003F02F5 /* VirusAnimations_Blue.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = VirusAnimations_Blue.atlas; sourceTree = "<group>"; };
+		1137F1521C8C3946003F02F5 /* VirusAnimations_Red.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = VirusAnimations_Red.atlas; sourceTree = "<group>"; };
 		114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libprotobuf.tbd; path = usr/lib/libprotobuf.tbd; sourceTree = SDKROOT; };
 		115C6E961ACBFA4200B79250 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
 		117CB8FD1C540CD20020E240 /* Flurry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
@@ -477,6 +481,8 @@
 		61AC5D991BA586C000CA109C /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				1137F1521C8C3946003F02F5 /* VirusAnimations_Red.atlas */,
+				1137F1501C8C3940003F02F5 /* VirusAnimations_Blue.atlas */,
 				6149A54F1BB67EF000525716 /* Block.atlas */,
 				617AB2111BAB429700DC71BD /* PauseView.atlas */,
 				61AC5DC51BA5881300CA109C /* RobotAnimations */,
@@ -643,10 +649,12 @@
 				614DA0BB1AEF1C750088A557 /* LevelCompleted.mp3 in Resources */,
 				112EBC431C805C1C00E955BF /* Levels_2.plist in Resources */,
 				61AC5DE11BA5881300CA109C /* Animation_Push_FirstPart_ToRight.atlas in Resources */,
+				1137F1531C8C3946003F02F5 /* VirusAnimations_Red.atlas in Resources */,
 				110952CD1AC6DF5B000A960A /* Images.xcassets in Resources */,
 				1183EB671C44296A00DA88A8 /* GoogleService-Info.plist in Resources */,
 				61AC5DB31BA586C000CA109C /* GameButtons.atlas in Resources */,
 				61AC5DDF1BA5881300CA109C /* Animation_Jump_ToRight.atlas in Resources */,
+				1137F1511C8C3940003F02F5 /* VirusAnimations_Blue.atlas in Resources */,
 				61AC5DE51BA5881300CA109C /* Animation_TurnToFront_ToRight.atlas in Resources */,
 				11E1088C1C0F799F00D207A1 /* Info.plist in Resources */,
 				61AC5DE01BA5881300CA109C /* Animation_Move_ToRight.atlas in Resources */,

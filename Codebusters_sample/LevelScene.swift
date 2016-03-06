@@ -33,8 +33,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     let trackLayer = SKNode()
     var touchesToRecord: [String] = []
     
-    let levelBackground1 = SKSpriteNode(imageNamed: "levelBackground1")
-    let levelBackground2 = SKSpriteNode(imageNamed: "levelBackground2")
+    var levelBackground1 = SKSpriteNode(imageNamed: "virusedBackground")
+    var levelBackground2 = SKSpriteNode(imageNamed: "virusedBackground_2")
     
     var button_Pause : GameButton!
     var button_Restart : GameButton!

@@ -96,6 +96,8 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                 action = jump(false)
             case .Push:
                 action = push()
+            case .Catch:
+                action = catchVirus()
             default:
                 return false
             }
@@ -350,10 +352,19 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         }
     }
     
-    func killVirus() -> SKAction {
-        let nextTrackPosition = self.track!.getNextRobotTrackPosition(direction)
-        let nextFloorPosition = self.track!.getFloorPositionAt(nextTrackPosition)
-        return SKAction()
+    func catchVirus() -> SKAction {
+        if (track!.virused) {
+                let startPoint = getCurrentPosition()
+                let toppoint = CGPoint(x: startPoint.x, y: startPoint.y + 250)
+                let action = SKAction.moveTo(toppoint, duration: 0.5)
+                let reverse = SKAction.moveTo(startPoint, duration: 0.3)
+                let group = SKAction.group([reverse , track!.fadeOutVirus()])
+                return SKAction.sequence([action , group])
+
+        }
+        else {
+            return SKAction()
+        }
     }
     
     func turn() -> SKAction {
