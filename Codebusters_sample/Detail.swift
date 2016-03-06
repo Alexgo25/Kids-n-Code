@@ -51,7 +51,7 @@ class Detail: SKSpriteNode {
         let floorPosition = getFloorPosition()
         position = getPosition()
         if !(track.getFloorPositionAt(getTrackPosition()).rawValue < floorPosition.rawValue) {
-            zPosition = CGFloat(6 * floorPosition.rawValue + 1)
+            zPosition = CGFloat(6 * floorPosition.rawValue + 2)
         } else {
             zPosition = CGFloat(5 * (floorPosition.rawValue + 1))
         }
@@ -67,6 +67,7 @@ class Detail: SKSpriteNode {
         if (detailType == .Door) {
             position.y -= 166
             position.x += 68
+            startPosition = position
         }
         else {
             move()
