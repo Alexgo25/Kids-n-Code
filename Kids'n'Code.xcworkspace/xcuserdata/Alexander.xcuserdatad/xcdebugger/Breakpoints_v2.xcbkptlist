@@ -56,7 +56,7 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/EndLevelView.swift"
-                  timestampString = "478951899.743092"
+                  timestampString = "478973828.86751"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "12"
@@ -71,7 +71,7 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/EndLevelView.swift"
-                  timestampString = "478951899.743364"
+                  timestampString = "478973828.867755"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "12"
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "478522666.800164"
+            timestampString = "478977169.306844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "addNewControls()"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "478428448.028466"
+            timestampString = "478977169.306844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "deleteCell(_:direction:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "478428448.028466"
+            timestampString = "478977169.306844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "deleteCell(_:direction:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "478428448.028466"
+            timestampString = "478977169.306844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "deleteCell(_:direction:)"
             landmarkType = "5">
             <Locations>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "478428448.028466"
+            timestampString = "478977169.306844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "deleteCell(_:direction:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -232,11 +232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "478428448.028466"
+            timestampString = "478977169.306844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "deleteCell(_:direction:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "478428448.028466"
+            timestampString = "478977169.306844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
             landmarkName = "deleteCell(_:direction:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -264,23 +264,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "478428448.028466"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
-            landmarkName = "moveNodesAfterDeletingTwo(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "478428448.028466"
+            timestampString = "478977169.306844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "370"
@@ -295,12 +279,28 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Codebusters_sample/Robot.swift"
-            timestampString = "478540666.605044"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "478977169.306844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
+            landmarkName = "moveNodesAfterDeletingTwo(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/Robot.swift"
+            timestampString = "479050431.889722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "performActions()"
             landmarkType = "5">
          </BreakpointContent>
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/RobotTrack.swift"
-            timestampString = "478637648.113078"
+            timestampString = "479049226.41304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "moveBlock(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -328,11 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/RobotTrack.swift"
-            timestampString = "478637648.113078"
+            timestampString = "479049226.41304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "moveBlock(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -344,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/RobotTrack.swift"
-            timestampString = "478637648.113078"
+            timestampString = "479049226.41304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "moveBlock(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -360,23 +360,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/RobotTrack.swift"
-            timestampString = "478636863.269643"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "fadeOutVirus()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Codebusters_sample/RobotTrack.swift"
-            timestampString = "478636919.599958"
+            timestampString = "479049226.41304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "130"
@@ -392,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/Detail.swift"
-            timestampString = "478954356.165935"
+            timestampString = "479050431.889722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "move()"
             landmarkType = "5">
          </BreakpointContent>
@@ -408,11 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/Detail.swift"
-            timestampString = "478954356.165935"
+            timestampString = "479050431.889722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "move()"
             landmarkType = "5">
          </BreakpointContent>
@@ -424,11 +408,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "478896888.480344"
+            timestampString = "479047474.02555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "506"
-            endingLineNumber = "506"
+            startingLineNumber = "519"
+            endingLineNumber = "519"
             landmarkName = "showDetailAndRobot()"
             landmarkType = "5">
             <Locations>
@@ -440,11 +424,11 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/LevelScene.swift"
-                  timestampString = "478951899.760995"
+                  timestampString = "478973828.891371"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "506"
-                  endingLineNumber = "506"
+                  startingLineNumber = "511"
+                  endingLineNumber = "511"
                   offsetFromSymbolStart = "284">
                </Location>
                <Location
@@ -455,11 +439,11 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/LevelScene.swift"
-                  timestampString = "478951899.761204"
+                  timestampString = "478973828.891562"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "506"
-                  endingLineNumber = "506"
+                  startingLineNumber = "511"
+                  endingLineNumber = "511"
                   offsetFromSymbolStart = "19">
                </Location>
             </Locations>
@@ -472,11 +456,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "478896918.576978"
+            timestampString = "479047474.02555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "501"
-            endingLineNumber = "501"
+            startingLineNumber = "514"
+            endingLineNumber = "514"
             landmarkName = "showDetailAndRobot()"
             landmarkType = "5">
          </BreakpointContent>
@@ -488,11 +472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/Robot.swift"
-            timestampString = "478950523.138443"
+            timestampString = "479050431.889722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "changeZPosition(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -504,12 +488,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelVirus.swift"
-            timestampString = "478951887.859813"
+            timestampString = "479049226.41304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "animateTextures()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/Robot.swift"
+            timestampString = "479050431.889722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "checkDetail()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/RobotTrack.swift"
+            timestampString = "479049226.41304"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "canPerformActionWithDirection(_:direction:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

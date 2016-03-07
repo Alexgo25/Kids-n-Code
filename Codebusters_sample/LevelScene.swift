@@ -28,6 +28,7 @@ let kNumberOfRepeatsLabel = NSLocalizedString("NUMBER_OF_REPEATS_LABEL", comment
 
 class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
     let levelInfo: LevelConfiguration
+    static var loopsEnabled = false
     
     let background = SKNode()
     let trackLayer = SKNode()
@@ -83,6 +84,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         super.init()
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "Level Scene")
+        LevelScene.loopsEnabled = levelInfo.loopsEnabled
         
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
@@ -208,7 +210,12 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 trackLayer.addChild(track.getBlockAt(i, floorPosition: j))
             }
         }
+        resetVirus()
+    }
+    
+    func resetVirus() {
         if (levelInfo.virusPosition != -1) {
+            track.virus = nil
             track.virused = true
             let virus = LevelVirus(levelcfg: levelInfo, track: track)
             trackLayer.addChild(virus)
@@ -421,11 +428,17 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         switch contactMask {
         case PhysicsCategory.Robot | PhysicsCategory.Detail:
             if (!robot.track!.virused) {
-                detail.hideDetail()
-                robot.takeDetail()
-                runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
-                    self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
-                    self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
+                if(detail.detailType != .Door) {
+                    detail.hideDetail()
+                    robot.takeDetail()
+                    runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
+                        self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
+                        self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
+                }
+                else {
+                    self.sceneManager.presentScene(.Menu)
+                }
+                
             }
             else {
                 print("you cant take detail on virused track")
@@ -571,11 +584,13 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 track.deleteBlocks()
                 detail.removeFromParent()
                 robot.removeFromParent()
+                trackLayer.removeAllChildren()
                 trackLayer.removeFromParent()
                 track = RobotTrack(levelInfo: levelInfo)
                 detail = Detail(track: track, levelInfo: levelInfo)
                 robot = Robot(track: track, detail: detail)
                 createTrackLayer()
+                resetVirus()
             case .Debug:
                 robot.debug()
             case .Continue_PauseView, .Ok:

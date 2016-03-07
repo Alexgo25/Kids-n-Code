@@ -78,8 +78,13 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func takeDetail() {
+        if (detail!.detailType == .Door) {
+            
+        }
+        else {
             stopRobot = true
             robotTookDetail = true
+        }
     }
     
     func appendAction(actionCell : ActionCell) -> Bool {
@@ -194,10 +199,16 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     
     func checkDetail() {
         if detail!.getFloorPosition() == currentFloorPosition && detail!.getTrackPosition() == currentTrackPosition {
-            detail!.zPosition -= 1
-            detail!.runAction(SKAction.moveByX(0, y: -200, duration: 0.4))
-            takeDetail()
-            NSNotificationCenter.defaultCenter().postNotificationName(kRobotTookDetailNotificationKey, object: self)
+            if (detail!.detailType != .Door) {
+                detail!.zPosition -= 1
+                detail!.runAction(SKAction.moveByX(0, y: -200, duration: 0.4))
+                takeDetail()
+                NSNotificationCenter.defaultCenter().postNotificationName(kRobotTookDetailNotificationKey, object: self)
+            }
+            else {
+                
+            }
+            
         }
     }
     
@@ -400,9 +411,19 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         if (!self.hasActions()) {
         self.isTurnedToFront = true
         let block = SKAction.runBlock() {
-            for button in self.actionButtons {
-                self.addChild(button)
-                button.showButton()
+            if (!self.track!.virused) {
+                for button in self.actionButtons {
+                    if (button.actionType != .Catch) {
+                        self.addChild(button)
+                        button.showButton()
+                    }
+                }
+            }
+            else {
+                for button in self.actionButtons {
+                    self.addChild(button)
+                    button.showButton()
+                }
             }
         
             let animate = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: .ToRight), timePerFrame: 0.05, resize: true, restore: false)

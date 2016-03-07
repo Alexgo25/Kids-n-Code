@@ -13,6 +13,9 @@ class RobotTrack {
     private var currentRobotPosition = 0
     private var startRobotPosition = 0
     var virus : LevelVirus?
+    var secondVirus : LevelVirus?
+    var thirdVirus : LevelVirus?
+    var viruses : [LevelVirus?] = []
     var detailPosition = 0
     var detailFloorPosition = FloorPosition.First
     var virused = false
@@ -77,7 +80,7 @@ class RobotTrack {
                 return false
             }
             
-            return track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue || (track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue == track[currentRobotPosition + 2 * direction.rawValue].getFloorPosition().rawValue + 1 && track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue == track[currentRobotPosition].getFloorPosition().rawValue + 1)
+            return track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue || (track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue > track[currentRobotPosition + 2 * direction.rawValue].getFloorPosition().rawValue && track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue > track[currentRobotPosition].getFloorPosition().rawValue)
         case .Catch:
             return true
         default:
@@ -134,6 +137,7 @@ class RobotTrack {
             return SKAction()
         }
     }
+    
     
     func moveBlock(direction: Direction) -> SKAction {
         if track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue {

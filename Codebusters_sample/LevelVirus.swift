@@ -35,6 +35,7 @@ class LevelVirus : SKSpriteNode {
         zPosition = CGFloat(6 * floorPosition!.rawValue)
         self.track = track
         track.virus = self
+        track.viruses.append(self)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -52,7 +53,7 @@ class LevelVirus : SKSpriteNode {
     
     func fadeOut() -> SKAction {
         let move = SKAction.moveByX(0, y: -250, duration: 0.3)
-        let group = SKAction.group([move , SKAction.fadeOutWithDuration(0.6) , animateTextures()])
+        let group = SKAction.group([move , SKAction.fadeOutWithDuration(0.6) , animateTextures() , SKAction.removeFromParent()])
         
         return SKAction.runBlock({
             self.runAction(group)

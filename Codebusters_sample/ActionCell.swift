@@ -223,13 +223,15 @@ class ActionCell: SKSpriteNode  {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //detect touch
         print("ActionCell is touched")
-        if (selected) {
-            self.runAction(deselect())
-            //Drop notification to LevelScene
-        }
-        else {
-            self.runAction(setSelected())
-            //Drop notification to LevelScene
+        if (LevelScene.loopsEnabled) {
+            if (selected) {
+                self.runAction(deselect())
+                //Drop notification to LevelScene
+            }
+            else {
+                self.runAction(setSelected())
+                //Drop notification to LevelScene
+            }
         }
     }
     

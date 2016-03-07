@@ -60,11 +60,9 @@ class LoopsMenuScene: SceneTemplate {
             let touchLocation = touch.locationInNode(self)
             
             if let touchedNode = nodeAtPoint(touchLocation) as? SKSpriteNode {
-                if (touchedNode == folders[0]) {
-                    sceneManager.presentScene(.VirusedLevel(0))
-                }
-                else if (touchedNode == folders[3]) {
-                    sceneManager.presentScene(.VirusedLevel(3))
+                if (folders.contains(touchedNode)) {
+                    let index = folders.indexOf(touchedNode)!
+                    sceneManager.presentScene(.VirusedLevel(index))
                 }
             }
         }

@@ -3,6 +3,8 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>loopsEnabled</key>
+		<false/>
 		<key>virusFloorPosition</key>
 		<integer>4</integer>
 		<key>detailType</key>
@@ -34,6 +36,56 @@
 		<integer>2</integer>
 	</dict>
 	<dict>
+		<key>loopsEnabled</key>
+		<false/>
+		<key>detailType</key>
+		<string>Door</string>
+		<key>virusFloorPosition</key>
+		<integer>1</integer>
+		<key>virusPosition</key>
+		<integer>15</integer>
+		<key>isOpened</key>
+		<true/>
+		<key>blocksPattern</key>
+		<array>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>0</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>0</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>0</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>0</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>0</integer>
+		</array>
+		<key>robotPosition</key>
+		<integer>1</integer>
+		<key>detailPosition</key>
+		<integer>13</integer>
+		<key>detailFloorPosition</key>
+		<integer>1</integer>
+		<key>result</key>
+		<integer>0</integer>
+		<key>result_1</key>
+		<integer>1</integer>
+		<key>result_2</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>virusFloorPosition</key>
+		<integer>1</integer>
+		<key>virusPosition</key>
+		<integer>10</integer>
+		<key>loopsEnabled</key>
+		<false/>
+		<key>detailType</key>
+		<string>Door</string>
 		<key>isOpened</key>
 		<true/>
 		<key>blocksPattern</key>
@@ -43,11 +95,18 @@
 			<integer>1</integer>
 			<integer>1</integer>
 			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
 		</array>
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>detailPosition</key>
-		<integer>2</integer>
+		<integer>11</integer>
 		<key>detailFloorPosition</key>
 		<integer>1</integer>
 		<key>result</key>
@@ -56,36 +115,12 @@
 		<integer>1</integer>
 		<key>result_2</key>
 		<integer>2</integer>
-		<key>tutorial</key>
-		<integer>1</integer>
 	</dict>
 	<dict>
-		<key>isOpened</key>
+		<key>detailType</key>
+		<string>Door</string>
+		<key>loopsEnabled</key>
 		<true/>
-		<key>blocksPattern</key>
-		<array>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-		</array>
-		<key>robotPosition</key>
-		<integer>1</integer>
-		<key>detailPosition</key>
-		<integer>2</integer>
-		<key>detailFloorPosition</key>
-		<integer>1</integer>
-		<key>result</key>
-		<integer>0</integer>
-		<key>result_1</key>
-		<integer>1</integer>
-		<key>result_2</key>
-		<integer>2</integer>
-		<key>tutorial</key>
-		<integer>1</integer>
-	</dict>
-	<dict>
 		<key>isOpened</key>
 		<true/>
 		<key>blocksPattern</key>
@@ -121,20 +156,36 @@
 		<integer>2</integer>
 	</dict>
 	<dict>
+		<key>detailType</key>
+		<string>Door</string>
+		<key>loopsEnabled</key>
+		<true/>
 		<key>isOpened</key>
 		<true/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
 			<integer>1</integer>
+			<integer>2</integer>
 			<integer>1</integer>
+			<integer>2</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>1</integer>
+			<integer>2</integer>
 			<integer>1</integer>
 			<integer>1</integer>
 		</array>
+		<key>virusFloorPosition</key>
+		<integer>1</integer>
+		<key>virusPosition</key>
+		<integer>12</integer>
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>detailPosition</key>
-		<integer>2</integer>
+		<integer>13</integer>
 		<key>detailFloorPosition</key>
 		<integer>1</integer>
 		<key>result</key>
@@ -143,34 +194,43 @@
 		<integer>1</integer>
 		<key>result_2</key>
 		<integer>2</integer>
-		<key>tutorial</key>
-		<integer>1</integer>
 	</dict>
 	<dict>
+		<key>detailType</key>
+		<string>Door</string>
+		<key>loopsEnabled</key>
+		<true/>
 		<key>isOpened</key>
 		<true/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
 			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
+			<integer>2</integer>
+			<integer>0</integer>
+			<integer>2</integer>
+			<integer>2</integer>
+			<integer>3</integer>
+			<integer>3</integer>
+			<integer>4</integer>
+			<integer>4</integer>
 		</array>
+		<key>virusFloorPosition</key>
+		<integer>4</integer>
+		<key>virusPosition</key>
+		<integer>9</integer>
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>detailPosition</key>
-		<integer>2</integer>
+		<integer>10</integer>
 		<key>detailFloorPosition</key>
-		<integer>1</integer>
+		<integer>4</integer>
 		<key>result</key>
 		<integer>0</integer>
 		<key>result_1</key>
 		<integer>1</integer>
 		<key>result_2</key>
 		<integer>2</integer>
-		<key>tutorial</key>
-		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>isOpened</key>

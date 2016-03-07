@@ -34,6 +34,16 @@ struct LevelConfiguration {
         }
     }
     
+    var loopsEnabled: Bool {
+        if (configurationDictionary["loopsEnabled"] == nil) {
+            return false
+        }
+        
+        else {
+            return configurationDictionary["loopsEnabled"] as! Bool
+        }
+    }
+    
     var virusFloorPosition: FloorPosition {
         let floorPositionInt = configurationDictionary["virusFloorPosition"] as! Int
         return FloorPosition(rawValue: floorPositionInt)!

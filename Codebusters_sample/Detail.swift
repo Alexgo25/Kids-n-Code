@@ -65,6 +65,7 @@ class Detail: SKSpriteNode {
         alpha = 1
         
         if (detailType == .Door) {
+            zPosition -= 2
             position.y -= 166
             position.x += 68
             startPosition = position
@@ -82,10 +83,12 @@ class Detail: SKSpriteNode {
     }
     
     func hideDetail() {
-        let fadeOut = SKAction.fadeOutWithDuration(0.2)
-        let remove = SKAction.removeFromParent()
-        let sequence = SKAction.sequence([fadeOut, remove])
-        runAction(sequence)
+        if (self.detailType != .Door) {
+            let fadeOut = SKAction.fadeOutWithDuration(0.2)
+            let remove = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([fadeOut, remove])
+            runAction(sequence)
+        }
         AudioPlayer.sharedInstance.playSoundEffect("DetailAchievement.wav")
     }
     
