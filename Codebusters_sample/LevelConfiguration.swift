@@ -16,6 +16,7 @@ struct LevelConfiguration {
     }
     
     var blocksPattern: [FloorPosition]
+    var virusesPattern: NSArray
     
     var robotPosition: Int {
         return configurationDictionary["robotPosition"] as! Int
@@ -86,6 +87,13 @@ struct LevelConfiguration {
         blocksPattern = []
         for block in blocks {
             blocksPattern.append(FloorPosition(rawValue: block)!)
+        }
+        
+        if let viruses = configurationDictionary["virusesPattern"] as? NSArray {
+                virusesPattern = viruses
+        }
+        else {
+            virusesPattern = []
         }
     }
 }

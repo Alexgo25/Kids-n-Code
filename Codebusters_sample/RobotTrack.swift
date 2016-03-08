@@ -13,9 +13,7 @@ class RobotTrack {
     private var currentRobotPosition = 0
     private var startRobotPosition = 0
     var virus : LevelVirus?
-    var secondVirus : LevelVirus?
-    var thirdVirus : LevelVirus?
-    var viruses : [LevelVirus?] = []
+    var viruses : [LevelVirus] = []
     var detailPosition = 0
     var detailFloorPosition = FloorPosition.First
     var virused = false
@@ -127,10 +125,33 @@ class RobotTrack {
     }
     
     func fadeOutVirus() -> SKAction {
+        /*
         if (currentRobotPosition == virus!.trackPosition) {
             
             return SKAction.group([virus!.fadeOut() , SKAction.runBlock({
                 self.virused = false
+            })])
+        }
+        else {
+            return SKAction()
+        }
+      */
+        weak var virus : LevelVirus?
+        for (var i = 0 ; i < viruses.count ;) {
+            if (currentRobotPosition == viruses[i].trackPosition) {
+                virus = viruses[i]
+                viruses.removeAtIndex(i)
+                break
+            }
+            else {
+                i++
+            }
+        }
+        if (virus != nil) {
+            return SKAction.group([virus!.fadeOut() , SKAction.runBlock({
+                if (self.viruses.count == 0) {
+                    self.virused = false
+                }
             })])
         }
         else {

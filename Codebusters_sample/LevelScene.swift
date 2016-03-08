@@ -210,15 +210,37 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 trackLayer.addChild(track.getBlockAt(i, floorPosition: j))
             }
         }
-        resetVirus()
+        //resetVirus()
+        resetViruses()
     }
     
     func resetVirus() {
-        if (levelInfo.virusPosition != -1) {
-            track.virus = nil
+        if (levelInfo.virusPosition != -1 ) {
+            if (track.virus != nil) {
+                track.virus!.removeFromParent()
+                track.virus = nil
+            }
             track.virused = true
             let virus = LevelVirus(levelcfg: levelInfo, track: track)
             trackLayer.addChild(virus)
+        }
+    }
+    
+    func resetViruses() {
+        if (levelInfo.virusesPattern != []) {
+            track.virused = true
+            for virus in levelInfo.virusesPattern {
+                if let dict = virus as? NSDictionary {
+                    let floor = dict["virusFloorPosition"] as! Int
+                    let flp = FloorPosition(rawValue: floor)
+                    let pos = dict["virusPosition"] as! Int
+                    let virus = LevelVirus(track: track, trackPosition: pos, floorPosition: flp!)
+                    NSOperationQueue.mainQueue().addOperationWithBlock({
+                        self.trackLayer.addChild(virus)
+                    })
+                }
+    
+            }
         }
     }
     

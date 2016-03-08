@@ -32,9 +32,30 @@ class LevelVirus : SKSpriteNode {
         let texture = SKTexture(imageNamed: "Virus_\(virusType!.rawValue)")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         getPosition(levelcfg)
-        zPosition = CGFloat(6 * floorPosition!.rawValue)
+        zPosition = CGFloat(6 * floorPosition!.rawValue + 3)
         self.track = track
         track.virus = self
+        track.viruses.append(self)
+    }
+    
+    init(track: RobotTrack , trackPosition : Int , floorPosition : FloorPosition) {
+        let rand = Int(arc4random() % 2)
+        if (rand == 0) {
+            virusType = VirusType.Blue
+        }
+        else {
+            virusType = VirusType.Red
+        }
+        let texture = SKTexture(imageNamed: "Virus_\(virusType!.rawValue)")
+        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        zPosition = CGFloat(6 * floorPosition.rawValue + 3)
+        self.floorPosition = floorPosition
+        self.trackPosition = trackPosition
+        let X = FirstBlockPosition.x + CGFloat(trackPosition - 1) * Block.BlockFaceSize.width
+        let dY = (floorPosition.rawValue - 1) * 203
+        let Y : CGFloat = CGFloat(734 + dY)
+        self.position = CGPoint(x: X, y: Y)
+        self.track = track
         track.viruses.append(self)
     }
 
@@ -53,7 +74,7 @@ class LevelVirus : SKSpriteNode {
     
     func fadeOut() -> SKAction {
         let move = SKAction.moveByX(0, y: -250, duration: 0.3)
-        let group = SKAction.group([move , SKAction.fadeOutWithDuration(0.6) , animateTextures() , SKAction.removeFromParent()])
+        let group = SKAction.group([move , SKAction.fadeOutWithDuration(0.6) , animateTextures()])
         
         return SKAction.runBlock({
             self.runAction(group)
