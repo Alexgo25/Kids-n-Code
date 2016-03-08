@@ -34,7 +34,6 @@ class LevelVirus : SKSpriteNode {
         getPosition(levelcfg)
         zPosition = CGFloat(6 * floorPosition!.rawValue + 3)
         self.track = track
-        track.virus = self
         track.viruses.append(self)
     }
     

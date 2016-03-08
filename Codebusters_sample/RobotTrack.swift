@@ -12,7 +12,7 @@ class RobotTrack {
     private var track: [RobotStanding] = []
     private var currentRobotPosition = 0
     private var startRobotPosition = 0
-    var virus : LevelVirus?
+
     var viruses : [LevelVirus] = []
     var detailPosition = 0
     var detailFloorPosition = FloorPosition.First

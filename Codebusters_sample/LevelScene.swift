@@ -210,23 +210,15 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 trackLayer.addChild(track.getBlockAt(i, floorPosition: j))
             }
         }
-        //resetVirus()
         resetViruses()
     }
     
-    func resetVirus() {
-        if (levelInfo.virusPosition != -1 ) {
-            if (track.virus != nil) {
-                track.virus!.removeFromParent()
-                track.virus = nil
-            }
-            track.virused = true
-            let virus = LevelVirus(levelcfg: levelInfo, track: track)
-            trackLayer.addChild(virus)
-        }
-    }
-    
     func resetViruses() {
+        if (track.viruses != []) {
+            for virus in track.viruses {
+                virus.removeFromParent()
+            }
+        }
         if (levelInfo.virusesPattern != []) {
             track.virused = true
             for virus in levelInfo.virusesPattern {
@@ -612,7 +604,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 detail = Detail(track: track, levelInfo: levelInfo)
                 robot = Robot(track: track, detail: detail)
                 createTrackLayer()
-                resetVirus()
+                resetViruses()
             case .Debug:
                 robot.debug()
             case .Continue_PauseView, .Ok:
