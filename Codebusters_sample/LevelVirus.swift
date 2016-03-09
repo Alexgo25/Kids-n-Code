@@ -47,7 +47,7 @@ class LevelVirus : SKSpriteNode {
         }
         let texture = SKTexture(imageNamed: "Virus_\(virusType!.rawValue)")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-        zPosition = CGFloat(6 * floorPosition.rawValue + 3)
+        zPosition = 999
         self.floorPosition = floorPosition
         self.trackPosition = trackPosition
         let X = FirstBlockPosition.x + CGFloat(trackPosition - 1) * Block.BlockFaceSize.width

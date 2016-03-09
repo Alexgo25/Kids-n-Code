@@ -462,7 +462,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     private func changeZPosition(floorPosition: FloorPosition) {
-        zPosition = CGFloat(6 * floorPosition.rawValue + 1)
+        zPosition = CGFloat(floorPosition.rawValue + 101)
     }
     
     func jump(afterStep: Bool) -> SKAction {

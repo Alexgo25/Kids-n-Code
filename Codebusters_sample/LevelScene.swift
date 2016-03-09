@@ -85,7 +85,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "Level Scene")
         LevelScene.loopsEnabled = levelInfo.loopsEnabled
-        
+        levelBackground2.zPosition = 1000
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
         //Listening to notifications
@@ -214,10 +214,12 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     }
     
     func resetViruses() {
+
         if (track.viruses != []) {
             for virus in track.viruses {
                 virus.removeFromParent()
             }
+            track.viruses.removeAll(keepCapacity: false)
         }
         if (levelInfo.virusesPattern != []) {
             track.virused = true
@@ -604,14 +606,15 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 detail = Detail(track: track, levelInfo: levelInfo)
                 robot = Robot(track: track, detail: detail)
                 createTrackLayer()
-                resetViruses()
+                
             case .Debug:
                 robot.debug()
             case .Continue_PauseView, .Ok:
                 overlay = nil
             case .Exit_PauseView, .Exit_EndLevelView:
                 NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-                sceneManager.presentScene(.Menu)
+                let loopsMenu = LoopsMenuScene()
+                sceneManager.presentScene(loopsMenu)
             case .Restart_PauseView, .Restart_EndLevelView, .Restart:
                 sceneManager.presentScene(.CurrentLevel)
             case .NextLevel_EndLevelView:

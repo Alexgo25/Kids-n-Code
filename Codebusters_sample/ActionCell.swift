@@ -94,7 +94,7 @@ class ActionCell: SKSpriteNode  {
                 if (ActionCell.selectedIndexes.count == 0) {
                     self.cellBackground.texture = atlas.textureNamed("ActionCell_selected")
                     self.selected = true
-                    ActionCell.selectedIndexes.append(self.index)
+                    ActionCell.selectedIndexes.append(ActionCell.cells.indexOf(self)!)
                     print(ActionCell.selectedIndexes)
                     NSNotificationCenter.defaultCenter().postNotificationName(kActionCellSelectedKey , object: NotificationZombie.sharedInstance)
                 }

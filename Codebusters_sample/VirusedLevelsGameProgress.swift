@@ -12,6 +12,7 @@ import Foundation
 class VirusedLevelsGameProgress {
     
     var levelsInfo : [LevelConfiguration] = []
+    var currentLevel = 0
     
     init() {
         
@@ -25,6 +26,17 @@ class VirusedLevelsGameProgress {
         let path = getLevelsDataPath()
         let config = NSArray(contentsOfFile: path)!
         return config
+    }
+    
+    func writeResultsOfCurrentLevel(result: Int) {
+        let path = getLevelsDataPath()
+        let fileManager = NSFileManager.defaultManager()
+        
+        let dict = getLevelsData()[currentLevel] as! NSDictionary
+        let currentResult = dict["result"] as! Int
+        if (result > currentResult || currentResult == 0) {
+        
+        }
     }
     
     func getLevelsDataPath() -> String {

@@ -39,9 +39,9 @@ class Block: SKSpriteNode {
         addChild(blockRight)
         addChild(blockUpper)
 
-        blockFace.zPosition = CGFloat(5 * floorPosition.rawValue)
-        blockUpper.zPosition = CGFloat(4 * floorPosition.rawValue)
-        blockRight.zPosition = CGFloat(3 * floorPosition.rawValue)
+        blockFace.zPosition = CGFloat( floorPosition.rawValue  + 101)
+        blockUpper.zPosition = CGFloat( floorPosition.rawValue + 100)
+        blockRight.zPosition = CGFloat( Double(floorPosition.rawValue) + 99.5)
 
         blockFace.anchorPoint = CGPointZero
         blockRight.anchorPoint = CGPointZero
@@ -57,12 +57,12 @@ class Block: SKSpriteNode {
         let sequence: SKAction
         
         let setBlockRightZPosition = SKAction.runBlock() {
-            self.blockRight.zPosition = CGFloat(3 * floorPosition.rawValue)
+            self.blockRight.zPosition = CGFloat(Double(floorPosition.rawValue) + 99.5) //8
         }
 
         let setFullBlockZPosition = SKAction.runBlock() {
-            self.blockFace.zPosition = CGFloat(5 * floorPosition.rawValue)
-            self.blockUpper.zPosition = CGFloat(4 * floorPosition.rawValue)
+            self.blockFace.zPosition = CGFloat( floorPosition.rawValue + 101)  //10
+            self.blockUpper.zPosition = CGFloat(floorPosition.rawValue + 100)  //9
         }
         
         if self.floorPosition.rawValue > floorPosition.rawValue {
