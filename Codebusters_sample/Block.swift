@@ -40,7 +40,7 @@ class Block: SKSpriteNode {
         addChild(blockUpper)
 
         blockFace.zPosition = CGFloat( floorPosition.rawValue  + 101)
-        blockUpper.zPosition = CGFloat( floorPosition.rawValue + 100)
+        blockUpper.zPosition = CGFloat( Double(floorPosition.rawValue) + 100.5)
         blockRight.zPosition = CGFloat( Double(floorPosition.rawValue) + 99.5)
 
         blockFace.anchorPoint = CGPointZero

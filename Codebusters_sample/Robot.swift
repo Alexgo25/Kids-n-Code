@@ -462,7 +462,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     private func changeZPosition(floorPosition: FloorPosition) {
-        zPosition = CGFloat(floorPosition.rawValue + 101)
+        zPosition = CGFloat(floorPosition.rawValue + 101 )
     }
     
     func jump(afterStep: Bool) -> SKAction {
@@ -497,8 +497,22 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         let changeZPosition = SKAction.runBlock() {
             self.changeZPosition(nextFloorPosition)
         }
+        var moveAndChangezPos : SKAction
         
-        let sequence = SKAction.sequence([setNextTrackPosition(), setNextFloorPosition(nextFloorPosition), animateBegin, sound, moveByCurve, changeZPosition, animateEnd])
+        if direction == .ToRight {
+            moveAndChangezPos = SKAction.sequence([moveByCurve , changeZPosition])
+        }
+        else {
+            if (trackPosition() != 0 && track!.getFloorPositionAt(trackPosition() + direction.rawValue).rawValue == currentFloorPosition.rawValue + 1) {
+                moveAndChangezPos = SKAction.sequence([changeZPosition , moveByCurve])
+            }
+            else {
+                moveAndChangezPos = SKAction.sequence([moveByCurve , changeZPosition])
+
+            }
+        }
+        
+        let sequence = SKAction.sequence([setNextTrackPosition(), setNextFloorPosition(nextFloorPosition), animateBegin, sound ,moveAndChangezPos , animateEnd])
         
         track!.setNextRobotTrackPosition(direction)
         
