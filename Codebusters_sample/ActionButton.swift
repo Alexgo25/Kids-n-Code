@@ -108,19 +108,19 @@ class ActionButton: SKSpriteNode {
         case .Move:
             label.text = kStepButtonLabel
             label.position = CGPoint(x: -8, y: 75)
-            zPosition = 11
+            zPosition = 101
         case .Turn:
             label.text = kTurnButtonLabel
             label.position = CGPoint(x: -35, y: 75)
-            zPosition = 10
+            zPosition = 100
         case .Push:
             label.text = kPushButtonLabel
             label.position = CGPoint(x: 8, y: 75)
-            zPosition = 10
+            zPosition = 100
         case .Jump:
             label.text = kJumpButtonLabel
             label.position = CGPoint(x: 15, y: 75)
-            zPosition = 11
+            zPosition = 101
         case .Catch:
             label.text = kCatchButtonLabel
             label.position = CGPoint(x: 0, y: 75)

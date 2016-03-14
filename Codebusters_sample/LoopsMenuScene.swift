@@ -20,6 +20,7 @@ class LoopsMenuScene: SceneTemplate {
     var folders : [SKSpriteNode] = []
     
     
+    
     override init() {
         super.init()
         addChild(background)
@@ -38,19 +39,44 @@ class LoopsMenuScene: SceneTemplate {
     }
     
     func addFolders() {
+        let levels = VirusedLevelsGameProgress.levelsInfo
         for (var i = 0 ; i < 4 ; i++) {
             for (var j = 0 ; j < 4; j++) {
-                let folder = SKSpriteNode(imageNamed: "folder")
-                folder.position = CGPoint(x: menuColumnPositionX[i], y: menuRowPositionY[j])
-                folder.zPosition = 1000
-                let circle = SKSpriteNode(imageNamed: "ellipse")
-                circle.zPosition = 1001
-                circle.position = CGPoint(x: 0, y: 0)
-                folder.addChild(circle)
+                var folderState : FolderState!
+                if (folders.count < 15) {
+                    let level = levels[folders.count] //as! LevelConfiguration
+                    let nextLevel = levels[folders.count + 1] //as! LevelConfiguration
+                    if (level.isOpened) {
+                        if (!nextLevel.isOpened) {
+                            folderState = .Current
+                        }
+                        else {
+                            folderState = .Opened
+                        }
+                    }
+                    else {
+                        folderState = .Closed
+                    }
+                }
+                else {
+                    let level = levels[folders.count] //as! LevelConfiguration
+                    if (level.isOpened) {
+                        if (level.currentResult == 0) {
+                            folderState = .Current
+                        }
+                        else {
+                            folderState = .Opened
+                        }
+                    }
+                    else {
+                        folderState = .Closed
+                    }
+                }
+                
+                let folder = Folder(folderState: folderState, number: folders.count + 1)
+                folder.position = CGPoint(x: menuColumnPositionX[j], y: menuRowPositionY[i])
                 addChild(folder)
                 folders.append(folder)
-                let label = createLabel(String(folders.count), fontColor: UIColor.brownColor(), fontSize: 23, position: CGPoint(x: 0, y: 0))
-                circle.addChild(label)
             }
         }
     }

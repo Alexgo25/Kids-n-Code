@@ -78,7 +78,7 @@ class MenuScene: SceneTemplate  {
         
         //showGarland()
     }
-    
+    /*
     func showGarland() {
         let garlandTexture = SKTexture(imageNamed: "garland1")
         let garland = SKSpriteNode(texture: garlandTexture)
@@ -93,7 +93,7 @@ class MenuScene: SceneTemplate  {
         let sequence = SKAction.sequence([SKAction.waitForDuration(1.5), action1, SKAction.waitForDuration(1.5), action2])
         garland.runAction(SKAction.repeatActionForever(sequence))
     }
-    
+    */
     func showFinalView() {
         finalView.zPosition = 10000
         finalView.anchorPoint = CGPointZero

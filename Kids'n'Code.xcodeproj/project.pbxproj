@@ -24,6 +24,10 @@
 		1137F1531C8C3946003F02F5 /* VirusAnimations_Red.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1137F1521C8C3946003F02F5 /* VirusAnimations_Red.atlas */; };
 		114DE4C01C4442A6004B1EDF /* libprotobuf.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */; };
 		115C6E971ACBFA4200B79250 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C6E961ACBFA4200B79250 /* Robot.swift */; };
+		11757B701C960035009D160D /* WalkingAway.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 11757B6F1C960035009D160D /* WalkingAway.atlas */; };
+		11757B721C96004C009D160D /* FadeOutInDoor_ToLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 11757B711C96004C009D160D /* FadeOutInDoor_ToLeft.atlas */; };
+		11757B741C960067009D160D /* FadeOutInDoor_ToRight.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 11757B731C960067009D160D /* FadeOutInDoor_ToRight.atlas */; };
+		11757B761C96ACAF009D160D /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11757B751C96ACAF009D160D /* Folder.swift */; };
 		117CB8FF1C540CDC0020E240 /* libFlurry_7.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 117CB8FE1C540CDC0020E240 /* libFlurry_7.3.0.a */; };
 		1183EB671C44296A00DA88A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1183EB661C44296A00DA88A8 /* GoogleService-Info.plist */; };
 		11845F611C32FE0A00FDCBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11845F631C32FE0A00FDCBB2 /* Localizable.strings */; };
@@ -159,6 +163,10 @@
 		1137F1521C8C3946003F02F5 /* VirusAnimations_Red.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = VirusAnimations_Red.atlas; sourceTree = "<group>"; };
 		114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libprotobuf.tbd; path = usr/lib/libprotobuf.tbd; sourceTree = SDKROOT; };
 		115C6E961ACBFA4200B79250 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		11757B6F1C960035009D160D /* WalkingAway.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WalkingAway.atlas; sourceTree = "<group>"; };
+		11757B711C96004C009D160D /* FadeOutInDoor_ToLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = FadeOutInDoor_ToLeft.atlas; sourceTree = "<group>"; };
+		11757B731C960067009D160D /* FadeOutInDoor_ToRight.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = FadeOutInDoor_ToRight.atlas; sourceTree = "<group>"; };
+		11757B751C96ACAF009D160D /* Folder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		117CB8FD1C540CD20020E240 /* Flurry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		117CB8FE1C540CDC0020E240 /* libFlurry_7.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.3.0.a; sourceTree = "<group>"; };
 		1183EB661C44296A00DA88A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -403,6 +411,7 @@
 				616C2BE21C2D599B008A471D /* ButtonNode.swift */,
 				11E38C681AD94BCC0061BE81 /* RobotTrack.swift */,
 				11EAB3F01C837EAB0054C644 /* LevelVirus.swift */,
+				11757B751C96ACAF009D160D /* Folder.swift */,
 			);
 			name = "Game Sprites";
 			sourceTree = "<group>";
@@ -497,6 +506,7 @@
 		61AC5DC51BA5881300CA109C /* RobotAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				11757B6F1C960035009D160D /* WalkingAway.atlas */,
 				61AC5DC71BA5881300CA109C /* ToLeft */,
 				61AC5DCF1BA5881300CA109C /* ToRight */,
 			);
@@ -506,6 +516,7 @@
 		61AC5DC71BA5881300CA109C /* ToLeft */ = {
 			isa = PBXGroup;
 			children = (
+				11757B711C96004C009D160D /* FadeOutInDoor_ToLeft.atlas */,
 				615C88291BA77A8A00B755F6 /* Animation_Mistake_ToLeft.atlas */,
 				61AC5DC81BA5881300CA109C /* Animation_Jump_ToLeft.atlas */,
 				61AC5DC91BA5881300CA109C /* Animation_Move_ToLeft.atlas */,
@@ -521,6 +532,7 @@
 		61AC5DCF1BA5881300CA109C /* ToRight */ = {
 			isa = PBXGroup;
 			children = (
+				11757B731C960067009D160D /* FadeOutInDoor_ToRight.atlas */,
 				615C882B1BA77AA200B755F6 /* Animation_Mistake_ToRight.atlas */,
 				61AC5DD01BA5881300CA109C /* Animation_Jump_ToRight.atlas */,
 				61AC5DD11BA5881300CA109C /* Animation_Move_ToRight.atlas */,
@@ -645,11 +657,14 @@
 				61AC5DAF1BA586C000CA109C /* ActionButtons.atlas in Resources */,
 				614DA0B71AEF1A8A0088A557 /* CubeFalling.mp3 in Resources */,
 				61AC5DB01BA586C000CA109C /* ActionCells.atlas in Resources */,
+				11757B701C960035009D160D /* WalkingAway.atlas in Resources */,
 				61A15FE91AEE4AA1008B36EA /* Jump.wav in Resources */,
 				614DA0BB1AEF1C750088A557 /* LevelCompleted.mp3 in Resources */,
 				112EBC431C805C1C00E955BF /* Levels_2.plist in Resources */,
 				61AC5DE11BA5881300CA109C /* Animation_Push_FirstPart_ToRight.atlas in Resources */,
 				1137F1531C8C3946003F02F5 /* VirusAnimations_Red.atlas in Resources */,
+				11757B721C96004C009D160D /* FadeOutInDoor_ToLeft.atlas in Resources */,
+				11757B741C960067009D160D /* FadeOutInDoor_ToRight.atlas in Resources */,
 				110952CD1AC6DF5B000A960A /* Images.xcassets in Resources */,
 				1183EB671C44296A00DA88A8 /* GoogleService-Info.plist in Resources */,
 				61AC5DB31BA586C000CA109C /* GameButtons.atlas in Resources */,
@@ -801,6 +816,7 @@
 				1198E7531BE9067100AFE73A /* CoreDataAdapter.swift in Sources */,
 				616C2BDF1C29F9A0008A471D /* SceneManager.swift in Sources */,
 				615D6E8E1BBF2F2600229AD6 /* EndLevelView.swift in Sources */,
+				11757B761C96ACAF009D160D /* Folder.swift in Sources */,
 				6120207D1BE15FDA00682C73 /* Tutorial.swift in Sources */,
 				61F698C21BAC1F120022018A /* Switcher.swift in Sources */,
 			);
@@ -965,7 +981,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Alexander.kidsncode;
 				PRODUCT_NAME = Codebusters_sample;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -995,7 +1011,7 @@
 				PRODUCT_NAME = Codebusters_sample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

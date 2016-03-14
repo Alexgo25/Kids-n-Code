@@ -98,7 +98,7 @@
 		<key>result</key>
 		<integer>0</integer>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>detailType</key>
 		<string>Door</string>
 		<key>blocksPattern</key>
@@ -171,7 +171,7 @@
 		<key>detailType</key>
 		<string>Door</string>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>blocksPattern</key>
@@ -230,7 +230,7 @@
 		<key>detailType</key>
 		<string>Door</string>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
@@ -283,7 +283,7 @@
 		<key>loopsEnabled</key>
 		<true/>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
@@ -325,7 +325,7 @@
 		<key>loopsEnabled</key>
 		<true/>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
@@ -369,7 +369,7 @@
 			</dict>
 		</array>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
@@ -409,7 +409,7 @@
 		<key>loopsEnabled</key>
 		<true/>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
@@ -456,7 +456,7 @@
 			<integer>1</integer>
 		</array>
 		<key>loopsEnabled</key>
-		<true/>
+		<false/>
 		<key>virusesPattern</key>
 		<array>
 			<dict>
@@ -467,7 +467,7 @@
 			</dict>
 		</array>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>robotPosition</key>
 		<integer>2</integer>
 		<key>detailPosition</key>
@@ -512,7 +512,7 @@
 			</dict>
 		</array>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>detailPosition</key>
@@ -553,7 +553,7 @@
 		<key>detailType</key>
 		<string>Door</string>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
@@ -643,7 +643,7 @@
 			</dict>
 		</array>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>robotPosition</key>
 		<integer>7</integer>
 		<key>detailPosition</key>
@@ -662,13 +662,7 @@
 		<array>
 			<dict>
 				<key>virusPosition</key>
-				<integer>2</integer>
-				<key>virusFloorPosition</key>
-				<integer>1</integer>
-			</dict>
-			<dict>
-				<key>virusPosition</key>
-				<integer>4</integer>
+				<integer>3</integer>
 				<key>virusFloorPosition</key>
 				<integer>2</integer>
 			</dict>
@@ -680,21 +674,9 @@
 			</dict>
 			<dict>
 				<key>virusFloorPosition</key>
-				<integer>3</integer>
+				<integer>4</integer>
 				<key>virusPosition</key>
-				<integer>8</integer>
-			</dict>
-			<dict>
-				<key>virusFloorPosition</key>
-				<integer>2</integer>
-				<key>virusPosition</key>
-				<integer>10</integer>
-			</dict>
-			<dict>
-				<key>virusFloorPosition</key>
-				<integer>1</integer>
-				<key>virusPosition</key>
-				<integer>12</integer>
+				<integer>9</integer>
 			</dict>
 		</array>
 		<key>detailType</key>
@@ -702,7 +684,7 @@
 		<key>loopsEnabled</key>
 		<true/>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
@@ -749,7 +731,7 @@
 			<integer>1</integer>
 		</array>
 		<key>loopsEnabled</key>
-		<true/>
+		<false/>
 		<key>detailType</key>
 		<string>Door</string>
 		<key>virusesPattern</key>
@@ -774,7 +756,7 @@
 			</dict>
 		</array>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>detailPosition</key>
@@ -790,7 +772,7 @@
 	</dict>
 	<dict>
 		<key>isOpened</key>
-		<true/>
+		<false/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>

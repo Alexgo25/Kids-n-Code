@@ -444,16 +444,16 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         switch contactMask {
         case PhysicsCategory.Robot | PhysicsCategory.Detail:
             if (!robot.track!.virused) {
-                if(detail.detailType != .Door) {
+                //if(detail.detailType != .Door) {
                     detail.hideDetail()
                     robot.takeDetail()
-                    runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
-                        self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
+                runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
+                        //self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
                         self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
-                }
-                else {
-                    self.sceneManager.presentScene(.Menu)
-                }
+                //}
+                //else {
+                  //  self.sceneManager.presentScene(.Menu)
+                //}
                 
             }
             else {
@@ -613,12 +613,21 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 overlay = nil
             case .Exit_PauseView, .Exit_EndLevelView:
                 NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-                let loopsMenu = LoopsMenuScene()
-                sceneManager.presentScene(loopsMenu)
+                sceneManager.presentScene(.Menu)
             case .Restart_PauseView, .Restart_EndLevelView, .Restart:
-                sceneManager.presentScene(.CurrentLevel)
+                if (detail.detailType == .Door) {
+                    sceneManager.presentScene(.CurrentVirusedLevel)
+                }
+                else {
+                    sceneManager.presentScene(.CurrentLevel)
+                }
             case .NextLevel_EndLevelView:
-                sceneManager.presentScene(.NextLevel)
+                if (detail.detailType == .Door) {
+                    
+                }
+                else {
+                    sceneManager.presentScene(.NextLevel)
+                }
             case .CancelLoop :
                 NSOperationQueue.mainQueue().addOperationWithBlock({
                     ActionCell.deselectAll()

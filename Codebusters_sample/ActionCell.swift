@@ -453,16 +453,16 @@ class ActionCell: SKSpriteNode  {
             let cell = ActionCell.cells[i]
             let action : SKAction!
             if (cell.selected) {
-                action = SKAction.moveByX(61, y: -actionCellSize.height , duration: 0.25)
+                action = SKAction.moveByX(61, y: -actionCellSize.height - 2 , duration: 0.25)
                 cell.runAction(action)
             }
             else {
-                cell.runAction(SKAction.moveByX(0, y: -actionCellSize.height, duration: 0.25))
+                cell.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 2, duration: 0.25))
             }
         }
         for rect in repeatRectangles {
             if (rect.position.y < cells[firstSelectedIndex].position.y) {
-                rect.runAction(SKAction.moveByX(0, y: -actionCellSize.height, duration: 0.25))
+                rect.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 2, duration: 0.25))
             }
         }
 

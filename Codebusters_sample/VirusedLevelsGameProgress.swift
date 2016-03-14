@@ -11,11 +11,15 @@ import Foundation
 
 class VirusedLevelsGameProgress {
     
-    var levelsInfo : [LevelConfiguration] = []
+    static var levelsInfo : [LevelConfiguration] = []
     var currentLevel = 0
     
     init() {
-        
+        let arr = getLevelsData()
+        for element in arr {
+            let levelInfo = LevelConfiguration(info: element as! [String : AnyObject])
+            VirusedLevelsGameProgress.levelsInfo.append(levelInfo)
+        }
     }
     
     func getLevelConfiguration(levelNumber : Int) -> LevelConfiguration {
@@ -30,13 +34,22 @@ class VirusedLevelsGameProgress {
     
     func writeResultsOfCurrentLevel(result: Int) {
         let path = getLevelsDataPath()
-        let fileManager = NSFileManager.defaultManager()
-        
-        let dict = getLevelsData()[currentLevel] as! NSDictionary
-        let currentResult = dict["result"] as! Int
-        if (result > currentResult || currentResult == 0) {
-        
+        let levels = NSMutableArray(contentsOfFile: path)
+        if (currentLevel < 16) {
+            let currentLevelData = levels![currentLevel] as! NSMutableDictionary
+            if (currentLevelData["result"] as! Int > result) {
+                currentLevelData["result"] = result
+            }
+            if (currentLevel != 15) {
+                let nextLevelData = levels![currentLevel + 1] as! NSMutableDictionary
+                if (!(nextLevelData["isOpened"] as! Bool)) {
+                    nextLevelData["isOpened"] = true
+                }
+            }
+            
         }
+        
+        
     }
     
     func getLevelsDataPath() -> String {
@@ -44,5 +57,11 @@ class VirusedLevelsGameProgress {
         let bundlePath = NSBundle.mainBundle().pathForResource("Levels_2", ofType: "plist")!
         //let fileURL = documentsURL.URLByAppendingPathComponent("Levels_2.plist")
         return bundlePath
+    }
+    
+    func setNextLevel() {
+        if (currentLevel < 15) {
+            currentLevel++
+        }
     }
 }

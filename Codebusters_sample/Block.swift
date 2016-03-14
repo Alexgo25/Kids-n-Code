@@ -40,7 +40,7 @@ class Block: SKSpriteNode {
         addChild(blockUpper)
 
         blockFace.zPosition = CGFloat( floorPosition.rawValue  + 101)
-        blockUpper.zPosition = CGFloat( Double(floorPosition.rawValue) + 100.5)
+        blockUpper.zPosition = CGFloat( Double(floorPosition.rawValue) + 100.1)
         blockRight.zPosition = CGFloat( Double(floorPosition.rawValue) + 99.5)
 
         blockFace.anchorPoint = CGPointZero
@@ -62,14 +62,14 @@ class Block: SKSpriteNode {
 
         let setFullBlockZPosition = SKAction.runBlock() {
             self.blockFace.zPosition = CGFloat( floorPosition.rawValue + 101)  //10
-            self.blockUpper.zPosition = CGFloat(floorPosition.rawValue + 100)  //9
+            self.blockUpper.zPosition = CGFloat(Double(floorPosition.rawValue) + 100.1)  //9
         }
         
         if self.floorPosition.rawValue > floorPosition.rawValue {
             let sound = SKAction.runBlock() {
                 AudioPlayer.sharedInstance.playSoundEffect("CubeFalling.mp3")
             }
-            sequence = SKAction.sequence([moveByX, setBlockRightZPosition, sound, moveByY, setFullBlockZPosition])
+            sequence = SKAction.sequence([ moveByX ,setBlockRightZPosition, sound, moveByY, setFullBlockZPosition])
         } else {
             sequence = SKAction.sequence([moveByX, moveByY])
         }

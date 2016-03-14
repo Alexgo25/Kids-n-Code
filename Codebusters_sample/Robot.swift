@@ -79,12 +79,10 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     
     func takeDetail() {
         if (detail!.detailType == .Door) {
-            
-        }
-        else {
+            runAction(fadeOutInTheDoor())
+         }
             stopRobot = true
             robotTookDetail = true
-        }
     }
     
     func appendAction(actionCell : ActionCell) -> Bool {
@@ -537,6 +535,30 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         let animate = SKAction.animateWithTextures(getRobotAnimation("Push_SecondPart", direction: direction), timePerFrame: 0.08, resize: true, restore: false)
         
         return animate
+    }
+    
+    func fadeOutInTheDoor() -> SKAction {
+        var str : String!
+        if (direction == .ToRight) {
+            str = "ToRight"
+        }
+        else {
+            str = "ToLeft"
+        }
+        let firstAtlas = SKTextureAtlas(named: "FadeOutInDoor_\(str)")
+        var textures : [SKTexture] = []
+        for name in firstAtlas.textureNames {
+            textures.append(SKTexture(imageNamed: name))
+        }
+        let turnAnimate = SKAction.animateWithTextures(textures, timePerFrame: 0.08)
+        let secondAtlas = SKTextureAtlas(named: "WalkingAway")
+        var secondTextures : [SKTexture] = []
+        for name in secondAtlas.textureNames {
+            secondTextures.append(SKTexture(imageNamed: name))
+        }
+        let walkAway = SKAction.animateWithTextures(secondTextures, timePerFrame: 0.08, resize: true , restore: false)
+        let sequence = SKAction.sequence([turnAnimate , walkAway])
+        return sequence
     }
     
     func moveToStart() {
