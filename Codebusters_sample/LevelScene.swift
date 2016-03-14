@@ -623,7 +623,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 }
             case .NextLevel_EndLevelView:
                 if (detail.detailType == .Door) {
-                    
+                    sceneManager.presentScene(.NextVirusedLevel)
                 }
                 else {
                     sceneManager.presentScene(.NextLevel)

@@ -78,9 +78,6 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     }
     
     func takeDetail() {
-        if (detail!.detailType == .Door) {
-            runAction(fadeOutInTheDoor())
-         }
             stopRobot = true
             robotTookDetail = true
     }
@@ -167,8 +164,8 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                             let turn = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05, resize: true, restore: false)
                             
                             if self.robotTookDetail {
-                                self.runAction(turn)
-                                
+                                    self.runAction(turn)
+
                             } else {
                                 
                                 let sequence = SKAction.sequence([turn, self.mistake()])
@@ -183,9 +180,9 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                             } else {
                                 self.stopRobot = true
 
-                                let turn = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05)
+                                //let turn = SKAction.animateWithTextures(self.getRobotAnimation("TurnToFront", direction: self.animationDirection), timePerFrame: 0.05)
                                 
-                                self.runAction(turn)
+                                //self.runAction(turn)
                             }
                         }
                     })
@@ -219,7 +216,12 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                 
                     
                     if self.robotTookDetail {
-                        self.runAction(turn)
+                        if (self.detail!.detailType == .Door) {
+                            self.runAction(self.fadeOutInTheDoor())
+                        }
+                        else {
+                            self.runAction(turn)
+                        }
                     } else {
                         let sequence = SKAction.sequence([turn, self.mistake()])
                         self.runAction(sequence)
@@ -550,13 +552,13 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         for name in firstAtlas.textureNames {
             textures.append(SKTexture(imageNamed: name))
         }
-        let turnAnimate = SKAction.animateWithTextures(textures, timePerFrame: 0.08)
+        let turnAnimate = SKAction.animateWithTextures(textures, timePerFrame: 0.8, resize: true , restore: false)
         let secondAtlas = SKTextureAtlas(named: "WalkingAway")
         var secondTextures : [SKTexture] = []
         for name in secondAtlas.textureNames {
             secondTextures.append(SKTexture(imageNamed: name))
         }
-        let walkAway = SKAction.animateWithTextures(secondTextures, timePerFrame: 0.08, resize: true , restore: false)
+        let walkAway = SKAction.animateWithTextures(secondTextures, timePerFrame: 0.8, resize: true , restore: false)
         let sequence = SKAction.sequence([turnAnimate , walkAway])
         return sequence
     }
