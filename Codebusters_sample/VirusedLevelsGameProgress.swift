@@ -9,18 +9,21 @@
 import Foundation
 
 
-class VirusedLevelsGameProgress {
+public class VirusedLevelsGameProgress {
     
-    static var levelsInfo : [LevelConfiguration] = []
+    var virusedLevelsInfo : [[String : AnyObject]] = [] {
+        didSet {
+            updatePlistFile()
+        }
+    }
     var currentLevel = 0
     
     init() {
-        let arr = getLevelsData()
-        for element in arr {
-            let levelInfo = LevelConfiguration(info: element as! [String : AnyObject])
-            VirusedLevelsGameProgress.levelsInfo.append(levelInfo)
-        }
+        writePListToDevice()
+        updateData()
     }
+    
+    
     
     func getLevelConfiguration(levelNumber : Int) -> LevelConfiguration {
         return LevelConfiguration(info: getLevelsData()[levelNumber] as! [String : AnyObject])
@@ -32,36 +35,83 @@ class VirusedLevelsGameProgress {
         return config
     }
     
-    func writeResultsOfCurrentLevel(result: Int) {
+    func updateData() {
+        let arr = getLevelsData() as! [[String : AnyObject]]
+        for element in arr {
+            virusedLevelsInfo.append(element)
+        }
+    }
+    
+    func writePListToDevice() {
         let path = getLevelsDataPath()
-        let levels = NSMutableArray(contentsOfFile: path)
-        if (currentLevel < 16) {
-            let currentLevelData = levels![currentLevel] as! NSMutableDictionary
-            if (currentLevelData["result"] as! Int > result) {
-                currentLevelData["result"] = result
-            }
-            if (currentLevel != 15) {
-                let nextLevelData = levels![currentLevel + 1] as! NSMutableDictionary
-                if (!(nextLevelData["isOpened"] as! Bool)) {
-                    nextLevelData["isOpened"] = true
+        let fileManager = NSFileManager.defaultManager()
+        if !fileManager.fileExistsAtPath(path) {
+            if let bundle = NSBundle.mainBundle().pathForResource("Levels_2", ofType: "plist") {
+                do {
+                    try fileManager.copyItemAtPath(bundle, toPath: path)
+                } catch _ {
+                    print("mh")
                 }
             }
-            
-        }
-        
-        
+        } /*else {
+            if let _ = NSMutableArray(contentsOfFile: path) {
+                
+                do {
+                    try fileManager.removeItemAtPath(path)
+                }
+                catch _ {
+                    print("123")
+                }
+                writePListToDevice()
+            }
+        }*/
+
     }
     
     func getLevelsDataPath() -> String {
-        //let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-        let bundlePath = NSBundle.mainBundle().pathForResource("Levels_2", ofType: "plist")!
-        //let fileURL = documentsURL.URLByAppendingPathComponent("Levels_2.plist")
-        return bundlePath
+        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        let fileURL = documentsURL.URLByAppendingPathComponent("Levels_2.plist")
+        return fileURL.path!
     }
     
     func setNextLevel() {
         if (currentLevel < 15) {
             currentLevel++
         }
+    }
+    
+    func openNextLevel() {
+        let count = virusedLevelsInfo.count
+        
+        guard virusedLevelsInfo[currentLevel]["result"] as! Int > 0 else {
+            return
+        }
+        
+        if currentLevel + 1 < count {
+            virusedLevelsInfo[currentLevel + 1].updateValue(true, forKey: kIsOpenedKey)
+        }
+        
+    }
+    
+    func writeResultOfCurrentLevel(result : Int) {
+        var data = self.virusedLevelsInfo
+        let currentResult =  data[currentLevel]["result"] as! Int
+        if (result < currentResult || currentResult == 0) {
+            data[currentLevel].updateValue(result, forKey: "result")
+            self.virusedLevelsInfo = data
+        }
+        openNextLevel()
+        
+    }
+    
+    func updatePlistFile() {
+        let config = virusedLevelsInfo as NSArray
+        config.writeToFile(getLevelsDataPath(), atomically: true)
+    }
+    
+    func removeTutorial() {
+        var data = self.virusedLevelsInfo
+        data[currentLevel].removeValueForKey("tutorial")
+        self.virusedLevelsInfo = data
     }
 }

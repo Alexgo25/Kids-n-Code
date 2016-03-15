@@ -16,7 +16,8 @@ class SceneManager {
         Level(Int, Int),
         VirusedLevel(Int),
         CurrentVirusedLevel,
-        NextVirusedLevel
+        NextVirusedLevel,
+        VirusedMenu
     }
     
     var currentLevel: Int {
@@ -116,7 +117,7 @@ class SceneManager {
                     currentScene.removeFromParent()
                 }
                 virusedGameProgressManager.currentLevel = levelNumber
-                presentScene(LevelScene(levelInfo: levelConfiguration))
+                presentScene(VirusedLevelScene(levelInfo: levelConfiguration))
             }
             else {
                 break
@@ -139,7 +140,14 @@ class SceneManager {
                     currentScene.removeFromParent()
                 }
             presentScene(.CurrentVirusedLevel)
-            
+        case .VirusedMenu:
+            if (self.view.scene != nil){
+                let currentScene = self.view.scene!
+                currentScene.removeAllActions()
+                currentScene.removeAllChildren()
+                currentScene.removeFromParent()
+            }
+            presentScene(LoopsMenuScene(data : virusedGameProgressManager.virusedLevelsInfo))
         }
     }
 }

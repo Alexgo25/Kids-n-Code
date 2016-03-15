@@ -130,8 +130,7 @@ class MenuScene: SceneTemplate  {
             }
             
             else if nodeAtPoint(touchLocation) == screen {
-                let loopsMenu = LoopsMenuScene()
-                sceneManager.presentScene(loopsMenu)
+                sceneManager.presentScene(.VirusedMenu)
             }
         }
     }

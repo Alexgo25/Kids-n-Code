@@ -39,6 +39,7 @@
 		1198E7791BE90B3C00AFE73A /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E7731BE90B3C00AFE73A /* Action.swift */; };
 		1198E77B1BE90B3C00AFE73A /* Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E7751BE90B3C00AFE73A /* Touch.swift */; };
 		1198E77D1BE9329400AFE73A /* NotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1198E77C1BE9329400AFE73A /* NotificationKeys.swift */; };
+		11A1F7001C9881790049B374 /* VirusedLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1F6FF1C9881790049B374 /* VirusedLevelScene.swift */; };
 		11A5F2D31C189469004A1A0A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A5F2D21C189469004A1A0A /* AdSupport.framework */; };
 		11A5F2D51C189476004A1A0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A5F2D41C189476004A1A0A /* AudioToolbox.framework */; };
 		11A5F2D71C189480004A1A0A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A5F2D61C189480004A1A0A /* AVFoundation.framework */; };
@@ -182,6 +183,7 @@
 		1198E7731BE90B3C00AFE73A /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		1198E7751BE90B3C00AFE73A /* Touch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Touch.swift; sourceTree = "<group>"; };
 		1198E77C1BE9329400AFE73A /* NotificationKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationKeys.swift; sourceTree = "<group>"; };
+		11A1F6FF1C9881790049B374 /* VirusedLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirusedLevelScene.swift; sourceTree = "<group>"; };
 		11A5F2D21C189469004A1A0A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		11A5F2D41C189476004A1A0A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		11A5F2D61C189480004A1A0A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -428,6 +430,7 @@
 				61A23A731BC9094B006B10C6 /* LevelSelectionView.swift */,
 				110952C71AC6DF5B000A960A /* GameViewController.swift */,
 				112EBC441C805E6B00E955BF /* LoopsMenuScene.swift */,
+				11A1F6FF1C9881790049B374 /* VirusedLevelScene.swift */,
 			);
 			name = "Game Views&Controllers";
 			sourceTree = "<group>";
@@ -812,6 +815,7 @@
 				6131E1331AD2C9FF00D69DD6 /* Helper.swift in Sources */,
 				614DA0C71AEF36680088A557 /* MenuScene.swift in Sources */,
 				618F7BA81AEEDCEE00B2DBC5 /* DetailCell.swift in Sources */,
+				11A1F7001C9881790049B374 /* VirusedLevelScene.swift in Sources */,
 				11E38C691AD94BCC0061BE81 /* RobotTrack.swift in Sources */,
 				1198E7531BE9067100AFE73A /* CoreDataAdapter.swift in Sources */,
 				616C2BDF1C29F9A0008A471D /* SceneManager.swift in Sources */,

@@ -17,17 +17,17 @@ class LoopsMenuScene: SceneTemplate {
     
     let background = SKSpriteNode(imageNamed: "loopsMenuBackground")
     let buttonPause = GameButton(type: .Pause)
-    var folders : [SKSpriteNode] = []
+    var folders : [Folder] = []
     
     
     
-    override init() {
+      init(data : [[String : AnyObject]]) {
         super.init()
         addChild(background)
         background.anchorPoint = CGPointZero
         background.zPosition = -1
         addChild(buttonPause)
-        addFolders()
+        addFolders(data)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -38,16 +38,15 @@ class LoopsMenuScene: SceneTemplate {
         
     }
     
-    func addFolders() {
-        let levels = VirusedLevelsGameProgress.levelsInfo
+    func addFolders(levels : [[String: AnyObject]]) {
         for (var i = 0 ; i < 4 ; i++) {
             for (var j = 0 ; j < 4; j++) {
                 var folderState : FolderState!
                 if (folders.count < 15) {
-                    let level = levels[folders.count] //as! LevelConfiguration
-                    let nextLevel = levels[folders.count + 1] //as! LevelConfiguration
-                    if (level.isOpened) {
-                        if (!nextLevel.isOpened) {
+                    let level = levels[folders.count]
+                    let nextLevel = levels[folders.count + 1]
+                    if ((level[kIsOpenedKey] as! Bool) == true) {
+                        if ((nextLevel[kIsOpenedKey] as! Bool) == false) {
                             folderState = .Current
                         }
                         else {
@@ -59,9 +58,9 @@ class LoopsMenuScene: SceneTemplate {
                     }
                 }
                 else {
-                    let level = levels[folders.count] //as! LevelConfiguration
-                    if (level.isOpened) {
-                        if (level.currentResult == 0) {
+                    let level = levels[folders.count]
+                    if ((level[kIsOpenedKey] as! Bool) == true) {
+                        if ((level["result"] as! Int)  == 0) {
                             folderState = .Current
                         }
                         else {
@@ -86,9 +85,21 @@ class LoopsMenuScene: SceneTemplate {
             let touchLocation = touch.locationInNode(self)
             
             if let touchedNode = nodeAtPoint(touchLocation) as? SKSpriteNode {
-                if (folders.contains(touchedNode)) {
-                    let index = folders.indexOf(touchedNode)!
-                    sceneManager.presentScene(.VirusedLevel(index))
+                if let folder = touchedNode as? Folder {
+                    let index = folders.indexOf(folder)!
+                    if (folders[index].folderState != .Closed) {
+                        sceneManager.presentScene(.VirusedLevel(index))
+                    }
+                    
+                }
+                else {
+                    if let parent = touchedNode.parent as? Folder {
+                        let index = folders.indexOf(parent)!
+                        if (folders[index].folderState != .Closed) {
+                            sceneManager.presentScene(.VirusedLevel(index))
+                        }
+
+                    }
                 }
             }
         }

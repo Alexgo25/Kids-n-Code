@@ -3,21 +3,6 @@
 <plist version="1.0">
 <array>
 	<dict>
-		<key>virusesPattern</key>
-		<array>
-			<dict>
-				<key>virusPosition</key>
-				<integer>8</integer>
-				<key>virusFloorPosition</key>
-				<integer>1</integer>
-			</dict>
-		</array>
-		<key>loopsEnabled</key>
-		<false/>
-		<key>detailType</key>
-		<string>Door</string>
-		<key>isOpened</key>
-		<true/>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
@@ -30,8 +15,23 @@
 			<integer>1</integer>
 			<integer>1</integer>
 		</array>
+		<key>virusesPattern</key>
+		<array>
+			<dict>
+				<key>virusPosition</key>
+				<integer>8</integer>
+				<key>virusFloorPosition</key>
+				<integer>1</integer>
+			</dict>
+		</array>
+		<key>loopsEnabled</key>
+		<false/>
+		<key>isOpened</key>
+		<true/>
+		<key>detailType</key>
+		<string>Door</string>
 		<key>robotPosition</key>
-		<integer>7</integer>
+		<integer>1</integer>
 		<key>detailPosition</key>
 		<integer>9</integer>
 		<key>detailFloorPosition</key>
@@ -44,6 +44,18 @@
 		<integer>10</integer>
 	</dict>
 	<dict>
+		<key>blocksPattern</key>
+		<array>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+		</array>
 		<key>virusesPattern</key>
 		<array>
 			<dict>
@@ -58,19 +70,7 @@
 		<key>loopsEnabled</key>
 		<true/>
 		<key>isOpened</key>
-		<true/>
-		<key>blocksPattern</key>
-		<array>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-		</array>
+		<false/>
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>detailPosition</key>

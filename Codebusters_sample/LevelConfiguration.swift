@@ -11,6 +11,7 @@ import Foundation
 struct LevelConfiguration {
     private let configurationDictionary: [String: AnyObject]
     
+    
     var isOpened: Bool {
         return configurationDictionary["isOpened"] as! Bool
     }

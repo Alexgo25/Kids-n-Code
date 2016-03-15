@@ -34,8 +34,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     let trackLayer = SKNode()
     var touchesToRecord: [String] = []
     
-    var levelBackground1 = SKSpriteNode(imageNamed: "virusedBackground")
-    var levelBackground2 = SKSpriteNode(imageNamed: "virusedBackground_2")
+    var levelBackground1 = SKSpriteNode(imageNamed: "levelBackground1")
+    var levelBackground2 = SKSpriteNode(imageNamed: "levelBackground2")
     
     var button_Pause : GameButton!
     var button_Restart : GameButton!
@@ -43,9 +43,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     var button_Start : GameButton!
     var button_Debug : GameButton!
     var button_Clear : GameButton!
-    var button_ReadyLoop : GameButton!
-    var button_CancelLoop : GameButton!
-    var loopControl = LoopControlFullRect()
+
     
     var robot: Robot
     var detail: Detail
@@ -91,8 +89,6 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         //Listening to notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addNewControls", name: kActionCellSelectedKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeNewControls", name: kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kNeedUpdatesKey)
         //Game buttons
         createGameButtons()
@@ -100,33 +96,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     
     //Handling notifications
     
-    func addNewControls() {
-        //remove old
-        print("addNewControls")
-        let fadeOut = SKAction.group([SKAction.moveByX(-400, y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
-        button_Clear.runAction(fadeOut)
-        button_Start.runAction(fadeOut)
-        button_Restart.runAction(fadeOut)
-        button_Debug.runAction(fadeOut)
-        let fadeIn = SKAction.group([SKAction.moveByX(-400, y: 0, duration: 0.2), SKAction.fadeInWithDuration(0.2)])
-        button_CancelLoop.runAction(fadeIn)
-        button_ReadyLoop.runAction(fadeIn)
-        loopControl.appearInScene()
-    }
-    
-    func removeNewControls() {
-        print("removeNewControls")
-        let fadeIn = SKAction.group([SKAction.moveByX(400, y: 0, duration: 0.2) , SKAction.fadeInWithDuration(0.2)])
-        button_Clear.runAction(fadeIn)
-        button_Start.runAction(fadeIn)
-        button_Restart.runAction(fadeIn)
-        button_Debug.runAction(fadeIn)
-        let fadeOut = SKAction.group([SKAction.moveByX(400, y: 0, duration: 0.2) , SKAction.fadeOutWithDuration(0.2)])
-        button_ReadyLoop.runAction(fadeOut)
-        button_CancelLoop.runAction(fadeOut)
-        loopControl.disappear()
-    }
-    
+        
     func createGameButtons(){
          button_Pause = GameButton(type: .Pause)
          button_Restart = GameButton(type: .Restart)
@@ -134,9 +104,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
          button_Start = GameButton(type: .Start)
          button_Debug = GameButton(type: .Debug)
          button_Clear = GameButton(type: .Clear)
-         button_ReadyLoop = GameButton(type: .ReadyLoop)
-         button_CancelLoop = GameButton(type: .CancelLoop)
-        createLabel(kNumberOfRepeatsLabel, fontColor: UIColor.blackColor(), fontSize: 28.56, position: CGPoint(x: 1800, y: 412))
+         
     }
     
     func finishWithSuccess() {
@@ -210,33 +178,9 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 trackLayer.addChild(track.getBlockAt(i, floorPosition: j))
             }
         }
-        resetViruses()
+        
     }
     
-    func resetViruses() {
-
-        if (track.viruses != []) {
-            for virus in track.viruses {
-                virus.removeFromParent()
-            }
-            track.viruses.removeAll(keepCapacity: false)
-        }
-        if (levelInfo.virusesPattern != []) {
-            track.virused = true
-            for virus in levelInfo.virusesPattern {
-                if let dict = virus as? NSDictionary {
-                    let floor = dict["virusFloorPosition"] as! Int
-                    let flp = FloorPosition(rawValue: floor)
-                    let pos = dict["virusPosition"] as! Int
-                    let virus = LevelVirus(track: track, trackPosition: pos, floorPosition: flp!)
-                    NSOperationQueue.mainQueue().addOperationWithBlock({
-                        self.trackLayer.addChild(virus)
-                    })
-                }
-    
-            }
-        }
-    }
     
     func createTrackLayer() {
         createBlocks()
@@ -448,13 +392,14 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                     detail.hideDetail()
                     robot.takeDetail()
                 runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
-                        //self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
+                    if (self.detail.detailType == .Door) {
+                        self.sceneManager.virusedGameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
+                    }
+                    else {
+                        self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
+                    }
+                    
                         self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
-                //}
-                //else {
-                  //  self.sceneManager.presentScene(.Menu)
-                //}
-                
             }
             else {
                 print("you cant take detail on virused track")
@@ -499,9 +444,6 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         addChild(button_Restart)
         addChild(button_Debug)
         addChild(button_Clear)
-        addChild(button_CancelLoop)
-        addChild(button_ReadyLoop)
-        addChild(loopControl)
     }
     
     func pauseGame() {
@@ -615,29 +557,10 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
                 sceneManager.presentScene(.Menu)
             case .Restart_PauseView, .Restart_EndLevelView, .Restart:
-                if (detail.detailType == .Door) {
-                    sceneManager.presentScene(.CurrentVirusedLevel)
-                }
-                else {
                     sceneManager.presentScene(.CurrentLevel)
-                }
             case .NextLevel_EndLevelView:
-                if (detail.detailType == .Door) {
-                    sceneManager.presentScene(.NextVirusedLevel)
-                }
-                else {
                     sceneManager.presentScene(.NextLevel)
-                }
-            case .CancelLoop :
-                NSOperationQueue.mainQueue().addOperationWithBlock({
-                    ActionCell.deselectAll()
-                })
-            case .ReadyLoop :
-                NSOperationQueue.mainQueue().addOperationWithBlock({
-                    ActionCell.moveCellsDownWhenAddingRect()
-                    ActionCell.deselectAll(self.self.loopControl.numberOfRepeats)
-                })
-            case .Achievements :
+            default:
                 break
             }
         }
