@@ -25,15 +25,21 @@ enum GameButtonType: String {
     CancelLoop,
     ReadyLoop,
     Ok,
+    Pause_Virused,
+    Debug_Virused,
+    Tips_Virused,
     Achievements
     
     func getPosition() -> CGPoint {
         switch self {
         case .Clear: return CGPoint(x: 1908, y: 229)
         case .Debug: return CGPoint(x: 1612, y: 229)
+        case .Debug_Virused: return CGPoint(x: 1612, y: 229)
         case .Pause: return CGPoint(x:103, y: 1440)
+        case .Pause_Virused: return CGPoint(x:103, y: 1440)
         case .Start: return CGPoint(x: 1760, y: 120)
         case .Tips, .Ok: return CGPoint(x: 237, y: 1440)
+        case .Tips_Virused: return CGPoint(x: 237, y: 1440)
         case .Restart: return CGPoint(x: 1760, y: 324)
         case .Restart_PauseView: return CGPoint(x: 306, y: 950)
         case .Continue_PauseView: return CGPoint(x: 306, y: 1094)

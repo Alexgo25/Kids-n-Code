@@ -39,6 +39,15 @@ public class Tutorial: SKSpriteNode {
         case 3:
             firstSlide = 8
             lastSlide = 8
+        case 4:
+            firstSlide = 9
+            lastSlide = 9
+        case 5:
+            firstSlide = 10
+            lastSlide = 14
+        case 6:
+            firstSlide = 9
+            lastSlide = 14
         default:
             firstSlide = 0
             lastSlide = 8

@@ -24,6 +24,11 @@ Tutorial_5 = "Tutorial_5_ru";
 Tutorial_6 = "Tutorial_6_ru";
 Tutorial_7 = "Tutorial_7_ru";
 Tutorial_8 = "Tutorial_8_ru";
+Tutorial_10 = "Tutorial_10_ru";
+Tutorial_11 = "Tutorial_11_ru";
+Tutorial_12 = "Tutorial_12_ru";
+Tutorial_13 = "Tutorial_13_ru";
+Tutorial_14 = "Tutorial_14_ru";
 
 //Robot texts in main menu
 DetailTextSuffix = "_Text_ru";

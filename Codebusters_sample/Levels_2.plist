@@ -3,6 +3,8 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>tutorial</key>
+		<integer>4</integer>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>
@@ -44,6 +46,8 @@
 		<integer>10</integer>
 	</dict>
 	<dict>
+		<key>tutorial</key>
+		<integer>5</integer>
 		<key>blocksPattern</key>
 		<array>
 			<integer>1</integer>

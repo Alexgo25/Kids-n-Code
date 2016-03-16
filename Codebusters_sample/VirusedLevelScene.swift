@@ -14,6 +14,35 @@ class VirusedLevelScene : LevelScene {
     var button_ReadyLoop : GameButton!
     var button_CancelLoop : GameButton!
     var loopControl = LoopControlFullRect()
+    
+    override func didMoveToView(view: SKView) {
+        let size = sceneManager.size
+        playAreaSize = CGSize(width: size.width - levelBackground2.size.width, height: size.height)
+        
+        userInteractionEnabled = true
+        anchorPoint = CGPointZero
+        physicsWorld.gravity = CGVectorMake(0, 0)
+        physicsWorld.contactDelegate = self
+        
+        ActionCell.cellsLayer.removeFromParent()
+        addChild(ActionCell.cellsLayer)
+        ActionCell.resetCells()
+        
+        //Analytics->start timer
+        TimerDelegate.sharedTimerDelegate.startTimer()
+        
+        createBackground()
+        createTrackLayer()
+        
+        addGestures()
+        
+        showDetailAndRobot()
+        
+        if let tutorial = levelInfo.tutorial {
+            overlay = Tutorial(tutorialNumber: tutorial)
+            sceneManager.virusedGameProgressManager.removeTutorial()
+        }
+    }
 
     override init(levelInfo: LevelConfiguration) {
         super.init(levelInfo: levelInfo)
@@ -30,7 +59,12 @@ class VirusedLevelScene : LevelScene {
     }
     
     override func createGameButtons() {
-        super.createGameButtons()
+        button_Pause = GameButton(type: .Pause_Virused)
+        button_Restart = GameButton(type: .Restart)
+        button_Tips = GameButton(type: .Tips_Virused)
+        button_Start = GameButton(type: .Start)
+        button_Debug = GameButton(type: .Debug_Virused)
+        button_Clear = GameButton(type: .Clear)
         button_ReadyLoop = GameButton(type: .ReadyLoop)
         button_CancelLoop = GameButton(type: .CancelLoop)
         createLabel(kNumberOfRepeatsLabel, fontColor: UIColor.blackColor(), fontSize: 28.56, position: CGPoint(x: 1800, y: 412))
@@ -107,11 +141,11 @@ class VirusedLevelScene : LevelScene {
             case .Start:
                 checkRobotPosition()
                 robot.performActions()
-            case .Pause:
+            case .Pause_Virused:
                 pauseGame()
-            case .Tips:
+            case .Tips_Virused:
                 if !robot.isRunningActions() {
-                    overlay = Tutorial(tutorialNumber: 0)
+                    overlay = Tutorial(tutorialNumber: 6)
                 }
             case .Clear:
                 enumerateChildNodesWithName("clear") {
@@ -129,7 +163,7 @@ class VirusedLevelScene : LevelScene {
                 robot = Robot(track: track, detail: detail)
                 createTrackLayer()
                 
-            case .Debug:
+            case .Debug_Virused:
                 robot.debug()
             case .Continue_PauseView, .Ok:
                 overlay = nil
@@ -149,7 +183,7 @@ class VirusedLevelScene : LevelScene {
                     ActionCell.moveCellsDownWhenAddingRect()
                     ActionCell.deselectAll(self.self.loopControl.numberOfRepeats)
                 })
-            case .Achievements :
+            default:
                 break
             }
         }
