@@ -59,7 +59,8 @@ public class Tutorial: SKSpriteNode {
             images[i - firstSlide].anchorPoint = CGPointZero
             images[i - firstSlide].zPosition = -1
             let number = -((lastSlide - firstSlide)/2 - (i - firstSlide))
-            let sliderElement = SKSpriteNode(imageNamed: "Slider_NonActive")
+            let sliderElement = SKSpriteNode(imageNamed: "Slider_Active")
+            sliderElement.alpha = 0.5
             sliderElement.position = CGPoint(x: number * 60, y: 0)
             sliderElement.name = "\(i - firstSlide)"
             slider.append(sliderElement)
@@ -77,6 +78,7 @@ public class Tutorial: SKSpriteNode {
         addChild(sliderNode)
         
         slider[0].texture = SKTexture(imageNamed: "Slider_Active")
+        slider[0].alpha = 1
         
         anchorPoint = CGPointZero
         userInteractionEnabled = true
@@ -121,10 +123,12 @@ public class Tutorial: SKSpriteNode {
         slides.runAction(moveSlides, completion: {
             self.images[self.currentSlideIndex].removeFromParent()
             self.canAddSlide = true
-            self.slider[self.currentSlideIndex].texture = SKTexture(imageNamed: "Slider_NonActive")
+            self.slider[self.currentSlideIndex].texture = SKTexture(imageNamed: "Slider_Active")
+            self.slider[self.currentSlideIndex].alpha = 0.5
             if number <= self.lastSlide - self.firstSlide && number >= 0 {
                 self.currentSlideIndex = number
                 self.slider[self.currentSlideIndex].texture = SKTexture(imageNamed: "Slider_Active")
+                self.slider[self.currentSlideIndex].alpha = 1
             }
         })
         }

@@ -26,11 +26,13 @@
 #define kShowAdsNotificationKey "showAdsAtTheEnd"
 #define kActionCellSelectedKey "actionCellSelectedKey"
 #define kActionCellDeselectAllKey "actionCellDeselectAll"
+#define kShowGameCenterLeaderboard "showGameCenterleaderboard"
 //action keys
 #define kTerminateApplicationKey "terminateApplication"
 //name keys
 #define kDeviceIDKey "deviceID"
 #define kNeedUpdatesKey "needUpdates"
+
 
 
 

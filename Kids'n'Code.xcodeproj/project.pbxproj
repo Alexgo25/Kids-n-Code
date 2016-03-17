@@ -24,6 +24,7 @@
 		1137F1531C8C3946003F02F5 /* VirusAnimations_Red.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1137F1521C8C3946003F02F5 /* VirusAnimations_Red.atlas */; };
 		114DE4C01C4442A6004B1EDF /* libprotobuf.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */; };
 		115C6E971ACBFA4200B79250 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C6E961ACBFA4200B79250 /* Robot.swift */; };
+		1162C4851C9B724400FE5F31 /* GameCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1162C4841C9B724400FE5F31 /* GameCenterManager.swift */; };
 		11757B701C960035009D160D /* WalkingAway.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 11757B6F1C960035009D160D /* WalkingAway.atlas */; };
 		11757B721C96004C009D160D /* FadeOutInDoor_ToLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 11757B711C96004C009D160D /* FadeOutInDoor_ToLeft.atlas */; };
 		11757B741C960067009D160D /* FadeOutInDoor_ToRight.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 11757B731C960067009D160D /* FadeOutInDoor_ToRight.atlas */; };
@@ -49,7 +50,6 @@
 		11A5F2DF1C1894B6004A1A0A /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A5F2DE1C1894B6004A1A0A /* EventKit.framework */; };
 		11A5F2E11C1894C3004A1A0A /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A5F2E01C1894C3004A1A0A /* EventKitUI.framework */; };
 		11A5F2E31C1894D0004A1A0A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A5F2E21C1894D0004A1A0A /* MessageUI.framework */; };
-		11A5F2E51C1894E0004A1A0A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A5F2E41C1894E0004A1A0A /* StoreKit.framework */; };
 		11A5F2E71C1894EB004A1A0A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A5F2E61C1894EB004A1A0A /* SystemConfiguration.framework */; };
 		11AEAAD91C0CC7CE000EB2E0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AEAAD71C0CC7CE000EB2E0 /* Fabric.framework */; };
 		11AEAADA1C0CC7CE000EB2E0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AEAAD81C0CC7CE000EB2E0 /* Crashlytics.framework */; };
@@ -164,6 +164,7 @@
 		1137F1521C8C3946003F02F5 /* VirusAnimations_Red.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = VirusAnimations_Red.atlas; sourceTree = "<group>"; };
 		114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libprotobuf.tbd; path = usr/lib/libprotobuf.tbd; sourceTree = SDKROOT; };
 		115C6E961ACBFA4200B79250 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		1162C4841C9B724400FE5F31 /* GameCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenterManager.swift; sourceTree = "<group>"; };
 		11757B6F1C960035009D160D /* WalkingAway.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WalkingAway.atlas; sourceTree = "<group>"; };
 		11757B711C96004C009D160D /* FadeOutInDoor_ToLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = FadeOutInDoor_ToLeft.atlas; sourceTree = "<group>"; };
 		11757B731C960067009D160D /* FadeOutInDoor_ToRight.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = FadeOutInDoor_ToRight.atlas; sourceTree = "<group>"; };
@@ -193,7 +194,6 @@
 		11A5F2DE1C1894B6004A1A0A /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		11A5F2E01C1894C3004A1A0A /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		11A5F2E21C1894D0004A1A0A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		11A5F2E41C1894E0004A1A0A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		11A5F2E61C1894EB004A1A0A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		11AEAAD71C0CC7CE000EB2E0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		11AEAAD81C0CC7CE000EB2E0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -275,7 +275,6 @@
 				111F52371C540A4C007A40A7 /* Security.framework in Frameworks */,
 				114DE4C01C4442A6004B1EDF /* libprotobuf.tbd in Frameworks */,
 				11A5F2E71C1894EB004A1A0A /* SystemConfiguration.framework in Frameworks */,
-				11A5F2E51C1894E0004A1A0A /* StoreKit.framework in Frameworks */,
 				11A5F2E31C1894D0004A1A0A /* MessageUI.framework in Frameworks */,
 				11A5F2E11C1894C3004A1A0A /* EventKitUI.framework in Frameworks */,
 				11A5F2DF1C1894B6004A1A0A /* EventKit.framework in Frameworks */,
@@ -464,6 +463,7 @@
 				1198E77C1BE9329400AFE73A /* NotificationKeys.swift */,
 				1133AA6A1C0FA20800C2D0A7 /* Kids'n'Code-Bridging-Header.h */,
 				11EAB3F41C838BDB0054C644 /* VirusedLevelsGameProgress.swift */,
+				1162C4841C9B724400FE5F31 /* GameCenterManager.swift */,
 			);
 			name = "Mechanisms&Services";
 			sourceTree = "<group>";
@@ -475,7 +475,6 @@
 				111F52361C540A4C007A40A7 /* Security.framework */,
 				114DE4BF1C4442A6004B1EDF /* libprotobuf.tbd */,
 				11A5F2E61C1894EB004A1A0A /* SystemConfiguration.framework */,
-				11A5F2E41C1894E0004A1A0A /* StoreKit.framework */,
 				11A5F2E21C1894D0004A1A0A /* MessageUI.framework */,
 				11A5F2E01C1894C3004A1A0A /* EventKitUI.framework */,
 				11A5F2DE1C1894B6004A1A0A /* EventKit.framework */,
@@ -617,6 +616,9 @@
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -782,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1198E7511BE9064E00AFE73A /* CBDataModel.xcdatamodeld in Sources */,
+				1162C4851C9B724400FE5F31 /* GameCenterManager.swift in Sources */,
 				613B797C1B0613F30021658D /* PauseView.swift in Sources */,
 				615231DE1B5E0F3100F7E96B /* GameButton.swift in Sources */,
 				616C2BE11C29FAE0008A471D /* LevelConfiguration.swift in Sources */,

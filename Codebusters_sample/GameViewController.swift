@@ -13,7 +13,7 @@ import GameKit
 
 var sceneManager: SceneManager!
 
-class GameViewController: UIViewController  {
+class GameViewController: UIViewController , UINavigationControllerDelegate , GKGameCenterControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +26,9 @@ class GameViewController: UIViewController  {
             skView.ignoresSiblingOrder = true
             //skView.showsPhysics = true
 
-        //Ad mob setup
-        //
+        authGameCenter()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showAds", name: kShowAdsNotificationKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLeaderboard", name: kShowGameCenterLeaderboard, object: NotificationZombie.sharedInstance)
 
         //Sending data to server
         dispatch_async(dispatch_get_main_queue(), {
@@ -54,6 +54,42 @@ class GameViewController: UIViewController  {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    func authGameCenter() {
+        let player = GKLocalPlayer()
+        player.authenticateHandler = {
+            (vc : UIViewController? , error : NSError?) -> Void in
+            if (vc != nil) {
+                self.presentViewController(vc!, animated: true, completion: nil)
+            }
+            else {
+                if (GKLocalPlayer.localPlayer().authenticated) {
+                    GKLocalPlayer.localPlayer().loadDefaultLeaderboardIdentifierWithCompletionHandler({
+                        (str : String? , error : NSError?) -> Void in
+                        if (error != nil) {
+                            print(error?.localizedDescription)
+                        }
+                    })
+                    
+                }
+            }
+        }
+    }
+    
+    func showLeaderboard() {
+        NSOperationQueue.mainQueue().addOperationWithBlock({
+            let gvc = GKGameCenterViewController()
+            gvc.delegate = self
+            gvc.gameCenterDelegate = self
+            self.presentViewController(gvc, animated: true, completion: nil)
+        })
+    }
+    
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
     
     
     

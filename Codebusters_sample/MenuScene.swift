@@ -193,7 +193,7 @@ class MenuScene: SceneTemplate  {
     override func buttonPressed(button: ButtonNode) {
         if let gameButton = button as? GameButton {
             if (gameButton.gameButtonType == .Achievements) {
-                
+                NSNotificationCenter.defaultCenter().postNotificationName(kShowGameCenterLeaderboard, object: NotificationZombie.sharedInstance)
             }
         }
     }
