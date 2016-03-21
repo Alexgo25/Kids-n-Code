@@ -72,8 +72,9 @@ class LevelVirus : SKSpriteNode {
     }
     
     func fadeOut() -> SKAction {
-        let move = SKAction.moveByX(0, y: -250, duration: 0.3)
-        let group = SKAction.group([move , SKAction.fadeOutWithDuration(0.6) , animateTextures()])
+        let move = SKAction.moveByX(0, y: -100, duration: 0.4)
+        let graction = SKAction.group([animateTextures() , SKAction.fadeOutWithDuration(0.6)])
+        let group = SKAction.sequence([move , graction])
         
         return SKAction.runBlock({
             self.runAction(group)

@@ -65,7 +65,6 @@ class ActionCell: SKSpriteNode  {
         }
         else {
             let prevPos = ActionCell.cells[ActionCell.cells.count - 1].position
-            //return CGPoint(x: 0, y: -CGFloat(ActionCell.cells.count) * cellBackground.size.height)
             return CGPoint(x: 0, y: prevPos.y - cellBackground.size.height)
         }
        
@@ -348,7 +347,7 @@ class ActionCell: SKSpriteNode  {
     
     static func moveCellsUpAfterDeleting(index: Int) {
         for var i = index + 1; i < nodesInProgram.count; i++ {
-            nodesInProgram[i].runAction(SKAction.moveByX(0, y: actionCellSize.height + 2, duration: 0.25))
+            nodesInProgram[i].runAction(SKAction.moveByX(0, y: actionCellSize.height + 4, duration: 0.25))
             if nodesInProgram[i] is ActionCell {
                 let cell = nodesInProgram[i] as! ActionCell
                 cell.index = cells.indexOf(cell)!
@@ -360,7 +359,7 @@ class ActionCell: SKSpriteNode  {
             nodesInProgram[upperNodeIndex + 11].runAction(SKAction.fadeInWithDuration(0.25))
         } else {
             if upperNodeIndex > 0 {
-                cellsLayer.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 2, duration: 0.25))
+                cellsLayer.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 4, duration: 0.25))
                 nodesInProgram[upperNodeIndex - 1].runAction(SKAction.fadeInWithDuration(0.25))
                 upperNodeIndex--
             }
@@ -369,7 +368,7 @@ class ActionCell: SKSpriteNode  {
     
     static func moveNodesAfterDeletingTwo(index : Int) {
         for var i = index - 1 ; i < nodesInProgram.count; i++ {
-            nodesInProgram[i].runAction(SKAction.moveByX(0, y: 2 * actionCellSize.height + 4, duration: 0.25))
+            nodesInProgram[i].runAction(SKAction.moveByX(0, y: 2 * actionCellSize.height + 8, duration: 0.25))
             if nodesInProgram[i] is ActionCell {
                 let cell = nodesInProgram[i] as! ActionCell
                 cell.index -= 1
@@ -381,7 +380,7 @@ class ActionCell: SKSpriteNode  {
             nodesInProgram[upperNodeIndex + 11].runAction(SKAction.fadeInWithDuration(0.25))
         } else {
             if upperNodeIndex > 0 {
-                cellsLayer.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 2, duration: 0.25))
+                cellsLayer.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 4, duration: 0.25))
                 nodesInProgram[upperNodeIndex - 1].runAction(SKAction.fadeInWithDuration(0.25))
                 upperNodeIndex--
             }
@@ -407,7 +406,7 @@ class ActionCell: SKSpriteNode  {
     static func moveCellsLayerUp() {
         //move cells layer when adding a new cell
             if canMoveCellsLayerUp() {
-                cellsLayer.runAction(SKAction.moveByX(0, y: actionCellSize.height + 2, duration: 0.25))
+                cellsLayer.runAction(SKAction.moveByX(0, y: actionCellSize.height + 4, duration: 0.25))
                 nodesInProgram[upperNodeIndex].runAction(SKAction.fadeOutWithDuration(0.25))
                 nodesInProgram[upperNodeIndex + 11].runAction(SKAction.fadeInWithDuration(0.25))
                 
@@ -417,7 +416,7 @@ class ActionCell: SKSpriteNode  {
     
     static func moveCellsLayerDown() {   //move layer when
         if upperNodeIndex > 0 {
-            cellsLayer.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 2, duration: 0.25))
+            cellsLayer.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 4, duration: 0.25))
             nodesInProgram[upperNodeIndex - 1].runAction(SKAction.fadeInWithDuration(0.25))
             nodesInProgram[upperNodeIndex + 10].runAction(SKAction.fadeOutWithDuration(0.25))
             upperNodeIndex--
@@ -453,16 +452,16 @@ class ActionCell: SKSpriteNode  {
             let cell = ActionCell.cells[i]
             let action : SKAction!
             if (cell.selected) {
-                action = SKAction.moveByX(61, y: -actionCellSize.height - 2 , duration: 0.25)
+                action = SKAction.moveByX(61, y: -actionCellSize.height - 4 , duration: 0.25)
                 cell.runAction(action)
             }
             else {
-                cell.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 2, duration: 0.25))
+                cell.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 4, duration: 0.25))
             }
         }
         for rect in repeatRectangles {
             if (rect.position.y < cells[firstSelectedIndex].position.y) {
-                rect.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 2, duration: 0.25))
+                rect.runAction(SKAction.moveByX(0, y: -actionCellSize.height - 4, duration: 0.25))
             }
         }
 

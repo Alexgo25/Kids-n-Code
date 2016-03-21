@@ -11,6 +11,26 @@ import SpriteKit
 import Google
 import GameKit
 
+enum Achievement : String {
+    case CPU = "processor",
+    Battery = "battery",
+    RAM = "ram",
+    Fan = "cooler",
+    HDD = "hdd",
+    Perfection1 = "perfection1",
+    Perfection5 = "perfection5",
+    Perfection10 = "perfection10",
+    Perfection20 = "perfection20",
+    PerfectionCh1 = "perfection_chapter_1",
+    Tutorial1 = "tutorial1",
+    SpeedOfLight = "speed_of_light",
+    BetterNBetter = "betternbetter",
+    Slow = "slowpoke",
+    FiveinARow = "5_in_a_row"
+}
+
+let kNumberOfGoodLevels = "numberOfGoodLevels"
+
 var sceneManager: SceneManager!
 
 class GameViewController: UIViewController , UINavigationControllerDelegate , GKGameCenterControllerDelegate {
@@ -18,6 +38,9 @@ class GameViewController: UIViewController , UINavigationControllerDelegate , GK
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if (NSUserDefaults.standardUserDefaults().objectForKey(kNumberOfGoodLevels) == nil) {
+            NSUserDefaults.standardUserDefaults().setInteger(0, forKey: kNumberOfGoodLevels)
+        }
             let skView = self.view as! SKView
             sceneManager = SceneManager(view: skView)
              sceneManager.presentScene(.Menu)
@@ -74,6 +97,7 @@ class GameViewController: UIViewController , UINavigationControllerDelegate , GK
                 }
             }
         }
+
     }
     
     func showLeaderboard() {
@@ -88,6 +112,26 @@ class GameViewController: UIViewController , UINavigationControllerDelegate , GK
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    class func sendAchievementProgress(achievement: Achievement) {
+        if (GKLocalPlayer.localPlayer().authenticated) {
+            let achievement1 = GKAchievement(identifier: achievement.rawValue)
+            achievement1.showsCompletionBanner = true
+            achievement1.percentComplete = 100
+            GKAchievement.reportAchievements([achievement1], withCompletionHandler: {
+                (error : NSError?) -> Void in
+                if (error != nil) {
+                    print(error?.localizedDescription)
+                }
+                else {
+                    print("achieved")
+                }
+            })
+        }
+        
+    }
+    
+    
     
     
     

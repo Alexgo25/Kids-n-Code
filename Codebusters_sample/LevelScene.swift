@@ -26,6 +26,8 @@ let kOnstartLabel = NSLocalizedString("ONSTART_LABEL", comment: "ON Start label 
 let kNumberOfRepeatsLabel = NSLocalizedString("NUMBER_OF_REPEATS_LABEL", comment: "Number of repeats for the loop")
 
 
+
+
 class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
     let levelInfo: LevelConfiguration
     static var loopsEnabled = false
@@ -116,6 +118,10 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             print(cell.actionType.rawValue)
         }
         let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+        //runtime
+        if (runtime >= 900) {
+            GameViewController.sendAchievementProgress(.Slow)
+        }
         CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel , levelPackNumber: sceneManager.currentLevelPack, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
         TouchesAnalytics.sharedInstance.resetTouches()
     }
@@ -400,6 +406,21 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                     }
                     
                         self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
+                if (ActionCell.cellsCount() <= self.levelInfo.goodResult) {
+                    GameViewController.sendAchievementProgress(.Perfection1)
+                    let goodLevelsNumber = NSUserDefaults.standardUserDefaults().integerForKey(kNumberOfGoodLevels)
+                    NSUserDefaults.standardUserDefaults().setInteger(goodLevelsNumber + 1, forKey: kNumberOfGoodLevels)
+                    if (goodLevelsNumber + 1 == 5) {
+                        GameViewController.sendAchievementProgress(.Perfection5)
+                    }
+                    else if (goodLevelsNumber + 1 == 10) {
+                        GameViewController.sendAchievementProgress(.Perfection10)
+                    }
+                    else if (goodLevelsNumber + 1 == 20) {
+                        GameViewController.sendAchievementProgress(.Perfection20)
+                        
+                    }
+                }
             }
             else {
                 print("you cant take detail on virused track")

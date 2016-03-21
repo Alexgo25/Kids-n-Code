@@ -16,8 +16,8 @@ let menuColumnPositionX = [649.0 , 895.0 , 1150.0 , 1396.0]
 class LoopsMenuScene: SceneTemplate {
     
     let background = SKSpriteNode(imageNamed: "loopsMenuBackground")
-    let buttonPause = GameButton(type: .Pause)
-    var folders : [Folder] = []
+    let buttonPause = GameButton(type: .Quit)
+    lazy var folders : [Folder] = []
     
     
     
@@ -50,7 +50,26 @@ class LoopsMenuScene: SceneTemplate {
                             folderState = .Current
                         }
                         else {
-                            folderState = .Opened
+                            if let result = level["result"] as? Int {
+                                let result_1 = level["result_1"] as? Int
+                                if (result <= result_1) {
+                                    folderState = .Good_Result
+                                }
+                                else {
+                                    let result_2 = level["result_2"] as? Int
+                                    if (result <= result_2) {
+                                        folderState = .Avg_Result
+                                    }
+                                    else {
+                                        folderState = .Bad_Result
+                                    }
+                                }
+                            }
+                            else {
+                                folderState = .Opened
+
+                            }
+                            
                         }
                     }
                     else {
@@ -64,7 +83,26 @@ class LoopsMenuScene: SceneTemplate {
                             folderState = .Current
                         }
                         else {
-                            folderState = .Opened
+                            if let result = level["result"] as? Int {
+                                let result_1 = level["result_1"] as? Int
+                                if (result <= result_1) {
+                                    folderState = .Good_Result
+                                }
+                                else {
+                                    let result_2 = level["result_2"] as? Int
+                                    if (result <= result_2) {
+                                        folderState = .Avg_Result
+                                    }
+                                    else {
+                                        folderState = .Bad_Result
+                                    }
+                                }
+                            }
+                            else {
+                                folderState = .Opened
+                                
+                            }
+
                         }
                     }
                     else {
@@ -101,6 +139,14 @@ class LoopsMenuScene: SceneTemplate {
 
                     }
                 }
+            }
+        }
+    }
+    
+    override func buttonPressed(button: ButtonNode) {
+        if let btn = button as? GameButton {
+            if (btn.gameButtonType == .Quit) {
+                sceneManager.presentScene(.Menu)
             }
         }
     }

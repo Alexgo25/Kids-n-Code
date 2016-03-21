@@ -319,7 +319,7 @@
 		<array>
 			<dict>
 				<key>virusPosition</key>
-				<integer>12</integer>
+				<integer>13</integer>
 				<key>virusFloorPosition</key>
 				<integer>1</integer>
 			</dict>
@@ -344,6 +344,7 @@
 			<integer>1</integer>
 			<integer>2</integer>
 			<integer>0</integer>
+			<string>1</string>
 		</array>
 		<key>robotPosition</key>
 		<integer>1</integer>
@@ -354,9 +355,9 @@
 		<key>result</key>
 		<integer>0</integer>
 		<key>result_1</key>
-		<integer>10</integer>
+		<integer>9</integer>
 		<key>result_2</key>
-		<integer>11</integer>
+		<integer>10</integer>
 	</dict>
 	<dict>
 		<key>detailType</key>
@@ -775,28 +776,95 @@
 		<integer>7</integer>
 	</dict>
 	<dict>
+		<key>virusesPattern</key>
+		<array>
+			<dict>
+				<key>virusPosition</key>
+				<integer>2</integer>
+				<key>virusFloorPosition</key>
+				<integer>3</integer>
+			</dict>
+			<dict>
+				<key>virusPosition</key>
+				<integer>3</integer>
+				<key>virusFloorPosition</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>virusFloorPosition</key>
+				<integer>1</integer>
+				<key>virusPosition</key>
+				<integer>4</integer>
+			</dict>
+			<dict>
+				<key>virusPosition</key>
+				<integer>6</integer>
+				<key>virusFloorPosition</key>
+				<integer>3</integer>
+			</dict>
+			<dict>
+				<key>virusPosition</key>
+				<integer>7</integer>
+				<key>virusFloorPosition</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>virusPosition</key>
+				<integer>8</integer>
+				<key>virusFloorPosition</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>virusPosition</key>
+				<integer>10</integer>
+				<key>virusFloorPosition</key>
+				<integer>3</integer>
+			</dict>
+			<dict>
+				<key>virusPosition</key>
+				<integer>11</integer>
+				<key>virusFloorPosition</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>virusPosition</key>
+				<integer>12</integer>
+				<key>virusFloorPosition</key>
+				<integer>1</integer>
+			</dict>
+		</array>
+		<key>loopsEnabled</key>
+		<true/>
 		<key>isOpened</key>
 		<false/>
 		<key>blocksPattern</key>
 		<array>
+			<integer>2</integer>
+			<integer>3</integer>
+			<integer>2</integer>
 			<integer>1</integer>
+			<integer>2</integer>
+			<integer>3</integer>
+			<integer>2</integer>
 			<integer>1</integer>
+			<integer>2</integer>
+			<integer>3</integer>
+			<integer>2</integer>
 			<integer>1</integer>
-			<integer>1</integer>
-			<integer>1</integer>
+			<integer>2</integer>
 		</array>
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>detailPosition</key>
-		<integer>2</integer>
+		<integer>13</integer>
 		<key>detailFloorPosition</key>
 		<integer>1</integer>
 		<key>result</key>
 		<integer>0</integer>
 		<key>result_1</key>
-		<integer>1</integer>
+		<integer>7</integer>
 		<key>result_2</key>
-		<integer>2</integer>
+		<integer>8</integer>
 		<key>tutorial</key>
 		<integer>1</integer>
 	</dict>

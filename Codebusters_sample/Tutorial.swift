@@ -67,7 +67,12 @@ public class Tutorial: SKSpriteNode {
             sliderNode.addChild(sliderElement)
         }
         
-        ok = GameButton(type: .Ok)
+        if (tutorialNumber > 3) {
+            ok = GameButton(type: .Ok_Virused)
+        }
+        else {
+            ok = GameButton(type: .Ok)
+        }
         ok.zPosition = 1
         
         super.init(texture: nil, color: SKColor.clearColor(), size: CGSize())

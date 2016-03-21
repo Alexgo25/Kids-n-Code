@@ -366,11 +366,11 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     func catchVirus() -> SKAction {
         if (track!.virused) {
                 let startPoint = getCurrentPosition()
-                let toppoint = CGPoint(x: startPoint.x, y: startPoint.y + 250)
-                let action = SKAction.moveTo(toppoint, duration: 0.5)
+                let toppoint = CGPoint(x: startPoint.x, y: startPoint.y + 150)
+                let action = SKAction.moveTo(toppoint, duration: 0.3)
                 let reverse = SKAction.moveTo(startPoint, duration: 0.3)
-                let group = SKAction.group([reverse , track!.fadeOutVirus()])
-                return SKAction.sequence([action , group])
+                let group = SKAction.group([action, track!.fadeOutVirus()])
+                return SKAction.sequence([group , reverse])
 
         }
         else {
@@ -503,7 +503,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             moveAndChangezPos = SKAction.sequence([moveByCurve , changeZPosition])
         }
         else {
-            if (trackPosition() != 0 && track!.getFloorPositionAt(trackPosition() + direction.rawValue).rawValue == currentFloorPosition.rawValue + 1) {
+            if (trackPosition() != 0 && track!.getFloorPositionAt(trackPosition() + direction.rawValue).rawValue == track!.getFloorPositionAt(trackPosition()).rawValue + 1) {
                 moveAndChangezPos = SKAction.sequence([changeZPosition , moveByCurve])
             }
             else {

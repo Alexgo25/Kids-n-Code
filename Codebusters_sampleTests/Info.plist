@@ -20,7 +20,9 @@
 	<string>1.1</string>
 	<key>CFBundleDisplayName</key>
 	<string>Kids&apos;n&apos;Code</string>
-	<key>CFBundleName</key>
-	<string>Kids&apos;n&apos;Code</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>gamekit</string>
+	</array>
 </dict>
 </plist>

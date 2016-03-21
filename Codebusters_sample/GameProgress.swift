@@ -45,7 +45,6 @@ public class GameProgress {
         var levelPacks = levelPacksInfo
         levelPacks[currentLevelPack].cellState = .Placed
         levelPacksInfo = levelPacks
-        
         if currentLevelPack + 1 < levelPacksInfo.count {
             if levelPacks[currentLevelPack + 1].cellState == .NonActive {
                 levelPacks[currentLevelPack + 1].cellState = .Active
@@ -75,6 +74,20 @@ public class GameProgress {
         if currentLevel < levelsCount - 1 {
             currentLevel++
         } else {
+            switch currentLevelPack {
+            case 0:
+                GameViewController.sendAchievementProgress(.CPU)
+            case 1:
+                GameViewController.sendAchievementProgress(.HDD)
+            case 2:
+                GameViewController.sendAchievementProgress(.RAM)
+            case 4:
+                GameViewController.sendAchievementProgress(.Battery)
+            case 5:
+                GameViewController.sendAchievementProgress(.Fan)
+            default:
+                break
+            }
             currentLevelPack = -1
             currentLevel = 0
         }
