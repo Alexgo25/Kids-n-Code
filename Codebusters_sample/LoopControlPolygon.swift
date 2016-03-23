@@ -9,8 +9,8 @@
 import Foundation
 import SpriteKit
 
-let LCLeftPolygonPosition = CGPoint(x: -150, y: -14)
-let LCRightPolygonPosition = CGPoint(x: 150, y: -14)
+let LCLeftPolygonPosition = CGPoint(x: -150, y: 0)
+let LCRightPolygonPosition = CGPoint(x: 150, y: 0)
 
 enum LCPolygonType : String {
     case Right = "Right",

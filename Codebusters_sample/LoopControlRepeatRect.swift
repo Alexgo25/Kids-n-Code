@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 
 let LCRepeatLabelText = NSLocalizedString("REPEAT_LC_LABEL", comment: "repeat label")
+let LCRectColor = UIColor(red: 164.0, green: 77.0, blue: 185.0, alpha: 1.0)
 
 protocol LCRepeatRectResponder {
     func moveRectUp()
@@ -30,7 +31,7 @@ class LoopControlRepeatRect : SKSpriteNode {
     var state = LCRepeatRectState.Normal
 
     
-    init (actionCell : ActionCell , numberOfRepeats : Int) {
+    init (actionCell : ActionCell , numberOfRepeats : Int ) {
         let texture = SKTexture(imageNamed: "repeatRect")
         super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: texture.size().width , height: 66.0))
         self.position = CGPoint(x: actionCell.position.x + 30, y: actionCell.position.y)
@@ -39,6 +40,7 @@ class LoopControlRepeatRect : SKSpriteNode {
         let label = createLabel(text, fontColor: UIColor.whiteColor(), fontSize: 23, position: CGPoint(x: 0, y: 0))
         addChild(label)
         ActionCell.repeatRectangles.append(self)
+        self.position = CGPoint(x: actionCell.position.x + 30, y: actionCell.position.y)
         name = "\(ActionCell.repeatRectangles.count - 1)"
     }
     

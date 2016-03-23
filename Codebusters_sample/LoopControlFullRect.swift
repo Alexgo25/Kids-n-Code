@@ -18,7 +18,7 @@ let LCMiddleRectSize = CGSize(width: 154, height: 63)
 let LCFullRectInitialPosition = CGPoint(x: 2163, y: 319)
 // for fullrectposition - normalX = 1748 but initial = 2148 to perform animation -
 //moveByX : 400
-let LCNumberOfRepeatsLabelPosition = CGPoint(x: 0, y: -14)
+let LCNumberOfRepeatsLabelPosition = CGPoint(x: 0, y: 0)
 let LCMiddleRectPosition = CGPoint(x: 199, y: 57)
 let LCTopLabelPosition = CGPoint(x: 0, y: 92)
 //text for top label

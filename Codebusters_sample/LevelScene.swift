@@ -122,7 +122,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         if (runtime >= 900) {
             GameViewController.sendAchievementProgress(.Slow)
         }
-        CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel , levelPackNumber: sceneManager.currentLevelPack, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
+        //CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel , levelPackNumber: sceneManager.currentLevelPack, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
         TouchesAnalytics.sharedInstance.resetTouches()
     }
     
@@ -393,17 +393,11 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         let contactMask: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         switch contactMask {
         case PhysicsCategory.Robot | PhysicsCategory.Detail:
-            if (!robot.track!.virused) {
-                //if(detail.detailType != .Door) {
                     detail.hideDetail()
                     robot.takeDetail()
                 runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
-                    if (self.detail.detailType == .Door) {
-                        self.sceneManager.virusedGameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
-                    }
-                    else {
+
                         self.sceneManager.gameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
-                    }
                     
                         self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
                 if (ActionCell.cellsCount() <= self.levelInfo.goodResult) {
@@ -420,7 +414,6 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                         GameViewController.sendAchievementProgress(.Perfection20)
                         
                     }
-                }
             }
             else {
                 print("you cant take detail on virused track")

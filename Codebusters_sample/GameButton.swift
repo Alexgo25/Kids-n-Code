@@ -29,8 +29,9 @@ enum GameButtonType: String {
     Debug_Virused,
     Tips_Virused,
     Ok_Virused,
-    Achievements,
-    Quit
+    Achievements_PauseView,
+    Quit,
+    Enter
     
     func getPosition() -> CGPoint {
         switch self {
@@ -40,10 +41,10 @@ enum GameButtonType: String {
         case .Pause , .Quit: return CGPoint(x:103, y: 1440)
         case .Pause_Virused: return CGPoint(x:103, y: 1440)
         case .Start: return CGPoint(x: 1760, y: 120)
-        case .Tips, .Ok , .Ok_Virused: return CGPoint(x: 237, y: 1440)
+        case .Tips, .Ok , .Ok_Virused , .Enter: return CGPoint(x: 237, y: 1440)
         case .Tips_Virused: return CGPoint(x: 237, y: 1440)
         case .Restart: return CGPoint(x: 1760, y: 324)
-        case .Restart_PauseView: return CGPoint(x: 306, y: 950)
+        case .Restart_PauseView , .Achievements_PauseView: return CGPoint(x: 306, y: 950)
         case .Continue_PauseView: return CGPoint(x: 306, y: 1094)
         case .Exit_PauseView: return CGPoint(x: 306, y: 806)
         case .NextLevel_EndLevelView: return CGPoint(x: 1363, y: 581.5)
@@ -52,7 +53,7 @@ enum GameButtonType: String {
             // initial x position for next 2 buttons is 1613 and 1913 ->movebyX
         case .CancelLoop: return CGPoint(x: 2013, y: 105)
         case .ReadyLoop: return CGPoint(x: 2313, y: 105)
-        case .Achievements: return CGPoint(x: 103, y: 1440)
+        
         }
     }
 }
@@ -75,14 +76,8 @@ class GameButton: ButtonNode {
         let atlas = SKTextureAtlas(named: "GameButtons")
         
         var texture : SKTexture!
-        if (type != .Achievements) {
-            texture = atlas.textureNamed("GameButton_\(type)")
-        }
-        else {
-            texture = atlas.textureNamed("GameButton_Tips")
-        }
-        
-        
+        texture = atlas.textureNamed("GameButton_\(type)")
+
         gameButtonType = type
         
         
@@ -97,7 +92,7 @@ class GameButton: ButtonNode {
         
         name = "GameButton_\(type.rawValue)"
         
-        guard gameButtonType == .Continue_PauseView || gameButtonType == .Exit_PauseView || gameButtonType == .Restart_PauseView else { return }
+        guard gameButtonType == .Continue_PauseView || gameButtonType == .Exit_PauseView || gameButtonType == .Restart_PauseView || gameButtonType == .Achievements_PauseView else { return }
         
         let label = createLabel("", fontColor: UIColor.whiteColor(), fontSize: 29, position: CGPointZero)
         
@@ -111,6 +106,9 @@ class GameButton: ButtonNode {
         case .Restart_PauseView:
             let restartString = NSLocalizedString("RESTART_BUTTON", comment: "Restart")
             label.text = restartString
+        case .Achievements_PauseView:
+            let str = NSLocalizedString("ACHIEVEMENTS_BUTTON", comment: "achievements")
+            label.text = str
         case .CancelLoop:
             let clString = NSLocalizedString("CANCEL_LC_BUTTON_LABEL", comment: "Cancel loop")
             label.text = clString

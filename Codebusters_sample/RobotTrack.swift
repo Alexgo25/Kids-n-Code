@@ -125,17 +125,6 @@ class RobotTrack {
     }
     
     func fadeOutVirus() -> SKAction {
-        /*
-        if (currentRobotPosition == virus!.trackPosition) {
-            
-            return SKAction.group([virus!.fadeOut() , SKAction.runBlock({
-                self.virused = false
-            })])
-        }
-        else {
-            return SKAction()
-        }
-      */
         weak var virus : LevelVirus?
         for (var i = 0 ; i < viruses.count ;) {
             if (currentRobotPosition == viruses[i].trackPosition) {

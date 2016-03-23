@@ -30,6 +30,9 @@ Tutorial_11 = "Tutorial_11_en";
 Tutorial_12 = "Tutorial_12_en";
 Tutorial_13 = "Tutorial_13_en";
 Tutorial_14 = "Tutorial_14_en";
+Tutorial_15 = "Tutorial_15_ru";
+Tutorial_16 = "Tutorial_16_ru";
+Tutorial_17 = "Tutorial_17_ru";
 
 //Robot texts in main menu
 DetailTextSuffix = "_Text_en";
@@ -42,6 +45,7 @@ finalView = "finalView_en";
 RESUME_BUTTON = "RESUME";
 QUIT_BUTTON = "QUIT";
 RESTART_BUTTON = "RESTART";
+ACHIEVEMENTS_BUTTON = "ACHIEVEMENTS";
 
 //Switcher
 SOUNDS_SWITCHER = "Sound";

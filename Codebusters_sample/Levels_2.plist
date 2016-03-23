@@ -33,7 +33,7 @@
 		<key>detailType</key>
 		<string>Door</string>
 		<key>robotPosition</key>
-		<integer>1</integer>
+		<integer>7</integer>
 		<key>detailPosition</key>
 		<integer>9</integer>
 		<key>detailFloorPosition</key>
@@ -344,7 +344,7 @@
 			<integer>1</integer>
 			<integer>2</integer>
 			<integer>0</integer>
-			<string>1</string>
+			<integer>1</integer>
 		</array>
 		<key>robotPosition</key>
 		<integer>1</integer>

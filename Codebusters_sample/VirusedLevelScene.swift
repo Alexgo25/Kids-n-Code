@@ -189,6 +189,43 @@ class VirusedLevelScene : LevelScene {
         }
 
     }
+    
+    override func didBeginContact(contact: SKPhysicsContact) {
+        let contactMask: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        switch contactMask {
+        case PhysicsCategory.Robot | PhysicsCategory.Detail:
+            if (!robot.track!.virused) {
+
+                detail.hideDetail()
+                robot.takeDetail()
+                runAction(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock() {
+                        self.sceneManager.virusedGameProgressManager.writeResultOfCurrentLevel(ActionCell.cellsCount())
+                    
+                    self.overlay = EndLevelView(levelInfo: self.levelInfo, result: ActionCell.cellsCount()) } ]))
+                if (ActionCell.cellsCount() <= self.levelInfo.goodResult) {
+                    GameViewController.sendAchievementProgress(.Perfection1)
+                    let goodLevelsNumber = NSUserDefaults.standardUserDefaults().integerForKey(kNumberOfGoodLevels)
+                    NSUserDefaults.standardUserDefaults().setInteger(goodLevelsNumber + 1, forKey: kNumberOfGoodLevels)
+                    if (goodLevelsNumber + 1 == 5) {
+                        GameViewController.sendAchievementProgress(.Perfection5)
+                    }
+                    else if (goodLevelsNumber + 1 == 10) {
+                        GameViewController.sendAchievementProgress(.Perfection10)
+                    }
+                    else if (goodLevelsNumber + 1 == 20) {
+                        GameViewController.sendAchievementProgress(.Perfection20)
+                        
+                    }
+                }
+            }
+            else {
+                print("you cant take detail on virused track")
+            }
+        default:
+            return
+        }
+    }
+
 
     
     

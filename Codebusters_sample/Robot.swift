@@ -217,6 +217,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                     
                     if self.robotTookDetail {
                         if (self.detail!.detailType == .Door) {
+                            self.removeAllActions()
                             self.runAction(self.fadeOutInTheDoor())
                         }
                         else {
@@ -369,8 +370,18 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                 let toppoint = CGPoint(x: startPoint.x, y: startPoint.y + 150)
                 let action = SKAction.moveTo(toppoint, duration: 0.3)
                 let reverse = SKAction.moveTo(startPoint, duration: 0.3)
-                let group = SKAction.group([action, track!.fadeOutVirus()])
-                return SKAction.sequence([group , reverse])
+                //let group = SKAction.group([action, track!.fadeOutVirus()])
+                let atlas = SKTextureAtlas(named: "CatchVirus")
+                var textures : [SKTexture] = []
+            for texture in atlas.textureNames {
+                textures.append(SKTexture(imageNamed: texture))
+            }
+                let turn = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: self.direction), timePerFrame: 0.05, resize: true, restore: false)
+                let open = SKAction.animateWithTextures(textures, timePerFrame: 0.075, resize: false, restore: false)
+                //let groupAct = SKAction.group([open , track!.fadeOutVirus()])
+                let reverseTurn = SKAction.animateWithTextures(getRobotAnimation("TurnFromFront", direction: self.direction), timePerFrame: 0.05, resize: true, restore: false)
+            
+                return SKAction.sequence([turn , open , track!.fadeOutVirus() , reverseTurn])
 
         }
         else {
@@ -552,15 +563,15 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         for name in firstAtlas.textureNames {
             textures.append(SKTexture(imageNamed: name))
         }
-        let turnAnimate = SKAction.animateWithTextures(textures, timePerFrame: 0.8, resize: true , restore: false)
+        let turnAnimate = SKAction.animateWithTextures(textures, timePerFrame: 0.06, resize: false , restore: false)
         let secondAtlas = SKTextureAtlas(named: "WalkingAway")
         var secondTextures : [SKTexture] = []
         for name in secondAtlas.textureNames {
             secondTextures.append(SKTexture(imageNamed: name))
         }
-        let walkAway = SKAction.animateWithTextures(secondTextures, timePerFrame: 0.8, resize: true , restore: false)
-        let sequence = SKAction.sequence([turnAnimate , walkAway])
-        return sequence
+        let walkAway = SKAction.animateWithTextures(secondTextures, timePerFrame: 0.06, resize: true , restore: false)
+        let sequence = SKAction.sequence([turnAnimate ])
+        return turnAnimate
     }
     
     func moveToStart() {

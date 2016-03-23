@@ -30,6 +30,9 @@ public class Tutorial: SKSpriteNode {
         sliderNode.zPosition = 1
         
         switch tutorialNumber {
+        case -1:
+            firstSlide = 15
+            lastSlide = 17
         case 1:
             firstSlide = 0
             lastSlide = 5
@@ -78,7 +81,11 @@ public class Tutorial: SKSpriteNode {
         super.init(texture: nil, color: SKColor.clearColor(), size: CGSize())
         zPosition = 3000
         
-        addChild(ok)
+        
+        if (tutorialNumber != -1) {
+           addChild(ok) 
+        }
+        
         addChild(slides)
         addChild(sliderNode)
         
@@ -153,7 +160,7 @@ public class Tutorial: SKSpriteNode {
                 }
             }
             
-            if nodeAtPoint(touchLocation) == slides {
+            else {
                 showNextSlide(.ToLeft)
             }
         }

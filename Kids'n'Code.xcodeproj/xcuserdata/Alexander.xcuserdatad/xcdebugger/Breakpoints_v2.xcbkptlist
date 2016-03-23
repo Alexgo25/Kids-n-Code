@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "480275923.449299"
+            timestampString = "480369079.074269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "523"
-            endingLineNumber = "523"
+            startingLineNumber = "516"
+            endingLineNumber = "516"
             landmarkName = "addGestures()"
             landmarkType = "5">
          </BreakpointContent>

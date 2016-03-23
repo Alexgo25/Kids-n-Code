@@ -52,7 +52,7 @@ class LevelVirus : SKSpriteNode {
         self.trackPosition = trackPosition
         let X = FirstBlockPosition.x + CGFloat(trackPosition - 1) * Block.BlockFaceSize.width
         let dY = (floorPosition.rawValue - 1) * 203
-        let Y : CGFloat = CGFloat(734 + dY)
+        let Y : CGFloat = CGFloat(704 + dY)
         self.position = CGPoint(x: X, y: Y)
         self.track = track
         track.viruses.append(self)
@@ -72,23 +72,13 @@ class LevelVirus : SKSpriteNode {
     }
     
     func fadeOut() -> SKAction {
-        let move = SKAction.moveByX(0, y: -100, duration: 0.4)
-        let graction = SKAction.group([animateTextures() , SKAction.fadeOutWithDuration(0.6)])
-        let group = SKAction.sequence([move , graction])
-        
+        let fadeOut = SKAction.fadeOutWithDuration(0.3)
+        let resize = SKAction.scaleTo(0.145, duration: 0.3)
+        let seq = SKAction.group([fadeOut , resize])
         return SKAction.runBlock({
-            self.runAction(group)
+            self.runAction(seq)
         })
     }
-    
-    func animateTextures() -> SKAction {
-        var textures : [SKTexture] = []
-        let atlas = SKTextureAtlas(named: "VirusAnimations_\(virusType!.rawValue)")
-        for textureName in atlas.textureNames {
-            textures.append(SKTexture(imageNamed: textureName))
-        }
-        let action = SKAction.animateWithTextures(textures, timePerFrame: 0.06)
-        return action
-    }
+
     
 }

@@ -63,7 +63,7 @@ class GameViewController: UIViewController , UINavigationControllerDelegate , GK
             }
                 
             else if (NSUserDefaults.standardUserDefaults().boolForKey(kNeedUpdatesKey) == true){
-                AnalyticsCore.sharedAnalyticsCore.sendData()
+                //AnalyticsCore.sharedAnalyticsCore.sendData()
                 print("sending data")
                 NSUserDefaults.standardUserDefaults().setBool(false, forKey: kNeedUpdatesKey)
             }

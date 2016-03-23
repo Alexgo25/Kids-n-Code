@@ -23,10 +23,27 @@ class MenuScene: SceneTemplate  {
     let keyboard = SKSpriteNode(imageNamed: "keyboard")
     let screen = SKSpriteNode(imageNamed: "activeScreen")
     let finalView = SKSpriteNode(imageNamed: kFinalViewImageName)
-    let achievmentsButton = GameButton(type: .Achievements)
+    let pauseButton = GameButton(type: .Pause)
+    let enterButton = GameButton(type: .Enter)
     
     let data: [LevelPackData]
     var details: [DetailCell] = []
+    
+    override var overlay: SKSpriteNode? {
+        willSet {
+            if let overlay = overlay as? MenuPauseView {
+                background.paused = false
+                overlay.hide()
+            }
+            
+            if let overlay = overlay as? Tutorial {
+                overlay.hide()
+            }
+            else {
+                print(overlay)
+            }
+        }
+    }
     
     init(robotTextImage: String = kRobotFirstTextImageName, data: [LevelPackData]) {
         
@@ -48,15 +65,19 @@ class MenuScene: SceneTemplate  {
         keyboard.anchorPoint = CGPoint(x: 1, y: 1)
         keyboard.position = CGPoint(x: 758, y: 523)
         addChild(keyboard)
-        addChild(achievmentsButton)
+        addChild(pauseButton)
+        addChild(enterButton)
         
-        //temporary for testing
-        screen.anchorPoint = CGPoint(x: 1, y: 1)
-        screen.zPosition = 1010
-        screen.alpha = 1
-        screen.position = CGPoint(x: 1899, y: 1439)
-        addChild(screen)
-        //
+            //temporary for testing
+            /*
+            screen.anchorPoint = CGPoint(x: 1, y: 1)
+            screen.zPosition = 1010
+            screen.alpha = 1
+            screen.position = CGPoint(x: 1899, y: 1439)
+            addChild(screen)
+            */
+            //
+        
         
         userInteractionEnabled = true
     }
@@ -71,11 +92,14 @@ class MenuScene: SceneTemplate  {
         
         if sceneManager.gameProgressManager.finished() {
             turnOnScreenAndMoveKeyboard()
-            runAction(SKAction.waitForDuration(2.3), completion: { self.showFinalView() } )
+            runAction(SKAction.waitForDuration(2.3), completion: { self.showVirusingSlides() } )
         } else {
             showRobot(textString)
         }
-        
+        if (sceneManager.gameProgressManager.isGameFinished()) {
+            print("sdsd")
+        }
+        //showVirusingSlides()
         //showGarland()
     }
     /*
@@ -94,6 +118,10 @@ class MenuScene: SceneTemplate  {
         garland.runAction(SKAction.repeatActionForever(sequence))
     }
     */
+    
+    func showVirusingSlides() {
+        overlay = Tutorial(tutorialNumber: -1)
+    }
     func showFinalView() {
         finalView.zPosition = 10000
         finalView.anchorPoint = CGPointZero
@@ -192,8 +220,17 @@ class MenuScene: SceneTemplate  {
     
     override func buttonPressed(button: ButtonNode) {
         if let gameButton = button as? GameButton {
-            if (gameButton.gameButtonType == .Achievements) {
+            switch gameButton.gameButtonType {
+            case .Pause:
+                overlay = MenuPauseView()
+            case .Continue_PauseView:
+                overlay = nil
+            case .Enter:
+                sceneManager.presentScene(.VirusedMenu)
+            case .Achievements_PauseView:
                 NSNotificationCenter.defaultCenter().postNotificationName(kShowGameCenterLeaderboard, object: NotificationZombie.sharedInstance)
+            default:
+                break
             }
         }
     }
