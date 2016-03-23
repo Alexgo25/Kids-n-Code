@@ -6,6 +6,7 @@ use_frameworks!
 target 'Kids\'n\'Code' do
 
 pod 'Google/Analytics'
+pod 'Mixpanel'
 
 end
 

@@ -366,11 +366,6 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
     
     func catchVirus() -> SKAction {
         if (track!.virused) {
-                let startPoint = getCurrentPosition()
-                let toppoint = CGPoint(x: startPoint.x, y: startPoint.y + 150)
-                let action = SKAction.moveTo(toppoint, duration: 0.3)
-                let reverse = SKAction.moveTo(startPoint, duration: 0.3)
-                //let group = SKAction.group([action, track!.fadeOutVirus()])
                 let atlas = SKTextureAtlas(named: "CatchVirus")
                 var textures : [SKTexture] = []
             for texture in atlas.textureNames {
@@ -378,10 +373,10 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             }
                 let turn = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: self.direction), timePerFrame: 0.05, resize: true, restore: false)
                 let open = SKAction.animateWithTextures(textures, timePerFrame: 0.075, resize: false, restore: false)
-                //let groupAct = SKAction.group([open , track!.fadeOutVirus()])
+                let close = SKAction.animateWithTextures(textures.reverse(), timePerFrame: 0.075, resize: false, restore: false)
                 let reverseTurn = SKAction.animateWithTextures(getRobotAnimation("TurnFromFront", direction: self.direction), timePerFrame: 0.05, resize: true, restore: false)
             
-                return SKAction.sequence([turn , open , track!.fadeOutVirus() , reverseTurn])
+                return SKAction.sequence([turn , open , track!.fadeOutVirus(), close , reverseTurn])
 
         }
         else {
@@ -560,18 +555,20 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         }
         let firstAtlas = SKTextureAtlas(named: "FadeOutInDoor_\(str)")
         var textures : [SKTexture] = []
-        for name in firstAtlas.textureNames {
-            textures.append(SKTexture(imageNamed: name))
+        for (var i = 0 ; i < firstAtlas.textureNames.count ; i++) {
+            textures.append(SKTexture(imageNamed: "RobotFOD_\(str)_\(String(i + 1))"))
         }
         let turnAnimate = SKAction.animateWithTextures(textures, timePerFrame: 0.06, resize: false , restore: false)
         let secondAtlas = SKTextureAtlas(named: "WalkingAway")
         var secondTextures : [SKTexture] = []
-        for name in secondAtlas.textureNames {
-            secondTextures.append(SKTexture(imageNamed: name))
+        for (var i = 0 ; i < secondAtlas.textureNames.count; i++) {
+            secondTextures.append(SKTexture(imageNamed: "Robot_WalkAway_\(String(i + 1))"))
         }
         let walkAway = SKAction.animateWithTextures(secondTextures, timePerFrame: 0.06, resize: true , restore: false)
-        let sequence = SKAction.sequence([turnAnimate ])
-        return turnAnimate
+        let fadeOut = SKAction.fadeOutWithDuration(0.3)
+        let group = SKAction.group([walkAway , fadeOut])
+        let sequence = SKAction.sequence([turnAnimate , group ])
+        return sequence
     }
     
     func moveToStart() {

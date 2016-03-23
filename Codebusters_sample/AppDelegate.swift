@@ -15,7 +15,7 @@ import Google
 
 
 let kMixpanleToken = ""
-let flurryAPIKey = "H3S4DVJMXS6XWC9BRZH3"
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,15 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: Move this to where you establish a user session
         
         self.logUser()
-        
         let settings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound , UIUserNotificationType.Badge , UIUserNotificationType.Alert], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
-        //forceCrash()
-        
-        //Mixpanel & Flurry setup
         //let mixpanel = Mixpanel.sharedInstanceWithToken(kMixpanleToken)
-        Flurry.startSession(flurryAPIKey)
         return true
     }
 

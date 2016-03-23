@@ -33,6 +33,38 @@
             endingLineNumber = "79"
             landmarkName = "buttonPressed(_:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Codebusters_sample.PauseView.buttonPressed (Codebusters_sample.PauseView)(Codebusters_sample.ButtonNode) -&gt; ()"
+                  moduleName = "Codebusters_sample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/PauseView.swift"
+                  timestampString = "480448283.550096"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "30">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "protocol witness for Codebusters_sample.ButtonNodeResponderType.buttonPressed &lt;A where A: Codebusters_sample.ButtonNodeResponderType&gt; (A)(Codebusters_sample.ButtonNode) -&gt; () in conformance Codebusters_sample.PauseView : Codebusters_sample.ButtonNodeResponderType in Codebusters_sample"
+                  moduleName = "Codebusters_sample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/PauseView.swift"
+                  timestampString = "480448283.550484"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "13">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,7 +88,7 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/EndLevelView.swift"
-                  timestampString = "480443503.314189"
+                  timestampString = "480448283.55179"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "12"
@@ -71,7 +103,7 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/EndLevelView.swift"
-                  timestampString = "480443503.314459"
+                  timestampString = "480448283.55211"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "12"
@@ -452,15 +484,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/Robot.swift"
-            timestampString = "480441311.185449"
+            timestampString = "480450280.055575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "572"
-            endingLineNumber = "572"
+            startingLineNumber = "568"
+            endingLineNumber = "568"
             landmarkName = "fadeOutInTheDoor()"
             landmarkType = "5">
          </BreakpointContent>
@@ -616,11 +648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/Robot.swift"
-            timestampString = "480441311.185449"
+            timestampString = "480450280.055575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "518"
-            endingLineNumber = "518"
+            startingLineNumber = "513"
+            endingLineNumber = "513"
             landmarkName = "jump(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -632,11 +664,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/Robot.swift"
-            timestampString = "480441311.185449"
+            timestampString = "480450280.055575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "521"
-            endingLineNumber = "521"
+            startingLineNumber = "516"
+            endingLineNumber = "516"
             landmarkName = "jump(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -648,11 +680,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/Robot.swift"
-            timestampString = "480441311.185449"
+            timestampString = "480450280.055575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "561"
-            endingLineNumber = "561"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
             landmarkName = "fadeOutInTheDoor()"
             landmarkType = "5">
          </BreakpointContent>
@@ -664,11 +696,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/Robot.swift"
-            timestampString = "480441311.185449"
+            timestampString = "480450280.055575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "574"
-            endingLineNumber = "574"
+            startingLineNumber = "571"
+            endingLineNumber = "571"
             landmarkName = "fadeOutInTheDoor()"
             landmarkType = "5">
          </BreakpointContent>
@@ -696,11 +728,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/Robot.swift"
-            timestampString = "480443000.441552"
+            timestampString = "480450280.055575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "566"
-            endingLineNumber = "566"
+            startingLineNumber = "561"
+            endingLineNumber = "561"
+            landmarkName = "fadeOutInTheDoor()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/Robot.swift"
+            timestampString = "480450280.055575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "559"
+            endingLineNumber = "559"
             landmarkName = "fadeOutInTheDoor()"
             landmarkType = "5">
          </BreakpointContent>
