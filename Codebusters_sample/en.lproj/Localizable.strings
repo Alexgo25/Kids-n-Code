@@ -30,9 +30,10 @@ Tutorial_11 = "Tutorial_11_en";
 Tutorial_12 = "Tutorial_12_en";
 Tutorial_13 = "Tutorial_13_en";
 Tutorial_14 = "Tutorial_14_en";
-Tutorial_15 = "Tutorial_15_ru";
-Tutorial_16 = "Tutorial_16_ru";
-Tutorial_17 = "Tutorial_17_ru";
+Tutorial_15 = "Tutorial_15_en";
+Tutorial_16 = "Tutorial_16_en";
+Tutorial_17 = "Tutorial_17_en";
+Tutorial_18 = "Tutorial_18_en";
 
 //Robot texts in main menu
 DetailTextSuffix = "_Text_en";

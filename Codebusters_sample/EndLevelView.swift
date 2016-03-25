@@ -34,6 +34,16 @@ class EndLevelView: SKSpriteNode {
         
         var batteryTexture = SKTexture()
         if result <= goodResult {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            var numOfLevels = defaults.integerForKey(kNumberOfLevelsInARow)
+            numOfLevels++
+            if (numOfLevels == 5) {
+                GameViewController.sendAchievementProgress(.FiveinARow)
+                defaults.setInteger(0, forKey: kNumberOfLevelsInARow)
+            }
+            else {
+                defaults.setInteger(numOfLevels, forKey: kNumberOfLevelsInARow)
+            }
             batteryTexture = SKTexture(imageNamed: "battery_3")
             addChild(createLabel(kGoodAlgorithmString, fontColor: UIColor.blackColor(), fontSize: 46, position: CGPoint(x: 1039.5, y: 1125.5)))
         } else if result <= badResult {

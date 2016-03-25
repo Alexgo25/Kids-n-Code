@@ -25,10 +25,10 @@ enum ActionType: String {
     
     func ActionButtonPosition() -> CGPoint {
         switch self {
-        case .Move: return CGPoint(x: -215, y: 156)
+        case .Move: return CGPoint(x: -218, y: 148)
         case .Turn: return CGPoint(x: -120, y: 250)
         case .Push: return CGPoint(x: 120, y: 250)
-        case .Jump: return CGPoint(x: 215, y: 156)
+        case .Jump: return CGPoint(x: 218, y: 148)
         case .Catch: return CGPoint(x: 0, y: 292)
         default: return CGPoint.zero
         }

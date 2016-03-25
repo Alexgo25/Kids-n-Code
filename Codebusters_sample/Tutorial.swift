@@ -32,7 +32,7 @@ public class Tutorial: SKSpriteNode {
         switch tutorialNumber {
         case -1:
             firstSlide = 15
-            lastSlide = 17
+            lastSlide = 18
         case 1:
             firstSlide = 0
             lastSlide = 5

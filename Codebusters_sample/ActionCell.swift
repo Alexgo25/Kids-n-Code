@@ -17,6 +17,7 @@ class ActionCell: SKSpriteNode  {
     static var selectedIndexes : [Int] = []
     static var repeatRectangles : [LoopControlRepeatRect] = []
     static var nodesInProgram : [SKSpriteNode] = []
+    static var gameIsRunning = false
     
     
     var actionType: ActionType
@@ -28,6 +29,7 @@ class ActionCell: SKSpriteNode  {
     
     var bottomRect : LoopControlRepeatRect!
     var topRect : LoopControlRepeatRect!
+    var rect : LoopControlRepeatRect!
     
     
     
@@ -54,10 +56,7 @@ class ActionCell: SKSpriteNode  {
         index = ActionCell.cells.count - 1
         showLabel()
     }
-// Protocol declaration
-    
-    
-// End
+
     
     func getNextPosition() -> CGPoint {
         if (ActionCell.cells.count == 0) {
@@ -87,6 +86,7 @@ class ActionCell: SKSpriteNode  {
     }
     
     func setSelected() -> SKAction {
+        if (!ActionCell.gameIsRunning) {
         if (self.numberOfRepeats == 1) {
             let atlas = SKTextureAtlas(named: "ActionCells")
             return SKAction.runBlock({
@@ -118,6 +118,10 @@ class ActionCell: SKSpriteNode  {
         else {
             return SKAction()
         }
+        }
+        else {
+            return SKAction()
+        }
         
     }
     
@@ -134,8 +138,11 @@ class ActionCell: SKSpriteNode  {
                 self.selected = false
                 let element = self.index
                 let cindex = ActionCell.selectedIndexes.indexOf(element)
-                ActionCell.selectedIndexes.removeAtIndex(cindex!)
-                print(ActionCell.selectedIndexes)
+                if (cindex != nil) {
+                    ActionCell.selectedIndexes.removeAtIndex(cindex!)
+                    print(ActionCell.selectedIndexes)
+                }
+                
             }
             if (ActionCell.selectedIndexes.count == 0){
                 NSNotificationCenter.defaultCenter().postNotificationName(kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
@@ -178,6 +185,9 @@ class ActionCell: SKSpriteNode  {
         let cell = ActionCell.cells[minIndex!]
         let loopRect = LoopControlRepeatRect(actionCell: cell, numberOfRepeats: numberOfRepeats)
         loopRect.repeatCells = cellsToAppend
+        for cell in cellsToAppend {
+            cell.rect = loopRect
+        }
         if (minIndex != 0) {
             ActionCell.cells[minIndex! - 1].bottomRect = loopRect
         }
@@ -278,7 +288,9 @@ class ActionCell: SKSpriteNode  {
         
         if (cells[index].topRect == nil) {
             let fadeOutAction = SKAction.group([SKAction.moveByX(100 * CGFloat(direction.rawValue), y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
-            
+            if (cells[index].rect != nil) {
+                cells[index].rect!.deleteCell(cells[index])
+            }
                cells[index].runAction(SKAction.sequence([fadeOutAction, SKAction.runBlock() { AudioPlayer.sharedInstance.playSoundEffect("Sound_ActionCellRemoving.mp3") }, SKAction.removeFromParent()]), completion: {
                 let deleteIndex = nodesInProgram.indexOf(cells[index])!
                 self.moveCellsUpAfterDeleting(deleteIndex)
@@ -289,6 +301,9 @@ class ActionCell: SKSpriteNode  {
         
         else {
             if (cells[index].topRect.repeatCells.count > 1 ) {
+                if (cells[index].rect != nil) {
+                    cells[index].rect!.deleteCell(cells[index])
+                }
                     let fadeOutAction = SKAction.group([SKAction.moveByX(100 * CGFloat(direction.rawValue), y: 0, duration: 0.2), SKAction.fadeOutWithDuration(0.2)])
                     cells[index].runAction(SKAction.sequence([fadeOutAction, SKAction.runBlock() { AudioPlayer.sharedInstance.playSoundEffect("Sound_ActionCellRemoving.mp3") }, SKAction.removeFromParent()]), completion: {
                     cells[index].topRect.repeatCells.removeLast()
@@ -323,6 +338,7 @@ class ActionCell: SKSpriteNode  {
     
     static func deleteRect(index : Int , direction : Direction) {
         let rcells = repeatRectangles[index].repeatCells
+        let nodesRectIndex = nodesInProgram.indexOf(rcells.first!.topRect!)!
         rcells.first?.topRect = nil
         let pindex = cells.indexOf(rcells.first!)
         if (pindex > 0 ) {
@@ -336,11 +352,12 @@ class ActionCell: SKSpriteNode  {
         } )
         
         for cell in rcells {
+            cell.rect = nil
             cell.runAction(SKAction.moveByX( -61, y: 0, duration: 0.2))
             cell.numberOfRepeats = 1
         }
         selectedIndexes = []
-        moveCellsUpAfterDeleting(pindex! - 1)
+        moveCellsUpAfterDeleting(nodesRectIndex)
         getRectIndexes()
 
     }
@@ -405,7 +422,7 @@ class ActionCell: SKSpriteNode  {
     
     static func moveCellsLayerUp() {
         //move cells layer when adding a new cell
-            if canMoveCellsLayerUp() {
+            if (canMoveCellsLayerUp() && upperNodeIndex + 11 < nodesInProgram.count) {
                 cellsLayer.runAction(SKAction.moveByX(0, y: actionCellSize.height + 4, duration: 0.25))
                 nodesInProgram[upperNodeIndex].runAction(SKAction.fadeOutWithDuration(0.25))
                 nodesInProgram[upperNodeIndex + 11].runAction(SKAction.fadeInWithDuration(0.25))
@@ -452,7 +469,7 @@ class ActionCell: SKSpriteNode  {
             let cell = ActionCell.cells[i]
             let action : SKAction!
             if (cell.selected) {
-                action = SKAction.moveByX(61, y: -actionCellSize.height - 4 , duration: 0.25)
+                action = SKAction.moveByX(61, y: -actionCellSize.height - 4, duration: 0.25)
                 cell.runAction(action)
             }
             else {

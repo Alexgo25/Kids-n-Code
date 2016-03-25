@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import Google
+import Mixpanel
 
 struct PhysicsCategory {
     static let None: UInt32 = 0
@@ -35,6 +36,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     let background = SKNode()
     let trackLayer = SKNode()
     var touchesToRecord: [String] = []
+    let mixpanel = Mixpanel.sharedInstance()
     
     var levelBackground1 = SKSpriteNode(imageNamed: "levelBackground1")
     var levelBackground2 = SKSpriteNode(imageNamed: "levelBackground2")
@@ -122,6 +124,10 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         if (runtime >= 900) {
             GameViewController.sendAchievementProgress(.Slow)
         }
+        else if (runtime < 60) {
+            GameViewController.sendAchievementProgress(.SpeedOfLight)
+        }
+        
         //CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel , levelPackNumber: sceneManager.currentLevelPack, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
         TouchesAnalytics.sharedInstance.resetTouches()
     }
@@ -136,7 +142,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             print(cell.actionType)
         }
         let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
-        CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel, levelPackNumber: sceneManager.currentLevelPack, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
+        
+        //CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel, levelPackNumber: sceneManager.currentLevelPack, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
         TouchesAnalytics.sharedInstance.resetTouches()
     }
     
@@ -540,6 +547,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             switch gameButton.gameButtonType {
             case .Start:
                 checkRobotPosition()
+                ActionCell.gameIsRunning = true
                 robot.performActions()
             case .Pause:
                 pauseGame()
@@ -548,6 +556,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                     overlay = Tutorial(tutorialNumber: 0)
                 }
             case .Clear:
+                ActionCell.gameIsRunning = false
                 enumerateChildNodesWithName("clear") {
                     node, stop in
                     node.removeFromParent()
@@ -564,6 +573,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 createTrackLayer()
                 
             case .Debug:
+                ActionCell.gameIsRunning = true
                 robot.debug()
             case .Continue_PauseView, .Ok:
                 overlay = nil
@@ -571,6 +581,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
                 sceneManager.presentScene(.Menu)
             case .Restart_PauseView, .Restart_EndLevelView, .Restart:
+                    NSUserDefaults.standardUserDefaults().setInteger(0, forKey: kNumberOfLevelsInARow)
                     sceneManager.presentScene(.CurrentLevel)
             case .NextLevel_EndLevelView:
                     sceneManager.presentScene(.NextLevel)

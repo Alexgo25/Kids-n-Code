@@ -14,6 +14,7 @@ import GameKit
 let kRobotFirstTextImageName = NSLocalizedString("First_Text", comment: "first text")
 let kDetailTextSuffix = NSLocalizedString("DetailTextSuffix", comment: "Detail text suffix")
 let kFinalViewImageName = NSLocalizedString("finalView", comment: "Final view")
+let kVirusedPreviewWasShown = "virusedPreviewWasShown"
 
 class MenuScene: SceneTemplate  {
     
@@ -23,7 +24,7 @@ class MenuScene: SceneTemplate  {
     let keyboard = SKSpriteNode(imageNamed: "keyboard")
     let screen = SKSpriteNode(imageNamed: "activeScreen")
     let finalView = SKSpriteNode(imageNamed: kFinalViewImageName)
-    let pauseButton = GameButton(type: .Pause)
+    let pauseButton = GameButton(type: .MenuPause)
     let enterButton = GameButton(type: .Enter)
     
     let data: [LevelPackData]
@@ -66,16 +67,17 @@ class MenuScene: SceneTemplate  {
         keyboard.position = CGPoint(x: 758, y: 523)
         addChild(keyboard)
         addChild(pauseButton)
-        addChild(enterButton)
+        //addChild(enterButton)
         
             //temporary for testing
-            /*
+        
             screen.anchorPoint = CGPoint(x: 1, y: 1)
             screen.zPosition = 1010
             screen.alpha = 1
             screen.position = CGPoint(x: 1899, y: 1439)
-            addChild(screen)
-            */
+        
+        
+        
             //
         
         
@@ -92,12 +94,17 @@ class MenuScene: SceneTemplate  {
         
         if sceneManager.gameProgressManager.finished() {
             turnOnScreenAndMoveKeyboard()
-            runAction(SKAction.waitForDuration(2.3), completion: { self.showVirusingSlides() } )
+            runAction(SKAction.waitForDuration(2.0), completion: { self.showVirusingSlides()
+                } )
         } else {
             showRobot(textString)
         }
         if (sceneManager.gameProgressManager.isGameFinished()) {
-            print("sdsd")
+            addChild(screen)
+            if (NSUserDefaults.standardUserDefaults().objectForKey(kVirusedPreviewWasShown) == nil) {
+                showVirusingSlides()
+            }
+            
         }
         //showVirusingSlides()
         //showGarland()
@@ -120,6 +127,11 @@ class MenuScene: SceneTemplate  {
     */
     
     func showVirusingSlides() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.objectForKey("Finished") as? Bool == true {
+            defaults.removeObjectForKey("Finished")
+        }
+        defaults.setBool(true, forKey: kVirusedPreviewWasShown)
         overlay = Tutorial(tutorialNumber: -1)
     }
     func showFinalView() {
@@ -198,12 +210,10 @@ class MenuScene: SceneTemplate  {
     }
     
     func turnOnScreenAndMoveKeyboard() {
-        screen.anchorPoint = CGPoint(x: 1, y: 1)
-        screen.alpha = 0
-        screen.position = CGPoint(x: 1899, y: 1439)
-        addChild(screen)
-        
-        keyboard.runAction(SKAction.moveTo(CGPoint(x: 1821, y: 1169), duration: 1), completion: {        self.screen.runAction(SKAction.fadeInWithDuration(0.75)) } )
+        if (screen.parent == nil) {
+            addChild(screen)
+        }
+        //keyboard.runAction(SKAction.moveTo(CGPoint(x: 1821, y: 1169), duration: 1), completion: {        self.screen.runAction(SKAction.fadeInWithDuration(0.75)) } )
     }
     
     func turnOffScreenAndMoveKeyboard() {
@@ -221,7 +231,7 @@ class MenuScene: SceneTemplate  {
     override func buttonPressed(button: ButtonNode) {
         if let gameButton = button as? GameButton {
             switch gameButton.gameButtonType {
-            case .Pause:
+            case .MenuPause:
                 overlay = MenuPauseView()
             case .Continue_PauseView:
                 overlay = nil

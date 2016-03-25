@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/GameProgress.swift"
-            timestampString = "479680875.13844"
+            timestampString = "480503918.562504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "getLevelConfiguration()"
             landmarkType = "5">
          </BreakpointContent>
@@ -33,38 +33,6 @@
             endingLineNumber = "79"
             landmarkName = "buttonPressed(_:)"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Codebusters_sample.PauseView.buttonPressed (Codebusters_sample.PauseView)(Codebusters_sample.ButtonNode) -&gt; ()"
-                  moduleName = "Codebusters_sample"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/PauseView.swift"
-                  timestampString = "480448283.550096"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "30">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protocol witness for Codebusters_sample.ButtonNodeResponderType.buttonPressed &lt;A where A: Codebusters_sample.ButtonNodeResponderType&gt; (A)(Codebusters_sample.ButtonNode) -&gt; () in conformance Codebusters_sample.PauseView : Codebusters_sample.ButtonNodeResponderType in Codebusters_sample"
-                  moduleName = "Codebusters_sample"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/PauseView.swift"
-                  timestampString = "480448283.550484"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "79"
-                  endingLineNumber = "79"
-                  offsetFromSymbolStart = "13">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -88,7 +56,7 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/EndLevelView.swift"
-                  timestampString = "480448283.55179"
+                  timestampString = "480593671.879333"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "12"
@@ -103,7 +71,7 @@
                   moduleName = "Codebusters_sample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/EndLevelView.swift"
-                  timestampString = "480448283.55211"
+                  timestampString = "480593671.879945"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "12"
@@ -152,23 +120,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "480277389.518424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
-            landmarkName = "deleteCell(_:direction:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "480277389.518424"
+            timestampString = "480592736.948121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "289"
@@ -184,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "480277389.518424"
+            timestampString = "480592736.948121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
             landmarkName = "deleteCell(_:direction:)"
             landmarkType = "5">
             <Locations>
@@ -232,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "480277389.518424"
+            timestampString = "480592736.948121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "317"
+            endingLineNumber = "317"
             landmarkName = "deleteCell(_:direction:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,43 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "480277389.518424"
+            timestampString = "480593671.602793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
-            landmarkName = "deleteCell(_:direction:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "480277389.518424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "deleteCell(_:direction:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "480277389.518424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "moveNodesAfterDeletingTwo(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/ActionCell.swift"
-            timestampString = "480277389.518424"
+            timestampString = "480593671.602793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "moveNodesAfterDeletingTwo(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -407,28 +327,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Codebusters_sample/LevelConfiguration.swift"
-            timestampString = "479677066.003726"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "init(info:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/GameProgress.swift"
-            timestampString = "480249412.3571"
+            timestampString = "480503918.562504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "setNextLevel()"
             landmarkType = "5">
          </BreakpointContent>
@@ -440,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/GameProgress.swift"
-            timestampString = "480249412.3571"
+            timestampString = "480503918.562504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "setNextLevel()"
             landmarkType = "5">
          </BreakpointContent>
@@ -456,11 +360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/GameProgress.swift"
-            timestampString = "480269960.327056"
+            timestampString = "480503918.562504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "setNextLevel()"
             landmarkType = "5">
          </BreakpointContent>
@@ -472,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/GameProgress.swift"
-            timestampString = "479680875.13844"
+            timestampString = "480503918.562504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "getLevelConfiguration()"
             landmarkType = "5">
          </BreakpointContent>
@@ -536,11 +440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/GameProgress.swift"
-            timestampString = "480269960.327056"
+            timestampString = "480503918.562504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "getLevelPacks()"
             landmarkType = "5">
          </BreakpointContent>
@@ -632,11 +536,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/GameProgress.swift"
-            timestampString = "480249206.609061"
+            timestampString = "480503918.562504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "openNextLevelPack()"
             landmarkType = "5">
          </BreakpointContent>
@@ -750,6 +654,213 @@
             startingLineNumber = "559"
             endingLineNumber = "559"
             landmarkName = "fadeOutInTheDoor()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "480592736.948121"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
+            landmarkName = "deleteCell(_:direction:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "480592736.948121"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
+            landmarkName = "deleteCell(_:direction:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Codebusters_sample.ActionCell.deleteCell (Codebusters_sample.ActionCell.Type)(Swift.Int, direction : Codebusters_sample.Direction) -&gt; ()"
+                  moduleName = "Codebusters_sample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/ActionCell.swift"
+                  timestampString = "480593671.999718"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "319"
+                  endingLineNumber = "319"
+                  offsetFromSymbolStart = "6117">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Codebusters_sample.ActionCell.(deleteCell (Codebusters_sample.ActionCell.Type) -&gt; (Swift.Int, direction : Codebusters_sample.Direction) -&gt; ()).(closure #5)"
+                  moduleName = "Codebusters_sample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/ActionCell.swift"
+                  timestampString = "480593672.000448"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "320"
+                  endingLineNumber = "320"
+                  offsetFromSymbolStart = "3">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "480592736.948121"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
+            landmarkName = "deleteCell(_:direction:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Codebusters_sample.ActionCell.deleteCell (Codebusters_sample.ActionCell.Type)(Swift.Int, direction : Codebusters_sample.Direction) -&gt; ()"
+                  moduleName = "Codebusters_sample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/ActionCell.swift"
+                  timestampString = "480593672.003207"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "308"
+                  endingLineNumber = "308"
+                  offsetFromSymbolStart = "4344">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Codebusters_sample.ActionCell.(deleteCell (Codebusters_sample.ActionCell.Type) -&gt; (Swift.Int, direction : Codebusters_sample.Direction) -&gt; ()).(closure #3)"
+                  moduleName = "Codebusters_sample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/ActionCell.swift"
+                  timestampString = "480593672.004183"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "308"
+                  endingLineNumber = "308"
+                  offsetFromSymbolStart = "3">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Codebusters_sample.ActionCell.(deleteCell (Codebusters_sample.ActionCell.Type) -&gt; (Swift.Int, direction : Codebusters_sample.Direction) -&gt; ()).(closure #4)"
+                  moduleName = "Codebusters_sample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Alexander/Desktop/Kids-n-Code-alvorontsov/Codebusters_sample/ActionCell.swift"
+                  timestampString = "480593672.004972"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "309"
+                  endingLineNumber = "309"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "480593671.602793"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
+            landmarkName = "deleteRect(_:direction:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "480593671.602793"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "deleteRect(_:direction:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "480593671.602793"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
+            landmarkName = "deleteRect(_:direction:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "480593671.602793"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "deleteRect(_:direction:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/ActionCell.swift"
+            timestampString = "480593671.602793"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "deleteRect(_:direction:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

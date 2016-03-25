@@ -30,6 +30,7 @@ enum Achievement : String {
 }
 
 let kNumberOfGoodLevels = "numberOfGoodLevels"
+let kNumberOfLevelsInARow = "numLevelsinRow"
 
 var sceneManager: SceneManager!
 
@@ -50,6 +51,7 @@ class GameViewController: UIViewController , UINavigationControllerDelegate , GK
             //skView.showsPhysics = true
 
         authGameCenter()
+        NSUserDefaults.standardUserDefaults().setInteger(0, forKey: kNumberOfLevelsInARow)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showAds", name: kShowAdsNotificationKey, object: NotificationZombie.sharedInstance)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLeaderboard", name: kShowGameCenterLeaderboard, object: NotificationZombie.sharedInstance)
 

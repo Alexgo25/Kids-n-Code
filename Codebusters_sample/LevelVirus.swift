@@ -20,23 +20,7 @@ class LevelVirus : SKSpriteNode {
     var floorPosition : FloorPosition?
     var trackPosition = 0
     var virusType : VirusType?
-    /*
-    init(levelcfg : LevelConfiguration , track : RobotTrack) {
-        let rand = Int(arc4random() % 2)
-        if (rand == 0) {
-            virusType = VirusType.Blue
-        }
-        else {
-            virusType = VirusType.Red
-        }
-        let texture = SKTexture(imageNamed: "Virus_\(virusType!.rawValue)")
-        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-        getPosition(levelcfg)
-        zPosition = CGFloat(6 * floorPosition!.rawValue + 3)
-        self.track = track
-        track.viruses.append(self)
-    }
-    */
+
     init(track: RobotTrack , trackPosition : Int , floorPosition : FloorPosition) {
         let rand = Int(arc4random() % 2)
         if (rand == 0) {
@@ -56,6 +40,10 @@ class LevelVirus : SKSpriteNode {
         self.position = CGPoint(x: X, y: Y)
         self.track = track
         track.viruses.append(self)
+        let texture2 = SKTexture(imageNamed: "Virus1_\(virusType!.rawValue)")
+        let textures = [texture , texture2]
+        let repeatAction = SKAction.animateWithTextures(textures, timePerFrame: 0.01, resize: false, restore: false)
+        self.runAction(SKAction.repeatActionForever(repeatAction))
     }
 
     required init?(coder aDecoder: NSCoder) {

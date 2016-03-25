@@ -33,7 +33,7 @@ class LoopControlRepeatRect : SKSpriteNode {
     
     init (actionCell : ActionCell , numberOfRepeats : Int ) {
         let texture = SKTexture(imageNamed: "repeatRect")
-        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: texture.size().width , height: 66.0))
+        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: texture.size().width, height: 78.0))
         self.position = CGPoint(x: actionCell.position.x + 30, y: actionCell.position.y)
         self.zPosition = 2002
         let text = LCRepeatLabelText + String(numberOfRepeats)
@@ -42,6 +42,13 @@ class LoopControlRepeatRect : SKSpriteNode {
         ActionCell.repeatRectangles.append(self)
         self.position = CGPoint(x: actionCell.position.x + 30, y: actionCell.position.y)
         name = "\(ActionCell.repeatRectangles.count - 1)"
+    }
+    
+    func deleteCell(actionCell : ActionCell) {
+        let index = repeatCells.indexOf(actionCell)
+        if (index != nil) {
+            repeatCells.removeAtIndex(index!)
+        }
     }
     
 

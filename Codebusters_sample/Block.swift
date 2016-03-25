@@ -39,9 +39,9 @@ class Block: SKSpriteNode {
         addChild(blockRight)
         addChild(blockUpper)
 
-        blockFace.zPosition = CGFloat( floorPosition.rawValue  + 101)
-        blockUpper.zPosition = CGFloat( Double(floorPosition.rawValue) + 100.1)
-        blockRight.zPosition = CGFloat( Double(floorPosition.rawValue) + 99.5)
+        blockFace.zPosition = CGFloat(floorPosition.rawValue  + 101)
+        blockUpper.zPosition = CGFloat(Double(floorPosition.rawValue) + 100.1)
+        blockRight.zPosition = CGFloat(Double(floorPosition.rawValue) + 99.5)
 
         blockFace.anchorPoint = CGPointZero
         blockRight.anchorPoint = CGPointZero

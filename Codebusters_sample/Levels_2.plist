@@ -461,7 +461,7 @@
 			<integer>1</integer>
 		</array>
 		<key>loopsEnabled</key>
-		<false/>
+		<true/>
 		<key>virusesPattern</key>
 		<array>
 			<dict>
@@ -521,7 +521,7 @@
 		<key>robotPosition</key>
 		<integer>1</integer>
 		<key>detailPosition</key>
-		<integer>7</integer>
+		<integer>1</integer>
 		<key>detailFloorPosition</key>
 		<integer>1</integer>
 		<key>result</key>

@@ -10,7 +10,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "480275923.449299"
+            timestampString = "480605181.719266"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "handlePanFrom(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Codebusters_sample/LevelScene.swift"
+            timestampString = "480605181.719266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "247"
@@ -26,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "480275923.449299"
+            timestampString = "480605181.719266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "handlePanFrom(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,27 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "480275923.449299"
+            timestampString = "480605181.719266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "handlePanFrom(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Codebusters_sample/LevelScene.swift"
-            timestampString = "480369079.074269"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "516"
-            endingLineNumber = "516"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
             landmarkName = "addGestures()"
             landmarkType = "5">
          </BreakpointContent>

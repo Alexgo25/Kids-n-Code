@@ -10,11 +10,12 @@ import UIKit
 import Fabric
 import Crashlytics
 import Google
+import Mixpanel
 
 
 
 
-let kMixpanleToken = ""
+let kMixpanelToken = "07d62651b24bd8d64d15169a33d73712"
 
 
 @UIApplicationMain
@@ -34,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let gai = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
-        // TODO: Move this to where you establish a user session
+        // Mixpanel
+        let mixpanel = Mixpanel.sharedInstanceWithToken(kMixpanelToken)
+        
         
         self.logUser()
         let settings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound , UIUserNotificationType.Badge , UIUserNotificationType.Alert], categories: nil)

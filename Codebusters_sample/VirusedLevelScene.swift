@@ -51,6 +51,9 @@ class VirusedLevelScene : LevelScene {
         levelBackground2 = SKSpriteNode(imageNamed: "virusedBackground2")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addNewControls", name: kActionCellSelectedKey, object: NotificationZombie.sharedInstance)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeNewControls", name: kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+
         
     }
 

@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import Mixpanel
 
 class SceneManager {
     enum SceneType {
@@ -61,8 +62,10 @@ class SceneManager {
     }
     
     func presentScene(sceneType: SceneType) {
+        let mixpanel = Mixpanel.sharedInstance()
         switch sceneType {
         case .Menu:
+            mixpanel.track("Main Menu")
             if currentLevelPack == -1 && gameProgressManager.currentDetailType != .Crystall {
                 presentScene(MenuScene(robotTextImage: gameProgressManager.currentDetailType.rawValue + kDetailTextSuffix, data: levelPacksInfo))
             } else {
@@ -75,6 +78,7 @@ class SceneManager {
                 presentScene(MenuScene(data: levelPacksInfo))
             }
         case .Level(let levelPack, let levelNumber):
+            mixpanel.track("Old level \(String(levelNumber)) from levelPack \(String(levelPack))")
             gameProgressManager.setLevel(levelPack, level: levelNumber)
             if currentLevelPack == -1 {
                 presentScene(.Menu)
@@ -98,6 +102,7 @@ class SceneManager {
             currentLevelInfo = gameProgressManager.getLevelConfiguration()
             fallthrough
         case .CurrentLevel:
+            mixpanel.track("Old level \(String(currentLevel)) from levelPack \(String(currentLevelPack))")
             if currentLevelInfo != nil {
                 if (self.view.scene != nil){
                     let currentScene = self.view.scene!
@@ -108,6 +113,7 @@ class SceneManager {
                 presentScene(LevelScene(levelInfo: currentLevelInfo!))
             }
         case .VirusedLevel(let levelNumber):
+            mixpanel.track("Virused level \(String(levelNumber))")
             if (levelNumber >= 0 && levelNumber <= 15) {
                 let levelConfiguration = virusedGameProgressManager.getLevelConfiguration(levelNumber)
                 if (self.view.scene != nil){
@@ -124,6 +130,7 @@ class SceneManager {
             }
         case .CurrentVirusedLevel:
             let currentLevelNumber = virusedGameProgressManager.currentLevel
+            mixpanel.track("Virused level \(String(currentLevelNumber))")
             if (self.view.scene != nil){
                 let currentScene = self.view.scene!
                 currentScene.removeAllActions()
@@ -141,6 +148,7 @@ class SceneManager {
                 }
             presentScene(.CurrentVirusedLevel)
         case .VirusedMenu:
+            mixpanel.track("Virused Menu")
             if (self.view.scene != nil){
                 let currentScene = self.view.scene!
                 currentScene.removeAllActions()
