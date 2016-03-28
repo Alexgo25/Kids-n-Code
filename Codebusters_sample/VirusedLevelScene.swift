@@ -167,7 +167,7 @@ class VirusedLevelScene : LevelScene {
                 detail = Detail(track: track, levelInfo: levelInfo)
                 robot = Robot(track: track, detail: detail)
                 createTrackLayer()
-                
+                checkRobotPosition()
             case .Debug_Virused:
                 ActionCell.gameIsRunning = true
                 robot.debug()

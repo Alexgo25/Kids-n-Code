@@ -190,7 +190,7 @@ class MenuScene: SceneTemplate  {
         let robot = SKSpriteNode(texture: texture)
         robot.anchorPoint = CGPointZero
         robot.position = CGPoint(x: 1542.5, y: -726)
-        let move = SKAction.sequence([SKAction.waitForDuration(0.4), SKAction.moveByX(0, y: 410, duration: 0.5), SKAction.moveByX(0, y: -62, duration: 0.13)])
+        let move = SKAction.sequence([SKAction.waitForDuration(0.1), SKAction.moveByX(0, y: 410, duration: 0.5), SKAction.moveByX(0, y: -62, duration: 0.13)])
         addChild(robot)
         robot.runAction(move)
         robot.zPosition = 2

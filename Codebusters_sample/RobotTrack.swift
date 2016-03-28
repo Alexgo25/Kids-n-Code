@@ -78,6 +78,10 @@ class RobotTrack {
                 return false
             }
             
+            if (getFloorPositionAt(currentRobotPosition).rawValue == getFloorPositionAt(currentRobotPosition + direction.rawValue).rawValue) {
+                return true
+            }
+            
             return track[currentRobotPosition].getFloorPosition().rawValue >= track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue || (track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue > track[currentRobotPosition + 2 * direction.rawValue].getFloorPosition().rawValue && track[getNextRobotTrackPosition(direction)].getFloorPosition().rawValue > track[currentRobotPosition].getFloorPosition().rawValue)
         case .Catch:
             return true

@@ -124,9 +124,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         if (runtime >= 900) {
             GameViewController.sendAchievementProgress(.Slow)
         }
-        else if (runtime < 60) {
-            GameViewController.sendAchievementProgress(.SpeedOfLight)
-        }
+        
         
         //CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel , levelPackNumber: sceneManager.currentLevelPack, finished: true, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
         TouchesAnalytics.sharedInstance.resetTouches()
@@ -477,10 +475,11 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     }
     
     func checkRobotPosition(durationOfAnimation: NSTimeInterval = 0.4) {
-        let bound: CGFloat = Block.BlockFaceSize.width
-        let robotPosition = trackLayer.position.x + robot.position.x
         let scale = trackLayer.xScale
+        let bound: CGFloat = Block.BlockFaceSize.width 
+        let robotPosition = trackLayer.position.x + robot.position.x
         print(scale)
+        print(playAreaSize.width)
         if robotPosition < bound {
             trackLayer.runAction(SKAction.moveByX((-robotPosition + bound) * scale, y: 0, duration: durationOfAnimation))
             return
@@ -488,6 +487,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         
         if robotPosition > playAreaSize.width - bound {
             trackLayer.runAction(SKAction.moveByX((-robotPosition + playAreaSize.width - bound) * scale, y: 0, duration: durationOfAnimation))
+            
         }
     }
     
@@ -557,6 +557,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                     overlay = Tutorial(tutorialNumber: 0)
                 }
             case .Clear:
+                checkRobotPosition()
                 ActionCell.gameIsRunning = false
                 enumerateChildNodesWithName("clear") {
                     node, stop in
@@ -572,6 +573,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
                 detail = Detail(track: track, levelInfo: levelInfo)
                 robot = Robot(track: track, detail: detail)
                 createTrackLayer()
+                
                 
             case .Debug:
                 ActionCell.gameIsRunning = true
@@ -594,7 +596,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     
     override func update(currentTime: CFTimeInterval) {
         if robot.isRunningActions() {
-            checkRobotPosition(0)
+            checkRobotPosition(1.0)
         }
     }
 }

@@ -170,9 +170,11 @@ class ActionCell: SKSpriteNode  {
     
     static func deselectAll(numberOfRepeats : Int) {
         let atlas = SKTextureAtlas(named: "ActionCells")
+        var sortedArray : [Int] = []
+        sortedArray = selectedIndexes.sort()
         var cellsToAppend : [ActionCell] = []
         for i in 0  ..< selectedIndexes.count  {
-            let cell = ActionCell.cells[selectedIndexes[i]]
+            let cell = ActionCell.cells[sortedArray[i]]
             let deselectAction = SKAction.runBlock({
                 cell.cellBackground.texture = atlas.textureNamed("ActionCell")
                 cell.selected = false
