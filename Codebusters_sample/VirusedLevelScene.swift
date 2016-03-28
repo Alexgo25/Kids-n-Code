@@ -18,7 +18,7 @@ class VirusedLevelScene : LevelScene {
     override func didMoveToView(view: SKView) {
         let size = sceneManager.size
         playAreaSize = CGSize(width: size.width - levelBackground2.size.width, height: size.height)
-        
+        ActionCell.gameIsRunning = false
         userInteractionEnabled = true
         anchorPoint = CGPointZero
         physicsWorld.gravity = CGVectorMake(0, 0)
@@ -49,10 +49,10 @@ class VirusedLevelScene : LevelScene {
         LevelScene.loopsEnabled = levelInfo.loopsEnabled
         levelBackground1 = SKSpriteNode(imageNamed: "virusedBackground1")
         levelBackground2 = SKSpriteNode(imageNamed: "virusedBackground2")
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addNewControls", name: kActionCellSelectedKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeNewControls", name: kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VirusedLevelScene.addNewControls), name: kActionCellSelectedKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VirusedLevelScene.removeNewControls), name: kActionCellDeselectAllKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(VirusedLevelScene.finishWithSuccess) , name:kRobotTookDetailNotificationKey, object: robot)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VirusedLevelScene.finishWithMistake), name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
 
         
     }
@@ -144,6 +144,7 @@ class VirusedLevelScene : LevelScene {
             case .Start:
                 checkRobotPosition()
                 robot.performActions()
+                ActionCell.gameIsRunning = true
             case .Pause_Virused:
                 pauseGame()
             case .Tips_Virused:
@@ -151,6 +152,7 @@ class VirusedLevelScene : LevelScene {
                     overlay = Tutorial(tutorialNumber: 6)
                 }
             case .Clear:
+                ActionCell.gameIsRunning = false
                 enumerateChildNodesWithName("clear") {
                     node, stop in
                     node.removeFromParent()
@@ -167,6 +169,7 @@ class VirusedLevelScene : LevelScene {
                 createTrackLayer()
                 
             case .Debug_Virused:
+                ActionCell.gameIsRunning = true
                 robot.debug()
             case .Continue_PauseView, .Ok:
                 overlay = nil
@@ -174,6 +177,7 @@ class VirusedLevelScene : LevelScene {
                 NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
                 sceneManager.presentScene(.Menu)
             case .Restart_PauseView, .Restart_EndLevelView, .Restart:
+                    ActionCell.gameIsRunning = false
                     sceneManager.presentScene(.CurrentVirusedLevel)
             case .NextLevel_EndLevelView:
                     sceneManager.presentScene(.NextVirusedLevel)

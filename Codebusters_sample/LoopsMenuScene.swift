@@ -39,8 +39,8 @@ class LoopsMenuScene: SceneTemplate {
     }
     
     func addFolders(levels : [[String: AnyObject]]) {
-        for (var i = 0 ; i < 4 ; i++) {
-            for (var j = 0 ; j < 4; j++) {
+        for i in 0  ..< 4  {
+            for j in 0  ..< 4 {
                 var folderState : FolderState!
                 if (folders.count < 15) {
                     let level = levels[folders.count]

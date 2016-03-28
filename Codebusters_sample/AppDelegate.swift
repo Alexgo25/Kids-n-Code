@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
         // Mixpanel
-        let mixpanel = Mixpanel.sharedInstanceWithToken(kMixpanelToken)
+        _ = Mixpanel.sharedInstanceWithToken(kMixpanelToken)
         
         
         self.logUser()

@@ -91,8 +91,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
         //Listening to notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"finishWithSuccess" , name:kRobotTookDetailNotificationKey, object: robot)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "finishWithMistake", name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(LevelScene.finishWithSuccess) , name:kRobotTookDetailNotificationKey, object: robot)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LevelScene.finishWithMistake), name: kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kNeedUpdatesKey)
         //Game buttons
         createGameButtons()
@@ -141,7 +141,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             strings.append(cell.actionType.rawValue)
             print(cell.actionType)
         }
-        let runtime = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
+        _ = TimerDelegate.sharedTimerDelegate.stopAndReturnTime()
         
         //CoreDataAdapter.sharedAdapter.addNewLevel(sceneManager.currentLevel, levelPackNumber: sceneManager.currentLevelPack, finished: false, time: runtime, actions: strings, touchedNodes: TouchesAnalytics.sharedInstance.getNodes())
         TouchesAnalytics.sharedInstance.resetTouches()
@@ -186,8 +186,8 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     func createBlocks() {
         let blocksPattern = track.getBlocksPattern()
         
-        for var i = 1; i < blocksPattern.count; i++ {
-            for var j = 0; j < blocksPattern[i].rawValue; j++ {
+        for i in 1 ..< blocksPattern.count {
+            for j in 0 ..< blocksPattern[i].rawValue {
                 trackLayer.addChild(track.getBlockAt(i, floorPosition: j))
             }
         }
@@ -479,14 +479,15 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
     func checkRobotPosition(durationOfAnimation: NSTimeInterval = 0.4) {
         let bound: CGFloat = Block.BlockFaceSize.width
         let robotPosition = trackLayer.position.x + robot.position.x
-        
+        let scale = trackLayer.xScale
+        print(scale)
         if robotPosition < bound {
-            trackLayer.runAction(SKAction.moveByX(-robotPosition + bound, y: 0, duration: durationOfAnimation))
+            trackLayer.runAction(SKAction.moveByX((-robotPosition + bound) * scale, y: 0, duration: durationOfAnimation))
             return
         }
         
         if robotPosition > playAreaSize.width - bound {
-            trackLayer.runAction(SKAction.moveByX(-robotPosition + playAreaSize.width - bound, y: 0, duration: durationOfAnimation))
+            trackLayer.runAction(SKAction.moveByX((-robotPosition + playAreaSize.width - bound) * scale, y: 0, duration: durationOfAnimation))
         }
     }
     
@@ -515,30 +516,30 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             }
         }
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(LevelScene.swipedLeft(_:)))
         swipeLeft.direction = .Left
         swipeLeft.delegate = self
         view!.addGestureRecognizer(swipeLeft)
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: Selector("swipedRight:"))
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(LevelScene.swipedRight(_:)))
         swipeRight.direction = .Right
         swipeRight.delegate = self
         view!.addGestureRecognizer(swipeRight)
         
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: Selector("swipedUp:"))
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(LevelScene.swipedUp(_:)))
         swipeUp.direction = .Up
         swipeUp.delegate = self
         view!.addGestureRecognizer(swipeUp)
         
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: Selector("swipedDown:"))
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(LevelScene.swipedDown(_:)))
         swipeDown.direction = .Down
         swipeDown.delegate = self
         view!.addGestureRecognizer(swipeDown)
         
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("handlePanFrom:"))
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(LevelScene.handlePanFrom(_:)))
         view!.addGestureRecognizer(gestureRecognizer)
         
-        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: Selector("handlePinchFrom:"))
+        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(LevelScene.handlePinchFrom(_:)))
         view!.addGestureRecognizer(pinchRecognizer)
     }
     

@@ -56,7 +56,8 @@ public class Tutorial: SKSpriteNode {
             lastSlide = 8
         }
         
-        for var i = firstSlide; i <= lastSlide; i++ {
+        for (var i = firstSlide; i <= lastSlide; i += 1)
+        {
             let nameStr = NSLocalizedString("Tutorial_\(i)", comment: "tutorial")
             images.append(SKSpriteNode(imageNamed: nameStr))
             images[i - firstSlide].anchorPoint = CGPointZero

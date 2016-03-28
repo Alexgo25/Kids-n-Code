@@ -173,7 +173,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                             }
                         } else {
                             if self.currentActionIndex < self.actions.count - 1 {
-                                self.currentActionIndex++
+                                self.currentActionIndex += 1
                                 if self.currentActionIndex > 5 && self.currentActionIndex + 5 < ActionCell.cellsCount() && ActionCell.canMoveCellsLayerUp() {
                                     ActionCell.moveCellsLayerUp()
                                 }
@@ -232,7 +232,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
                     return
                 } else {
                     if self.currentActionIndex < self.actions.count - 1 {
-                        self.currentActionIndex++
+                        self.currentActionIndex += 1
 
                         if self.currentActionIndex > 5 && self.currentActionIndex + 5 < ActionCell.cellsCount() && ActionCell.canMoveCellsLayerUp() {
                             ActionCell.moveCellsLayerUp()
@@ -264,11 +264,11 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
             isOnStart = false
             
             
-            for (var i = 0 ; i < ActionCell.cells.count ; i++) {
+            for var i = 0 ; i < ActionCell.cells.count ; i += 1 {
                 if (ActionCell.cells[i].numberOfRepeats > 1) {
                     
-                    let rect = ActionCell.cells[i].topRect!
-                    for (var j = 0 ; j < ActionCell.cells[i].numberOfRepeats ; j++) {
+                    let rect = ActionCell.cells[i].rect!
+                    for _ in 0  ..< ActionCell.cells[i].numberOfRepeats  {
                         for cell in rect.repeatCells {
                             appendAction(cell)
                         }
@@ -368,15 +368,15 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         if (track!.virused) {
                 let atlas = SKTextureAtlas(named: "CatchVirus")
                 var textures : [SKTexture] = []
-            for texture in atlas.textureNames {
-                textures.append(SKTexture(imageNamed: texture))
+            for var i = 1; i < 5 ; i += 1 {
+                textures.append(SKTexture(imageNamed: "CatchVirus_\(i)"))
             }
                 let turn = SKAction.animateWithTextures(getRobotAnimation("TurnToFront", direction: self.direction), timePerFrame: 0.05, resize: true, restore: false)
                 let open = SKAction.animateWithTextures(textures, timePerFrame: 0.075, resize: false, restore: false)
                 let close = SKAction.animateWithTextures(textures.reverse(), timePerFrame: 0.075, resize: false, restore: false)
                 let reverseTurn = SKAction.animateWithTextures(getRobotAnimation("TurnFromFront", direction: self.direction), timePerFrame: 0.05, resize: true, restore: false)
             
-                return SKAction.sequence([turn , open , track!.fadeOutVirus(), close , reverseTurn])
+                return SKAction.sequence([turn , open , track!.fadeOutVirus() , close, reverseTurn])
 
         }
         else {
@@ -555,13 +555,13 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         }
         let firstAtlas = SKTextureAtlas(named: "FadeOutInDoor_\(str)")
         var textures : [SKTexture] = []
-        for (var i = 0 ; i < firstAtlas.textureNames.count ; i++) {
+        for i in 0  ..< firstAtlas.textureNames.count  {
             textures.append(SKTexture(imageNamed: "RobotFOD_\(str)_\(String(i + 1))"))
         }
         let turnAnimate = SKAction.animateWithTextures(textures, timePerFrame: 0.06, resize: false , restore: false)
         let secondAtlas = SKTextureAtlas(named: "WalkingAway")
         var secondTextures : [SKTexture] = []
-        for (var i = 0 ; i < secondAtlas.textureNames.count; i++) {
+        for i in 0  ..< secondAtlas.textureNames.count {
             secondTextures.append(SKTexture(imageNamed: "Robot_WalkAway_\(String(i + 1))"))
         }
         let walkAway = SKAction.animateWithTextures(secondTextures, timePerFrame: 0.06, resize: true , restore: false)
@@ -650,7 +650,7 @@ class Robot: SKSpriteNode, SKPhysicsContactDelegate {
         let atlasName = "Animation_\(actionType)\(directionString)"
         let atlas = SKTextureAtlas(named: atlasName)
         
-        for var i = 1; i <= atlas.textureNames.count; i++ {
+        for var i = 1; i <= atlas.textureNames.count; i += 1 {
             textures.append(atlas.textureNamed("\(atlasName)_\(i)"))
         }
         

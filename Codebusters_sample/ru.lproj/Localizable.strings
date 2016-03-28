@@ -77,5 +77,8 @@ CATCH_BUTTON_LABEL = "ПОЙМАТЬ";
 CONTINUE_PLAYING_LABEL = "Играть дальше";
 QUIT_TO_MENU_LABEL = "Выйти в меню";
 
+//Alerts
+GAMECENTER_NOTSIGNED_ALERT = "Вы не вошли в Game Center";
+
 
 

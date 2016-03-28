@@ -76,7 +76,7 @@ public class VirusedLevelsGameProgress {
     
     func setNextLevel() {
         if (currentLevel < 15) {
-            currentLevel++
+            currentLevel += 1
         }
     }
     

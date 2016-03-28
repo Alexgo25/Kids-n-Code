@@ -76,3 +76,5 @@ CATCH_BUTTON_LABEL = "CATCH";
 //End level view
 CONTINUE_PLAYING_LABEL = "Next level";
 QUIT_TO_MENU_LABEL = "Quit to menu";
+//Alerts
+GAMECENTER_NOTSIGNED_ALERT = "You are not signed in";

@@ -52,8 +52,8 @@ class GameViewController: UIViewController , UINavigationControllerDelegate , GK
 
         authGameCenter()
         NSUserDefaults.standardUserDefaults().setInteger(0, forKey: kNumberOfLevelsInARow)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showAds", name: kShowAdsNotificationKey, object: NotificationZombie.sharedInstance)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLeaderboard", name: kShowGameCenterLeaderboard, object: NotificationZombie.sharedInstance)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector("showAds"), name: kShowAdsNotificationKey, object: NotificationZombie.sharedInstance)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showLeaderboard), name: kShowGameCenterLeaderboard, object: NotificationZombie.sharedInstance)
 
         //Sending data to server
         dispatch_async(dispatch_get_main_queue(), {

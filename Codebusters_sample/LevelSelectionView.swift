@@ -19,7 +19,7 @@ class LevelSelectionView: SKSpriteNode {
         let texture = SKTexture(imageNamed: "LevelSelectionView_Background")
         super.init(texture: texture, color: SKColor(), size: texture.size())
         
-        for var levelNumber = 0; levelNumber < levelsCount; levelNumber++ {
+        for levelNumber in 0 ..< levelsCount {
             let battery = Battery(type: getBatteryType(levels[levelNumber]), levelNumber: levelNumber, levelPackNumber: levelPackIndex)
             battery.position = getNextPosition(levelNumber)
             addChild(battery)

@@ -46,8 +46,8 @@ class RobotTrack {
     
     func initTrackFromPattern(pattern: [FloorPosition]) {
         track.append(RobotStanding(trackPosition: track.count, floorPosition: .Ground))
-        for var i = 0; i < pattern.count; i++ {
-            track.append(RobotStanding(trackPosition: i + 1, floorPosition: pattern[i]))
+        for i in 0 ..< pattern.count {
+        track.append(RobotStanding(trackPosition: i + 1, floorPosition: pattern[i]))
         }
     }
     
@@ -133,7 +133,7 @@ class RobotTrack {
                 break
             }
             else {
-                i++
+                i += 1
             }
         }
         if (virus != nil) {

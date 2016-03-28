@@ -33,7 +33,7 @@
 		<key>detailType</key>
 		<string>Door</string>
 		<key>robotPosition</key>
-		<integer>7</integer>
+		<integer>1</integer>
 		<key>detailPosition</key>
 		<integer>9</integer>
 		<key>detailFloorPosition</key>
@@ -736,7 +736,7 @@
 			<integer>1</integer>
 		</array>
 		<key>loopsEnabled</key>
-		<false/>
+		<true/>
 		<key>detailType</key>
 		<string>Door</string>
 		<key>virusesPattern</key>
@@ -776,6 +776,8 @@
 		<integer>7</integer>
 	</dict>
 	<dict>
+		<key>detailType</key>
+		<string>Door</string>
 		<key>virusesPattern</key>
 		<array>
 			<dict>
@@ -865,8 +867,6 @@
 		<integer>7</integer>
 		<key>result_2</key>
 		<integer>8</integer>
-		<key>tutorial</key>
-		<integer>1</integer>
 	</dict>
 </array>
 </plist>

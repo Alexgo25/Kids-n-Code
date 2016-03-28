@@ -26,7 +26,7 @@ class RobotStanding {
     init (trackPosition: Int, floorPosition: FloorPosition) {
         self.floorPosition = floorPosition
         self.trackPosition = trackPosition
-        for var i = 1; i <= floorPosition.rawValue; i++ {
+        for var i = 1; i <= floorPosition.rawValue; i += 1 {
             if let floor = FloorPosition(rawValue: i) {
                 blocks.append(Block(trackPosition: trackPosition, floorPosition: floor))
             }

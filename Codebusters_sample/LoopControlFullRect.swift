@@ -11,7 +11,7 @@ import SpriteKit
 
 //sizes for Full rect , polygons and middle rect
 let LCFullRectSize = CGSize(width: 466, height: 228)
-let LCPolygonSize = CGSize(width: 30, height: 34)
+let LCPolygonSize = CGSize(width: 60, height: 64)
 let LCMiddleRectSize = CGSize(width: 154, height: 63)
 
 //positions for all elements
@@ -80,13 +80,13 @@ class LoopControlFullRect : SKSpriteNode , LCPolygonResponder  {
     func leftPolygonTap() {
         print("left tap")
         if (numberOfRepeats > 2) {
-            numberOfRepeats--
+            numberOfRepeats -= 1
         }
     }
     
     func rightPolygonTap() {
         print("right tap")
-        numberOfRepeats++
+        numberOfRepeats += 1
     }
     
 }

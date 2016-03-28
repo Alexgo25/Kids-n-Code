@@ -146,7 +146,12 @@ class SceneManager {
                     currentScene.removeAllChildren()
                     currentScene.removeFromParent()
                 }
+            if (virusedGameProgressManager.currentLevel != 15) {
             presentScene(.CurrentVirusedLevel)
+            }
+            else {
+                presentScene(.Menu)
+            }
         case .VirusedMenu:
             mixpanel.track("Virused Menu")
             if (self.view.scene != nil){

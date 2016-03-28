@@ -73,7 +73,7 @@ public class GameProgress {
         guard levelPacksInfo[currentLevelPack].levels[currentLevel]["result"] as! Int > 0 else { return }
         
         if currentLevel < levelsCount - 1 {
-            currentLevel++
+            currentLevel += 1
         } else {
             switch currentLevelPack {
             case 0:
@@ -161,10 +161,10 @@ public class GameProgress {
             LevelPackData(levelPackData: $0)
         }
         
-        for var i = 0; i < levelPacksInfo.count; i++ {
+        for i in 0 ..< levelPacksInfo.count {
             var levelPackInfo = levelPacksInfo[i]
             var levels = levelPackInfo.levels
-            for var j = 0; j < levels.count; j++ {
+            for j in 0 ..< levels.count {
                 var level = levels[j]
                 let result = level["result"] as! Int
                 if result == -1 {

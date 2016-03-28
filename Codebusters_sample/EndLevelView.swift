@@ -36,7 +36,7 @@ class EndLevelView: SKSpriteNode {
         if result <= goodResult {
             let defaults = NSUserDefaults.standardUserDefaults()
             var numOfLevels = defaults.integerForKey(kNumberOfLevelsInARow)
-            numOfLevels++
+            numOfLevels += 1
             if (numOfLevels == 5) {
                 GameViewController.sendAchievementProgress(.FiveinARow)
                 defaults.setInteger(0, forKey: kNumberOfLevelsInARow)
