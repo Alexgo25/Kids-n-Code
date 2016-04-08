@@ -146,7 +146,7 @@ class SceneManager {
                     currentScene.removeAllChildren()
                     currentScene.removeFromParent()
                 }
-            if (virusedGameProgressManager.currentLevel != 15) {
+            if (virusedGameProgressManager.currentLevel != 16) {
             presentScene(.CurrentVirusedLevel)
             }
             else {

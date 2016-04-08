@@ -478,17 +478,32 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
         let scale = trackLayer.xScale
         let bound: CGFloat = Block.BlockFaceSize.width 
         let robotPosition = trackLayer.position.x + robot.position.x
-        print(scale)
-        print(playAreaSize.width)
-        if robotPosition < bound {
-            trackLayer.runAction(SKAction.moveByX((-robotPosition + bound) * scale, y: 0, duration: durationOfAnimation))
-            return
+        
+        if (robot.isRunningActions()) {
+            if robotPosition < bound / scale {
+                trackLayer.runAction(SKAction.moveByX((bound) * scale, y: 0, duration: durationOfAnimation ))
+                
+            }
+                
+            else if robotPosition > (playAreaSize.width - bound) / scale {
+                trackLayer.runAction(SKAction.moveByX((-bound) * scale, y: 0, duration: durationOfAnimation))
+                
+            }
         }
         
-        if robotPosition > playAreaSize.width - bound {
+        else {
+        if robotPosition < bound  {
+            trackLayer.runAction(SKAction.moveByX((-robotPosition + bound) * scale, y: 0, duration: durationOfAnimation))
+            
+        }
+        
+        else if robotPosition > (playAreaSize.width - bound) / scale {
             trackLayer.runAction(SKAction.moveByX((-robotPosition + playAreaSize.width - bound) * scale, y: 0, duration: durationOfAnimation))
             
         }
+        }
+        
+        
     }
     
     func showDetailAndRobot() {
@@ -578,7 +593,7 @@ class LevelScene: SceneTemplate, SKPhysicsContactDelegate, UIGestureRecognizerDe
             case .Debug:
                 ActionCell.gameIsRunning = true
                 robot.debug()
-            case .Continue_PauseView, .Ok:
+            case .Continue_PauseView, .Ok , .Ok_Virused:
                 overlay = nil
             case .Exit_PauseView, .Exit_EndLevelView:
                 NSNotificationCenter.defaultCenter().postNotificationName(kPauseQuitNotificationKey, object: NotificationZombie.sharedInstance)

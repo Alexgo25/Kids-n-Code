@@ -438,9 +438,9 @@
 		<key>result</key>
 		<integer>0</integer>
 		<key>result_1</key>
-		<integer>6</integer>
-		<key>result_2</key>
 		<integer>7</integer>
+		<key>result_2</key>
+		<integer>8</integer>
 	</dict>
 	<dict>
 		<key>detailType</key>
@@ -583,9 +583,9 @@
 		<key>result</key>
 		<integer>0</integer>
 		<key>result_1</key>
-		<integer>6</integer>
+		<integer>10</integer>
 		<key>result_2</key>
-		<integer>7</integer>
+		<integer>11</integer>
 	</dict>
 	<dict>
 		<key>detailType</key>
